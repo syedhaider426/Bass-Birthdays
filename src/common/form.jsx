@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+/*Form can have properties of the controls on the browser page*/
+/*State can be dynamic based on controls being created*/
 class Form extends Component {
   state = { name: "", email: "", comments: "" };
 
@@ -66,6 +68,9 @@ class Form extends Component {
             placeholder="Enter comments"
           ></input>
         </div>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
       </form>
     );
   }
