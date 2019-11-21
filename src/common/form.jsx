@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 /*Form can have properties of the controls on the browser page*/
 /*State can be dynamic based on controls being created*/
+/*date field database value*/
 class Form extends Component {
   state = { name: "", email: "", comments: "" };
 
@@ -38,6 +39,7 @@ class Form extends Component {
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
+            autoFocus
             type="text"
             id="name"
             className="form-control"

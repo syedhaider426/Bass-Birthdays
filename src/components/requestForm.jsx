@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-
+import Form2 from "../common/form2";
 class RequestForm extends Component {
   state = {};
   render() {
-    return <h1>Request Form</h1>;
+    return <Form2 />;
   }
 }
 
