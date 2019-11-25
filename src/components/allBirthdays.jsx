@@ -3,12 +3,13 @@ import Table from "../common/table";
 import axios from "axios";
 import Pagination from "../common/paging";
 import paginate from "../utils/paginate";
-
+import _ from "lodash";
 class AllBirthdays extends Component {
   state = {
     artists: [],
     currentPage: 1,
-    amountPerPage: 25
+    amountPerPage: 25,
+    sortColumn: { path: "artist", order: "initial" }
   };
 
   componentDidMount() {
@@ -34,16 +35,41 @@ class AllBirthdays extends Component {
     this.setState({ currentPage });
   };
 
-  render() {
-    const { artists: allArtists, currentPage, amountPerPage } = this.state;
-    console.log("Render", currentPage);
-    const artists = paginate(allArtists, currentPage, amountPerPage);
+  handleSort = sortColumn => {
+    this.setState({ sortColumn });
+  };
 
+  lower = s => {
+    if (typeof s !== "string") return "";
+    return s.charAt(0).toLowerCase() + s.slice(1);
+  };
+
+  capitalize = s => {
+    if (typeof s !== "string") return "";
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  };
+
+  render() {
+    const {
+      artists: allArtists,
+      currentPage,
+      amountPerPage,
+      sortColumn
+    } = this.state;
+    var sorted = { ...allArtists };
+    var artists = paginate(allArtists, currentPage, amountPerPage);
+    if (sortColumn.order !== "initial") {
+      sorted = _.orderBy(allArtists, [sortColumn.path], [sortColumn.order]);
+      artists = sorted;
+    }
     const artistsLength = allArtists.length;
-    console.log("artists length", artistsLength);
     return (
       <React.Fragment>
-        <Table data={artists}></Table>
+        <Table
+          data={artists}
+          sortColumn={sortColumn}
+          onSort={this.handleSort}
+        ></Table>
         <Pagination
           itemsCount={artistsLength}
           pageSize={amountPerPage}

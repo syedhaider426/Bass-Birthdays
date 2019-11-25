@@ -1,7 +1,7 @@
 import React from "react";
 
 const CurrentBirthdays = () => {
-  return <h1>CurrentBirthdays</h1>;
+  return <div className="content"></div>;
 };
 
 export default CurrentBirthdays;

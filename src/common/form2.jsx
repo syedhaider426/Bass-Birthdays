@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import axios from "axios";
+import { withRouter } from "react-router-dom";
 /*Form can have properties of the controls on the browser page*/
 /*State can be dynamic based on controls being created*/
 
@@ -57,12 +58,29 @@ class Form extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { name, email, comments, socials } = this.state;
+    const {
+      name,
+      email,
+      comments,
+      socials,
+      birthday,
+      phoneNumber
+    } = this.state;
     //also submit the date
-    console.log(name);
-    console.log(email);
-    console.log(comments);
-    console.log(socials);
+    const obj = {
+      name,
+      birthday,
+      phoneNumber,
+      email,
+      comments,
+      socials
+    };
+    axios
+      .post("http://localhost:4000/birthday", obj)
+      .then(() => {
+        this.props.history.push("/all");
+      })
+      .catch(err => console.log("Error", err));
     this.setState({
       name: "",
       email: "",
@@ -231,7 +249,7 @@ class Form extends Component {
   }
 }
 
-export default Form;
+export default withRouter(Form);
 
 /*htmlFor
 Now when the user clicks with the mouse on the username text the browser will automatically put the focus in the corresponding input field. This also works with other input elements such as <textbox> and <select>.

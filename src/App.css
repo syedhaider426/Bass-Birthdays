@@ -20,3 +20,22 @@
 .page-item {
   margin: 5px;
 }
+
+img {
+  margin-right: 30px;
+}
+
+td span {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
