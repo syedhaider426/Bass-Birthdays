@@ -8,7 +8,26 @@ import soundcloud from "../images/soundcloud.png";
 
 const TableBody = ({ data }) => {
   function convertISODateToString(date) {
-    return date.substring(0, 10);
+    const dateString = date.substring(0, 10);
+    //var month = dateString.substring(5, 7);
+    //var day = dateString.substring(8, 11);
+    /*var year = dateString.substring(0, 4);
+    var months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];*/
+    //month = months[month - 1];
+    return dateString;
   }
 
   return (
@@ -24,6 +43,7 @@ const TableBody = ({ data }) => {
               target="_blank"
               rel="noopener noreferrer"
               href={item.socials["spotify"]}
+              className="artist-social"
             >
               <img src={spotify} alt="Spotify" />
             </a>
@@ -31,6 +51,7 @@ const TableBody = ({ data }) => {
               target="_blank"
               rel="noopener noreferrer"
               href={item.socials["soundcloud"]}
+              className="artist-social"
             >
               <img src={soundcloud} alt="SoundCloud" />
             </a>
@@ -38,6 +59,7 @@ const TableBody = ({ data }) => {
               target="_blank"
               rel="noopener noreferrer"
               href={item.socials["facebook"]}
+              className="artist-social"
             >
               <img src={facebook} alt="Facebook" />
             </a>
@@ -45,6 +67,7 @@ const TableBody = ({ data }) => {
               target="_blank"
               rel="noopener noreferrer"
               href={item.socials["twitter"]}
+              className="artist-social"
             >
               <img src={twitter} alt="Twitter" />
             </a>
@@ -52,6 +75,7 @@ const TableBody = ({ data }) => {
               target="_blank"
               rel="noopener noreferrer"
               href={item.socials["instagram"]}
+              className="artist-social"
             >
               <img src={instagram} alt="Instagram" />
             </a>
@@ -59,10 +83,12 @@ const TableBody = ({ data }) => {
               target="_blank"
               rel="noopener noreferrer"
               href={item.socials["bandcamp"]}
+              className="artist-social"
             >
               <img src={bandcamp} alt="BandCamp" />
             </a>
           </td>
+          <td></td>
         </tr>
       ))}
     </tbody>

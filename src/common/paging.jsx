@@ -1,100 +1,60 @@
 import React from "react";
+import _ from "lodash";
+
 const Pagination = ({
   onPageChange,
   currentPage,
   onPageNext,
-  onPagePrevious
+  onPagePrevious,
+  itemsCount,
+  pageSize
 }) => {
+  const pagesCount = Math.ceil(itemsCount / pageSize);
+  const pages = _.range(1, pagesCount + 1); //if pagesCount is 3, then it will be 1,2; thats why we add 1
+  const firstPage = pages[0];
+  const lastPage = pages[pages.length - 1];
   return (
-    <nav aria-label="Page navigation example">
+    <nav>
       <ul className="pagination">
         <li
-          key="Previous"
-          className={1 === currentPage ? "page-item disabled" : "page-item"}
+          key={"Previous"}
+          className={
+            firstPage === currentPage ? "page-item disabled" : "page-item"
+          }
         >
-          <a className="page-link" href="#/" onClick={() => onPagePrevious()}>
+          <a
+            style={{ cursor: "pointer" }}
+            className="page-link"
+            onClick={() => onPagePrevious()}
+          >
             Previous
           </a>
         </li>
+        {pages.map(page => (
+          <li
+            key={page}
+            className={page === currentPage ? "page-item active" : "page-item"}
+          >
+            <a
+              style={{ cursor: "pointer" }}
+              className="page-link"
+              onClick={() => onPageChange(page)}
+            >
+              {page}
+            </a>
+          </li>
+        ))}
         <li
-          key={1}
-          className={1 === currentPage ? "page-item active" : "page-item"}
+          key={"Next"}
+          className={
+            lastPage === currentPage ? "page-item disabled" : "page-item"
+          }
         >
-          <a className="page-link" href="#/" onClick={() => onPageChange(1)}>
-            1
-          </a>
-        </li>
-        <li
-          key={2}
-          className={2 === currentPage ? "page-item active" : "page-item"}
-        >
-          <a className="page-link" href="#/" onClick={() => onPageChange(2)}>
-            2
-          </a>
-        </li>
-        <li
-          key={3}
-          className={3 === currentPage ? "page-item active" : "page-item"}
-        >
-          <a className="page-link" href="#/" onClick={() => onPageChange(3)}>
-            3
-          </a>
-        </li>
-
-        <li
-          key={4}
-          className={4 === currentPage ? "page-item active" : "page-item"}
-        >
-          <a className="page-link" href="#/" onClick={() => onPageChange(4)}>
-            4
-          </a>
-        </li>
-        <li
-          key={5}
-          className={5 === currentPage ? "page-item active" : "page-item"}
-        >
-          <a className="page-link" href="#/" onClick={() => onPageChange(5)}>
-            5
-          </a>
-        </li>
-        <li
-          key={6}
-          className={6 === currentPage ? "page-item active" : "page-item"}
-        >
-          <a className="page-link" href="#/" onClick={() => onPageChange(6)}>
-            6
-          </a>
-        </li>
-
-        <li
-          key={7}
-          className={7 === currentPage ? "page-item active" : "page-item"}
-        >
-          <a className="page-link" href="#/" onClick={() => onPageChange(7)}>
-            7
-          </a>
-        </li>
-        <li
-          key={8}
-          className={8 === currentPage ? "page-item active" : "page-item"}
-        >
-          <a className="page-link" href="#/" onClick={() => onPageChange(8)}>
-            8
-          </a>
-        </li>
-        <li
-          key={9}
-          className={9 === currentPage ? "page-item active" : "page-item"}
-        >
-          <a className="page-link" href="#/" onClick={() => onPageChange(9)}>
-            9
-          </a>
-        </li>
-        <li
-          key="Next"
-          className={9 === currentPage ? "page-item disabled" : "page-item"}
-        >
-          <a className="page-link" href="#/" onClick={() => onPageNext()}>
+          <a
+            style={{ cursor: "pointer" }}
+            className="page-link"
+            onClick={() => onPageNext()}
+          >
             Next
           </a>
         </li>

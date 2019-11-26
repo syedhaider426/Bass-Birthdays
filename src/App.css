@@ -1,8 +1,8 @@
-.App-logo {
+/* .App-logo {
   height: 40vmin;
 }
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -11,10 +11,16 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} 
 
 .App-link {
   color: #09d3ac;
+}*/
+.App {
+  min-height: 96.5vh; /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;
 }
 
 .page-item {
@@ -30,12 +36,40 @@ td span {
   color: blue;
   text-decoration: underline;
 }
+.site-footer {
+  background-color: #242729;
+  background-image: none;
+  background-position: top left;
+  background-repeat: no-repeat;
+  border-top: 0;
+  background-size: auto;
+  color: #6a737c;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 10px;
+}
 
-.footer {
-  position: absolute;
-  right: 0;
-  left: 0;
-  padding: 1rem;
-  background-color: #efefef;
-  text-align: center;
+.records-per-page {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.fix {
+  display: flex;
+}
+
+.refresh-button {
+  margin-top: 16px !important;
+}
+
+@media only screen and (max-width: 400px) {
+  .refresh-button,
+  .socials,
+  .artist-social {
+    display: none;
+  }
+
+  table tbody td {
+    padding-bottom: 0px !important;
+  }
 }

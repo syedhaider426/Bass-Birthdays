@@ -10,16 +10,18 @@ import NotFound from "./components/notFound";
 import Footer from "./components/footer";
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <Switch>
-        <Route path="/all" exact component={AllBirthdays}></Route>
-        <Route path="/contact" exact component={ContactForm}></Route>
-        <Route path="/birthday" exact component={RequestForm}></Route>
-        <Route path="/not-found" component={NotFound}></Route>
-        <Route path="/" exact component={CurrentBirthdays}></Route>
-        <Redirect to="/not-found" />
-      </Switch>
+    <div>
+      <div className="App">
+        <NavBar />
+        <Switch>
+          <Route path="/all" exact component={AllBirthdays}></Route>
+          <Route path="/contact" exact component={ContactForm}></Route>
+          <Route path="/birthday" exact component={RequestForm}></Route>
+          <Route path="/not-found" component={NotFound}></Route>
+          <Route path="/" exact component={CurrentBirthdays}></Route>
+          <Redirect to="/not-found" />
+        </Switch>
+      </div>
       <Footer />
     </div>
   );
