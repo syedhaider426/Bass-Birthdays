@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import NavBar from "./components/navbar";
+import NavBar from "./components/navbar2";
 import { Switch, Route, Redirect } from "react-router-dom";
 import CurrentBirthdays from "./components/currentBirthdays";
 import AllBirthdays from "./components/allBirthdays";
@@ -22,7 +22,6 @@ function App() {
           <Redirect to="/not-found" />
         </Switch>
       </div>
-      <Footer />
     </div>
   );
 }

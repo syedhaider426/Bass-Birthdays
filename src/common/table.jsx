@@ -4,10 +4,16 @@ import TableHeader from "./tableHeader";
 
 const Table = ({ data, sortColumn, onSort, refresh }) => {
   return (
-    <table>
-      <TableHeader sortColumn={sortColumn} onSort={onSort} refresh={refresh} />
-      <TableBody data={data} />
-    </table>
+    <div className="div-all-table">
+      <table className="all-birthday-table">
+        <TableHeader
+          sortColumn={sortColumn}
+          onSort={onSort}
+          refresh={refresh}
+        />
+        <TableBody data={data} />
+      </table>
+    </div>
   );
 };
 

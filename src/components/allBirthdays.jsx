@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import Table from "../common/table";
 import axios from "axios";
-import Pagination from "../common/paging";
 import paginate from "../utils/paginate";
 import _ from "lodash";
 import FilterTable from "./filterTable";
-import Select from "../common/select";
+import Footer from "../components/footer";
+
 class AllBirthdays extends Component {
   state = {
     artists: [],
@@ -47,10 +47,9 @@ class AllBirthdays extends Component {
   };
   //LOOK INTO QUERY PARAMS
   refresh = () => {
-    let { sortColumn } = { ...this.state };
     const searchQuery = "";
     const bdayQuery = "";
-    const amountPerPage = 25;
+    const amountPerPage = 25; //look into default state values
     this.setState({
       sortColumn: { path: "artist", order: "initial" },
       searchQuery,
@@ -113,32 +112,23 @@ class AllBirthdays extends Component {
     var options = [25, 50, 75, 100];
     return (
       <React.Fragment>
-        <FilterTable
-          value={searchQuery}
-          onChange={this.handleSearch}
-          handleBirthday={this.handleBirthdayFilter}
-          refresh={this.refresh}
-        />
-        <Table
-          data={artists}
-          sortColumn={sortColumn}
-          onSort={this.handleSort}
-        ></Table>
-        <div class="fix">
-          <Pagination
-            itemsCount={artistsLength}
-            pageSize={amountPerPage}
-            onPageChange={this.handlePageChange}
-            currentPage={currentPage}
-            onPageNext={this.handlePageNext}
-            onPagePrevious={this.handlePagePrevious}
+        <div className="filter-table">
+          <FilterTable
+            value={searchQuery}
+            onChange={this.handleSearch}
+            handleBirthday={this.handleBirthdayFilter}
+            refresh={this.refresh}
           />
-          <Select
-            name={"Records Per Page"}
-            value={amountPerPage}
-            options={options}
-            onChange={this.handleSelect}
-          />
+        </div>
+        <div className="main-table">
+          <Table
+            data={artists}
+            sortColumn={sortColumn}
+            onSort={this.handleSort}
+          ></Table>
+        </div>
+        <div className="footer-table">
+          <Footer />
         </div>
       </React.Fragment>
     );
