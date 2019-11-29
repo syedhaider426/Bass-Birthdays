@@ -14,7 +14,7 @@ const Pagination = ({
   const firstPage = pages[0];
   const lastPage = pages[pages.length - 1];
   return (
-    <nav>
+    <nav className="paging">
       <ul className="pagination">
         <li
           key={"Previous"}

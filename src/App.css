@@ -1,41 +1,108 @@
-/* .App-logo {
-  height: 40vmin;
+/* BODY */
+
+body {
+  background-color: #2b3e50 !important;
 }
 
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} 
+/* BODY ENDS*/
 
-.App-link {
-  color: #09d3ac;
-}*/
-.App {
-  min-height: 96.5vh; /* will cover the 100% of viewport */
-  overflow: hidden;
-  display: block;
-  position: relative;
+/* NAVBAR STARTS*/
+.navbar {
+  background-color: #df691a;
+  height: 4vh;
 }
+
+.navbar-color {
+  color: #ebebeb;
+}
+.navbar-nav > li > .dropdown-menu {
+  background-color: #df691a;
+}
+
+.fa-arrow-down {
+  transform: rotate(0deg);
+  transition: transform 250ms linear;
+}
+
+.fa-arrow-down.open {
+  transform: rotate(-180deg);
+  transition: transform 250ms linear;
+}
+
+/* NAVBAR ENDS*/
+
+/* SEARCH TABLE */
+input,
+textarea {
+  width: 100%;
+}
+
+/* SEARCH TABLE ENDS */
+
+/* Table starts */
+.pre-scrollable {
+  max-height: 70vh;
+}
+
+th {
+  background: var(--background);
+  position: sticky;
+  top: 0;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+  background-color: #df691a;
+}
+
+td {
+  color: #ebebeb;
+  font-weight: bold;
+}
+
+span {
+  color: #ebebeb;
+}
+
+.jumbotron {
+  background-color: #4e5d6c !important;
+}
+
+tr:nth-child(even) {
+  background-color: gray;
+}
+/*table css ends*/
+
+/* pagination START*/
 
 .page-item {
-  margin: 5px;
+  margin-left: 1%;
 }
 
-img {
-  margin-right: 30px;
+.paging-records {
+  display: flex;
 }
 
-td span {
-  cursor: pointer;
-  color: blue;
-  text-decoration: underline;
+.records-per-page {
+  margin-left: 5% !important;
 }
+.pagination li a {
+  background: #4e5d6c;
+  color: white !important;
+}
+
+.page-item.disabled .page-link {
+  background-color: black !important;
+}
+
+/* PAGINATION END*/
+
+/* Labels*/
+
+label {
+  color: white;
+  font-weight: bold;
+}
+
+/* FOOTER START*/
+
 .site-footer {
   background-color: #242729;
   background-image: none;
@@ -50,233 +117,4 @@ td span {
   position: relative;
 }
 
-.records-per-page {
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
-
-.fix {
-  display: flex;
-}
-
-.refresh-button {
-  margin-top: 16px !important;
-}
-
-@media only screen and (max-width: 400px) {
-  .refresh-button,
-  .socials,
-  .artist-social {
-    display: none;
-  }
-
-  table tbody td {
-    padding-bottom: 0px !important;
-  }
-}
-
-/*table css starts*/
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td,
-th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
-.fa-arrow-down {
-  transform: rotate(0deg);
-  transition: transform 250ms linear;
-}
-
-.fa-arrow-down.open {
-  transform: rotate(-180deg);
-  transition: transform 250ms linear;
-}
-
-.div-all-table {
-  position: fixed;
-  overflow: scroll;
-  width: 100%;
-  height: 100%;
-}
-
-/*table css ends*/
-
-/* navigation styles start here*/
-:root {
-  --background: rgba(85, 214, 170, 1); /*0.85 references opacity*/
-}
-
-header {
-  background: var(--background); /*this is a variable being referenced*/
-  text-align: center;
-  width: 100%;
-  /*position: fixed;*/
-  z-index: 999;
-}
-
-nav {
-  position: absolute; /* this is placed based on the overall positioning of the parent/header element*/
-  text-align: left;
-  top: 100%; /* if this was top 50%, it would move the nav elements up*/
-  left: 0;
-  background: var(--background);
-  width: 100%;
-  /*display: none !important; /*display: block is inherited from react*/
-  /*1 refers t*/ /*0 smushes it, 1 leaves it with full width*/
-  transform: scale(1, 0);
-  transform-origin: top;
-  transition: transform 400ms ease-in-out;
-}
-
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none; /*gets rid of bullet points*/
-}
-
-nav li {
-  margin-bottom: 1em;
-  margin-left: 1em;
-}
-
-header li {
-  list-style: none;
-}
-nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 1.2rem; /*rem vs em*/
-  /*text-transform: uppercase;*/
-  opacity: 0; /*this will make the all the nav elements opaque*/
-  /*the 2nd 250ms is the delay before animation*/
-  transition: opacity 150ms ease-in-out;
-}
-
-nav a:hover {
-  color: #000;
-}
-
-/*hover is a psuedoclass, checked is a psuedoclass*/
-/* this is looking for nav's preceding sibling which is a nav-toggle */
-/* if checked, block; otherwise, hide*/
-.nav-toggle:checked ~ nav {
-  /*display: block !important;*/
-  transform: scale(1, 1);
-}
-
-/* when nav elements are displayed*/
-.nav-toggle:checked ~ nav a {
-  /*display: block !important;*/
-  opacity: 1;
-  transition: opacity 250ms ease-in-out 250ms;
-}
-
-.nav-toggle {
-  display: none;
-}
-
-.nav-toggle-label {
-  position: absolute; /*tell it where to go*/
-  top: 0;
-  left: 0;
-  margin-left: 1em;
-  /*border: 1px solid red; /*used just to view centering*/
-  height: 100%; /*take up height of navbar*/
-  display: flex;
-  align-items: center; /*puts in center*/
-}
-
-.nav-toggle-label span,
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  display: block;
-  background: white;
-  height: 2px;
-  width: 2em;
-  border-radius: 2px;
-  position: relative;
-}
-
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  content: "";
-  position: absolute;
-}
-
-.nav-toggle-label span::before {
-  bottom: 7px;
-}
-
-.nav-toggle-label span::after {
-  top: 7px;
-}
-
-@media screen and (min-width: 800px) {
-  .nav-toggle-label {
-    display: none;
-  }
-
-  header {
-    display: grid !important;
-    grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
-  }
-
-  .logo {
-    grid-column: 2 / 3; /*takes up 2-3 for the lines*/
-  }
-
-  nav {
-    /*all: unset; /* this causes issues with Edge, since it's unsupported */
-
-    /* the following lines are not from my video, but add Edge support */
-    all: unset;
-    /* end Edge support stuff */
-
-    grid-column: 3 / 4 !important;
-    display: flex !important; /*elements next to each other*/
-    justify-content: flex-end !important;
-    align-items: center !important;
-  }
-
-  nav ul {
-    display: flex;
-  }
-
-  nav a {
-    opacity: 1;
-    position: relative;
-  }
-
-  nav li {
-    margin-left: 3em;
-    margin-bottom: 0;
-  }
-
-  nav a::before {
-    content: "";
-    height: 5px;
-    background: black;
-    position: absolute;
-    top: -0.75em; /*you can change this to the bottom if you want line on the bottom*/
-    left: 0;
-    right: 0;
-    display: block !important;
-    transform: scale(0, 1);
-    transition: transform ease-in-out 250ms;
-  }
-
-  nav a:hover::before {
-    transform: scale(1, 1);
-  }
-}
+/* FOOTER ENDS*/

@@ -78,7 +78,7 @@ class Form extends Component {
             placeholder="Enter comments"
           ></input>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="contact-button btn btn-primary">
           Submit
         </button>
       </form>

@@ -4,8 +4,9 @@ import axios from "axios";
 import paginate from "../utils/paginate";
 import _ from "lodash";
 import FilterTable from "./filterTable";
-import Footer from "../components/footer";
-
+import Pagination from "../common/paging";
+import Select from "../common/select";
+import refreshIcon from "../images/refresh.png";
 class AllBirthdays extends Component {
   state = {
     artists: [],
@@ -24,6 +25,8 @@ class AllBirthdays extends Component {
   }
 
   handlePageChange = page => {
+    const { currentPage } = this.state;
+    if (currentPage === page) return;
     this.setState({ currentPage: page });
     this.smoothScroll();
   };
@@ -75,12 +78,11 @@ class AllBirthdays extends Component {
   };
 
   smoothScroll = () => {
-    if (window.screen.width < 400)
-      window.scrollTo({
-        //top: 100, // could be negative value
-        top: 50,
-        behavior: "smooth"
-      });
+    window.scrollTo({
+      //top: 100, // could be negative value
+      top: 0,
+      behavior: "smooth"
+    });
   };
 
   render() {
@@ -107,28 +109,56 @@ class AllBirthdays extends Component {
       allArtists = sorted;
     }
     var artists = paginate(allArtists, currentPage, amountPerPage);
-
     const artistsLength = allArtists.length;
     var options = [25, 50, 75, 100];
     return (
       <React.Fragment>
-        <div className="filter-table">
-          <FilterTable
-            value={searchQuery}
-            onChange={this.handleSearch}
-            handleBirthday={this.handleBirthdayFilter}
-            refresh={this.refresh}
-          />
-        </div>
-        <div className="main-table">
-          <Table
-            data={artists}
-            sortColumn={sortColumn}
-            onSort={this.handleSort}
-          ></Table>
-        </div>
-        <div className="footer-table">
-          <Footer />
+        <div className="main-content">
+          <div className="container search-query">
+            <div className="row">
+              <div className="col-sm-12">
+                <FilterTable
+                  value={searchQuery}
+                  onChange={this.handleSearch}
+                  handleBirthday={this.handleBirthdayFilter}
+                  refresh={this.refresh}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="container birthday-table mt-2">
+            <div className="row">
+              <div className="col-sm-12 ">
+                <Table
+                  data={artists}
+                  sortColumn={sortColumn}
+                  onSort={this.handleSort}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="container mt-4">
+            <div className="row">
+              <div className="col-sm-12 paging-records">
+                <Pagination
+                  itemsCount={artistsLength}
+                  pageSize={amountPerPage}
+                  onPageChange={this.handlePageChange}
+                  currentPage={currentPage}
+                  onPageNext={this.handlePageNext}
+                  onPagePrevious={this.handlePagePrevious}
+                />
+                <Select
+                  name={"Records Per Page"}
+                  value={amountPerPage}
+                  options={options}
+                  onChange={this.handleSelect}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </React.Fragment>
     );

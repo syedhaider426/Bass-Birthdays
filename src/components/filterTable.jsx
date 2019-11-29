@@ -3,20 +3,24 @@ import React from "react";
 /*if you see query parametrs in the web address, there is a form*/
 const FilteredTable = ({ value, onChange, handleBirthday, refresh }) => {
   return (
-    <div>
+    <React.Fragment>
       <div className="form-group">
-        <label htmlFor="query">Enter Artist</label>
+        <label htmlFor="query">
+          <span style={{ fontWeight: "bold" }}>Artist</span>
+        </label>
         <input
           type="text"
           name="query"
           className="form-control"
-          placeholder="Search..."
+          placeholder="Enter Artist Name"
           value={value}
           onChange={e => onChange(e.currentTarget.value)}
         />
       </div>
       <div className="form-group">
-        <label htmlFor="birthday">Enter Birthday</label>
+        <label htmlFor="birthday">
+          <span style={{ fontWeight: "bold" }}>Birthday</span>
+        </label>
         <input
           type="date"
           name="birthday"
@@ -25,11 +29,8 @@ const FilteredTable = ({ value, onChange, handleBirthday, refresh }) => {
           onChange={handleBirthday}
           placeholder="Enter Birthday"
         ></input>
-        <button className="refresh-button" onClick={() => refresh()}>
-          Refresh
-        </button>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

@@ -105,7 +105,7 @@ var birthdayFormSchema = mongoose.Schema({
 var BirthdayForm = mongoose.model("BirthdayForm", birthdayFormSchema);
 
 app.get("/artist", async (req, res) => {
-  const result = await Artist.find();
+  const result = await Artist.find().sort({ birthday: 1 });
   res.status(200).send(result);
 });
 

@@ -1,10 +1,10 @@
 import React from "react";
-import spotify from "../images/spotify.png";
-import bandcamp from "../images/bandcamp.png";
-import twitter from "../images/twitter.png";
-import instagram from "../images/instagram.png";
-import facebook from "../images/facebook.png";
-import soundcloud from "../images/soundcloud.png";
+// import spotify from "../images/spotify.png";
+// import bandcamp from "../images/bandcamp.png";
+// import twitter from "../images/twitter.png";
+// import instagram from "../images/instagram.png";
+// import facebook from "../images/facebook.png";
+// import soundcloud from "../images/soundcloud.png";
 
 const TableBody = ({ data }) => {
   function convertISODateToString(date) {
@@ -38,7 +38,15 @@ const TableBody = ({ data }) => {
             <span>{item.artist}</span>
           </td>
           <td>{convertISODateToString(item.birthday)}</td>
-          <td>
+        </tr>
+      ))}
+    </tbody>
+  );
+};
+
+export default TableBody;
+
+/* <td>
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -87,12 +95,4 @@ const TableBody = ({ data }) => {
             >
               <img src={bandcamp} alt="BandCamp" />
             </a>
-          </td>
-          <td></td>
-        </tr>
-      ))}
-    </tbody>
-  );
-};
-
-export default TableBody;
+          </td>*/

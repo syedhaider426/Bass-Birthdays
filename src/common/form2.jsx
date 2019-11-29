@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
+
 /*Form can have properties of the controls on the browser page*/
 /*State can be dynamic based on controls being created*/
 
@@ -121,9 +122,7 @@ class Form extends Component {
           ></input>
         </div>
         <div className="form-group">
-          <label htmlFor="birthday">
-            Birthday (If year is not known, use current year or next year)
-          </label>
+          <label htmlFor="birthday">Birthday</label>
           <input
             type="date"
             name="birthday"
@@ -132,18 +131,6 @@ class Form extends Component {
             value={birthday}
             onChange={this.handleBirthday}
             placeholder="Enter Birthday"
-          ></input>
-        </div>
-        <div className="form-group">
-          <label htmlFor="phoneNumber">Phone Number</label>
-          <input
-            type="text"
-            name="phoneNumber"
-            id="phoneNumber"
-            className="form-control"
-            value={phoneNumber}
-            onChange={this.handlePhoneNumber}
-            placeholder="Enter Phone Number"
           ></input>
         </div>
         <div className="form-group">
@@ -231,15 +218,27 @@ class Form extends Component {
           ></input>
         </div>
         <div className="form-group">
-          <label htmlFor="comments">Comments</label>
+          <label htmlFor="personal">Personal</label>
           <input
+            type="text"
+            name="personal"
+            id="personal"
+            className="form-control"
+            value={socials["personal"]}
+            onChange={this.handleSocials}
+            placeholder="Enter Personal URL"
+          ></input>
+        </div>
+        <div className="form-group">
+          <label htmlFor="comments">Comments</label>
+          <textarea
             type="text"
             id="comments"
             className="form-control"
             value={comments}
             onChange={this.handleComments}
             placeholder="Enter comments"
-          ></input>
+          ></textarea>
         </div>
         <button type="submit" className="btn btn-primary">
           Submit

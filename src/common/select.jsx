@@ -1,8 +1,6 @@
 import React from "react";
 
 const Select = ({ name, options, value, onChange }) => {
-  console.log(options);
-
   return (
     <div className="records-per-page">
       <select

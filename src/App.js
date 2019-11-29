@@ -11,21 +11,25 @@ import Footer from "./components/footer";
 function App() {
   return (
     <div>
-      <div className="App">
+      <div>
         <NavBar />
-        <Switch>
-          <Route path="/all" exact component={AllBirthdays}></Route>
-          <Route path="/contact" exact component={ContactForm}></Route>
-          <Route path="/birthday" exact component={RequestForm}></Route>
-          <Route path="/not-found" component={NotFound}></Route>
-          <Route path="/" exact component={CurrentBirthdays}></Route>
-          <Redirect to="/not-found" />
-        </Switch>
+        <div className="content">
+          <Switch>
+            <Route path="/all" exact component={AllBirthdays}></Route>
+            <Route path="/contact" exact component={ContactForm}></Route>
+            <Route path="/birthday" exact component={RequestForm}></Route>
+            <Route path="/not-found" component={NotFound}></Route>
+            <Route path="/" exact component={CurrentBirthdays}></Route>
+            <Redirect to="/not-found" />
+          </Switch>
+        </div>
       </div>
     </div>
   );
 }
-
+/*<div className="footer-table">
+        <Footer />
+      </div>*/
 //switch renders first child that matches the url location
 //order routes from most specific to most generic
 //if you have a redirect without the from, then it will redirect
