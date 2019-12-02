@@ -6,9 +6,10 @@ const app = express();
 
 const cors = require("cors");
 const port = config.get("db.port");
+const path = require("path");
 //const port = process.env.PORT;
 app.use(cors());
-
+app.use(express.static(path.join(__dirname, "client/build")));
 app.use(express.json());
 
 app.listen(port, () => console.log(`Connected on port ${port}`));
