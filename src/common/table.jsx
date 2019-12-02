@@ -4,7 +4,7 @@ import TableHeader from "./tableHeader";
 
 const Table = ({ data, sortColumn, onSort, refresh }) => {
   return (
-    <table className="table table-bordered table-striped">
+    <table className="table w-auto">
       <TableHeader sortColumn={sortColumn} onSort={onSort} refresh={refresh} />
       <TableBody data={data} />
     </table>

@@ -7,7 +7,7 @@ class ContactForm extends Component {
       <div className="container birthday-table mt-2">
         <div className="row">
           <div className="col-sm-12 ">
-            <Form />;
+            <Form />
           </div>
         </div>
       </div>

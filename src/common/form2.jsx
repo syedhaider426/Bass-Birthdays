@@ -17,7 +17,6 @@ class Form extends Component {
     name: "",
     email: "",
     birthday: "",
-    phoneNumber: "",
     comments: "",
     socials: {
       facebook: "",
@@ -45,10 +44,6 @@ class Form extends Component {
     this.setState({ birthday: input.value });
   };
 
-  handlePhoneNumber = ({ currentTarget: input }) => {
-    this.setState({ phoneNumber: input.value });
-  };
-
   //still not sure what currentarget is
   handleSocials = ({ currentTarget: input }) => {
     const socials = { ...this.state.socials }; //this creates a copy of the object and stores it in a new variable()
@@ -59,19 +54,11 @@ class Form extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const {
-      name,
-      email,
-      comments,
-      socials,
-      birthday,
-      phoneNumber
-    } = this.state;
+    const { name, email, comments, socials, birthday } = this.state;
     //also submit the date
     const obj = {
       name,
       birthday,
-      phoneNumber,
       email,
       comments,
       socials

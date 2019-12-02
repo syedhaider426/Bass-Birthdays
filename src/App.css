@@ -1,19 +1,28 @@
 /* BODY */
 
 body {
-  background-color: #2b3e50 !important;
+  padding: 0 2em;
+  background-image: -webkit-linear-gradient(
+    bottom,
+    #c471f5,
+    #fa71cd
+  ) !important;
+  font-family: "Montserrat", "sans-serif";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: #444;
+  background: #eee;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
 /* BODY ENDS*/
 
 /* NAVBAR STARTS*/
-.navbar {
-  background-color: #df691a;
-  height: 4vh;
-}
 
 .navbar-color {
-  color: #ebebeb;
+  color: black;
+  font-family: "Montserrat", "sans-serif";
 }
 .navbar-nav > li > .dropdown-menu {
   background-color: #df691a;
@@ -40,34 +49,44 @@ textarea {
 /* SEARCH TABLE ENDS */
 
 /* Table starts */
+
+.birthday-table {
+  color: #fff;
+  border-radius: 0.4em;
+}
 .pre-scrollable {
   max-height: 70vh;
 }
 
 th {
   background: var(--background);
-  position: sticky;
+  position: sticky !important;
   top: 0;
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
-  background-color: #df691a;
+  background-color: black;
+  color: white;
 }
 
+table {
+  border-collapse: collapse;
+  font-family: "Montserrat", "sans-serif";
+}
 td {
-  color: #ebebeb;
-  font-weight: bold;
+  font-family: "Montserrat", "sans-serif";
+  border: 0 !important;
+  background-color: white;
 }
 
 span {
-  color: #ebebeb;
+  color: #666;
+  font-family: "Montserrat", "sans-serif";
 }
 
-.jumbotron {
-  background-color: #4e5d6c !important;
+.form-group span {
+  color: black;
+  font-family: "Montserrat", "sans-serif";
 }
 
-tr:nth-child(even) {
-  background-color: gray;
-}
 /*table css ends*/
 
 /* pagination START*/
@@ -83,13 +102,9 @@ tr:nth-child(even) {
 .records-per-page {
   margin-left: 5% !important;
 }
-.pagination li a {
-  background: #4e5d6c;
-  color: white !important;
-}
 
-.page-item.disabled .page-link {
-  background-color: black !important;
+.pr {
+  padding: 0px !important;
 }
 
 /* PAGINATION END*/
@@ -97,8 +112,8 @@ tr:nth-child(even) {
 /* Labels*/
 
 label {
-  color: white;
-  font-weight: bold;
+  color: black;
+  font-family: "Montserrat", "sans-serif";
 }
 
 /* FOOTER START*/

@@ -6,6 +6,13 @@ import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter } from "react-router-dom";
 import "font-awesome/css/font-awesome.css";
+import WebFont from "webfontloader";
+
+WebFont.load({
+  google: {
+    families: ["Montserrat", "sans-serif"]
+  }
+});
 
 ReactDOM.render(
   <BrowserRouter>

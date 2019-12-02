@@ -127,9 +127,9 @@ class AllBirthdays extends Component {
             </div>
           </div>
 
-          <div className="container birthday-table mt-2">
+          <div className="container mt-2">
             <div className="row">
-              <div className="col-sm-12 ">
+              <div className="col-sm-12 birthday-table ">
                 <Table
                   data={artists}
                   sortColumn={sortColumn}
@@ -139,7 +139,7 @@ class AllBirthdays extends Component {
             </div>
           </div>
 
-          <div className="container mt-4">
+          <div className="container mt-4 pr">
             <div className="row">
               <div className="col-sm-12 paging-records">
                 <Pagination

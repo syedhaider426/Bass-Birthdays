@@ -7,7 +7,7 @@ import AllBirthdays from "./components/allBirthdays";
 import ContactForm from "./components/contactForm";
 import RequestForm from "./components/requestForm";
 import NotFound from "./components/notFound";
-import Footer from "./components/footer";
+//import Footer from "./components/footer";
 function App() {
   return (
     <div>
