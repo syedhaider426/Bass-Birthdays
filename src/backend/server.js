@@ -15,7 +15,6 @@ console.log(__dirname);
 app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../../build", "index.html"));
 });
-
 app.listen(port, () => console.log(`Connected on port ${port}`));
 
 const mongoose = require("mongoose");
