@@ -11,7 +11,7 @@ const NavBar = () => {
             Dubstep Data
           </Link>
           <button
-            className="navbar-toggler"
+            className="navbar-toggler navbar-light"
             type="button"
             data-toggle="collapse"
             data-target="#navbarSupportedContent"

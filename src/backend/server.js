@@ -11,24 +11,15 @@ const path = require("path");
 app.use(cors());
 app.use(express.static(path.join(__dirname, "../../build")));
 app.use(express.json());
-console.log(__dirname);
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../../build", "index.html"));
-});
 app.listen(port, () => console.log(`Connected on port ${port}`));
 
 const mongoose = require("mongoose");
-mongoose
-  .connect(db, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch(err => {
-    console.log("Errors", err.message);
-  });
+console.log(db);
+console.log(port);
+mongoose.connect(db, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 //declare schema
 //declare model

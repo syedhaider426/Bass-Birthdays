@@ -6,7 +6,6 @@ import _ from "lodash";
 import FilterTable from "./filterTable";
 import Pagination from "../common/paging";
 import Select from "../common/select";
-import refreshIcon from "../images/refresh.png";
 class AllBirthdays extends Component {
   state = {
     artists: [],
@@ -18,7 +17,7 @@ class AllBirthdays extends Component {
   };
 
   componentDidMount() {
-    axios.get(`http://localhost:4000/artist`).then(res => {
+    axios.get(`http://dubstepdata.info/artist`).then(res => {
       const artists = res.data; //res.data is an array
       this.setState({ artists });
     });
