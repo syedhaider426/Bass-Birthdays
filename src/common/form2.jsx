@@ -84,14 +84,7 @@ class Form extends Component {
     });
   };
   render() {
-    const {
-      name,
-      email,
-      birthday,
-      phoneNumber,
-      comments,
-      socials
-    } = this.state;
+    const { name, email, birthday, comments, socials } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit}>
