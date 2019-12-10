@@ -3,7 +3,7 @@ const db = config.get("db.connect");
 const express = require("express");
 
 const app = express();
-
+const router = express.Router();
 const cors = require("cors");
 const port = config.get("db.port");
 const path = require("path");
@@ -11,11 +11,11 @@ const path = require("path");
 app.use(cors());
 app.use(express.static(path.join(__dirname, "../../build")));
 app.use(express.json());
-app.listen(port, () => console.log(`Connected on port ${port}`));
+app.listen(8080);
 
+app.use("/api", router);
 const mongoose = require("mongoose");
-console.log(db);
-console.log(port);
+
 mongoose.connect(db, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -99,19 +99,23 @@ var birthdayFormSchema = mongoose.Schema({
 
 var BirthdayForm = mongoose.model("BirthdayForm", birthdayFormSchema);
 
-app.get("/artist", async (req, res) => {
+router.get("/artist", async (req, res) => {
   const result = await Artist.find().sort({ birthday: 1 });
   res.status(200).send(result);
 });
 
-app.post("/contact", async (req, res) => {
+router.post("/contact", async (req, res) => {
   const contact = new ContactForm(req.body);
   const result = await contact.save();
   res.status(200).send(result);
 });
 
-app.post("/birthday", async (req, res) => {
+router.post("/birthday", async (req, res) => {
   const birthdayForm = new BirthdayForm(req.body);
   const result = await birthdayForm.save();
   res.status(200).send(result);
+});
+
+app.get("*", function(request, response) {
+  response.sendFile(path.resolve(__dirname, "../../build", "index.html"));
 });

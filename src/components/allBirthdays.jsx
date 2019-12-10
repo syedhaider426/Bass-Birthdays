@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Table from "../common/table";
-import axios from "axios";
 import paginate from "../utils/paginate";
 import _ from "lodash";
 import FilterTable from "./filterTable";
@@ -17,10 +16,12 @@ class AllBirthdays extends Component {
   };
 
   componentDidMount() {
-    axios.get(`http://dubstepdata.info/artist`).then(res => {
-      const artists = res.data; //res.data is an array
-      this.setState({ artists });
-    });
+    fetch("https://dubstepdata.info/api/artist")
+      .then(response => response.json())
+      .then(data => {
+        console.log("DATA", data);
+        this.setState({ artists: data });
+      });
   }
 
   handlePageChange = page => {
