@@ -5,6 +5,7 @@ import _ from "lodash";
 import FilterTable from "./filterTable";
 import Pagination from "../common/paging";
 import Select from "../common/select";
+
 class AllBirthdays extends Component {
   state = {
     artists: [],
