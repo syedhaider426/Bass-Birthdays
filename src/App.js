@@ -1,25 +1,18 @@
 import React from "react";
 import "./App.css";
-import NavBar from "./components/navbar2";
 import { Switch, Route, Redirect } from "react-router-dom";
-import CurrentBirthdays from "./components/currentBirthdays";
 import AllBirthdays from "./components/allBirthdays";
-import ContactForm from "./components/contactForm";
-import RequestForm from "./components/requestForm";
 import NotFound from "./components/notFound";
 //import Footer from "./components/footer";
 function App() {
   return (
     <div>
       <div>
-        <NavBar />
         <div className="content">
+          <h2 className="title">Bass Birthdays</h2>
           <Switch>
-            <Route path="/all" exact component={AllBirthdays}></Route>
-            <Route path="/contact" exact component={ContactForm}></Route>
-            <Route path="/birthday" exact component={RequestForm}></Route>
             <Route path="/not-found" component={NotFound}></Route>
-            <Route path="/" exact component={CurrentBirthdays}></Route>
+            <Route path="/" exact component={AllBirthdays}></Route>
             <Redirect to="/not-found" />
           </Switch>
         </div>

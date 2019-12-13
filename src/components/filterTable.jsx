@@ -4,10 +4,7 @@ import React from "react";
 const FilteredTable = ({ value, onChange, handleBirthday, refresh }) => {
   return (
     <React.Fragment>
-      <div className="form-group">
-        <label htmlFor="query">
-          <span style={{ fontWeight: "bold" }}>Artist</span>
-        </label>
+      <div className="input-group">
         <input
           type="text"
           name="query"
@@ -16,19 +13,18 @@ const FilteredTable = ({ value, onChange, handleBirthday, refresh }) => {
           value={value}
           onChange={e => onChange(e.currentTarget.value)}
         />
-      </div>
-      <div className="form-group">
-        <label htmlFor="birthday">
-          <span style={{ fontWeight: "bold" }}>Birthday</span>
-        </label>
+
         <input
           type="date"
           name="birthday"
           id="birthday"
-          className="form-control"
+          className=" form-control"
           onChange={handleBirthday}
           placeholder="Enter Birthday"
         ></input>
+        <span class="add-on">
+          <i class="icon-th"></i>
+        </span>
       </div>
     </React.Fragment>
   );

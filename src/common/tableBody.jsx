@@ -34,9 +34,7 @@ const TableBody = ({ data }) => {
     <tbody>
       {data.map(item => (
         <tr key={item._id}>
-          <td>
-            <span>{item.artist}</span>
-          </td>
+          <td>{item.artist}</td>
           <td>{convertISODateToString(item.birthday)}</td>
         </tr>
       ))}
@@ -45,54 +43,3 @@ const TableBody = ({ data }) => {
 };
 
 export default TableBody;
-
-/* <td>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={item.socials["spotify"]}
-              className="artist-social"
-            >
-              <img src={spotify} alt="Spotify" />
-            </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={item.socials["soundcloud"]}
-              className="artist-social"
-            >
-              <img src={soundcloud} alt="SoundCloud" />
-            </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={item.socials["facebook"]}
-              className="artist-social"
-            >
-              <img src={facebook} alt="Facebook" />
-            </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={item.socials["twitter"]}
-              className="artist-social"
-            >
-              <img src={twitter} alt="Twitter" />
-            </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={item.socials["instagram"]}
-              className="artist-social"
-            >
-              <img src={instagram} alt="Instagram" />
-            </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={item.socials["bandcamp"]}
-              className="artist-social"
-            >
-              <img src={bandcamp} alt="BandCamp" />
-            </a>
-          </td>*/

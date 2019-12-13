@@ -17,10 +17,9 @@ class AllBirthdays extends Component {
   };
 
   componentDidMount() {
-    fetch("https://dubstepdata.info/api/artist")
+    fetch("http://localhost:8080/artist")
       .then(response => response.json())
       .then(data => {
-        console.log("DATA", data);
         this.setState({ artists: data });
       });
   }
@@ -102,11 +101,16 @@ class AllBirthdays extends Component {
       });
     if (bdayQuery)
       allArtists = allArtists.filter(m => {
+        console.log(bdayQuery);
         return m.birthday.substring(0, 10).startsWith(bdayQuery);
       });
     var sorted = {};
     if (sortColumn.order !== "initial") {
-      sorted = _.orderBy(allArtists, [sortColumn.path], [sortColumn.order]);
+      sorted = _.orderBy(
+        allArtists,
+        [artistName => artistName[sortColumn.path].toLowerCase()],
+        [sortColumn.order]
+      );
       allArtists = sorted;
     }
     var artists = paginate(allArtists, currentPage, amountPerPage);

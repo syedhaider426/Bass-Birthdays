@@ -4,10 +4,10 @@ body {
   padding: 0 2em;
   background-image: -webkit-linear-gradient(
     bottom,
-    #c471f5,
-    #fa71cd
+    #009ffd 0%,
+    #2a2a72
   ) !important;
-  font-family: "Montserrat", "sans-serif";
+  font-family: "Montserrat", "sans-serif" !important;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   color: #444;
@@ -17,15 +17,8 @@ body {
 }
 
 /* BODY ENDS*/
-
-/* NAVBAR STARTS*/
-
-.navbar-color {
-  color: black;
-  font-family: "Montserrat", "sans-serif";
-}
-.navbar-nav > li > .dropdown-menu {
-  background-color: #df691a;
+.ui-datepicker-year {
+  display: none;
 }
 
 .fa-arrow-down {
@@ -54,12 +47,8 @@ textarea {
   color: #fff;
   border-radius: 0.4em;
 }
-.pre-scrollable {
-  max-height: 70vh;
-}
 
 th {
-  background: var(--background);
   position: sticky !important;
   top: 0;
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
@@ -83,8 +72,12 @@ span {
 }
 
 .form-group span {
-  color: black;
+  color: white;
   font-family: "Montserrat", "sans-serif";
+}
+
+.form-group label {
+  text-align: center !important;
 }
 
 /*table css ends*/
@@ -112,7 +105,7 @@ span {
 /* Labels*/
 
 label {
-  color: black;
+  color: white !important;
   font-family: "Montserrat", "sans-serif";
 }
 
@@ -133,3 +126,15 @@ label {
 }
 
 /* FOOTER ENDS*/
+
+.title {
+  text-align: center;
+  font-size: xxx-large;
+  color: white;
+  text-shadow: horizontal-offset vertical-offset blur color;
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+}
+
+label span {
+  color: white;
+}
