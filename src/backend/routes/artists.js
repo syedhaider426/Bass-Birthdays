@@ -27,7 +27,9 @@ var authOptions = {
 };
 
 async function getArtists() {
-  const result = await Artist.find({}, { artist: 1 }).sort({ birthday: 1 });
+  const result = await Artist.find({}, { artist: 1, spotifyID: 1 }).sort({
+    birthday: 1
+  });
 
   return result;
 }
@@ -55,7 +57,6 @@ async function getSpotifyID(array) {
         },
         json: true
       };
-      console.log(options.url);
       await getRequestForSpotifyID(options);
     }
   });
@@ -106,13 +107,33 @@ async function SerialFlow() {
 module.exports = router;
 
 //SerialFlow();
-SerialFlow2();
 
-async function SerialFlow2() {
-  const artists = await getArtistsWOProfileImage();
-  console.log("artists", artists);
-  await getSpotifyProfileImage(artists);
-  return;
+async function getSpotifyID(array) {
+  var token = "";
+  rp.post(authOptions, async function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      token = body.access_token; // use the access token to access the Spotify Web API
+    }
+    for (var x = 0; x < array.length; x++) {
+      var artistName = array[x].artist;
+      var query;
+      var endingIndex = artistName.length;
+      var startParantheses = artistName.indexOf("(");
+      if (startParantheses != -1) endingIndex = startParantheses;
+      query = querystring.stringify({
+        query: artistName.substring(0, endingIndex),
+        type: "artist"
+      });
+      var options = {
+        url: "https://api.spotify.com/v1/search?" + query,
+        headers: {
+          Authorization: "Bearer " + token
+        },
+        json: true
+      };
+      await getRequestForSpotifyID(options);
+    }
+  });
 }
 
 async function getArtistsWOProfileImage() {
@@ -125,3 +146,55 @@ async function getArtistsWOProfileImage() {
 
   return result;
 }
+
+async function SerialFlow2() {
+  const artists = await getArtists();
+  await getSpotifyProfileImage(artists);
+  return;
+}
+
+async function getSpotifyProfileImage(array) {
+  var token = "";
+  rp.post(authOptions, async function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      token = body.access_token; // use the access token to access the Spotify Web API
+    }
+    for (var x = 0; x < array.length; x++) {
+      var query = array[x].spotifyID;
+      var options = {
+        url: "https://api.spotify.com/v1/artists/" + query,
+        headers: {
+          Authorization: "Bearer " + token
+        },
+        json: true
+      };
+      await getRequestForSpotifyImage(options);
+    }
+  });
+}
+
+async function getRequestForSpotifyImage(options) {
+  await rp
+    .get(options, async function(error, response, body) {
+      if (!error && response.statusCode === 200) {
+        const profileImage = body.images[2].url;
+        const _id = await Artist.find({
+          artist: body.name
+        })
+          .limit(1)
+          .select({ _id: 1 });
+        console.log(body.name);
+        const result = await Artist.updateOne(
+          { _id },
+          {
+            $set: {
+              profileImage
+            }
+          }
+        );
+      }
+    })
+    .catch(err => console.log("Error", err));
+}
+
+SerialFlow2();

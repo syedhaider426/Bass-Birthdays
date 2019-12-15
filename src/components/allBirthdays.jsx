@@ -78,11 +78,7 @@ class AllBirthdays extends Component {
   };
 
   smoothScroll = () => {
-    window.scrollTo({
-      //top: 100, // could be negative value
-      top: 0,
-      behavior: "smooth"
-    });
+    window.scrollTo(0, 0);
   };
 
   render() {

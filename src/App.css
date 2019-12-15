@@ -66,6 +66,9 @@ td {
   background-color: white;
 }
 
+table td {
+  vertical-align: middle !important;
+}
 span {
   color: #666;
   font-family: "Montserrat", "sans-serif";
@@ -86,14 +89,6 @@ span {
 
 .page-item {
   margin-left: 1%;
-}
-
-.paging-records {
-  display: flex;
-}
-
-.records-per-page {
-  margin-left: 5% !important;
 }
 
 .pr {

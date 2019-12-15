@@ -34,8 +34,12 @@ const TableBody = ({ data }) => {
     <tbody>
       {data.map(item => (
         <tr key={item._id}>
+          <td>
+            <img src={item.profileImage} />
+          </td>
           <td>{item.artist}</td>
           <td>{convertISODateToString(item.birthday)}</td>
+          <td>{item.genres[0]}</td>
         </tr>
       ))}
     </tbody>
