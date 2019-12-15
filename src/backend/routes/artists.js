@@ -9,7 +9,7 @@ router.get("/artist", async (req, res) => {
   const result = await Artist.find().sort({ birthday: 1 });
   res.status(200).send(result);
 });
-
+/*
 const config = require("config");
 const client_id = config.get("client_id");
 const client_secret = config.get("client_secret");
@@ -197,4 +197,5 @@ async function getRequestForSpotifyImage(options) {
     .catch(err => console.log("Error", err));
 }
 
-SerialFlow2();
+//SerialFlow2();
+*/
