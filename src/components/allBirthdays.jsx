@@ -17,7 +17,7 @@ class AllBirthdays extends Component {
   };
 
   componentDidMount() {
-    fetch("http://dubstepdata.info/api/artist")
+    fetch("https://dubstepdata.info/api/artist")
       .then(response => response.json())
       .then(data => {
         this.setState({ artists: data });
