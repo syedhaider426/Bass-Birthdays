@@ -16,6 +16,7 @@ class AllBirthdays extends Component {
     bdayQuery: ""
   };
 
+  //"http://localhost:8080/artist"
   componentDidMount() {
     fetch("https://dubstepdata.info/api/artist")
       .then(response => response.json())
