@@ -34,7 +34,7 @@ const TableBody = ({ data }) => {
     <tbody>
       {data.map(item => (
         <tr key={item._id}>
-          <td>
+          <td className="td-profileImage">
             <img src={item.profileImage} />
           </td>
           <td>{item.artist}</td>

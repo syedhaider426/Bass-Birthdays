@@ -27,18 +27,18 @@ class TableHeader extends Component {
     return (
       <thead>
         <tr>
-          <th></th>
+          <th className="h-picture"></th>
           <th
             onClick={() => this.raiseSort("artist")}
             style={{ cursor: "pointer" }}
-            className="artist"
+            className="h-artist"
           >
             Artist{this.renderSortIcon("artist")}
           </th>
-          <th className="birthday">
+          <th className="h-birthday">
             Birthday{this.renderSortIcon("birthday")}
           </th>
-          <th>Genre{this.renderSortIcon("genre")}</th>
+          <th className="h-genre">Genre{this.renderSortIcon("genre")}</th>
         </tr>
       </thead>
     );
