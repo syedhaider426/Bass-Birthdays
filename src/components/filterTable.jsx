@@ -4,7 +4,7 @@ import React from "react";
 const FilteredTable = ({ value, onChange, handleBirthday, refresh }) => {
   return (
     <React.Fragment>
-      <div className="input-group">
+      <div className="input-group filter-table">
         <input
           type="text"
           name="query"

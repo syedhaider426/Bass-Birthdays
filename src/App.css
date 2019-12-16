@@ -112,7 +112,9 @@ span {
 .form-group label {
   text-align: center !important;
 }
-
+.filter-table {
+  margin-bottom: 2%;
+}
 /*table css ends*/
 
 /* pagination START*/

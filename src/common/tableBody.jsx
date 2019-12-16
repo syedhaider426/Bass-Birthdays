@@ -28,7 +28,6 @@ const TableBody = ({ data }) => {
           </td>
           <td>{item.artist}</td>
           <td className="w-25">{convertISODateToString(item.birthday)}</td>
-          <td>{convertArrayToString(item.genres)}</td>
         </tr>
       ))}
     </tbody>
