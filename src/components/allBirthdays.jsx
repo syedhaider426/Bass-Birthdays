@@ -18,7 +18,11 @@ class AllBirthdays extends Component {
 
   //"http://localhost:8080/artist"
   componentDidMount() {
-    fetch("https://dubstepdata.info/api/artist")
+    var url;
+    if (process.env.NODE_ENV == "production")
+      url = "https://dubstepdata.info/api/artist";
+    else url = "http://localhost:8080/artist";
+    fetch(url)
       .then(response => response.json())
       .then(data => {
         this.setState({ artists: data });
