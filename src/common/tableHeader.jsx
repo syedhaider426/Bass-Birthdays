@@ -26,7 +26,7 @@ class TableHeader extends Component {
   render() {
     return (
       <thead>
-        <tr>
+        <tr className="headers">
           <th className="h-picture"></th>
           <th
             onClick={() => this.raiseSort("artist")}
@@ -38,7 +38,7 @@ class TableHeader extends Component {
           <th className="h-birthday">
             Birthday{this.renderSortIcon("birthday")}
           </th>
-          <th className="h-genre">Genres{this.renderSortIcon("genre")}</th>
+          <th className="h-genre">Genres</th>
         </tr>
       </thead>
     );

@@ -4,10 +4,18 @@ import TableHeader from "./tableHeader";
 
 const Table = ({ data, sortColumn, onSort, refresh }) => {
   return (
-    <table className="table table-bordered w-auto">
-      <TableHeader sortColumn={sortColumn} onSort={onSort} refresh={refresh} />
-      <TableBody data={data} />
-    </table>
+    <React.Fragment>
+      <div className="table-responsive">
+        <table className="table">
+          <TableHeader
+            sortColumn={sortColumn}
+            onSort={onSort}
+            refresh={refresh}
+          />
+          <TableBody data={data} />
+        </table>
+      </div>
+    </React.Fragment>
   );
 };
 

@@ -81,7 +81,13 @@ class AllBirthdays extends Component {
   };
 
   smoothScroll = () => {
-    window.scrollTo(0, 0);
+    //window.scrollTo(0, 0);
+    // scroll certain amounts from current position
+    window.scrollBy({
+      top: 100, // negative value acceptable
+      left: 0,
+      behavior: "smooth"
+    });
   };
 
   render() {
@@ -125,49 +131,43 @@ class AllBirthdays extends Component {
     return (
       <React.Fragment>
         <div className="main-content">
-          <div className="container search-query">
-            <div className="row">
-              <div className="col-sm-12">
-                <Select
-                  name={"Records Per Page"}
-                  value={amountPerPage}
-                  options={options}
-                  onChange={this.handleSelect}
-                />
-                <FilterTable
-                  value={searchQuery}
-                  onChange={this.handleSearch}
-                  handleBirthday={this.handleBirthdayFilter}
-                  refresh={this.refresh}
-                />
-              </div>
+          <div className="container">
+            <div className="row birthday-filter">
+              <FilterTable
+                value={searchQuery}
+                onChange={this.handleSearch}
+                handleBirthday={this.handleBirthdayFilter}
+                refresh={this.refresh}
+              />
+              <Select
+                name={"Records Per Page"}
+                value={amountPerPage}
+                options={options}
+                onChange={this.handleSelect}
+              />
             </div>
           </div>
 
           <div className="container">
             <div className="row">
-              <div className="col-sm-12 birthday-table ">
-                <Table
-                  data={artists}
-                  sortColumn={sortColumn}
-                  onSort={this.handleSort}
-                />
-              </div>
+              <Table
+                data={artists}
+                sortColumn={sortColumn}
+                onSort={this.handleSort}
+              />
             </div>
           </div>
 
           <div className="container">
             <div className="row">
-              <div className="col-sm-12">
-                <Pagination
-                  itemsCount={artistsLength}
-                  pageSize={amountPerPage}
-                  onPageChange={this.handlePageChange}
-                  currentPage={currentPage}
-                  onPageNext={this.handlePageNext}
-                  onPagePrevious={this.handlePagePrevious}
-                />
-              </div>
+              <Pagination
+                itemsCount={artistsLength}
+                pageSize={amountPerPage}
+                onPageChange={this.handlePageChange}
+                currentPage={currentPage}
+                onPageNext={this.handlePageNext}
+                onPagePrevious={this.handlePagePrevious}
+              />
             </div>
           </div>
         </div>

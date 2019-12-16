@@ -9,7 +9,7 @@ function App() {
     <div>
       <div>
         <div className="content">
-          <h2 className="title">Bass Birthdays</h2>
+          <h1 className="title">Bass Birthdays</h1>
           <Switch>
             <Route path="/not-found" component={NotFound}></Route>
             <Route path="/" exact component={AllBirthdays}></Route>

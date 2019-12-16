@@ -16,48 +16,24 @@ const Pagination = ({
   return (
     <nav className="paging">
       <ul className="pagination">
-        <li
-          key={"Previous"}
-          className={
-            firstPage === currentPage ? "page-item disabled" : "page-item"
-          }
-        >
-          <a
-            style={{ cursor: "pointer" }}
-            className="page-link"
-            onClick={() => onPagePrevious()}
-          >
-            Previous
-          </a>
-        </li>
         {pages.map(page => (
           <li
             key={page}
-            className={page === currentPage ? "page-item active" : "page-item"}
+            className={
+              page === currentPage
+                ? "page-item active page-num"
+                : "page-item page-num"
+            }
           >
             <a
               style={{ cursor: "pointer" }}
-              className="page-link"
+              className="page-link "
               onClick={() => onPageChange(page)}
             >
               {page}
             </a>
           </li>
         ))}
-        <li
-          key={"Next"}
-          className={
-            lastPage === currentPage ? "page-item disabled" : "page-item"
-          }
-        >
-          <a
-            style={{ cursor: "pointer" }}
-            className="page-link"
-            onClick={() => onPageNext()}
-          >
-            Next
-          </a>
-        </li>
       </ul>
     </nav>
   );
