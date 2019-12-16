@@ -6,7 +6,7 @@ const Table = ({ data, sortColumn, onSort, refresh }) => {
   return (
     <React.Fragment>
       <div className="table-responsive">
-        <table className="table">
+        <table className="table table-sm">
           <TableHeader
             sortColumn={sortColumn}
             onSort={onSort}

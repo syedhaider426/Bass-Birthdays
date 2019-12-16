@@ -139,12 +139,15 @@ class AllBirthdays extends Component {
                 handleBirthday={this.handleBirthdayFilter}
                 refresh={this.refresh}
               />
-              <Select
-                name={"Records Per Page"}
-                value={amountPerPage}
-                options={options}
-                onChange={this.handleSelect}
-              />
+              <div className="form-inline">
+                <Select
+                  name={"Records Per Page"}
+                  value={amountPerPage}
+                  options={options}
+                  onChange={this.handleSelect}
+                />
+                <label className="records-label">Records Per Page</label>
+              </div>
             </div>
           </div>
 

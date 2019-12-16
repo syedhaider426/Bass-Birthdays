@@ -11,6 +11,7 @@ const Pagination = ({
 }) => {
   const pagesCount = Math.ceil(itemsCount / pageSize);
   const pages = _.range(1, pagesCount + 1); //if pagesCount is 3, then it will be 1,2; thats why we add 1
+  console.log(pages);
   const firstPage = pages[0];
   const lastPage = pages[pages.length - 1];
   return (

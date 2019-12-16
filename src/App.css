@@ -44,8 +44,8 @@ textarea {
 /* Table starts */
 
 img {
-  height: 160px;
-  width: 160px;
+  height: 120px;
+  width: 120px;
 }
 th {
   position: sticky !important;
@@ -68,8 +68,8 @@ h1 {
 }
 
 .birthday-filter {
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
 td {
@@ -89,6 +89,15 @@ tr {
   img {
     height: 60px;
     width: 60px;
+  }
+}
+
+@media only screen and (max-width: 325px) {
+  .td-profileImage {
+    display: none;
+  }
+  .h-picture {
+    display: none;
   }
 }
 
@@ -113,7 +122,17 @@ span {
   text-align: center !important;
 }
 .filter-table {
-  margin-bottom: 2%;
+  margin-bottom: 1%;
+}
+
+hr {
+  background-color: white;
+}
+
+.divider {
+  width: 1% !important;
+  height: auto;
+  display: inline-block;
 }
 /*table css ends*/
 
@@ -153,7 +172,26 @@ label {
 }
 
 /* FOOTER ENDS*/
+.tagline {
+  color: white;
+}
 
+.records-label {
+  margin-left: 1% !important;
+}
+
+.form-inline {
+  align-items: center;
+}
+
+.records-label {
+  margin: 0 !important;
+  flex-basis: 50% !important;
+}
+
+h6 {
+  text-align: center;
+}
 .title {
   text-align: center;
   font-size: xxx-large;
