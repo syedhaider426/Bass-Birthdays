@@ -20,7 +20,7 @@ class AllBirthdays extends Component {
   componentDidMount() {
     var url;
     if (process.env.NODE_ENV == "production")
-      url = "https://dubstepdata.info/api/artist";
+      url = "https://dubstepdata.info/artist";
     else url = "http://localhost:8080/artist";
     fetch(url)
       .then(response => response.json())
