@@ -128,6 +128,12 @@ class AllBirthdays extends Component {
           <div className="container search-query">
             <div className="row">
               <div className="col-sm-12">
+                <Select
+                  name={"Records Per Page"}
+                  value={amountPerPage}
+                  options={options}
+                  onChange={this.handleSelect}
+                />
                 <FilterTable
                   value={searchQuery}
                   onChange={this.handleSearch}
@@ -138,7 +144,7 @@ class AllBirthdays extends Component {
             </div>
           </div>
 
-          <div className="container mt-2">
+          <div className="container">
             <div className="row">
               <div className="col-sm-12 birthday-table ">
                 <Table
@@ -150,9 +156,9 @@ class AllBirthdays extends Component {
             </div>
           </div>
 
-          <div className="container mt-4 pr">
+          <div className="container">
             <div className="row">
-              <div className="col-sm-12 paging-records">
+              <div className="col-sm-12">
                 <Pagination
                   itemsCount={artistsLength}
                   pageSize={amountPerPage}
@@ -160,12 +166,6 @@ class AllBirthdays extends Component {
                   currentPage={currentPage}
                   onPageNext={this.handlePageNext}
                   onPagePrevious={this.handlePagePrevious}
-                />
-                <Select
-                  name={"Records Per Page"}
-                  value={amountPerPage}
-                  options={options}
-                  onChange={this.handleSelect}
                 />
               </div>
             </div>
