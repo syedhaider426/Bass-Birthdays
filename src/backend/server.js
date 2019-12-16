@@ -1,7 +1,7 @@
 //Starts up server
 const env = process.env.NODE_ENV || "development";
 if (env == "production") {
-  process.env.NODE_CONFIG_DIR = "./backend/config";
+  process.env.NODE_CONFIG_DIR = "../backend/config";
 } else {
   process.env.NODE_CONFIG_DIR = "./config";
 }
