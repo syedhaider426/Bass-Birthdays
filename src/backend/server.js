@@ -1,4 +1,7 @@
 //Starts up server
+const env = process.env.NODE_ENV;
+if (env == "production") process.env.NODE_CONFIG_DIR = "./backend/config";
+else process.env.NODE_CONFIG_DIR = "./config";
 
 const express = require("express");
 const app = express();
