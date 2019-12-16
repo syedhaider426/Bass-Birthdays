@@ -12,7 +12,6 @@ router.get("/artist", async (req, res) => {
 
 module.exports = router;
 
-/*
 const config = require("config");
 const client_id = config.get("client_id");
 const client_secret = config.get("client_secret");
@@ -107,9 +106,6 @@ async function SerialFlow() {
   return;
 }
 
-
-//SerialFlow();
-
 async function getSpotifyID(array) {
   var token = "";
   rp.post(authOptions, async function(error, response, body) {
@@ -180,6 +176,7 @@ async function getRequestForSpotifyImage(options) {
     .get(options, async function(error, response, body) {
       if (!error && response.statusCode === 200) {
         const profileImage = body.images[2].url;
+        const genres = body.genres;
         const _id = await Artist.find({
           artist: body.name
         })
@@ -190,7 +187,8 @@ async function getRequestForSpotifyImage(options) {
           { _id },
           {
             $set: {
-              profileImage
+              profileImage,
+              genres
             }
           }
         );
@@ -199,5 +197,5 @@ async function getRequestForSpotifyImage(options) {
     .catch(err => console.log("Error", err));
 }
 
-//SerialFlow2();
-*/
+//SerialFlow();
+SerialFlow2();

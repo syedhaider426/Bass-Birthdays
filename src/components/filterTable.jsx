@@ -22,8 +22,8 @@ const FilteredTable = ({ value, onChange, handleBirthday, refresh }) => {
           onChange={handleBirthday}
           placeholder="Enter Birthday"
         ></input>
-        <span class="add-on">
-          <i class="icon-th"></i>
+        <span className="add-on">
+          <i className="icon-th"></i>
         </span>
       </div>
     </React.Fragment>

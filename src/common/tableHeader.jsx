@@ -38,7 +38,7 @@ class TableHeader extends Component {
           <th className="h-birthday">
             Birthday{this.renderSortIcon("birthday")}
           </th>
-          <th className="h-genre">Genre{this.renderSortIcon("genre")}</th>
+          <th className="h-genre">Genres{this.renderSortIcon("genre")}</th>
         </tr>
       </thead>
     );

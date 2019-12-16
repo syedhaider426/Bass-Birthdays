@@ -8,26 +8,15 @@ import React from "react";
 
 const TableBody = ({ data }) => {
   function convertISODateToString(date) {
-    const dateString = date.substring(0, 10);
-    //var month = dateString.substring(5, 7);
-    //var day = dateString.substring(8, 11);
-    /*var year = dateString.substring(0, 4);
-    var months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ];*/
-    //month = months[month - 1];
+    var dateString = date.substring(0, 10);
+    var month = dateString.substring(5, 7);
+    var date = dateString.substring(8);
+    var dateString = month + "/" + date + "/" + new Date().getFullYear();
     return dateString;
+  }
+
+  function convertArrayToString(array) {
+    return array.join(", ");
   }
 
   return (
@@ -39,7 +28,7 @@ const TableBody = ({ data }) => {
           </td>
           <td>{item.artist}</td>
           <td>{convertISODateToString(item.birthday)}</td>
-          <td>{item.genres[0]}</td>
+          <td>{convertArrayToString(item.genres)}</td>
         </tr>
       ))}
     </tbody>

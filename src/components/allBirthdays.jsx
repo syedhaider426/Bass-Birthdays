@@ -69,12 +69,10 @@ class AllBirthdays extends Component {
   handleSearch = query => {
     //query is what is typed in
     //currentPage is set to 1 b/c if user is on page 3 when they search, they can't view page 1
-    console.log("Query", query);
     this.setState({ searchQuery: query, currentPage: 1 });
   };
 
   handleBirthdayFilter = ({ currentTarget: bday }) => {
-    console.log(bday.value);
     this.setState({ bdayQuery: bday.value, currentPage: 1 });
   };
 
@@ -98,12 +96,19 @@ class AllBirthdays extends Component {
 
     if (searchQuery)
       allArtists = allArtists.filter(m => {
-        return m.artist.toLowerCase().startsWith(searchQuery.toLowerCase());
+        return m.artist.toLowerCase().includes(searchQuery.toLowerCase());
       });
     if (bdayQuery)
       allArtists = allArtists.filter(m => {
-        console.log(bdayQuery);
-        return m.birthday.substring(0, 10).startsWith(bdayQuery);
+        var month = bdayQuery.substring(5, 7);
+        var date = bdayQuery.substring(8);
+
+        var db = m.birthday.substring(0, 10);
+
+        var date2 = db.substring(8);
+        var month2 = db.substring(5, 7);
+        console.log(month + "/" + date);
+        if (month2 == month && date2 == date) return true;
       });
     var sorted = {};
     if (sortColumn.order !== "initial") {
