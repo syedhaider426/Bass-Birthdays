@@ -27,7 +27,7 @@ const TableBody = ({ data }) => {
             <img src={item.profileImage} />
           </td>
           <td>{item.artist}</td>
-          <td className="w-25">{convertISODateToString(item.birthday)}</td>
+          <td>{convertISODateToString(item.birthday)}</td>
         </tr>
       ))}
     </tbody>

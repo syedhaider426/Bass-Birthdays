@@ -151,7 +151,7 @@ class AllBirthdays extends Component {
             </div>
           </div>
 
-          <div className="container">
+          <div className="">
             <div className="row">
               <Table
                 data={artists}

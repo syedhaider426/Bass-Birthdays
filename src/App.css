@@ -82,24 +82,34 @@ td {
   font-family: "Montserrat", "sans-serif";
   border: 0 !important;
 }
+
 tr {
   background-color: white;
 }
-@media only screen and (max-width: 782px) {
+
+@media only screen and (max-width: 450px) {
+  img {
+    height: 90px;
+    width: 90px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
   img {
     height: 60px;
     width: 60px;
   }
 }
 
-@media only screen and (max-width: 325px) {
-  .td-profileImage {
-    display: none;
-  }
-  .h-picture {
-    display: none;
+@media only screen and (max-width: 350px) {
+  img {
+    height: 60px;
+    width: 60px;
   }
 }
+/* table td {
+  line-height: 1vh;
+} */
 
 tr:nth-child(even) {
   background-color: #d3d3d3 !important;
