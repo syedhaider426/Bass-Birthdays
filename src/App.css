@@ -21,6 +21,10 @@ body {
   display: none;
 }
 
+td,
+th {
+  font-size: larger;
+}
 .fa-arrow-down {
   transform: rotate(0deg);
   transition: transform 250ms linear;
@@ -31,6 +35,9 @@ body {
   transition: transform 250ms linear;
 }
 
+.table-responsive {
+  overflow-x: unset !important;
+}
 /* NAVBAR ENDS*/
 
 /* SEARCH TABLE */
@@ -87,6 +94,11 @@ tr {
   background-color: white;
 }
 
+img {
+  height: 160px;
+  width: 160px;
+}
+
 @media only screen and (max-width: 450px) {
   img {
     height: 90px;
@@ -96,15 +108,15 @@ tr {
 
 @media only screen and (max-width: 375px) {
   img {
-    height: 60px;
-    width: 60px;
+    height: 45px;
+    width: 45px;
   }
 }
 
 @media only screen and (max-width: 350px) {
   img {
-    height: 60px;
-    width: 60px;
+    height: 45px;
+    width: 45px;
   }
 }
 /* table td {
@@ -147,6 +159,31 @@ hr {
 /*table css ends*/
 
 /* pagination START*/
+
+@media only screen and (max-width: 580px) {
+  .pagination {
+    flex-wrap: wrap !important;
+  }
+}
+
+td {
+  border: 1px solid black !important;
+}
+
+@media only screen and (max-width: 400px) {
+  table tbody td {
+    font-size: 14px;
+  }
+  table thead th {
+    font-size: 11px;
+  }
+}
+/* table tbody tr {
+  line-height: 4vh;
+} */
+.pagination {
+  flex-wrap: nowrap;
+}
 
 .active {
   color: white;
@@ -196,7 +233,6 @@ label {
 
 .records-label {
   margin: 0 !important;
-  flex-basis: 50% !important;
 }
 
 h6 {
@@ -212,4 +248,9 @@ h6 {
 
 label span {
   color: white;
+}
+
+.page-item {
+  margin-left: 1%;
+  margin-top: 1%;
 }

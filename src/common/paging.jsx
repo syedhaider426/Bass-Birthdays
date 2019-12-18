@@ -9,14 +9,30 @@ const Pagination = ({
   itemsCount,
   pageSize
 }) => {
+  console.log("ItemsCount", itemsCount);
+  console.log("pageSize", pageSize);
   const pagesCount = Math.ceil(itemsCount / pageSize);
   const pages = _.range(1, pagesCount + 1); //if pagesCount is 3, then it will be 1,2; thats why we add 1
-  console.log(pages);
+  console.log("Total pages:", pages);
   const firstPage = pages[0];
   const lastPage = pages[pages.length - 1];
   return (
     <nav className="paging">
       <ul className="pagination">
+        <li
+          key={"Previous"}
+          className={
+            firstPage === currentPage ? "page-item disabled" : "page-item"
+          }
+        >
+          <a
+            style={{ cursor: "pointer" }}
+            className="page-link"
+            onClick={() => onPagePrevious()}
+          >
+            Previous
+          </a>
+        </li>
         {pages.map(page => (
           <li
             key={page}
@@ -35,6 +51,20 @@ const Pagination = ({
             </a>
           </li>
         ))}
+        <li
+          key={"Next"}
+          className={
+            lastPage === currentPage ? "page-item disabled" : "page-item"
+          }
+        >
+          <a
+            style={{ cursor: "pointer" }}
+            className="page-link"
+            onClick={() => onPageNext()}
+          >
+            Next
+          </a>
+        </li>
       </ul>
     </nav>
   );

@@ -13,7 +13,7 @@ const FilteredTable = ({ value, onChange, handleBirthday, refresh }) => {
           value={value}
           onChange={e => onChange(e.currentTarget.value)}
         />
-        <div class="divider" />
+        <div className="divider" />
         <input
           type="date"
           name="birthday"

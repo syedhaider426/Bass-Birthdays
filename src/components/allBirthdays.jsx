@@ -77,7 +77,8 @@ class AllBirthdays extends Component {
   };
 
   handleSelect = ({ currentTarget: selected }) => {
-    this.setState({ amountPerPage: selected.value, currentPage: 1 });
+    //selected.value returns a string
+    this.setState({ amountPerPage: parseInt(selected.value), currentPage: 1 });
   };
 
   smoothScroll = () => {
@@ -99,7 +100,7 @@ class AllBirthdays extends Component {
       searchQuery,
       bdayQuery
     } = this.state;
-
+    console.log("Initial artist length", allArtists.length);
     if (searchQuery)
       allArtists = allArtists.filter(m => {
         return m.artist.toLowerCase().includes(searchQuery.toLowerCase());
@@ -126,8 +127,10 @@ class AllBirthdays extends Component {
       allArtists = sorted;
     }
     var artists = paginate(allArtists, currentPage, amountPerPage);
+    console.log("Final artist length", artists.length);
     const artistsLength = allArtists.length;
     var options = [25, 50, 75, 100];
+    /*container class for table affects bootstrap*/
     return (
       <React.Fragment>
         <div className="main-content">
@@ -151,7 +154,7 @@ class AllBirthdays extends Component {
             </div>
           </div>
 
-          <div className="">
+          <div className="container">
             <div className="row">
               <Table
                 data={artists}
