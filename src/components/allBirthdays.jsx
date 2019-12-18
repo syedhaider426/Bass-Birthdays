@@ -84,11 +84,7 @@ class AllBirthdays extends Component {
   smoothScroll = () => {
     //window.scrollTo(0, 0);
     // scroll certain amounts from current position
-    window.scrollBy({
-      top: 100, // negative value acceptable
-      left: 0,
-      behavior: "smooth"
-    });
+    window.scroll({ top: 0, left: 0, behavior: "smooth" });
   };
 
   render() {
