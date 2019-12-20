@@ -6,7 +6,7 @@ import FilterTable from "./filterTable";
 import Pagination from "../common/paging";
 import Select from "../common/select";
 import "bootstrap/dist/js/bootstrap";
-import Carousel from "./currentBirthdays";
+import CurrentBirthdays from "./currentBirthdays";
 class AllBirthdays extends Component {
   state = {
     artists: [],
@@ -127,21 +127,38 @@ class AllBirthdays extends Component {
 
     const artistsLength = allArtists.length;
     var options = [25, 50, 75, 100];
-    var date = new Date().toDateString();
+    var date = new Date().toLocaleDateString("en-US");
     /*container class for table affects bootstrap*/
     return (
       <React.Fragment>
         <div class="row">
-          <div class="col-5">
+          <div class="col-sm-5">
             <h1 className="title ">Today's Birthdays ({date}) </h1>
             <hr></hr>
             <div class="row">
-              <Carousel />
+              <CurrentBirthdays />
             </div>
           </div>
-          <div class="col-7">
+          <div class="col-sm-7">
             <h1 className="title ">All Birthdays</h1>
             <hr></hr>
+            <div className="row birthday-filter">
+              <FilterTable
+                value={searchQuery}
+                onChange={this.handleSearch}
+                handleBirthday={this.handleBirthdayFilter}
+                refresh={this.refresh}
+              />
+              <div className="form-inline">
+                <Select
+                  name={"Records Per Page"}
+                  value={amountPerPage}
+                  options={options}
+                  onChange={this.handleSelect}
+                />
+                <label className="records-label">Records Per Page</label>
+              </div>
+            </div>
             <div class="row">
               <Table
                 data={artists}

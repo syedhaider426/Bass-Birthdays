@@ -11,8 +11,8 @@ router.get("/artist", async (req, res) => {
 });
 
 router.get("/currentArtist", async (req, res) => {
-  var today = new Date(2019, 9, 25);
-  var tomorrow = new Date(2019, 10, 26);
+  var today = new Date();
+  var tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
 
   today.setHours(0, 0, 0, 0);

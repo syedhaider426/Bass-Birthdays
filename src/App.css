@@ -89,6 +89,13 @@ h1 {
   margin-bottom: 1%;
 }
 
+.no-artists {
+  margin-left: auto;
+  margin-right: auto;
+  color: red;
+  margin-bottom: 5%;
+}
+
 html {
   scroll-behavior: smooth;
 }

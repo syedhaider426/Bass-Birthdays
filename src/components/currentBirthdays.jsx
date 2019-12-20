@@ -18,6 +18,7 @@ class Carousel extends Component {
   render() {
     const { currentArtists } = this.state;
     const length = currentArtists.length;
+    if (length == 0) return <h1 className="no-artists">None</h1>;
     return (
       <React.Fragment>
         {currentArtists.map(artist => (
