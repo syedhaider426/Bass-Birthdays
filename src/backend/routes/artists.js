@@ -10,4 +10,23 @@ router.get("/artist", async (req, res) => {
   res.status(200).send(result);
 });
 
+router.get("/currentArtist", async (req, res) => {
+  var today = new Date(2019, 9, 25);
+  var tomorrow = new Date(2019, 10, 26);
+  tomorrow.setDate(today.getDate() + 1);
+
+  today.setHours(0, 0, 0, 0);
+  tomorrow.setHours(0, 0, 0, 0);
+  var isoToday = today.toISOString();
+  var isoTomorrow = tomorrow.toISOString();
+
+  const result = await Artist.find({
+    birthday: {
+      $gte: isoToday,
+      $lt: isoTomorrow
+    }
+  }).limit(4);
+  res.status(200).send(result);
+});
+
 module.exports = router;

@@ -5,7 +5,8 @@ import _ from "lodash";
 import FilterTable from "./filterTable";
 import Pagination from "../common/paging";
 import Select from "../common/select";
-
+import "bootstrap/dist/js/bootstrap";
+import Carousel from "./currentBirthdays";
 class AllBirthdays extends Component {
   state = {
     artists: [],
@@ -16,7 +17,6 @@ class AllBirthdays extends Component {
     bdayQuery: ""
   };
 
-  //"http://localhost:8080/artist"
   componentDidMount() {
     var url;
     if (process.env.NODE_ENV == "production")
@@ -84,7 +84,7 @@ class AllBirthdays extends Component {
   smoothScroll = () => {
     //window.scrollTo(0, 0);
     // scroll certain amounts from current position
-    window.scroll({ top: 0, left: 0, behavior: "smooth" });
+    window.scroll({ top: 0, left: 0 });
   };
 
   render() {
@@ -94,9 +94,10 @@ class AllBirthdays extends Component {
       amountPerPage,
       sortColumn,
       searchQuery,
-      bdayQuery
+      bdayQuery,
+      currentArtists
     } = this.state;
-    console.log("Initial artist length", allArtists.length);
+
     if (searchQuery)
       allArtists = allArtists.filter(m => {
         return m.artist.toLowerCase().includes(searchQuery.toLowerCase());
@@ -110,7 +111,7 @@ class AllBirthdays extends Component {
 
         var date2 = db.substring(8);
         var month2 = db.substring(5, 7);
-        console.log(month + "/" + date);
+
         if (month2 == month && date2 == date) return true;
       });
     var sorted = {};
@@ -123,44 +124,31 @@ class AllBirthdays extends Component {
       allArtists = sorted;
     }
     var artists = paginate(allArtists, currentPage, amountPerPage);
-    console.log("Final artist length", artists.length);
+
     const artistsLength = allArtists.length;
     var options = [25, 50, 75, 100];
+    var date = new Date().toDateString();
     /*container class for table affects bootstrap*/
     return (
       <React.Fragment>
-        <div className="main-content">
-          <div className="container">
-            <div className="row birthday-filter">
-              <FilterTable
-                value={searchQuery}
-                onChange={this.handleSearch}
-                handleBirthday={this.handleBirthdayFilter}
-                refresh={this.refresh}
-              />
-              <div className="form-inline">
-                <Select
-                  name={"Records Per Page"}
-                  value={amountPerPage}
-                  options={options}
-                  onChange={this.handleSelect}
-                />
-                <label className="records-label">Records Per Page</label>
-              </div>
+        <div class="row">
+          <div class="col-5">
+            <h1 className="title ">Today's Birthdays ({date}) </h1>
+            <hr></hr>
+            <div class="row">
+              <Carousel />
             </div>
           </div>
-
-          <div className="container">
-            <div className="row">
+          <div class="col-7">
+            <h1 className="title ">All Birthdays</h1>
+            <hr></hr>
+            <div class="row">
               <Table
                 data={artists}
                 sortColumn={sortColumn}
                 onSort={this.handleSort}
               />
             </div>
-          </div>
-
-          <div className="container">
             <div className="row">
               <Pagination
                 itemsCount={artistsLength}

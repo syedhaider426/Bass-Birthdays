@@ -4,8 +4,8 @@ body {
   padding: 0 2em;
   background-image: -webkit-linear-gradient(
     bottom,
-    #009ffd 0%,
-    #316eb8
+    #5c258d 0%,
+    #4389a2
   ) !important;
   font-family: "Montserrat", "sans-serif" !important;
   -webkit-font-smoothing: antialiased;
@@ -19,6 +19,12 @@ body {
 /* BODY ENDS*/
 .ui-datepicker-year {
   display: none;
+}
+
+.img-wrapper img {
+  height: 50px;
+  width: 50px;
+  object-fit: cover; /*GAME CHANGED CSS*/
 }
 
 td,
@@ -51,12 +57,8 @@ textarea {
 
 /* Table starts */
 
-img {
-  height: 120px;
-  width: 120px;
-}
 th {
-  position: sticky !important;
+  /* position: sticky !important; */
   top: 0;
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
   background-color: black;
@@ -65,10 +67,17 @@ th {
 th td {
   color: white !important;
 }
-
+.main-title {
+  text-align: center;
+  font-size: 325% !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  text-shadow: #222 0 2px 0;
+  color: #eee;
+}
 h1 {
   text-align: center;
-  font-size: 280% !important;
+  font-size: 250% !important;
   font-weight: 700 !important;
   line-height: 1 !important;
   text-shadow: #222 0 2px 0;
@@ -78,6 +87,10 @@ h1 {
 .birthday-filter {
   margin-top: 1%;
   margin-bottom: 1%;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 td {
@@ -90,32 +103,34 @@ td {
   font-family: "Montserrat", "sans-serif";
   border: 0 !important;
 }
-
+.boo-title {
+  margin-bottom: 2%;
+}
 tr {
   background-color: white;
 }
 
-img {
+table img {
   height: 160px;
   width: 160px;
 }
 
 @media only screen and (max-width: 450px) {
-  img {
+  table img {
     height: 90px;
     width: 90px;
   }
 }
 
 @media only screen and (max-width: 375px) {
-  img {
+  table img {
     height: 45px;
     width: 45px;
   }
 }
 
 @media only screen and (max-width: 350px) {
-  img {
+  table img {
     height: 45px;
     width: 45px;
   }
@@ -147,9 +162,29 @@ span {
 .filter-table {
   margin-bottom: 1%;
 }
+.footer {
+  text-align: center;
+}
 
 hr {
   background-color: white;
+}
+
+.bottom-left {
+  position: relative;
+  bottom: 8px;
+  color: white !important;
+  font-size: xx-large;
+}
+
+.img-wrapper {
+  text-align: center;
+}
+
+.img-wrapper img {
+  object-fit: cover;
+  height: 300px;
+  width: 300px;
 }
 
 .divider {
@@ -171,7 +206,7 @@ td {
   border: 1px solid black !important;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 450px) {
   table tbody td {
     font-size: 14px;
   }
@@ -192,7 +227,7 @@ td {
 thead {
   z-index: 1;
   top: 0;
-  position: sticky;
+  /* position: sticky; */
 }
 /* PAGINATION END*/
 
@@ -243,7 +278,6 @@ h6 {
   text-align: center;
   font-size: xxx-large;
   color: white;
-  text-shadow: horizontal-offset vertical-offset blur color;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
 }
 

@@ -23,8 +23,8 @@ const TableBody = ({ data }) => {
     <tbody>
       {data.map(item => (
         <tr key={item._id}>
-          <td className="td-profileImage">
-            <img src={item.profileImage} />
+          <td>
+            <img src={item.profileImage} className="img-fluid mx-auto" />
           </td>
           <td className="td-artist">{item.artist}</td>
           <td>{convertISODateToString(item.birthday)}</td>

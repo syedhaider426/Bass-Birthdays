@@ -7,8 +7,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter } from "react-router-dom";
 import "font-awesome/css/font-awesome.css";
 import WebFont from "webfontloader";
-import smoothscroll from "smoothscroll-polyfill";
-smoothscroll.polyfill();
 
 WebFont.load({
   google: {

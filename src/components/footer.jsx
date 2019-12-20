@@ -2,11 +2,11 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="div-footer">
-      <footer className="site-footer">
+    <footer className="footer">
+      <div className="container site-footer">
         © <strong>BassBirthdays.com</strong>
-      </footer>
-    </div>
+      </div>
+    </footer>
   );
 };
 

@@ -3,23 +3,21 @@ import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import AllBirthdays from "./components/allBirthdays";
 import NotFound from "./components/notFound";
-
+import Footer from "./components/footer";
 function App() {
   return (
     <div>
-      <div>
-        <div className="content">
-          <h1 className="title">Bass Birthdays</h1>
-          <h6>
-            <em className="tagline">Birthdays of Your Favorite DJs</em>
-          </h6>
-          <hr></hr>
-          <Switch>
-            <Route path="/not-found" component={NotFound}></Route>
-            <Route path="/" exact component={AllBirthdays}></Route>
-            <Redirect to="/not-found" />
-          </Switch>
-        </div>
+      <div className="content">
+        <h1 className="main-title">Bass Birthdays</h1>
+        <h6>
+          <em className="tagline">Birthdays of Your Favorite DJs</em>
+        </h6>
+        <hr></hr>
+        <Switch>
+          <Route path="/not-found" component={NotFound}></Route>
+          <Route path="/" exact component={AllBirthdays}></Route>
+          <Redirect to="/not-found" />
+        </Switch>
       </div>
     </div>
   );
