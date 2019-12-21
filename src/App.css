@@ -84,6 +84,7 @@ h1 {
 th {
   position: sticky;
 }
+
 .pre-scrollable {
   overflow-x: hidden;
   height: 55.5vh;
@@ -103,14 +104,21 @@ th {
   padding: unset !important;
 }
 
-@media only screen and (max-height: 870px) {
+@media only screen and (max-height: 900px) and (max-width: 450px) and (orientation: portrait) {
   .pre-scrollable {
-    height: 52.5vh;
+    height: initial !important;
+    overflow-y: hidden !important;
+    height: 85% !important;
   }
 }
+
 .birthday-filter {
   margin-top: 1%;
   margin-bottom: 1%;
+}
+
+.records-label {
+  margin: 5px !important;
 }
 
 @media only screen and (max-height: 900px) {
@@ -144,12 +152,6 @@ th {
 ::-ms-input-placeholder {
   /* Microsoft Edge */
   color: #fff;
-}
-
-@media only screen and (max-height: 500px) {
-  .pre-scrollable {
-    height: initial;
-  }
 }
 
 @media only screen and (max-height: 850px) and (max-width: 768px) {
@@ -379,11 +381,7 @@ hr {
 .active {
   color: white;
 }
-thead {
-  z-index: 1;
-  top: 0;
-  position: sticky;
-}
+
 /* PAGINATION END*/
 
 /* Labels*/
@@ -414,16 +412,8 @@ label {
   color: white;
 }
 
-.records-label {
-  margin-left: 1% !important;
-}
-
 .form-inline {
   align-items: center;
-}
-
-.records-label {
-  margin: 0 !important;
 }
 
 h6 {
