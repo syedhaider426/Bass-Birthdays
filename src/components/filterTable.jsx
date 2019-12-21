@@ -8,8 +8,8 @@ const FilteredTable = ({ value, onChange, handleBirthday, refresh }) => {
         <input
           type="text"
           name="query"
-          className="form-control"
-          placeholder="Enter Artist Name"
+          className="text-line"
+          placeholder="Enter Artist"
           value={value}
           onChange={e => onChange(e.currentTarget.value)}
         />
@@ -18,9 +18,8 @@ const FilteredTable = ({ value, onChange, handleBirthday, refresh }) => {
           type="date"
           name="birthday"
           id="birthday"
-          className=" form-control"
+          className="text-line"
           onChange={handleBirthday}
-          placeholder="Enter Birthday"
         ></input>
         <span className="add-on">
           <i className="icon-th"></i>

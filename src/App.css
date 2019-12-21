@@ -21,12 +21,6 @@ body {
   display: none;
 }
 
-.img-wrapper img {
-  height: 50px;
-  width: 50px;
-  object-fit: cover; /*GAME CHANGED CSS*/
-}
-
 td,
 th {
   font-size: larger;
@@ -67,6 +61,10 @@ th {
 th td {
   color: white !important;
 }
+
+tbody td {
+  color: white !important;
+}
 .main-title {
   text-align: center;
   font-size: 325% !important;
@@ -77,18 +75,127 @@ th td {
 }
 h1 {
   text-align: center;
-  font-size: 250% !important;
+  font-size: 193% !important;
   font-weight: 700 !important;
   line-height: 1 !important;
   text-shadow: #222 0 2px 0;
   color: #eee;
 }
+th {
+  position: sticky;
+}
+.pre-scrollable {
+  overflow-x: hidden;
+  height: 55.5vh;
+  max-height: unset !important;
+}
 
+.page-link {
+  background-color: none;
+  color: white !important;
+}
+
+.table th {
+  border-top: unset !important;
+}
+
+.table-sm th {
+  padding: unset !important;
+}
+
+@media only screen and (max-height: 870px) {
+  .pre-scrollable {
+    height: 52.5vh;
+  }
+}
 .birthday-filter {
   margin-top: 1%;
   margin-bottom: 1%;
 }
 
+@media only screen and (max-height: 900px) {
+  .title {
+    font-size: 120% !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .col-md-7 {
+    flex: 1 0 59.333333% !important;
+    max-width: 100% !important;
+  }
+  .col-md-5 {
+    flex: 1 0 41.666667% !important;
+    max-width: 100% !important;
+  }
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #fff;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #fff;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #fff;
+}
+
+@media only screen and (max-height: 500px) {
+  .pre-scrollable {
+    height: initial;
+  }
+}
+
+@media only screen and (max-height: 850px) and (max-width: 768px) {
+  #all-birthdays {
+    margin-top: 4%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .main-title {
+    font-size: 250% !important;
+  }
+}
+
+.page-num,
+.page-next {
+  margin-left: 1% !important;
+}
+
+.current-birthdays {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+select {
+  background: transparent !important;
+  color: white !important;
+}
+
+select option {
+  color: black;
+}
+.text-line {
+  background-color: transparent;
+  color: #eeeeee;
+  outline: none;
+  outline-style: none;
+  outline-offset: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: solid #eeeeee 1px;
+  padding: 3px 10px;
+  margin-bottom: 1%;
+  width: 49%;
+}
 .no-artists {
   margin-left: auto;
   margin-right: auto;
@@ -113,13 +220,12 @@ td {
 .boo-title {
   margin-bottom: 2%;
 }
-tr {
+/* tr {
   background-color: white;
-}
+} */
 
 table img {
-  height: 160px;
-  width: 160px;
+  width: 148px;
 }
 
 @media only screen and (max-width: 450px) {
@@ -146,9 +252,9 @@ table img {
   line-height: 1vh;
 } */
 
-tr:nth-child(even) {
-  background-color: #d3d3d3 !important;
-}
+/* tr:nth-child(even) {
+  background-color: #e7ecf1 !important;
+} */
 
 table td {
   vertical-align: middle !important;
@@ -178,14 +284,17 @@ hr {
 }
 
 .bottom-left {
-  position: relative;
-  bottom: 8px;
   color: white !important;
-  font-size: xx-large;
+  font-size: 15px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+  z-index: 1;
+  position: relative;
 }
 
 .img-wrapper {
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .img-wrapper img {
@@ -194,24 +303,63 @@ hr {
   width: 300px;
 }
 
+@media only screen and (max-width: 1200px) {
+  .img-wrapper img {
+    height: 150px;
+    width: 150px;
+  }
+}
+
+@media only screen and (max-width: 910px) {
+  .img-wrapper img {
+    height: 150px;
+    width: 150px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .img-wrapper img {
+    height: 125px;
+    width: 125px;
+  }
+}
+
+.col-container {
+  display: table; /* Make the container element behave like a table */
+  width: 100%; /* Set full-width to expand the whole page */
+}
+
 .divider {
   width: 1% !important;
   height: auto;
   display: inline-block;
 }
+
 /*table css ends*/
 
 /* pagination START*/
 
-@media only screen and (max-width: 580px) {
+@media only screen and (max-width: 550px) {
   .pagination {
     flex-wrap: wrap !important;
   }
 }
 
-td {
-  border: 1px solid black !important;
+.page-link {
+  background-color: inherit !important;
 }
+
+.page-item.active .page-link {
+  background-color: #007bff !important;
+}
+
+.page-item.disabled .page-link {
+  background-color: black !important;
+}
+
+/* td {
+  border: 1px solid black !important;
+} */
 
 @media only screen and (max-width: 450px) {
   table tbody td {
@@ -234,7 +382,7 @@ td {
 thead {
   z-index: 1;
   top: 0;
-  /* position: sticky; */
+  position: sticky;
 }
 /* PAGINATION END*/
 
@@ -293,6 +441,5 @@ label span {
 }
 
 .page-item {
-  margin-left: 1%;
-  margin-top: 1%;
+  margin-top: 2%;
 }

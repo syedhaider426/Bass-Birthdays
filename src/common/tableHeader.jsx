@@ -35,7 +35,11 @@ class TableHeader extends Component {
           >
             Artist{this.renderSortIcon("artist")}
           </th>
-          <th className="h-birthday">
+          <th
+            className="h-birthday"
+            onClick={() => this.raiseSort("artist")}
+            style={{ cursor: "pointer" }}
+          >
             Birthday{this.renderSortIcon("birthday")}
           </th>
         </tr>

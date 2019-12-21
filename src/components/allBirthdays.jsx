@@ -19,7 +19,7 @@ class AllBirthdays extends Component {
 
   componentDidMount() {
     var url;
-    if (process.env.NODE_ENV == "production")
+    if (process.env.NODE_ENV === "production")
       url = "https://dubstepdata.info/artist";
     else url = "http://localhost:8080/artist";
     fetch(url)
@@ -33,21 +33,21 @@ class AllBirthdays extends Component {
     const { currentPage } = this.state;
     if (currentPage === page) return;
     this.setState({ currentPage: page });
-    this.smoothScroll();
+    // this.smoothScroll();
   };
 
   handlePageNext = () => {
     let { currentPage } = this.state;
     currentPage += 1;
     this.setState({ currentPage });
-    this.smoothScroll();
+    // this.smoothScroll();
   };
 
   handlePagePrevious = () => {
     let { currentPage } = this.state;
     currentPage -= 1;
     this.setState({ currentPage });
-    this.smoothScroll();
+    // this.smoothScroll();
   };
 
   handleSort = sortColumn => {
@@ -94,8 +94,7 @@ class AllBirthdays extends Component {
       amountPerPage,
       sortColumn,
       searchQuery,
-      bdayQuery,
-      currentArtists
+      bdayQuery
     } = this.state;
 
     if (searchQuery)
@@ -112,7 +111,10 @@ class AllBirthdays extends Component {
         var date2 = db.substring(8);
         var month2 = db.substring(5, 7);
 
-        if (month2 == month && date2 == date) return true;
+        if (month2 === month && date2 === date) {
+          return true;
+        }
+        return false;
       });
     var sorted = {};
     if (sortColumn.order !== "initial") {
@@ -127,54 +129,58 @@ class AllBirthdays extends Component {
 
     const artistsLength = allArtists.length;
     var options = [25, 50, 75, 100];
-    var date = new Date().toLocaleDateString("en-US");
+    // var date = new Date().toLocaleDateString("en-US");
     /*container class for table affects bootstrap*/
     return (
       <React.Fragment>
-        <div class="row">
-          <div class="col-sm-5">
-            <h1 className="title ">Today's Birthdays ({date}) </h1>
-            <hr></hr>
-            <div class="row">
-              <CurrentBirthdays />
-            </div>
-          </div>
-          <div class="col-sm-7">
-            <h1 className="title ">All Birthdays</h1>
-            <hr></hr>
-            <div className="row birthday-filter">
-              <FilterTable
-                value={searchQuery}
-                onChange={this.handleSearch}
-                handleBirthday={this.handleBirthdayFilter}
-                refresh={this.refresh}
-              />
-              <div className="form-inline">
-                <Select
-                  name={"Records Per Page"}
-                  value={amountPerPage}
-                  options={options}
-                  onChange={this.handleSelect}
-                />
-                <label className="records-label">Records Per Page</label>
+        <div className="col-container">
+          <div className="row">
+            <div className="col-md-5">
+              <h1 className="title">Today's Birthdays</h1>
+              <hr></hr>
+              <div className="row current-birthdays">
+                <CurrentBirthdays />
               </div>
             </div>
-            <div class="row">
-              <Table
-                data={artists}
-                sortColumn={sortColumn}
-                onSort={this.handleSort}
-              />
-            </div>
-            <div className="row">
-              <Pagination
-                itemsCount={artistsLength}
-                pageSize={amountPerPage}
-                onPageChange={this.handlePageChange}
-                currentPage={currentPage}
-                onPageNext={this.handlePageNext}
-                onPagePrevious={this.handlePagePrevious}
-              />
+            <div className="col-md-7">
+              <h1 className="title" id="all-birthdays">
+                All Birthdays
+              </h1>
+              <hr></hr>
+              <div className="row birthday-filter">
+                <FilterTable
+                  value={searchQuery}
+                  onChange={this.handleSearch}
+                  handleBirthday={this.handleBirthdayFilter}
+                  refresh={this.refresh}
+                />
+                <div className="form-inline">
+                  <Select
+                    name={"Records Per Page"}
+                    value={amountPerPage}
+                    options={options}
+                    onChange={this.handleSelect}
+                  />
+                  <label className="records-label">Records Per Page</label>
+                </div>
+              </div>
+              <div className="row pre-scrollable">
+                <Table
+                  data={artists}
+                  sortColumn={sortColumn}
+                  onSort={this.handleSort}
+                />
+              </div>
+              <div className="row">
+                <Pagination
+                  itemsCount={artistsLength}
+                  pageSize={amountPerPage}
+                  onPageChange={this.handlePageChange}
+                  currentPage={currentPage}
+                  onPageNext={this.handlePageNext}
+                  onPagePrevious={this.handlePagePrevious}
+                />
+              </div>
             </div>
           </div>
         </div>

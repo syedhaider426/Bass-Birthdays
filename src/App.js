@@ -3,7 +3,7 @@ import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import AllBirthdays from "./components/allBirthdays";
 import NotFound from "./components/notFound";
-import Footer from "./components/footer";
+// import Footer from "./components/footer";
 function App() {
   return (
     <div>

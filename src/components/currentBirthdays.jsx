@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
-class Carousel extends Component {
+class CurrentBirthdays extends Component {
   state = { currentArtists: [] };
 
   componentDidMount() {
     var url;
-    if (process.env.NODE_ENV == "production")
+    if (process.env.NODE_ENV === "production")
       url = "https://dubstepdata.info/currentArtist";
     else url = "http://localhost:8080/currentArtist";
     fetch(url)
@@ -18,13 +18,20 @@ class Carousel extends Component {
   render() {
     const { currentArtists } = this.state;
     const length = currentArtists.length;
-    if (length == 0) return <h1 className="no-artists">None</h1>;
+    if (length === 0) return <h1 className="no-artists">None</h1>;
     return (
       <React.Fragment>
         {currentArtists.map(artist => (
-          <div className={"col-sm-6 mx-auto img-wrapper"}>
-            <img className="img-fluid" src={artist.profileImage}></img>
-            <div className="bottom-left">{artist.artist}</div>
+          <div className={"col-6 img-wrapper"} key={artist._id}>
+            <img
+              className="img-fluid"
+              src={artist.profileImage}
+              alt={artist.artist}
+              key={artist.artist}
+            ></img>
+            <div className="bottom-left" key={artist._id}>
+              {artist.artist}
+            </div>
           </div>
         ))}
       </React.Fragment>
@@ -32,4 +39,4 @@ class Carousel extends Component {
   }
 }
 
-export default Carousel;
+export default CurrentBirthdays;
