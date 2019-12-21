@@ -104,10 +104,13 @@ th {
   padding: unset !important;
 }
 
-@media only screen and (max-height: 900px) and (max-width: 450px) and (orientation: portrait) {
+@media only screen and (max-height: 912px) and (max-width: 450px) and (orientation: portrait) {
   .pre-scrollable {
     height: initial !important;
     overflow-y: hidden !important;
+  }
+  .col-md-7 {
+    height: 100% !important;
   }
 }
 
@@ -130,7 +133,6 @@ th {
   .col-md-7 {
     flex: 1 0 59.333333% !important;
     max-width: 100% !important;
-    height: 100%;
   }
   .col-md-5 {
     flex: 1 0 41.666667% !important;

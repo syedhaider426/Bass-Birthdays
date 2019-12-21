@@ -14,6 +14,18 @@ const Pagination = ({
 
   const firstPage = pages[0];
   const lastPage = pages[pages.length - 1];
+  if (pages.length === 1)
+    return (
+      <nav className="paging">
+        <ul className="pagination">
+          <li key={"1"} className="page-item active page-num">
+            <a style={{ cursor: "pointer" }} className="page-link">
+              1
+            </a>
+          </li>
+        </ul>
+      </nav>
+    );
   return (
     <nav className="paging">
       <ul className="pagination">
