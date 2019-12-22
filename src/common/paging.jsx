@@ -14,7 +14,9 @@ const Pagination = ({
 
   const firstPage = pages[0];
   const lastPage = pages[pages.length - 1];
-  if (pages.length === 1)
+  const length = pages.length;
+  if (pages.length === 0) return <div></div>;
+  else if (pages.length === 1)
     return (
       <nav className="paging">
         <ul className="pagination">
@@ -28,7 +30,7 @@ const Pagination = ({
     );
   return (
     <nav className="paging">
-      <ul className="pagination">
+      <ul className={length >= 5 ? "pagination count5" : "pagination count4"}>
         <li
           key={"Previous"}
           className={

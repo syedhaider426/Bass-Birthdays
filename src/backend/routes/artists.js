@@ -11,12 +11,17 @@ router.get("/artist", async (req, res) => {
 });
 
 router.get("/currentArtist", async (req, res) => {
-  var today = new Date();
-  var tomorrow = new Date();
+  var date = req.query.date;
+  var month = req.query.month;
+  var year = new Date().getFullYear();
+  var today = new Date(year, month, date);
+  var tomorrow = new Date(year, month, date);
   tomorrow.setDate(today.getDate() + 1);
 
   today.setHours(0, 0, 0, 0);
   tomorrow.setHours(0, 0, 0, 0);
+  console.log(today);
+  console.log(tomorrow);
   var isoToday = today.toISOString();
   var isoTomorrow = tomorrow.toISOString();
 

@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import AllBirthdays from "./components/allBirthdays";
+import Home from "./components/home";
 import NotFound from "./components/notFound";
 // import Footer from "./components/footer";
 function App() {
@@ -15,7 +15,7 @@ function App() {
         <hr></hr>
         <Switch>
           <Route path="/not-found" component={NotFound}></Route>
-          <Route path="/" exact component={AllBirthdays}></Route>
+          <Route path="/" exact component={Home}></Route>
           <Redirect to="/not-found" />
         </Switch>
       </div>

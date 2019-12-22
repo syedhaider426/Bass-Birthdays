@@ -6,7 +6,7 @@ import FilterTable from "./filterTable";
 import Pagination from "../common/paging";
 import Select from "../common/select";
 import "bootstrap/dist/js/bootstrap";
-import CurrentBirthdays from "./currentBirthdays";
+
 class AllBirthdays extends Component {
   state = {
     artists: [],
@@ -81,6 +81,14 @@ class AllBirthdays extends Component {
     this.setState({ amountPerPage: parseInt(selected.value), currentPage: 1 });
   };
 
+  handlePrevDate = () => {
+    return;
+  };
+
+  handleNextDate = () => {
+    return;
+  };
+
   smoothScroll = () => {
     //window.scrollTo(0, 0);
     // scroll certain amounts from current position
@@ -129,58 +137,45 @@ class AllBirthdays extends Component {
 
     const artistsLength = allArtists.length;
     var options = [25, 50, 75, 100];
-    // var date = new Date().toLocaleDateString("en-US");
-    /*container class for table affects bootstrap*/
     return (
       <React.Fragment>
+        <h1 className="title" id="all-birthdays">
+          All Birthdays
+        </h1>
+        <hr></hr>
+        <div className="row birthday-filter">
+          <FilterTable
+            value={searchQuery}
+            onChange={this.handleSearch}
+            handleBirthday={this.handleBirthdayFilter}
+            refresh={this.refresh}
+          />
+          <div className="form-inline">
+            <Select
+              name={"Records Per Page"}
+              value={amountPerPage}
+              options={options}
+              onChange={this.handleSelect}
+            />
+            <label className="records-label">Records Per Page</label>
+          </div>
+        </div>
+        <div className="row pre-scrollable">
+          <Table
+            data={artists}
+            sortColumn={sortColumn}
+            onSort={this.handleSort}
+          />
+        </div>
         <div className="row">
-          <div className="col-md-5">
-            <h1 className="title">Today's Birthdays</h1>
-            <hr></hr>
-            <div className="row current-birthdays">
-              <CurrentBirthdays />
-            </div>
-          </div>
-          <div className="col-md-7">
-            <h1 className="title" id="all-birthdays">
-              All Birthdays
-            </h1>
-            <hr></hr>
-            <div className="row birthday-filter">
-              <FilterTable
-                value={searchQuery}
-                onChange={this.handleSearch}
-                handleBirthday={this.handleBirthdayFilter}
-                refresh={this.refresh}
-              />
-              <div className="form-inline">
-                <Select
-                  name={"Records Per Page"}
-                  value={amountPerPage}
-                  options={options}
-                  onChange={this.handleSelect}
-                />
-                <label className="records-label">Records Per Page</label>
-              </div>
-            </div>
-            <div className="row pre-scrollable">
-              <Table
-                data={artists}
-                sortColumn={sortColumn}
-                onSort={this.handleSort}
-              />
-            </div>
-            <div className="row">
-              <Pagination
-                itemsCount={artistsLength}
-                pageSize={amountPerPage}
-                onPageChange={this.handlePageChange}
-                currentPage={currentPage}
-                onPageNext={this.handlePageNext}
-                onPagePrevious={this.handlePagePrevious}
-              />
-            </div>
-          </div>
+          <Pagination
+            itemsCount={artistsLength}
+            pageSize={amountPerPage}
+            onPageChange={this.handlePageChange}
+            currentPage={currentPage}
+            onPageNext={this.handlePageNext}
+            onPagePrevious={this.handlePagePrevious}
+          />
         </div>
       </React.Fragment>
     );

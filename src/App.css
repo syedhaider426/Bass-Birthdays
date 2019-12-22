@@ -75,7 +75,7 @@ tbody td {
 }
 h1 {
   text-align: center;
-  font-size: 193% !important;
+  font-size: 155% !important;
   font-weight: 700 !important;
   line-height: 1 !important;
   text-shadow: #222 0 2px 0;
@@ -138,6 +138,19 @@ th {
     flex: 1 0 41.666667% !important;
     max-width: 100% !important;
   }
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.img-wrapper img {
+  transition: transform 0.2s; /* Animation */
+}
+.img-wrapper img:hover {
+  transform: scale(1.05);
 }
 
 ::placeholder {
@@ -293,6 +306,13 @@ hr {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
   z-index: 1;
   position: relative;
+  margin-bottom: 5%;
+  margin-top: 1%;
+}
+
+.page-num:hover {
+  opacity: 0.9;
+  background-color: gray;
 }
 
 .img-wrapper {
@@ -343,8 +363,20 @@ hr {
 
 /* pagination START*/
 
-@media only screen and (max-width: 550px) {
-  .pagination {
+@media only screen and (max-width: 920px) and (min-width: 770px) {
+  .pagination.count5 {
+    flex-wrap: wrap !important;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .pagination.count5 {
+    flex-wrap: wrap !important;
+  }
+}
+
+@media only screen and (max-width: 345px) {
+  .pagination.count4 {
     flex-wrap: wrap !important;
   }
 }
