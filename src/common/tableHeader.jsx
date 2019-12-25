@@ -5,43 +5,46 @@ import React, { Component } from "react";
 // onSort: function
 
 class TableHeader extends Component {
-  raiseSort = column => {
+  raiseSort = path => {
     const sortColumn = { ...this.props.sortColumn };
-
-    if (sortColumn.path === column)
+    if (sortColumn.path === path)
       sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
     else {
-      sortColumn.path = column;
-      sortColumn.order = "initial";
+      sortColumn.path = path;
+      sortColumn.order = "asc";
     }
     this.props.onSort(sortColumn);
   };
 
   renderSortIcon = column => {
     const { sortColumn } = this.props;
-    if (sortColumn.order === "asc") return <i className="fa fa-arrow-down"></i>;
-    return <i className="fa fa-arrow-down open"></i>;
+    if (column !== sortColumn.path) return null;
+    if (sortColumn.order === "asc") return <i className="fa fa-arrow-down" />;
+    return <i className="fa fa-arrow-down open" />;
   };
 
   render() {
+    var headers = this.props.headers;
+    var emptyHeader;
+    if (this.props.headers[0] == "") {
+      headers = this.props.headers.slice(1);
+      emptyHeader = <th></th>;
+    }
     return (
       <thead>
-        <tr className="headers">
-          <th className="h-picture"></th>
-          <th
-            onClick={() => this.raiseSort("artist")}
-            style={{ cursor: "pointer" }}
-            className="h-artist"
-          >
-            Artist{this.renderSortIcon("artist")}
-          </th>
-          <th
-            className="h-birthday"
-            onClick={() => this.raiseSort("artist")}
-            style={{ cursor: "pointer" }}
-          >
-            Birthday{this.renderSortIcon("birthday")}
-          </th>
+        <tr id="headers" className="headers">
+          {emptyHeader}
+          {headers.map(header => (
+            <th
+              onClick={() => this.raiseSort(header)}
+              style={{ cursor: "pointer" }}
+              key={header}
+              className="w-25"
+            >
+              {header}
+              {this.renderSortIcon(header)}
+            </th>
+          ))}
         </tr>
       </thead>
     );

@@ -16,15 +16,11 @@ body {
   min-height: 100vh;
 }
 
-/* BODY ENDS*/
-.ui-datepicker-year {
-  display: none;
-}
-
 td,
 th {
   font-size: larger;
 }
+
 .fa-arrow-down {
   transform: rotate(0deg);
   transition: transform 250ms linear;
@@ -39,32 +35,22 @@ th {
   overflow-x: unset !important;
 }
 
-/* NAVBAR ENDS*/
-
-/* SEARCH TABLE */
-input,
-textarea {
-  width: 100%;
-}
-
-/* SEARCH TABLE ENDS */
-
 /* Table starts */
 
 th {
-  /* position: sticky !important; */
   top: 0;
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
   background-color: black;
   color: white;
 }
-th td {
+th td span {
   color: white !important;
 }
 
 tbody td {
   color: white !important;
 }
+
 .main-title {
   text-align: center;
   font-size: 325% !important;
@@ -73,6 +59,7 @@ tbody td {
   text-shadow: #222 0 2px 0;
   color: #eee;
 }
+
 h1 {
   text-align: center;
   font-size: 155% !important;
@@ -99,6 +86,9 @@ th {
 .table th {
   border-top: unset !important;
 }
+.table thead th {
+  border-bottom: unset !important;
+}
 
 .table-sm th {
   padding: unset !important;
@@ -111,6 +101,32 @@ th {
   }
   .col-md-7 {
     height: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 950px) and (max-height: 450px) and (orientation: landscape) {
+  .pre-scrollable {
+    height: initial !important;
+    overflow-y: hidden !important;
+  }
+  .col-md-7 {
+    height: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 767px) and (max-height: 1200px) {
+  .pre-scrollable {
+    height: initial !important;
+    overflow-y: hidden !important;
+  }
+  .col-md-7 {
+    height: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .title {
+    font-size: 120% !important;
   }
 }
 
@@ -129,7 +145,7 @@ th {
   }
 }
 
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
   .col-md-7 {
     flex: 1 0 59.333333% !important;
     max-width: 100% !important;
@@ -138,19 +154,12 @@ th {
     flex: 1 0 41.666667% !important;
     max-width: 100% !important;
   }
-}
+} */
 
 .carousel-control-prev-icon:hover,
 .carousel-control-next-icon:hover {
   cursor: pointer;
   opacity: 0.5;
-}
-
-.img-wrapper img {
-  transition: transform 0.2s; /* Animation */
-}
-.img-wrapper img:hover {
-  transform: scale(1.05);
 }
 
 ::placeholder {
@@ -213,6 +222,13 @@ select option {
   margin-bottom: 1%;
   width: 49%;
 }
+
+.divider {
+  width: 1% !important;
+  height: auto;
+  display: inline-block;
+}
+
 .no-artists {
   margin-left: auto;
   margin-right: auto;
@@ -227,6 +243,7 @@ html {
 td {
   color: black;
 }
+
 table {
   font-family: "Montserrat", "sans-serif";
 }
@@ -242,53 +259,39 @@ td {
 } */
 
 table img {
-  width: 148px;
+  width: 100px;
+  height: auto;
+  max-width: 100%;
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 520px) {
+  table td {
+    font-size: 12px;
+  }
   table img {
-    height: 90px;
-    width: 90px;
+    width: 50px !important;
+    height: 50px !important;
+    max-width: unset !important;
   }
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 400px) {
   table img {
-    height: 45px;
-    width: 45px;
+    max-width: 100%;
   }
 }
 
-@media only screen and (max-width: 350px) {
-  table img {
-    height: 45px;
-    width: 45px;
-  }
+span.Image {
+  display: none !important;
 }
-/* table td {
-  line-height: 1vh;
-} */
-
-/* tr:nth-child(even) {
-  background-color: #e7ecf1 !important;
-} */
 
 table td {
   vertical-align: middle !important;
 }
 span {
-  color: #666;
   font-family: "Montserrat", "sans-serif";
 }
 
-.form-group span {
-  color: white;
-  font-family: "Montserrat", "sans-serif";
-}
-
-.form-group label {
-  text-align: center !important;
-}
 .filter-table {
   margin-bottom: 1%;
 }
@@ -315,48 +318,45 @@ hr {
   background-color: gray;
 }
 
+li.page-next {
+  margin-left: 1%;
+}
+
 .img-wrapper {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
 
+/*height:auto, max-width:100% = equivalent to img-fluid*/
 .img-wrapper img {
   object-fit: cover;
-  height: 300px;
-  width: 300px;
-}
-
-@media only screen and (max-width: 1200px) {
-  .img-wrapper img {
-    height: 150px;
-    width: 150px;
-  }
-}
-
-@media only screen and (max-width: 910px) {
-  .img-wrapper img {
-    height: 150px;
-    width: 150px;
-  }
-}
-
-@media only screen and (max-width: 450px) {
-  .img-wrapper img {
-    height: 125px;
-    width: 125px;
-  }
-}
-
-.col-container {
-  display: table; /* Make the container element behave like a table */
-  width: 100%; /* Set full-width to expand the whole page */
-}
-
-.divider {
-  width: 1% !important;
   height: auto;
-  display: inline-block;
+  height: 300px !important;
+  width: 100%;
+  max-width: 100%;
+}
+
+.img-wrapper img {
+  transition: transform 0.2s; /* Animation */
+}
+.img-wrapper img:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1400px) {
+  .img-wrapper img {
+    width: 175px !important;
+    height: 175px !important;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .img-wrapper img {
+    width: 130px !important;
+    height: 130px !important;
+  }
 }
 
 /*table css ends*/
@@ -396,10 +396,14 @@ hr {
 /* td {
   border: 1px solid black !important;
 } */
-
+@media only screen and (max-width: 500px) {
+  .main-title {
+    font-size: 250% !important;
+  }
+}
 @media only screen and (max-width: 450px) {
   table tbody td {
-    font-size: 14px;
+    font-size: 10px;
   }
   table thead th {
     font-size: 11px;

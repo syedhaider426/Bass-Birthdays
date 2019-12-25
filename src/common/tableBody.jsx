@@ -5,7 +5,7 @@ const TableBody = ({ data }) => {
     var dateString = date.substring(0, 10);
     var month = dateString.substring(5, 7);
     date = dateString.substring(8);
-    dateString = month + "/" + date + "/" + new Date().getFullYear();
+    dateString = month + "/" + date;
     return dateString;
   }
 
@@ -16,12 +16,13 @@ const TableBody = ({ data }) => {
           <td>
             <img
               src={item.profileImage}
-              className="img-fluid mx-auto"
-              alt={item.artist}
+              className="mx-auto"
+              alt={item.Artist}
             />
           </td>
-          <td className="td-artist">{item.artist}</td>
-          <td>{convertISODateToString(item.birthday)}</td>
+          <td>{item.Artist}</td>
+          <td>{convertISODateToString(item.Birthday)}</td>
+          <td>{item.Genre[0]}</td>
         </tr>
       ))}
     </tbody>

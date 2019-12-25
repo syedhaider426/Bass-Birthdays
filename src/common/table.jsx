@@ -2,7 +2,7 @@ import React from "react";
 import TableBody from "./tableBody";
 import TableHeader from "./tableHeader";
 
-const Table = ({ data, sortColumn, onSort, refresh }) => {
+const Table = ({ data, sortColumn, onSort, refresh, headers }) => {
   return (
     <React.Fragment>
       <div className="table-responsive">
@@ -11,6 +11,7 @@ const Table = ({ data, sortColumn, onSort, refresh }) => {
             sortColumn={sortColumn}
             onSort={onSort}
             refresh={refresh}
+            headers={headers}
           />
           <TableBody data={data} />
         </table>

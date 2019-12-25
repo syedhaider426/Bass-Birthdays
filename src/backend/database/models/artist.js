@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 var artistSchema = mongoose.Schema({
-  artist: {
+  Artist: {
     type: String
   },
-  birthday: {
+  Birthday: {
     type: Date
   },
   spotifyID: {
@@ -13,7 +13,7 @@ var artistSchema = mongoose.Schema({
   profileImage: {
     type: String
   },
-  genres: {
+  Genre: {
     type: Array
   }
 });

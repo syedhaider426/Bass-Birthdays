@@ -21,7 +21,11 @@ const Pagination = ({
       <nav className="paging">
         <ul className="pagination">
           <li key={"1"} className="page-item active page-num">
-            <a style={{ cursor: "pointer" }} className="page-link">
+            <a
+              style={{ cursor: "pointer" }}
+              className="page-link"
+              href="#headers"
+            >
               1
             </a>
           </li>
@@ -39,9 +43,9 @@ const Pagination = ({
         >
           <a
             style={{ cursor: "pointer" }}
-            className="page-link"
+            className="page-previous page-link"
             onClick={() => onPagePrevious()}
-            href="#all-birthdays"
+            href="#headers"
           >
             Previous
           </a>
@@ -59,7 +63,7 @@ const Pagination = ({
               style={{ cursor: "pointer" }}
               className="page-link "
               onClick={() => onPageChange(page)}
-              href="#all-birthdays"
+              href="#headers"
             >
               {page}
             </a>
@@ -68,14 +72,16 @@ const Pagination = ({
         <li
           key={"Next"}
           className={
-            lastPage === currentPage ? "page-item disabled" : "page-item"
+            lastPage === currentPage
+              ? "page-item disabled page-next"
+              : "page-item page-next"
           }
         >
           <a
             style={{ cursor: "pointer" }}
-            className="page-next page-link"
+            className="page-link"
             onClick={() => onPageNext()}
-            href="#all-birthdays"
+            href="#headers"
           >
             Next
           </a>

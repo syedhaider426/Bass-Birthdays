@@ -64,6 +64,9 @@ class CurrentBirthdays extends Component {
     var year = currentDate.getFullYear();
     var date = month + "/" + day + "/" + year;
     const length = currentArtists.length;
+    var compareDate1 = currentDate.setHours(0, 0, 0, 0);
+    var compareDate2 = new Date().setHours(0, 0, 0, 0);
+    if (compareDate1 === compareDate2) date = "Today's Birthdays";
     if (length === 0)
       return (
         <div>
@@ -107,15 +110,22 @@ class CurrentBirthdays extends Component {
         <hr></hr>
         <div className="row">
           {currentArtists.map(artist => (
-            <div className={"col-6 img-wrapper"} key={artist._id}>
+            <div
+              className={
+                length > 4
+                  ? "col-6 img-wrapper smaller-img"
+                  : "col-6 img-wrapper"
+              }
+              key={artist.Artist}
+            >
               <img
                 className="img-fluid"
                 src={artist.profileImage}
-                alt={artist.artist}
-                key={artist.artist}
+                alt={artist.Artist}
+                key={artist.Artist}
               ></img>
-              <div className="bottom-left" key={artist._id}>
-                {artist.artist}
+              <div className="bottom-left" key={artist._artist}>
+                {artist.Artist}
               </div>
             </div>
           ))}

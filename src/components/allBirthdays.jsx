@@ -12,7 +12,7 @@ class AllBirthdays extends Component {
     artists: [],
     currentPage: 1,
     amountPerPage: 25,
-    sortColumn: { path: "artist", order: "initial" },
+    sortColumn: { path: "Birthday", order: "asc" },
     searchQuery: "",
     bdayQuery: ""
   };
@@ -33,21 +33,18 @@ class AllBirthdays extends Component {
     const { currentPage } = this.state;
     if (currentPage === page) return;
     this.setState({ currentPage: page });
-    // this.smoothScroll();
   };
 
   handlePageNext = () => {
     let { currentPage } = this.state;
     currentPage += 1;
     this.setState({ currentPage });
-    // this.smoothScroll();
   };
 
   handlePagePrevious = () => {
     let { currentPage } = this.state;
     currentPage -= 1;
     this.setState({ currentPage });
-    // this.smoothScroll();
   };
 
   handleSort = sortColumn => {
@@ -81,20 +78,6 @@ class AllBirthdays extends Component {
     this.setState({ amountPerPage: parseInt(selected.value), currentPage: 1 });
   };
 
-  handlePrevDate = () => {
-    return;
-  };
-
-  handleNextDate = () => {
-    return;
-  };
-
-  smoothScroll = () => {
-    //window.scrollTo(0, 0);
-    // scroll certain amounts from current position
-    window.scroll({ top: 0, left: 0 });
-  };
-
   render() {
     let {
       artists: allArtists,
@@ -107,14 +90,14 @@ class AllBirthdays extends Component {
 
     if (searchQuery)
       allArtists = allArtists.filter(m => {
-        return m.artist.toLowerCase().includes(searchQuery.toLowerCase());
+        return m.Artist.toLowerCase().includes(searchQuery.toLowerCase());
       });
     if (bdayQuery)
       allArtists = allArtists.filter(m => {
         var month = bdayQuery.substring(5, 7);
         var date = bdayQuery.substring(8);
 
-        var db = m.birthday.substring(0, 10);
+        var db = m.Birthday.substring(0, 10);
 
         var date2 = db.substring(8);
         var month2 = db.substring(5, 7);
@@ -125,18 +108,12 @@ class AllBirthdays extends Component {
         return false;
       });
     var sorted = {};
-    if (sortColumn.order !== "initial") {
-      sorted = _.orderBy(
-        allArtists,
-        [artistName => artistName[sortColumn.path].toLowerCase()],
-        [sortColumn.order]
-      );
-      allArtists = sorted;
-    }
-    var artists = paginate(allArtists, currentPage, amountPerPage);
+    sorted = _.orderBy(allArtists, [sortColumn.path], [sortColumn.order]);
+    var artists = paginate(sorted, currentPage, amountPerPage);
 
     const artistsLength = allArtists.length;
     var options = [25, 50, 75, 100];
+    var headers = ["", "Artist", "Birthday", "Genre"];
     return (
       <React.Fragment>
         <h1 className="title" id="all-birthdays">
@@ -165,7 +142,13 @@ class AllBirthdays extends Component {
             data={artists}
             sortColumn={sortColumn}
             onSort={this.handleSort}
+            headers={headers}
           />
+          <a href="#headers">
+            <button type="btn" className="btn btn-primary ">
+              Back to Top
+            </button>
+          </a>
         </div>
         <div className="row">
           <Pagination

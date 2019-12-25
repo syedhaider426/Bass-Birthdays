@@ -6,7 +6,7 @@ const querystring = require("querystring");
 const Artist = require("../database/models/artist"); //Artist model
 
 router.get("/artist", async (req, res) => {
-  const result = await Artist.find().sort({ birthday: 1 });
+  const result = await Artist.find().sort({ Birthday: 1 });
   res.status(200).send(result);
 });
 
@@ -20,17 +20,15 @@ router.get("/currentArtist", async (req, res) => {
 
   today.setHours(0, 0, 0, 0);
   tomorrow.setHours(0, 0, 0, 0);
-  console.log(today);
-  console.log(tomorrow);
   var isoToday = today.toISOString();
   var isoTomorrow = tomorrow.toISOString();
 
   const result = await Artist.find({
-    birthday: {
+    Birthday: {
       $gte: isoToday,
       $lt: isoTomorrow
     }
-  }).limit(4);
+  });
   res.status(200).send(result);
 });
 
