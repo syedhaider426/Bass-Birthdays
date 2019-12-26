@@ -26,7 +26,7 @@ class TableHeader extends Component {
   render() {
     var headers = this.props.headers;
     var emptyHeader;
-    if (this.props.headers[0] == "") {
+    if (this.props.headers[0] === "") {
       headers = this.props.headers.slice(1);
       emptyHeader = <th></th>;
     }

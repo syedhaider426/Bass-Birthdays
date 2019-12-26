@@ -110,7 +110,6 @@ class AllBirthdays extends Component {
     var sorted = {};
     sorted = _.orderBy(allArtists, [sortColumn.path], [sortColumn.order]);
     var artists = paginate(sorted, currentPage, amountPerPage);
-
     const artistsLength = allArtists.length;
     var options = [25, 50, 75, 100];
     var headers = ["", "Artist", "Birthday", "Genre"];

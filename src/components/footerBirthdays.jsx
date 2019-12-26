@@ -14,7 +14,7 @@ function makeDateFormat(n) {
   return n < 10 ? "0" + n : "" + n;
 }
 
-class CurrentBirthdays extends Component {
+class FooterBirthdays extends Component {
   state = { currentArtists: [], currentDate: new Date() };
 
   componentDidMount() {
@@ -87,7 +87,6 @@ class CurrentBirthdays extends Component {
             ></span>
             <span className="sr-only">Next</span>
           </h1>
-          <hr></hr>
           <h1 className="no-artists">None</h1>
         </div>
       );
@@ -108,30 +107,21 @@ class CurrentBirthdays extends Component {
           ></span>
           <span className="sr-only">Next</span>
         </h1>
-        <hr></hr>
 
-        <div className="row">
+        <div className="center">
           {currentArtists.map(artist => (
-            <div
-              className={
-                length > 4
-                  ? "col-6 img-wrapper smaller-img"
-                  : "col-6 img-wrapper"
-              }
-              key={artist.Artist}
-            >
-              <Link to={"/profile/" + artist.Artist}>
-                <img
-                  className="img-fluid"
-                  src={artist.profileImage}
-                  alt={artist.Artist}
-                  key={artist.Artist}
-                ></img>
-              </Link>
-              <div className="bottom-left" key={artist._artist}>
-                {artist.Artist}
-              </div>
-            </div>
+            <React.Fragment>
+              <span className="img-foot-link">
+                <Link to={"/profile/" + artist.Artist}>
+                  <img
+                    className="img-fluid footer-img"
+                    src={artist.profileImage}
+                    alt={artist.Artist}
+                    key={artist.Artist}
+                  ></img>
+                </Link>
+              </span>
+            </React.Fragment>
           ))}
         </div>
       </React.Fragment>
@@ -139,4 +129,4 @@ class CurrentBirthdays extends Component {
   }
 }
 
-export default CurrentBirthdays;
+export default FooterBirthdays;

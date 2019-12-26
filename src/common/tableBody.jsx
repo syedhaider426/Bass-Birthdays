@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const TableBody = ({ data }) => {
   function convertISODateToString(date) {
@@ -13,14 +14,19 @@ const TableBody = ({ data }) => {
     <tbody>
       {data.map(item => (
         <tr key={item._id}>
+          <Link to={"/profile/" + item.Artist}>
+            <td>
+              <img
+                src={item.profileImage}
+                className="mx-auto"
+                alt={item.Artist}
+              />
+            </td>
+          </Link>
           <td>
-            <img
-              src={item.profileImage}
-              className="mx-auto"
-              alt={item.Artist}
-            />
+            {" "}
+            <Link to={"/profile/" + item.Artist}>{item.Artist} </Link>
           </td>
-          <td>{item.Artist}</td>
           <td>{convertISODateToString(item.Birthday)}</td>
           <td>{item.Genre[0]}</td>
         </tr>
