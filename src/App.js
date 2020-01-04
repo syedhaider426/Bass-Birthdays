@@ -5,15 +5,16 @@ import Home from "./components/home";
 import NotFound from "./components/notFound";
 import ArtistProfile from "./components/artistProfile";
 import Footer from "./components/footer";
-import NavBar from "./components/navbar";
 function App() {
   return (
     <React.Fragment>
       <div>
         <div className="content">
-          <Link to="/">
-            <h1 className="main-title">Bass Birthdays</h1>
-          </Link>
+          <div className="main">
+            <Link to="/">
+              <h1 className="main-title">Bass Birthdays</h1>
+            </Link>
+          </div>
 
           <hr></hr>
           <Switch>
@@ -24,6 +25,7 @@ function App() {
               exact
               component={ArtistProfile}
             ></Route>
+
             <Redirect to="/not-found" />
           </Switch>
         </div>

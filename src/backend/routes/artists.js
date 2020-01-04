@@ -9,6 +9,51 @@ const config = require("config");
 const client_id = config.get("client_id");
 const client_secret = config.get("client_secret");
 
+const cron = require("node-cron");
+const Twit = require("twit");
+var twitterConfig = {
+    twitter: {
+      consumer_key: config.get("consumer_key"),
+      consumer_secret: config.get("consumer_secret"),
+      access_token: config.get("access_token"),
+      access_token_secret: config.get("access_token_secret")
+    }
+  },
+  T = new Twit(twitterConfig.twitter);
+
+cron.schedule("0 0 9 * * *", () => {
+  getCurrentBirthdayTweet();
+});
+
+async function getCurrentBirthdayTweet() {
+  var today = new Date();
+  var tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 15);
+
+  today.setHours(0, 0, 0, 0);
+  tomorrow.setHours(0, 0, 0, 0);
+  var isoToday = today.toISOString();
+  var isoTomorrow = tomorrow.toISOString();
+  var result = await Artist.find({
+    Birthday: {
+      $gte: isoToday,
+      $lt: isoTomorrow
+    }
+  }).select({ Twitter: 1, _id: 0 });
+  createTweet(result);
+}
+
+function createTweet(result) {
+  var tweet = "Happy Birthday to ";
+  for (var x = 0; x < result.length; x++) {
+    var res = result[x].Twitter;
+    if (x == result.length - 1)
+      tweet = tweet + "and @" + res.substring(20) + "!";
+    else tweet = tweet + "@" + res.substring(20) + ",";
+  }
+  T.post("statuses/update", { status: tweet });
+}
+
 var authOptions = {
   url: "https://accounts.spotify.com/api/token",
   headers: {
@@ -21,6 +66,11 @@ var authOptions = {
   json: true
 };
 router.get("/artist", async (req, res) => {
+  const result = await Artist.find().sort({ Birthday: 1 });
+  res.status(200).send(result);
+});
+
+router.get("/allArtists", async (req, res) => {
   const result = await Artist.find().sort({ Birthday: 1 });
   res.status(200).send(result);
 });
@@ -143,6 +193,16 @@ router.get("/currentArtist", async (req, res) => {
     }
   });
   res.status(200).send(result);
+});
+
+router.get("/upload", async (req, res) => {
+  const result = await Artist.find().sort({ Birthday: 1 });
+
+  for (var x = 0; x < result.length; x++) {
+    var id = new Artist(result[x]._id);
+    await artist.update({ _id: id }, { $set: { twitter: "" } }, false, true);
+    //await artist.save();
+  }
 });
 
 module.exports = router;

@@ -5,10 +5,10 @@ const Home = () => {
   return (
     <React.Fragment>
       <div className="home-display">
-        <div className="col-md-4">
+        <div className="col-md-12">
           <CurrentBirthdays />
         </div>
-        <div className="col-md-8">
+        <div className="col-md-12">
           <AllBirthdays />
         </div>
       </div>

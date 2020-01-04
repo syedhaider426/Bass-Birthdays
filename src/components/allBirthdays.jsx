@@ -144,9 +144,11 @@ class AllBirthdays extends Component {
             headers={headers}
           />
           <a href="#headers">
-            <button type="btn" className="btn btn-primary ">
-              Back to Top
-            </button>
+            {artistsLength > 5 && (
+              <button type="btn" className="btn btn-primary ">
+                Back to Top
+              </button>
+            )}
           </a>
         </div>
         <div className="row">

@@ -1,5 +1,6 @@
 const express = require("express");
 const artists = require("../routes/artists");
+
 const cors = require("cors");
 const path = require("path");
 

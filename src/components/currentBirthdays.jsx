@@ -128,7 +128,7 @@ class CurrentBirthdays extends Component {
                   key={artist.Artist}
                 ></img>
               </Link>
-              <div className="bottom-left" key={artist._artist}>
+              <div className="bottom-left-2" key={artist._artist}>
                 {artist.Artist}
               </div>
             </div>

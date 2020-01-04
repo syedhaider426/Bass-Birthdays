@@ -14,15 +14,16 @@ const TableBody = ({ data }) => {
     <tbody>
       {data.map(item => (
         <tr key={item._id}>
-          <Link to={"/profile/" + item.Artist}>
-            <td>
+          <td>
+            <Link to={"/profile/" + item.Artist}>
               <img
                 src={item.profileImage}
                 className="mx-auto"
                 alt={item.Artist}
               />
-            </td>
-          </Link>
+            </Link>
+          </td>
+
           <td>
             {" "}
             <Link to={"/profile/" + item.Artist}>{item.Artist} </Link>

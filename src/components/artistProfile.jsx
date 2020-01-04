@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import FooterBirthdays from "./footerBirthdays";
-
 var url;
 if (process.env.NODE_ENV === "production")
   url = new URL("https://dubstepdata.info/artistInfo");
@@ -26,7 +24,7 @@ class ArtistProfile extends Component {
 
   componentDidMount() {
     const { artist } = this.props.match.params;
-    console.log(artist);
+
     var params = { artist: artist };
     url.search = new URLSearchParams(params).toString();
     fetch(url)
@@ -92,9 +90,6 @@ this mounting method to update the state*/
                   <input type="text"></input>
                 </div>
               </div>
-              <div className="col-6">
-                <FooterBirthdays />
-              </div>
             </div>
           </div>
         </React.Fragment>
@@ -102,22 +97,9 @@ this mounting method to update the state*/
     return (
       <React.Fragment>
         <div className="home-display">
-          <div className="col-md-4 container">
+          <div className="col-md-3">
             <img className="image-artist" src={image}></img>
-            <div className="center-info">
-              <div>
-                <label className="artist-name">Name: </label>
-                <div className="divider" />
-                <label className="artist-name">{artist}</label>
-              </div>
-              <div>
-                <label className="birthday-date">Birthday: </label>
-                <div className="divider" />
-                <label className="birthday-date">{birthday}</label>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
+            <div className="bottom-left">{artist}</div>
             <div>
               <h2 className="h2-title">
                 <u>Genres </u>
@@ -130,6 +112,8 @@ this mounting method to update the state*/
                 ))}
               </ol>
             </div>
+          </div>
+          <div className="col-md-4">
             <div>
               <h2 className="h2-title">
                 <u>Top 10 Songs</u>{" "}
@@ -172,7 +156,6 @@ this mounting method to update the state*/
             </div>
           </div>
         </div>
-        <FooterBirthdays />
       </React.Fragment>
     );
   }

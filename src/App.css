@@ -77,11 +77,18 @@ th {
 
 .li-song img,
 .li-artist img {
-  height: 50px;
-  width: 50px;
+  height: 75px;
+  width: 75px;
   margin-bottom: 5px;
 }
 
+.main-login-div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
 .artist-name,
 .birthday-date {
   font-size: 155% !important;
@@ -268,6 +275,16 @@ html {
   column-count: 2;
 }
 
+.top-search {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 @media only screen and (max-width: 1400px) {
   .related-artists-list {
     -webkit-column-count: 1;
@@ -341,12 +358,25 @@ hr {
 
 .bottom-left {
   color: white !important;
-  font-size: 15px;
+  font-size: 24px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
   z-index: 1;
   position: relative;
   margin-bottom: 5%;
   margin-top: 1%;
+  bottom: 32px;
+  background-color: black;
+}
+
+.bottom-left-2 {
+  color: white !important;
+  font-size: 16px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+  z-index: 1;
+  position: relative;
+  margin-bottom: 5%;
+  margin-top: 1%;
+  bottom: 24px;
 }
 
 .page-item:hover {
@@ -367,10 +397,8 @@ li.page-next {
 /*height:auto, max-width:100% = equivalent to img-fluid*/
 .img-wrapper img {
   object-fit: cover;
-  height: auto;
-  height: 300px !important;
-  width: 100%;
-  max-width: 100%;
+  height: 250px;
+  width: 250px;
 }
 
 .img-wrapper img {
@@ -429,6 +457,11 @@ li.page-next {
   background-color: black !important;
 }
 
+.h2-title {
+  color: black;
+  font-weight: bold;
+}
+
 /* td {
   border: 1px solid black !important;
 } */
@@ -437,6 +470,7 @@ li.page-next {
     font-size: 250% !important;
   }
 }
+
 @media only screen and (max-width: 450px) {
   table tbody td {
     font-size: 10px;
@@ -464,15 +498,15 @@ table tr:hover {
 .li-artist {
   color: white;
 }
-.center-info {
+/* .center-info {
   text-align: center;
-}
+} */
 
 .image-artist {
   height: auto;
   max-width: 100%;
 }
-a {
+a:not(.spotify-web-api) {
   color: white !important;
 }
 .active {
@@ -528,4 +562,13 @@ label span {
 
 .page-item {
   margin-top: 2%;
+}
+
+.artist-id {
+  display: none;
+}
+
+.artist-genre,
+.artist-url {
+  display: block;
 }
