@@ -47,7 +47,8 @@ function createTweet(result) {
   var tweet = "Happy Birthday to ";
   for (var x = 0; x < result.length; x++) {
     var res = result[x].Twitter;
-    if (x == result.length - 1)
+    if (result.length == 1) tweet = tweet + "@" + res.substring(20) + "!";
+    else if (x == result.length - 1 && result.length > 1)
       tweet = tweet + "and @" + res.substring(20) + "!";
     else tweet = tweet + "@" + res.substring(20) + ",";
   }
