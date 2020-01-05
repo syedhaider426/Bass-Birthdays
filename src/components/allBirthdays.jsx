@@ -14,7 +14,8 @@ class AllBirthdays extends Component {
     amountPerPage: 25,
     sortColumn: { path: "Birthday", order: "asc" },
     searchQuery: "",
-    bdayQuery: ""
+    bdayQuery: "",
+    isLoaded: false
   };
 
   componentDidMount() {
@@ -25,7 +26,7 @@ class AllBirthdays extends Component {
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        this.setState({ artists: data });
+        this.setState({ artists: data, isLoaded: true });
       });
   }
 
@@ -85,7 +86,8 @@ class AllBirthdays extends Component {
       amountPerPage,
       sortColumn,
       searchQuery,
-      bdayQuery
+      bdayQuery,
+      isLoaded
     } = this.state;
 
     if (searchQuery)
@@ -113,6 +115,7 @@ class AllBirthdays extends Component {
     const artistsLength = allArtists.length;
     var options = [25, 50, 75, 100];
     var headers = ["", "Artist", "Birthday", "Genre"];
+
     return (
       <React.Fragment>
         <h1 className="title" id="all-birthdays">
@@ -142,6 +145,7 @@ class AllBirthdays extends Component {
             sortColumn={sortColumn}
             onSort={this.handleSort}
             headers={headers}
+            isLoaded={isLoaded}
           />
           <a href="#headers">
             {artistsLength > 5 && (

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const TableBody = ({ data }) => {
+const TableBody = ({ data, isLoaded }) => {
   function convertISODateToString(date) {
     var dateString = date.substring(0, 10);
     var month = dateString.substring(5, 7);
@@ -9,8 +9,11 @@ const TableBody = ({ data }) => {
     dateString = month + "/" + date;
     return dateString;
   }
-
-  return (
+  console.log("loading", isLoaded);
+  var loadedDiv = <tbody className="loader"></tbody>;
+  return !isLoaded ? (
+    loadedDiv
+  ) : (
     <tbody>
       {data.map(item => (
         <tr key={item._id}>

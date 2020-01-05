@@ -20,7 +20,7 @@ class ArtistProfile extends Component {
     image: placeholder,
     artist: "",
     birthday: "",
-    genres: ["", "", "", "", "", "", ""],
+    genres: [],
     topSongs: ["", "", "", "", "", "", "", "", "", ""],
     relatedArtists: [
       "",
@@ -125,9 +125,7 @@ this mounting method to update the state*/
         <div className="home-display">
           <div className="col-sm-3">
             <img className="image-artist" src={image} alt={artist}></img>
-            <div className="bottom-left">
-              {artist} / Birthday - {birthday}
-            </div>
+            <div className="bottom-left">{artist}</div>
             <div>
               <h2 className="h2-title">Genres</h2>
               <hr></hr>

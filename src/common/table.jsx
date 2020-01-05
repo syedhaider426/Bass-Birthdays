@@ -1,8 +1,8 @@
 import React from "react";
 import TableBody from "./tableBody";
 import TableHeader from "./tableHeader";
-
-const Table = ({ data, sortColumn, onSort, refresh, headers }) => {
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+const Table = ({ data, sortColumn, onSort, refresh, headers, isLoaded }) => {
   return (
     <React.Fragment>
       <div className="table-responsive">
@@ -13,7 +13,7 @@ const Table = ({ data, sortColumn, onSort, refresh, headers }) => {
             refresh={refresh}
             headers={headers}
           />
-          <TableBody data={data} />
+          <TableBody data={data} isLoaded={isLoaded} />
         </table>
       </div>
     </React.Fragment>

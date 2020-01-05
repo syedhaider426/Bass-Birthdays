@@ -117,7 +117,7 @@ class CurrentBirthdays extends Component {
           {currentArtists.map(artist => (
             <div
               className={length > 4 ? "img-wrapper smaller-img" : "img-wrapper"}
-              key={artist.Artist}
+              key={artist}
             >
               <Link to={"/profile/" + artist.Artist}>
                 <img
@@ -127,9 +127,7 @@ class CurrentBirthdays extends Component {
                   key={artist.Artist}
                 ></img>
               </Link>
-              <div className="bottom-left-2" key={artist._artist}>
-                {artist.Artist}
-              </div>
+              <div className="bottom-left-2">{artist.Artist}</div>
             </div>
           ))}
         </div>
