@@ -21,9 +21,9 @@ var twitterConfig = {
   },
   T = new Twit(twitterConfig.twitter);
 
-// cron.schedule("0 0 9 * * *", () => {
-//   getCurrentBirthdayTweet();
-// });
+cron.schedule("0 0 9 * * *", () => {
+  getCurrentBirthdayTweet();
+});
 
 async function getCurrentBirthdayTweet() {
   var today = new Date();
