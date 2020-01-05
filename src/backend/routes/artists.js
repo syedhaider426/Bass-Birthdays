@@ -129,14 +129,15 @@ async function getSpotifyTopTracks(spotifyID) {
   };
   return await rp.get(options).then(function(response) {
     var tracks = [];
+
     for (var x = 0; x < response.tracks.length; x++) {
       var track = response.tracks[x].name;
       var image = response.tracks[x].album.images[0].url;
-      var url = response.tracks[x].external_urls.spotify;
+      var trackURL = response.tracks[x].external_urls.spotify;
       tracks.push({
         track: track,
         image: image,
-        url: url
+        url: trackURL
       });
     }
     return tracks;
@@ -159,10 +160,15 @@ async function getSpotifyRelatedArtists(spotifyID) {
   };
   return await rp.get(options).then(function(response) {
     var artists = [];
+
     for (var x = 0; x < response.artists.length; x++) {
       var artist = response.artists[x].name;
-      var image = response.artists[x].images[0].url;
+      var image = "";
+      if (response.artists[x].images[0] === undefined) {
+        image = "empty-image.png";
+      } else image = response.artists[x].images[0].url;
       var external_urls = response.artists[x].external_urls.spotify;
+
       artists.push({
         artist: artist,
         image: image,

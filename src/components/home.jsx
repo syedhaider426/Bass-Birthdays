@@ -4,7 +4,7 @@ import CurrentBirthdays from "./currentBirthdays";
 const Home = () => {
   return (
     <React.Fragment>
-      <div className="home-display">
+      <div className="home-display container">
         <div className="col-md-12">
           <CurrentBirthdays />
         </div>

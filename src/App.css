@@ -18,7 +18,7 @@ body {
 
 .home-display {
   flex-wrap: wrap;
-  display: flex;
+  display: flex !important;
 }
 
 td,
@@ -104,7 +104,7 @@ th {
 
 .pre-scrollable {
   overflow-x: hidden;
-  height: 55.5vh;
+  height: 50vh;
   max-height: unset !important;
 }
 
@@ -189,6 +189,10 @@ th {
 .carousel-control-next-icon:hover {
   cursor: pointer;
   opacity: 0.5;
+}
+
+a:hover {
+  text-decoration: none !important;
 }
 
 ::placeholder {
@@ -366,6 +370,7 @@ hr {
   margin-top: 1%;
   bottom: 32px;
   background-color: black;
+  width: 100%;
 }
 
 .bottom-left-2 {
@@ -460,14 +465,23 @@ li.page-next {
 .h2-title {
   color: black;
   font-weight: bold;
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+}
+@media only screen and (max-width: 1200px) and (min-width: 732px) {
+  .h2-title {
+    font-size: 1.2rem;
+  }
 }
 
-/* td {
-  border: 1px solid black !important;
-} */
-@media only screen and (max-width: 500px) {
-  .main-title {
-    font-size: 250% !important;
+@media only screen and (max-width: 732px) and (min-width: 576px) {
+  .h2-title {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .h2-title {
+    font-size: 2rem;
   }
 }
 
@@ -505,6 +519,7 @@ table tr:hover {
 .image-artist {
   height: auto;
   max-width: 100%;
+  object-fit: cover;
 }
 a:not(.spotify-web-api) {
   color: white !important;
@@ -571,4 +586,22 @@ label span {
 .artist-genre,
 .artist-url {
   display: block;
+}
+
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }

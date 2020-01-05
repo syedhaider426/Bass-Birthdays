@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import placeholder from "../images/picture-placeholder.png";
 var url;
 if (process.env.NODE_ENV === "production")
   url = new URL("https://dubstepdata.info/currentArtist");
@@ -15,7 +15,10 @@ function makeDateFormat(n) {
 }
 
 class CurrentBirthdays extends Component {
-  state = { currentArtists: [], currentDate: new Date() };
+  state = {
+    currentArtists: [{ profileImage: placeholder }],
+    currentDate: new Date()
+  };
 
   componentDidMount() {
     const { currentDate } = this.state;
@@ -113,11 +116,7 @@ class CurrentBirthdays extends Component {
         <div className="row">
           {currentArtists.map(artist => (
             <div
-              className={
-                length > 4
-                  ? "col-6 img-wrapper smaller-img"
-                  : "col-6 img-wrapper"
-              }
+              className={length > 4 ? "img-wrapper smaller-img" : "img-wrapper"}
               key={artist.Artist}
             >
               <Link to={"/profile/" + artist.Artist}>

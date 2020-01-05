@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import emptyImage from "../images/empty-image.png";
+import placeholder from "../images/picture-placeholder.png";
+
 var url;
 if (process.env.NODE_ENV === "production")
   url = new URL("https://dubstepdata.info/artistInfo");
@@ -14,15 +17,38 @@ function convertISODateToString(date) {
 
 class ArtistProfile extends Component {
   state = {
-    image: "",
+    image: placeholder,
     artist: "",
     birthday: "",
-    genres: [],
-    topSongs: [],
-    relatedArtists: []
+    genres: ["", "", "", "", "", "", ""],
+    topSongs: ["", "", "", "", "", "", "", "", "", ""],
+    relatedArtists: [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    profileContent: false
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     const { artist } = this.props.match.params;
 
     var params = { artist: artist };
@@ -30,6 +56,7 @@ class ArtistProfile extends Component {
     fetch(url)
       .then(response => response.json())
       .then(data => {
+        this.setState({ genres: [] });
         this.setState({
           image: data[0].profileImage,
           artist: data[0].Artist,
@@ -48,7 +75,7 @@ this mounting method to update the state*/
 
   componentWillReceiveProps(nextProps) {
     const { artist } = nextProps.match.params;
-    console.log(artist);
+
     var params = { artist: artist };
     url.search = new URLSearchParams(params).toString();
     fetch(url)
@@ -73,51 +100,50 @@ this mounting method to update the state*/
       topSongs,
       relatedArtists
     } = this.state;
+    // const notFoundArtist = (
+    //   <React.Fragment>
+    //     <div className="container">
+    //       <div className="home-display">
+    //         <div className="col-12">
+    //           <h1>Page Not Found</h1>
+    //           <div className="text-center jumbotron">
+    //             <h1>Oops!</h1>
+    //             <p>
+    //               Visit our homepage to browse through our site or search for an
+    //               artist or date below
+    //             </p>
+    //             <input type="text"></input>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </React.Fragment>
+    // );
 
-    if (topSongs.length <= 0)
-      return (
-        <React.Fragment>
-          <div className="container">
-            <div className="home-display">
-              <div className="col-6">
-                <h1>Page Not Found</h1>
-                <div className="text-center jumbotron">
-                  <h1>Oops!</h1>
-                  <p>
-                    Visit our homepage to browse through our site or search for
-                    an artist or date below
-                  </p>
-                  <input type="text"></input>
-                </div>
-              </div>
-            </div>
-          </div>
-        </React.Fragment>
-      );
     return (
       <React.Fragment>
         <div className="home-display">
-          <div className="col-md-3">
-            <img className="image-artist" src={image}></img>
-            <div className="bottom-left">{artist}</div>
+          <div className="col-sm-3">
+            <img className="image-artist" src={image} alt={artist}></img>
+            <div className="bottom-left">
+              {artist} / Birthday - {birthday}
+            </div>
             <div>
-              <h2 className="h2-title">
-                <u>Genres </u>
-              </h2>
-              <ol>
+              <h2 className="h2-title">Genres</h2>
+              <hr></hr>
+              <ul>
                 {genres.map(genre => (
                   <li key={genre} className="li-genre">
                     {genre}
                   </li>
                 ))}
-              </ol>
+              </ul>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-sm-4">
             <div>
-              <h2 className="h2-title">
-                <u>Top 10 Songs</u>{" "}
-              </h2>
+              <h2 className="h2-title">Top 10 Songs</h2>
+              <hr></hr>
               <ol>
                 {topSongs.map(song => (
                   <li key={song.track} className="li-song">
@@ -134,18 +160,19 @@ this mounting method to update the state*/
               </ol>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-sm-4">
             <div>
-              <h2 className="h2-title">
-                <u>Top 20 Related Artists</u>{" "}
-              </h2>
+              <h2 className="h2-title">Top 20 Related Artists</h2>
+              <hr></hr>
               <ol className="related-artists-list">
                 {relatedArtists.map(a => (
                   <li key={a.artist} className="li-artist">
                     <a href={a.url}>
                       <img
                         className="li-artist img"
-                        src={a.image}
+                        src={
+                          a.image !== "empty-image.png" ? a.image : emptyImage
+                        }
                         alt={a.artist}
                       />
                       {a.artist}
