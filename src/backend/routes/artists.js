@@ -21,14 +21,14 @@ var twitterConfig = {
   },
   T = new Twit(twitterConfig.twitter);
 
-cron.schedule("0 0 9 * * *", () => {
+cron.schedule("0 9 * * *", () => {
   getCurrentBirthdayTweet();
 });
 
 async function getCurrentBirthdayTweet() {
   var today = new Date();
   var tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 15);
+  tomorrow.setDate(today.getDate() + 1);
 
   today.setHours(0, 0, 0, 0);
   tomorrow.setHours(0, 0, 0, 0);
@@ -39,14 +39,14 @@ async function getCurrentBirthdayTweet() {
       $gte: isoToday,
       $lt: isoTomorrow
     }
-  }).select({ Twitter: 1, _id: 0 });
+  }).select({ twitter: 1, _id: 0 });
   createTweet(result);
 }
 
 function createTweet(result) {
-  var tweet = "Happy Birthday to ";
+  var tweet = "Happy Birthday ";
   for (var x = 0; x < result.length; x++) {
-    var res = result[x].Twitter;
+    var res = result[x].twitter;
     if (result.length == 1) tweet = tweet + "@" + res.substring(20) + "!";
     else if (x == result.length - 1 && result.length > 1)
       tweet = tweet + "and @" + res.substring(20) + "!";

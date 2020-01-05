@@ -16,7 +16,7 @@ var artistSchema = mongoose.Schema({
   Genre: {
     type: Array
   },
-  Twitter: {
+  twitter: {
     type: String
   }
 });
