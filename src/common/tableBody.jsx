@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
 
-const TableBody = ({ data, isLoaded }) => {
+const TableBody = ({ data, isLoaded, handleClick }) => {
   function convertISODateToString(date) {
     var dateString = date.substring(0, 10);
     var month = dateString.substring(5, 7);
@@ -20,38 +19,28 @@ const TableBody = ({ data, isLoaded }) => {
       </tr>
     </tbody>
   );
+
   return !isLoaded ? (
     loadedDiv
   ) : (
     <Fragment>
       <tbody>
         {data.map(item => (
-          <tr key={item._id}>
+          <tr key={item._id} onClick={() => handleClick(item.Artist)}>
             <td>
-              <Link to={"/profile/" + item.Artist}>
-                <img
-                  src={item.profileImage}
-                  className="mx-auto"
-                  alt={item.Artist}
-                />
-              </Link>
+              <img
+                src={item.profileImage}
+                className="mx-auto"
+                alt={item.Artist}
+              />
             </td>
 
-            <td>
-              <Link to={"/profile/" + item.Artist}>{item.Artist} </Link>
-            </td>
+            <td>{item.Artist}</td>
             <td>{convertISODateToString(item.Birthday)}</td>
             <td>{item.Genre[0]}</td>
           </tr>
         ))}
       </tbody>
-      <a href="#headers">
-        {data.length > 5 && (
-          <button type="btn" className="btn btn-primary ">
-            Back to Top
-          </button>
-        )}
-      </a>
     </Fragment>
   );
 };

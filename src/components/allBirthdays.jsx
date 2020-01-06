@@ -6,6 +6,7 @@ import FilterTable from "./filterTable";
 import Pagination from "../common/paging";
 import Select from "../common/select";
 import "bootstrap/dist/js/bootstrap";
+import { withRouter } from "react-router-dom";
 
 class AllBirthdays extends Component {
   state = {
@@ -78,6 +79,9 @@ class AllBirthdays extends Component {
     //selected.value returns a string
     this.setState({ amountPerPage: parseInt(selected.value), currentPage: 1 });
   };
+  handleClick = artist => {
+    this.props.history.push("/profile/" + artist);
+  };
 
   render() {
     let {
@@ -146,7 +150,18 @@ class AllBirthdays extends Component {
             onSort={this.handleSort}
             headers={headers}
             isLoaded={isLoaded}
+            handleClick={this.handleClick}
           />
+        </div>
+        <div className="row">
+          {" "}
+          <a href="#headers">
+            {artistsLength > 5 && (
+              <button type="btn" className="btn btn-primary ">
+                Back to Top
+              </button>
+            )}
+          </a>
         </div>
         <div className="row">
           <Pagination
@@ -163,4 +178,4 @@ class AllBirthdays extends Component {
   }
 }
 
-export default AllBirthdays;
+export default withRouter(AllBirthdays);

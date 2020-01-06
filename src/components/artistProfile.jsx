@@ -49,6 +49,7 @@ class ArtistProfile extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
     const { artist } = this.props.match.params;
 
     var params = { artist: artist };
@@ -77,26 +78,26 @@ this mounting method to update the state*/
 
   /* important url: https://stackoverflow.com/questions/43351752/react-router-changes-url-but-not-view*/
 
-  componentWillReceiveProps(nextProps) {
-    const { artist } = nextProps.match.params;
+  // componentWillReceiveProps(nextProps) {
+  //   const { artist } = nextProps.match.params;
 
-    var params = { artist: artist };
-    url.search = new URLSearchParams(params).toString();
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        if (data.length > 0) {
-          this.setState({
-            image: data[0].profileImage,
-            artist: data[0].Artist,
-            birthday: convertISODateToString(data[0].Birthday),
-            genres: data[0].Genre,
-            topSongs: data.topSongs,
-            relatedArtists: data.relatedArtists
-          });
-        }
-      });
-  }
+  //   var params = { artist: artist };
+  //   url.search = new URLSearchParams(params).toString();
+  //   fetch(url)
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       if (data.length > 0) {
+  //         this.setState({
+  //           image: data[0].profileImage,
+  //           artist: data[0].Artist,
+  //           birthday: convertISODateToString(data[0].Birthday),
+  //           genres: data[0].Genre,
+  //           topSongs: data.topSongs,
+  //           relatedArtists: data.relatedArtists
+  //         });
+  //       }
+  //     });
+  // }
   render() {
     const {
       image,
@@ -106,25 +107,6 @@ this mounting method to update the state*/
       topSongs,
       relatedArtists
     } = this.state;
-    // const notFoundArtist = (
-    //   <React.Fragment>
-    //     <div className="container">
-    //       <div className="home-display">
-    //         <div className="col-12">
-    //           <h1>Page Not Found</h1>
-    //           <div className="text-center jumbotron">
-    //             <h1>Oops!</h1>
-    //             <p>
-    //               Visit our homepage to browse through our site or search for an
-    //               artist or date below
-    //             </p>
-    //             <input type="text"></input>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </React.Fragment>
-    // );
 
     return (
       <React.Fragment>
@@ -149,14 +131,14 @@ this mounting method to update the state*/
               <h2 className="h2-title">Top 10 Songs</h2>
               <hr></hr>
               <ol>
-                {topSongs.map(song => (
+                {topSongs.map((song, index) => (
                   <li key={song.track} className="li-song">
                     <a href={song.url}>
                       <img
                         className="li-song img"
                         src={song.image}
                         alt={song.track}
-                      />{" "}
+                      />
                       {song.track}
                     </a>
                   </li>
@@ -179,7 +161,7 @@ this mounting method to update the state*/
                         }
                         alt={a.artist}
                       />
-                      {a.artist}}
+                      {a.artist}
                     </a>
                   </li>
                 ))}

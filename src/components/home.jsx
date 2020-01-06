@@ -1,6 +1,7 @@
 import React from "react";
 import AllBirthdays from "./allBirthdays";
 import CurrentBirthdays from "./currentBirthdays";
+
 const Home = () => {
   return (
     <React.Fragment>

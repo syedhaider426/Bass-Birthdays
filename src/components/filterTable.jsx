@@ -20,7 +20,6 @@ const FilteredTable = ({ value, onChange, handleBirthday, refresh }) => {
           id="birthday"
           className="text-line"
           onChange={handleBirthday}
-          onfocus="(this.placeholder='')"
         ></input>
         <span className="add-on">
           <i className="icon-th"></i>
