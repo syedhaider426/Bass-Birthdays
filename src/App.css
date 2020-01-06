@@ -604,9 +604,12 @@ label span {
 }
 
 .loader {
-  position: absolute;
+  position: relative;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center;
   top: calc(50% - 4em);
-  left: calc(50% - 4em);
+  left: calc(50% - 0em);
   width: 6em;
   height: 6em;
   border: 1.1em solid rgba(0, 0, 0, 0.2);

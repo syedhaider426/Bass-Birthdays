@@ -147,13 +147,6 @@ class AllBirthdays extends Component {
             headers={headers}
             isLoaded={isLoaded}
           />
-          <a href="#headers">
-            {artistsLength > 5 && (
-              <button type="btn" className="btn btn-primary ">
-                Back to Top
-              </button>
-            )}
-          </a>
         </div>
         <div className="row">
           <Pagination

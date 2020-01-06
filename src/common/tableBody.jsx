@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 const TableBody = ({ data, isLoaded }) => {
@@ -9,33 +9,50 @@ const TableBody = ({ data, isLoaded }) => {
     dateString = month + "/" + date;
     return dateString;
   }
-  console.log("loading", isLoaded);
-  var loadedDiv = <tbody className="loader"></tbody>;
+
+  var loadedDiv = (
+    <tbody>
+      <tr>
+        <td></td>
+        <td>
+          <div className="loader"></div>
+        </td>
+      </tr>
+    </tbody>
+  );
   return !isLoaded ? (
     loadedDiv
   ) : (
-    <tbody>
-      {data.map(item => (
-        <tr key={item._id}>
-          <td>
-            <Link to={"/profile/" + item.Artist}>
-              <img
-                src={item.profileImage}
-                className="mx-auto"
-                alt={item.Artist}
-              />
-            </Link>
-          </td>
+    <Fragment>
+      <tbody>
+        {data.map(item => (
+          <tr key={item._id}>
+            <td>
+              <Link to={"/profile/" + item.Artist}>
+                <img
+                  src={item.profileImage}
+                  className="mx-auto"
+                  alt={item.Artist}
+                />
+              </Link>
+            </td>
 
-          <td>
-            {" "}
-            <Link to={"/profile/" + item.Artist}>{item.Artist} </Link>
-          </td>
-          <td>{convertISODateToString(item.Birthday)}</td>
-          <td>{item.Genre[0]}</td>
-        </tr>
-      ))}
-    </tbody>
+            <td>
+              <Link to={"/profile/" + item.Artist}>{item.Artist} </Link>
+            </td>
+            <td>{convertISODateToString(item.Birthday)}</td>
+            <td>{item.Genre[0]}</td>
+          </tr>
+        ))}
+      </tbody>
+      <a href="#headers">
+        {data.length > 5 && (
+          <button type="btn" className="btn btn-primary ">
+            Back to Top
+          </button>
+        )}
+      </a>
+    </Fragment>
   );
 };
 
