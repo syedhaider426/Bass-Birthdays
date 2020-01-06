@@ -56,6 +56,10 @@ class ArtistProfile extends Component {
     fetch(url)
       .then(response => response.json())
       .then(data => {
+        if (data.length === 0) {
+          this.props.history.push("/not-found");
+          return;
+        }
         this.setState({ genres: [] });
         this.setState({
           image: data[0].profileImage,
@@ -81,14 +85,16 @@ this mounting method to update the state*/
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        this.setState({
-          image: data[0].profileImage,
-          artist: data[0].Artist,
-          birthday: convertISODateToString(data[0].Birthday),
-          genres: data[0].Genre,
-          topSongs: data.topSongs,
-          relatedArtists: data.relatedArtists
-        });
+        if (data.length > 0) {
+          this.setState({
+            image: data[0].profileImage,
+            artist: data[0].Artist,
+            birthday: convertISODateToString(data[0].Birthday),
+            genres: data[0].Genre,
+            topSongs: data.topSongs,
+            relatedArtists: data.relatedArtists
+          });
+        }
       });
   }
   render() {
@@ -173,7 +179,7 @@ this mounting method to update the state*/
                         }
                         alt={a.artist}
                       />
-                      {a.artist}
+                      {a.artist}}
                     </a>
                   </li>
                 ))}

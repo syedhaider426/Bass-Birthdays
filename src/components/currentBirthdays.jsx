@@ -71,66 +71,47 @@ class CurrentBirthdays extends Component {
     var compareDate1 = currentDate.setHours(0, 0, 0, 0);
     var compareDate2 = new Date().setHours(0, 0, 0, 0);
     if (compareDate1 === compareDate2) date = "Today's Birthdays";
-    if (length === 0)
-      return (
-        <div>
-          {" "}
-          <h1 className="title">
-            <span
-              className="carousel-control-prev-icon"
-              aria-hidden="true"
-              onClick={this.handlePrevDate}
-            ></span>
-            <span className="sr-only">Previous</span>
-            {date}
-            <span
-              className="carousel-control-next-icon"
-              aria-hidden="true"
-              onClick={this.handleNextDate}
-            ></span>
-            <span className="sr-only">Next</span>
-          </h1>
-          <hr></hr>
-          <h1 className="no-artists">None</h1>
-        </div>
-      );
     return (
       <React.Fragment>
         <h1 className="title">
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-            onClick={this.handlePrevDate}
-          ></span>
+          <span className="" aria-hidden="true" onClick={this.handlePrevDate}>
+            <i className="fa fa-lg fa-arrow-left"></i>
+          </span>
           <span className="sr-only">Previous</span>
+          <div className="divider"></div>
           {date}
-          <span
-            className="carousel-control-next-icon"
-            aria-hidden="true"
-            onClick={this.handleNextDate}
-          ></span>
+          <div className="divider"></div>
+          <span className="" aria-hidden="true" onClick={this.handleNextDate}>
+            <i className="fa fa-lg fa-arrow-right"></i>
+          </span>
           <span className="sr-only">Next</span>
         </h1>
         <hr></hr>
 
-        <div className="row">
-          {currentArtists.map(artist => (
-            <div
-              className={length > 4 ? "img-wrapper smaller-img" : "img-wrapper"}
-              key={artist}
-            >
-              <Link to={"/profile/" + artist.Artist}>
-                <img
-                  className="img-fluid"
-                  src={artist.profileImage}
-                  alt={artist.Artist}
-                  key={artist.Artist}
-                ></img>
-              </Link>
-              <div className="bottom-left-2">{artist.Artist}</div>
-            </div>
-          ))}
-        </div>
+        {currentArtists.length === 0 ? (
+          <h1 className="no-artists">None</h1>
+        ) : (
+          <div className="row">
+            {currentArtists.map(artist => (
+              <div
+                className={
+                  length > 4 ? "img-wrapper smaller-img" : "img-wrapper"
+                }
+                key={artist}
+              >
+                <Link to={"/profile/" + artist.Artist}>
+                  <img
+                    className="img-fluid"
+                    src={artist.profileImage}
+                    alt={artist.Artist}
+                    key={artist.Artist}
+                  ></img>
+                </Link>
+                <div className="bottom-left-2">{artist.Artist}</div>
+              </div>
+            ))}
+          </div>
+        )}
       </React.Fragment>
     );
   }

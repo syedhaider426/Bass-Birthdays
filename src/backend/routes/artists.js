@@ -88,6 +88,10 @@ router.get("/artistInfo", async (req, res) => {
       spotifyID: 1
     })
     .limit(1); //returns an array
+  if (result.length == 0) {
+    res.status(400).send(result);
+    return;
+  }
   var spotifyID = result[0].spotifyID;
   // getSpotifyTopTracks(spotifyID).then(trackList => {
   //   var finalResult = Object.assign({}, result, { topSongs: trackList });

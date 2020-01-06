@@ -1,12 +1,14 @@
 import React from "react";
 import "./App.css";
-import { Switch, Route, Redirect, Link } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./components/home";
 import NotFound from "./components/notFound";
 import ArtistProfile from "./components/artistProfile";
 import Footer from "./components/footer";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-
+import NavBar from "./components/navbar";
+import About from "./components/about";
+import Contact from "./components/contact";
 /* Transition source help from
  * https://medium.com/@khwsc1/step-by-step-guide-of-simple-routing-transition-effect-for-react-with-react-router-v4-and-9152db1566a0*
  */
@@ -14,13 +16,11 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 function App() {
   return (
     <React.Fragment>
+      {" "}
+      <NavBar></NavBar>
       <div>
         <div className="content">
-          <div className="main">
-            <Link to="/">
-              <h1 className="main-title">Bass Birthdays</h1>
-            </Link>
-          </div>
+          <div className="main container"></div>
           <Route
             render={({ location }) => {
               const { key } = location;
@@ -36,6 +36,8 @@ function App() {
                     <Switch location={location}>
                       <Route path="/not-found" component={NotFound}></Route>
                       <Route path="/" exact component={Home}></Route>
+                      <Route path="/about" exact component={About}></Route>
+                      <Route path="/contact" exact component={Contact}></Route>
                       <Route
                         path="/profile/:artist"
                         component={ArtistProfile}

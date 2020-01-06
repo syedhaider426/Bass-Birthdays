@@ -57,11 +57,15 @@ tbody td {
 }
 
 .main-title {
-  font-size: 325% !important;
+  font-size: 150% !important;
   font-weight: 700 !important;
   line-height: 1 !important;
   text-shadow: #222 0 2px 0;
   color: #eee;
+}
+input[type="text"],
+input[type="date"] {
+  height: 2.375rem;
 }
 
 h1 {
@@ -174,19 +178,8 @@ th {
   }
 }
 
-/* @media only screen and (max-width: 768px) {
-  .col-md-7 {
-    flex: 1 0 59.333333% !important;
-    max-width: 100% !important;
-  }
-  .col-md-5 {
-    flex: 1 0 41.666667% !important;
-    max-width: 100% !important;
-  }
-} */
-
-.carousel-control-prev-icon:hover,
-.carousel-control-next-icon:hover {
+.fa-arrow-right:hover,
+.fa-arrow-left:hover {
   cursor: pointer;
   opacity: 0.5;
 }
@@ -399,6 +392,10 @@ li.page-next {
   margin-right: auto;
 }
 
+.margin-center {
+  margin-left: auto;
+  margin-right: auto;
+}
 /*height:auto, max-width:100% = equivalent to img-fluid*/
 .img-wrapper img {
   object-fit: cover;
