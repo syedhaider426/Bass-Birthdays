@@ -67,6 +67,9 @@ input[type="text"],
 input[type="date"] {
   height: 2.375rem;
 }
+input[type="date"]:after {
+  content: attr(placeholder);
+}
 
 h1 {
   font-size: 155% !important;
