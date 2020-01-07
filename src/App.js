@@ -16,7 +16,6 @@ import Contact from "./components/contact";
 function App() {
   return (
     <React.Fragment>
-      {" "}
       <NavBar></NavBar>
       <div>
         <div className="content">

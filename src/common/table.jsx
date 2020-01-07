@@ -14,7 +14,7 @@ const Table = ({
   return (
     <React.Fragment>
       <div className="table-responsive">
-        <table className="table table-sm">
+        <table className="table table-sm" id="table">
           <TableHeader
             sortColumn={sortColumn}
             onSort={onSort}

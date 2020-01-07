@@ -8,6 +8,10 @@ import Select from "../common/select";
 import "bootstrap/dist/js/bootstrap";
 import { withRouter } from "react-router-dom";
 
+function scrollToTop() {
+  document.getElementById("table").scrollIntoView();
+}
+
 class AllBirthdays extends Component {
   state = {
     artists: [],
@@ -35,18 +39,21 @@ class AllBirthdays extends Component {
     const { currentPage } = this.state;
     if (currentPage === page) return;
     this.setState({ currentPage: page });
+    scrollToTop();
   };
 
   handlePageNext = () => {
     let { currentPage } = this.state;
     currentPage += 1;
     this.setState({ currentPage });
+    scrollToTop();
   };
 
   handlePagePrevious = () => {
     let { currentPage } = this.state;
     currentPage -= 1;
     this.setState({ currentPage });
+    scrollToTop();
   };
 
   handleSort = sortColumn => {
@@ -155,13 +162,15 @@ class AllBirthdays extends Component {
         </div>
         <div className="row">
           {" "}
-          <a href="#headers">
-            {artistsLength > 5 && (
-              <button type="btn" className="btn btn-primary ">
-                Back to Top
-              </button>
-            )}
-          </a>
+          {artistsLength > 5 && (
+            <button
+              type="btn"
+              className="btn btn-primary "
+              onClick={scrollToTop}
+            >
+              Back to Top
+            </button>
+          )}
         </div>
         <div className="row">
           <Pagination

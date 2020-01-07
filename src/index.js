@@ -21,6 +21,9 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
+/* Solved issue with scrolling to top of window by doing this 
+https://stackoverflow.com/questions/8149155/animate-scrolltop-not-working-in-firefox/8149216#8149216*/
+
 //browserrouter - passes down the history object
 //in the browser and passes it down to the component tree
 

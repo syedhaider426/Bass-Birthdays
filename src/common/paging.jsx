@@ -30,7 +30,6 @@ const Pagination = ({
             style={{ cursor: "pointer" }}
             className="page-previous page-link"
             onClick={() => onPagePrevious()}
-            href="#headers"
           >
             Previous
           </a>
@@ -48,7 +47,6 @@ const Pagination = ({
               style={{ cursor: "pointer" }}
               className="page-link "
               onClick={() => onPageChange(page)}
-              href="#headers"
             >
               {page}
             </a>
@@ -66,7 +64,6 @@ const Pagination = ({
             style={{ cursor: "pointer" }}
             className="page-link"
             onClick={() => onPageNext()}
-            href="#headers"
           >
             Next
           </a>

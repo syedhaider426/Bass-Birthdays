@@ -187,10 +187,6 @@ th {
   opacity: 0.5;
 }
 
-a:hover {
-  text-decoration: none !important;
-}
-
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #fff;
@@ -210,12 +206,6 @@ a:hover {
 @media only screen and (max-height: 850px) and (max-width: 768px) {
   #all-birthdays {
     margin-top: 4%;
-  }
-}
-
-@media only screen and (max-width: 450px) {
-  .main-title {
-    font-size: 250% !important;
   }
 }
 
@@ -432,6 +422,9 @@ li.page-next {
   }
 }
 
+.active {
+  color: blue !important;
+}
 /*table css ends*/
 
 /* pagination START*/
@@ -526,9 +519,6 @@ table tr:hover {
   object-fit: cover;
 }
 a:not(.spotify-web-api) {
-  color: white !important;
-}
-.active {
   color: white;
 }
 
@@ -541,18 +531,6 @@ label {
   font-family: "Montserrat", "sans-serif";
 }
 
-/* FOOTER START*/
-.footer-img {
-  height: 166px !important;
-  width: 166px !important;
-}
-.footer {
-  position: relative;
-  color: white;
-  margin-top: 25px;
-}
-
-/* FOOTER ENDS*/
 .tagline {
   color: white;
 }
@@ -592,13 +570,29 @@ label span {
   display: block;
 }
 
+/* FOOTER START*/
+.footer-img {
+  height: 166px !important;
+  width: 166px !important;
+}
+.footer {
+  position: relative;
+  color: white;
+  margin-top: 25px;
+}
+
+/* FOOTER ENDS*/
+
+/* CSS Transitions*/
+
 .fade-enter {
-  opacity: 0.01;
+  opacity: 0;
+  z-index: 1;
 }
 
 .fade-enter.fade-enter-active {
   opacity: 1;
-  transition: opacity 300ms ease-in;
+  transition: opacity 700ms linear 150ms;
 }
 
 .fade-exit {
@@ -606,9 +600,11 @@ label span {
 }
 
 .fade-exit.fade-exit-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
+  opacity: 0;
+  transition: opacity 700ms linear;
 }
+
+/*Loading icon*/
 
 .loader {
   position: relative;
@@ -637,4 +633,17 @@ label span {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.active {
+  color: #0056b3 !important;
+}
+
+html {
+  overflow: hidden;
+  height: 100%;
+}
+body {
+  overflow: auto;
+  height: 100%;
 }

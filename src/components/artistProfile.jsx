@@ -48,8 +48,6 @@ class ArtistProfile extends Component {
   };
 
   componentDidMount() {
-    window.scrollTo(0, 0);
-
     const { artist } = this.props.match.params;
 
     var params = { artist: artist };
@@ -99,14 +97,7 @@ this mounting method to update the state*/
   //     });
   // }
   render() {
-    const {
-      image,
-      artist,
-      birthday,
-      genres,
-      topSongs,
-      relatedArtists
-    } = this.state;
+    const { image, artist, genres, topSongs, relatedArtists } = this.state;
 
     return (
       <React.Fragment>
