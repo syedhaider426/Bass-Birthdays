@@ -49,7 +49,7 @@ class ArtistProfile extends Component {
 
   componentDidMount() {
     const { artist } = this.props.match.params;
-
+    document.getElementById("navbar").scrollIntoView();
     var params = { artist: artist };
     url.search = new URLSearchParams(params).toString();
     fetch(url)
