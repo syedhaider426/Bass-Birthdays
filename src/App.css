@@ -73,13 +73,6 @@ tbody td {
   text-shadow: #222 0 2px 0;
   color: #eee;
 }
-input[type="text"],
-input[type="date"] {
-  height: 2.375rem;
-}
-input[type="date"]:after {
-  content: attr(placeholder);
-}
 
 h1 {
   font-size: 155% !important;
@@ -232,7 +225,7 @@ th {
 select {
   background: transparent !important;
   color: white !important;
-  width: 5rem;
+  width: 10rem !important;
 }
 
 select option {
