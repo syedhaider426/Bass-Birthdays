@@ -42,7 +42,6 @@ class TableHeader extends Component {
               className="w-25"
             >
               {header}
-              {this.renderSortIcon(header)}
             </th>
           ))}
         </tr>

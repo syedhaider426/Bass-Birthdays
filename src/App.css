@@ -21,9 +21,19 @@ body {
   display: flex !important;
 }
 
-td,
+td {
+  font-size: larger;
+}
+
 th {
   font-size: larger;
+  text-align: center;
+}
+
+@media only screen and (max-width: 500px) {
+  th {
+    font-size: medium;
+  }
 }
 
 .fa-arrow-down {
@@ -222,6 +232,7 @@ th {
 select {
   background: transparent !important;
   color: white !important;
+  width: 5rem;
 }
 
 select option {
@@ -255,7 +266,9 @@ select option {
   text-align: center;
 }
 
-html {
+html,
+body,
+table {
   scroll-behavior: smooth;
 }
 
@@ -308,9 +321,6 @@ table img {
 }
 
 @media only screen and (max-width: 520px) {
-  table td {
-    font-size: 12px;
-  }
   table img {
     width: 50px !important;
     height: 50px !important;
@@ -482,14 +492,6 @@ li.page-next {
   }
 }
 
-@media only screen and (max-width: 450px) {
-  table tbody td {
-    font-size: 10px;
-  }
-  table thead th {
-    font-size: 11px;
-  }
-}
 /* table tbody tr {
   line-height: 4vh;
 } */
@@ -570,6 +572,18 @@ label span {
   display: block;
 }
 
+@media only screen and (max-width: 470px) {
+  td {
+    font-size: 0.9em;
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  td {
+    font-size: 0.9em;
+  }
+}
+
 /* FOOTER START*/
 .footer-img {
   height: 166px !important;
@@ -639,6 +653,7 @@ label span {
   color: #0056b3 !important;
 }
 
+/*This fixed issue with white space on mobile*/
 html {
   overflow: hidden;
   height: 100%;
@@ -646,4 +661,8 @@ html {
 body {
   overflow: auto;
   height: 100%;
+}
+
+td {
+  column-span: 3;
 }
