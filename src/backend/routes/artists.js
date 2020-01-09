@@ -21,7 +21,7 @@ var twitterConfig = {
   },
   T = new Twit(twitterConfig.twitter);
 
-cron.schedule("0 9 * * *", () => {
+cron.schedule("0 0 * * *", () => {
   getCurrentBirthdayTweet();
 });
 
@@ -52,6 +52,8 @@ function createTweet(result) {
       tweet = tweet + "and @" + res.substring(20) + "!";
     else tweet = tweet + "@" + res.substring(20) + ",";
   }
+  if (tweet === "Happy Birthday ") tweet = "No Birthdays Today :(";
+
   T.post("statuses/update", { status: tweet });
 }
 

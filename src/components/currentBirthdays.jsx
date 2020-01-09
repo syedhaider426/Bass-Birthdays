@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import placeholder from "../images/picture-placeholder.png";
+
 var url;
 if (process.env.NODE_ENV === "production")
   url = new URL("https://dubstepdata.info/currentArtist");
