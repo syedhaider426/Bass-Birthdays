@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-
+import ScrollToTop from "../utils/scrollToTop";
 const About = () => {
+  ScrollToTop();
   return (
     <Fragment>
       <h1 className="center">

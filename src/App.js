@@ -19,38 +19,43 @@ function App() {
       <NavBar></NavBar>
       <div>
         <div className="content">
-          <div className="main container"></div>
-          <Route
-            render={({ location }) => {
-              const { key } = location;
+          <div className="main-content">
+            <Route
+              render={({ location }) => {
+                const { key } = location;
 
-              return (
-                <TransitionGroup component={null}>
-                  <CSSTransition
-                    key={key}
-                    appear={true}
-                    classNames={"fade"}
-                    timeout={{ enter: 750, exit: 0 }}
-                  >
-                    <Switch location={location}>
-                      <Route path="/not-found" component={NotFound}></Route>
-                      <Route path="/" exact component={Home}></Route>
-                      <Route path="/about" exact component={About}></Route>
-                      <Route path="/contact" exact component={Contact}></Route>
-                      <Route
-                        path="/profile/:artist"
-                        component={ArtistProfile}
-                      ></Route>
-                      <Redirect to="/not-found" />
-                    </Switch>
-                  </CSSTransition>
-                </TransitionGroup>
-              );
-            }}
-          />
+                return (
+                  <TransitionGroup component={null}>
+                    <CSSTransition
+                      key={key}
+                      appear={true}
+                      classNames={"fade"}
+                      timeout={{ enter: 750, exit: 0 }}
+                    >
+                      <Switch location={location}>
+                        <Route path="/not-found" component={NotFound}></Route>
+                        <Route path="/" exact component={Home}></Route>
+                        <Route path="/about" exact component={About}></Route>
+                        <Route
+                          path="/contact"
+                          exact
+                          component={Contact}
+                        ></Route>
+                        <Route
+                          path="/profile/:artist"
+                          component={ArtistProfile}
+                        ></Route>
+                        <Redirect to="/not-found" />
+                      </Switch>
+                    </CSSTransition>
+                  </TransitionGroup>
+                );
+              }}
+            />
+          </div>
+          <Footer />
         </div>
       </div>
-      <Footer />
     </React.Fragment>
   );
 }

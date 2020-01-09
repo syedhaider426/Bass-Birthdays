@@ -24,6 +24,7 @@ class AllBirthdays extends Component {
   };
 
   componentDidMount() {
+    document.getElementById("navbar").scrollIntoView();
     var url;
     if (process.env.NODE_ENV === "production")
       url = "https://dubstepdata.info/artist";

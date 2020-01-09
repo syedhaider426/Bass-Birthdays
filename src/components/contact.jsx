@@ -1,6 +1,7 @@
 import React from "react";
-
+import ScrollToTop from "../utils/scrollToTop";
 const Contact = () => {
+  ScrollToTop();
   return (
     <div className="center">
       <h1>

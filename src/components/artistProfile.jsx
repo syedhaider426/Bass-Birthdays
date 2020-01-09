@@ -63,7 +63,7 @@ class ArtistProfile extends Component {
         this.setState({
           image: data[0].profileImage,
           artist: data[0].Artist,
-          birthday: convertISODateToString(data[0].Birthday),
+          birthday: "Birthday: " + convertISODateToString(data[0].Birthday),
           genres: data[0].Genre,
           topSongs: data.topSongs,
           relatedArtists: data.relatedArtists
@@ -97,14 +97,33 @@ this mounting method to update the state*/
   //     });
   // }
   render() {
-    const { image, artist, genres, topSongs, relatedArtists } = this.state;
+    const {
+      image,
+      artist,
+      birthday,
+      genres,
+      topSongs,
+      relatedArtists
+    } = this.state;
 
     return (
       <React.Fragment>
         <div className="home-display">
           <div className="col-sm-3">
+            <span>
+              <i>
+                * Data sourced from{" "}
+                <a
+                  className="spotify-web-api"
+                  href="https://developer.spotify.com/documentation/web-api/"
+                >
+                  Spotify
+                </a>
+              </i>
+            </span>
             <img className="image-artist" src={image} alt={artist}></img>
-            <div className="bottom-left">{artist}</div>
+            <div className="info">{artist}</div>
+            <div className="info">{birthday}</div>
             <div>
               <h2 className="h2-title">Genres</h2>
               <hr></hr>
