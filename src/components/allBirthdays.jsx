@@ -79,11 +79,11 @@ class AllBirthdays extends Component {
     this.setState({ searchQuery: query, currentPage: 1 });
   };
 
-  handleBirthdayFilter = ({ currentTarget: bday }) => {
+  handleBirthdayFilter = ({ target: bday }) => {
     this.setState({ bdayQuery: bday.value, currentPage: 1 });
   };
 
-  handleSelect = ({ currentTarget: selected }) => {
+  handleSelect = ({ target: selected }) => {
     //selected.value returns a string
     this.setState({ amountPerPage: parseInt(selected.value), currentPage: 1 });
   };

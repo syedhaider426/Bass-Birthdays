@@ -399,12 +399,25 @@ hr {
   }
 }
 
+.contact {
+  color: black !important;
+  text-shadow: none;
+}
+
 .fa-search {
   color: #7b1db5;
 
   margin-top: 5%;
 
   font-weight: 900;
+}
+
+.star {
+  color: red;
+}
+
+.white {
+  color: white;
 }
 
 .info {

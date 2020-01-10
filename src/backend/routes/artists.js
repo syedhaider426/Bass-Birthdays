@@ -21,7 +21,7 @@ var twitterConfig = {
   },
   T = new Twit(twitterConfig.twitter);
 
-cron.schedule("0 0 * * *", () => {
+cron.schedule("0 9 * * *", () => {
   getCurrentBirthdayTweet();
 });
 
@@ -75,6 +75,28 @@ router.get("/artist", async (req, res) => {
 
 router.get("/allArtists", async (req, res) => {
   const result = await Artist.find().sort({ Birthday: 1 });
+  res.status(200).send(result);
+});
+
+router.get("/currentArtist", async (req, res) => {
+  var date = req.query.date;
+  var month = req.query.month;
+  var year = new Date().getFullYear();
+  var today = new Date(year, month, date);
+  var tomorrow = new Date(year, month, date);
+  tomorrow.setDate(today.getDate() + 1);
+
+  today.setHours(0, 0, 0, 0);
+  tomorrow.setHours(0, 0, 0, 0);
+  var isoToday = today.toISOString();
+  var isoTomorrow = tomorrow.toISOString();
+
+  const result = await Artist.find({
+    Birthday: {
+      $gte: isoToday,
+      $lt: isoTomorrow
+    }
+  });
   res.status(200).send(result);
 });
 
@@ -185,28 +207,6 @@ async function getSpotifyRelatedArtists(spotifyID) {
     return artists;
   });
 }
-
-router.get("/currentArtist", async (req, res) => {
-  var date = req.query.date;
-  var month = req.query.month;
-  var year = new Date().getFullYear();
-  var today = new Date(year, month, date);
-  var tomorrow = new Date(year, month, date);
-  tomorrow.setDate(today.getDate() + 1);
-
-  today.setHours(0, 0, 0, 0);
-  tomorrow.setHours(0, 0, 0, 0);
-  var isoToday = today.toISOString();
-  var isoTomorrow = tomorrow.toISOString();
-
-  const result = await Artist.find({
-    Birthday: {
-      $gte: isoToday,
-      $lt: isoTomorrow
-    }
-  });
-  res.status(200).send(result);
-});
 
 router.get("/upload", async (req, res) => {
   const result = await Artist.find().sort({ Birthday: 1 });
