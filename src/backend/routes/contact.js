@@ -8,6 +8,8 @@ const fromEmail = config.get("fromEmail");
 const express = require("express");
 const router = express.Router();
 const Contact = require("../database/models/contacts");
+const errorLog = require("../../utils/logger").errorlog;
+const successLog = require("../../utils/logger").successLog;
 
 /*https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/js-sdk-dv.pdf*/
 AWS.config.update({
@@ -43,10 +45,10 @@ router.post("/contactInfo", (req, res) => {
   // Handle promise's fulfilled/rejected states
   sendPromise
     .then(function(data) {
-      console.log(data.MessageId);
+      successLog.info(data.MessageId);
     })
     .catch(function(err) {
-      console.error(err, err.stack);
+      errorLog.error(err, err.stack);
     });
 
   const contact = new Contact({ name, email, comment });
