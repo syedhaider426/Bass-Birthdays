@@ -14,6 +14,35 @@ body {
   background: #eee;
   background-repeat: no-repeat;
   min-height: 100vh;
+  overflow: auto;
+  height: 100%;
+}
+
+/*This fixed issue with white space on mobile*/
+html {
+  overflow: hidden;
+  height: 100%;
+}
+
+html,
+body,
+table {
+  scroll-behavior: smooth;
+}
+
+/* Refers to any h1 tags*/
+h1 {
+  font-size: 155% !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  text-shadow: #222 0 2px 0;
+  color: #eee;
+}
+
+.h2-title {
+  color: black;
+  font-weight: bold;
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
 }
 
 .home-display {
@@ -21,21 +50,27 @@ body {
   display: flex !important;
 }
 
-td {
-  font-size: larger;
-}
-
 th {
+  top: 0;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+  background-color: #1a1a1a;
+  color: white;
+  border-top: unset !important;
+  border-bottom: unset !important;
   font-size: larger;
   text-align: inherit;
+  position: sticky;
 }
 
-@media only screen and (max-width: 500px) {
-  th {
-    font-size: medium;
-  }
+th td span {
+  color: white !important;
 }
 
+.jumbotron {
+  padding: 0rem 2rem 3rem 2rem !important;
+}
+
+/*Icons*/
 .fa-arrow-down {
   transform: rotate(0deg);
   transition: transform 250ms linear;
@@ -46,26 +81,35 @@ th {
   transition: transform 250ms linear;
 }
 
+.fa-arrow-right:hover,
+.fa-arrow-left:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+/*Icons*/
+
 .table-responsive {
   overflow-x: unset !important;
 }
 
 /* Table starts */
 
-th {
-  top: 0;
-  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
-  background-color: #1a1a1a;
+td {
+  border: 0 !important;
+  vertical-align: middle !important;
+  font-size: larger;
   color: white;
 }
-th td span {
-  color: white !important;
+
+table tr {
+  cursor: pointer;
 }
 
-tbody td {
-  color: white !important;
+table tr:hover {
+  background-color: #0f5ca9;
 }
 
+/* Refers to Bass Birthdays */
 .main-title {
   font-size: 150% !important;
   font-weight: 700 !important;
@@ -74,38 +118,11 @@ tbody td {
   color: #eee;
 }
 
-h1 {
-  font-size: 155% !important;
-  font-weight: 700 !important;
-  line-height: 1 !important;
-  text-shadow: #222 0 2px 0;
-  color: #eee;
-}
-th {
-  position: sticky;
-}
-
 .li-song img,
 .li-artist img {
   height: 75px;
   width: 75px;
   margin-bottom: 5px;
-}
-
-.main-login-div {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  /* bring your own prefixes */
-  transform: translate(-50%, -50%);
-}
-.artist-name,
-.birthday-date {
-  font-size: 155% !important;
-  font-weight: 700 !important;
-  line-height: 1 !important;
-  text-shadow: #222 0 2px 0;
-  color: #eee;
 }
 
 .center {
@@ -123,70 +140,27 @@ th {
   color: white !important;
 }
 
-.table th {
-  border-top: unset !important;
-}
-.table thead th {
-  border-bottom: unset !important;
+.page-num,
+.page-next {
+  margin-left: 1% !important;
 }
 
-@media only screen and (max-height: 912px) and (max-width: 450px) and (orientation: portrait) {
-  .pre-scrollable {
-    height: initial !important;
-    overflow-y: hidden !important;
-  }
-  .col-md-7 {
-    height: 100% !important;
-  }
-}
-
-@media only screen and (max-width: 950px) and (max-height: 450px) and (orientation: landscape) {
-  .pre-scrollable {
-    height: initial !important;
-    overflow-y: hidden !important;
-  }
-  .col-md-7 {
-    height: 100% !important;
-  }
-}
-
-@media only screen and (max-width: 767px) and (max-height: 1200px) {
-  .pre-scrollable {
-    height: initial !important;
-    overflow-y: hidden !important;
-  }
-  .col-md-7 {
-    height: 100% !important;
-  }
-}
-
-@media only screen and (max-width: 900px) {
-  .title {
-    font-size: 120% !important;
-  }
-}
-
+/* Refers to Filter Birthday component*/
 .birthday-filter {
   margin-bottom: 5px;
 }
 
+/* Refers to input/date filter, not the select*/
+.filter-table {
+  margin-bottom: 1%;
+}
+
+/* Refers to spacing between select and "records per page" text */
 .records-label {
   margin: 5px !important;
 }
 
-@media only screen and (max-height: 900px) {
-  .title {
-    font-size: 120% !important;
-  }
-}
-
-.fa-arrow-right:hover,
-.fa-arrow-left:hover {
-  cursor: pointer;
-  opacity: 0.5;
-}
-
-/* stroke */
+/* NAVBAR */
 
 nav ul li a,
 nav ul li a:after,
@@ -196,24 +170,21 @@ nav ul li a:before {
 nav ul li a:hover {
   color: black;
 }
-nav ul li a {
-  position: relative;
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(252, 252, 252)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
-nav ul li a:after {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 0%;
-  content: ".";
-  color: transparent;
-  background: #aaa;
-  height: 1px;
+
+.custom-toggler.navbar-toggler {
+  border-color: rgb(252, 248, 248);
+  border: none;
 }
-nav ul li a:hover:after {
-  width: 100%;
+
+.nav-link {
+  font-size: 24px;
 }
+
+/* NAVBAR */
 
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -229,22 +200,6 @@ nav ul li a:hover:after {
 ::-ms-input-placeholder {
   /* Microsoft Edge */
   color: #fff;
-}
-
-@media only screen and (max-height: 850px) and (max-width: 768px) {
-  #all-birthdays {
-    margin-top: 4%;
-  }
-}
-
-.page-num,
-.page-next {
-  margin-left: 1% !important;
-}
-
-.current-birthdays {
-  margin-left: auto !important;
-  margin-right: auto !important;
 }
 
 select {
@@ -284,48 +239,11 @@ select option {
   text-align: center;
 }
 
-html,
-body,
-table {
-  scroll-behavior: smooth;
-}
-
 .related-artists-list {
   -webkit-column-count: 2;
   -moz-column-count: 2;
   column-count: 2;
 }
-
-.top-search {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media only screen and (max-width: 1400px) {
-  .related-artists-list {
-    -webkit-column-count: 1;
-    -moz-column-count: 1;
-    column-count: 1;
-  }
-}
-
-td {
-  color: black;
-}
-
-table {
-  font-family: "Montserrat", "sans-serif";
-}
-td {
-  font-family: "Montserrat", "sans-serif";
-  border: 0 !important;
-}
-.boo-title {
-  margin-bottom: 2%;
-}
-/* tr {
-  background-color: white;
-} */
 
 table img {
   width: 100px;
@@ -333,54 +251,12 @@ table img {
   max-width: 100%;
 }
 
-@media only screen and (max-width: 520px) {
-  table img {
-    width: 50px !important;
-    height: 50px !important;
-    max-width: unset !important;
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  table img {
-    max-width: 100%;
-  }
-}
-
 span.Image {
   display: none !important;
 }
 
-table td {
-  vertical-align: middle !important;
-}
-span {
-  font-family: "Montserrat", "sans-serif";
-}
-
-.filter-table {
-  margin-bottom: 1%;
-}
-
 hr {
   background-color: white;
-}
-
-.custom-toggler .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(252, 252, 252)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
-}
-.searchbar {
-  width: 60%;
-}
-
-.custom-toggler.navbar-toggler {
-  border-color: rgb(252, 248, 248);
-  border: none;
-}
-@media only screen and (max-width: 768px) {
-  .navbar form input {
-    display: none !important;
-  }
 }
 
 .contact {
@@ -388,28 +264,11 @@ hr {
   text-shadow: none;
 }
 
-.fa-search {
-  color: #7b1db5;
-
-  margin-top: 5%;
-
-  font-weight: 900;
-}
-
-@media only screen and (max-width: 600px) {
-  .jumbotron {
-    padding: 3rem 1rem !important;
-  }
-}
-
 .star {
   color: red;
 }
 
-.white {
-  color: white;
-}
-
+/* Refers to Artist and Birthday field in the Artist Profile page*/
 .info {
   color: white !important;
   font-size: 24px;
@@ -429,7 +288,7 @@ hr {
   width: 100%;
 } */
 
-.bottom-left-2 {
+/* .bottom-left-2 {
   color: white !important;
   font-size: 12px;
   font-weight: bold;
@@ -439,16 +298,7 @@ hr {
   margin-bottom: 5%;
   margin-top: 1%;
   bottom: 24px;
-}
-
-.page-item:hover {
-  opacity: 0.9;
-  background-color: gray;
-}
-
-li.page-next {
-  margin-left: 1%;
-}
+} */
 
 .img-wrapper {
   text-align: center;
@@ -478,44 +328,9 @@ li.page-next {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 1400px) {
-  .img-wrapper img {
-    width: 175px !important;
-    height: 175px !important;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  .img-wrapper img {
-    width: 130px !important;
-    height: 130px !important;
-  }
-}
-
-.active {
-  color: blue !important;
-}
 /*table css ends*/
 
 /* pagination START*/
-
-@media only screen and (max-width: 920px) and (min-width: 770px) {
-  .pagination.count5 {
-    flex-wrap: wrap !important;
-  }
-}
-
-@media only screen and (max-width: 560px) {
-  .pagination.count5 {
-    flex-wrap: wrap !important;
-  }
-}
-
-@media only screen and (max-width: 345px) {
-  .pagination.count4 {
-    flex-wrap: wrap !important;
-  }
-}
 
 .page-link {
   background-color: inherit !important;
@@ -529,51 +344,29 @@ li.page-next {
   background-color: black !important;
 }
 
-.h2-title {
-  color: black;
-  font-weight: bold;
-  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
-}
-@media only screen and (max-width: 1200px) and (min-width: 732px) {
-  .h2-title {
-    font-size: 1.2rem;
-  }
+.page-item:hover {
+  opacity: 0.9;
+  background-color: gray;
 }
 
-@media only screen and (max-width: 732px) and (min-width: 576px) {
-  .h2-title {
-    font-size: 0.8rem;
-  }
+li.page-next {
+  margin-left: 1%;
 }
-
-@media only screen and (max-width: 575px) {
-  .h2-title {
-    font-size: 2rem;
-  }
-}
-
-/* table tbody tr {
-  line-height: 4vh;
-} */
 .pagination {
   flex-wrap: nowrap;
 }
 
-table tr {
-  cursor: pointer;
+.page-item {
+  margin-top: 2%;
 }
 
-table tr:hover {
-  background-color: #0f5ca9;
-}
+/* pagination END*/
+
 .li-genre,
 .li-song,
 .li-artist {
   color: white;
 }
-/* .center-info {
-  text-align: center;
-} */
 
 .image-artist {
   height: auto;
@@ -598,25 +391,12 @@ a:not(.spotify-web-api) {
 
 label {
   color: white !important;
-  font-family: "Montserrat", "sans-serif";
-}
-
-.tagline {
-  color: white;
-}
-
-.form-inline {
-  align-items: center;
-}
-
-.home {
-  text-decoration: none;
 }
 
 h6 {
   text-align: center;
 }
-.title {
+.current-birthdays-title {
   text-align: center;
   font-size: xxx-large;
   color: white;
@@ -627,29 +407,9 @@ label span {
   color: white;
 }
 
-.page-item {
-  margin-top: 2%;
-}
-
-.artist-id {
-  display: none;
-}
-
 .artist-genre,
 .artist-url {
   display: block;
-}
-
-@media only screen and (max-width: 470px) {
-  td {
-    font-size: 0.9em;
-  }
-}
-
-@media only screen and (max-width: 470px) {
-  td {
-    font-size: 0.9em;
-  }
 }
 
 /* FOOTER START*/
@@ -679,18 +439,6 @@ label span {
   width: 1% !important;
   height: auto;
   display: inline-block;
-}
-
-@media only screen and (max-width: 750px) {
-  .link-divider {
-    width: 2% !important;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .link-divider {
-    width: 5% !important;
-  }
 }
 
 /* FOOTER ENDS*/
@@ -751,22 +499,135 @@ label span {
   color: #0056b3 !important;
 }
 
-/*This fixed issue with white space on mobile*/
-html {
-  overflow: hidden;
-  height: 100%;
-}
-body {
-  overflow: auto;
-  height: 100%;
-}
-
-.nav-link {
-  font-size: 24px;
-}
-
 .Toastify__toast-body {
   font-family: inherit;
+}
+
+@media only screen and (max-width: 900px) {
+  .title {
+    font-size: 120% !important;
+  }
+}
+
+@media only screen and (max-height: 850px) and (max-width: 768px) {
+  #all-birthdays {
+    margin-top: 4%;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  table img {
+    width: 50px !important;
+    height: 50px !important;
+    max-width: unset !important;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  table img {
+    max-width: 100%;
+  }
+}
+@media only screen and (max-width: 1400px) {
+  .img-wrapper img {
+    width: 175px !important;
+    height: 175px !important;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .img-wrapper img {
+    width: 130px !important;
+    height: 130px !important;
+  }
+}
+
+@media only screen and (max-width: 920px) and (min-width: 770px) {
+  .pagination.count5 {
+    flex-wrap: wrap !important;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .pagination.count5 {
+    flex-wrap: wrap !important;
+  }
+}
+
+@media only screen and (max-width: 345px) {
+  .pagination.count4 {
+    flex-wrap: wrap !important;
+  }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 732px) {
+  .h2-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 732px) and (min-width: 576px) {
+  .h2-title {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .h2-title {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  td {
+    font-size: 0.9em;
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  td {
+    font-size: 0.9em;
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .related-artists-list {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+}
+
+@media only screen and (max-width: 950px) and (max-height: 450px) and (orientation: landscape) {
+  .pre-scrollable {
+    height: initial !important;
+    overflow-y: hidden !important;
+  }
+  .col-md-7 {
+    height: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 767px) and (max-height: 1200px) {
+  .pre-scrollable {
+    height: initial !important;
+    overflow-y: hidden !important;
+  }
+  .col-md-7 {
+    height: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .link-divider {
+    width: 2% !important;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .link-divider {
+    width: 5% !important;
+  }
 }
 
 @media only screen and (max-width: 350px) {
@@ -775,5 +636,27 @@ body {
   }
   table td {
     font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  th {
+    font-size: medium;
+  }
+}
+
+@media only screen and (max-height: 912px) and (max-width: 450px) and (orientation: portrait) {
+  .pre-scrollable {
+    height: initial !important;
+    overflow-y: hidden !important;
+  }
+  .col-md-7 {
+    height: 100% !important;
+  }
+}
+
+@media only screen and (max-height: 900px) {
+  .title {
+    font-size: 120% !important;
   }
 }

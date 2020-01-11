@@ -23,7 +23,7 @@ const NavBar = () => {
               data-toggle="collapse"
               data-target=".navbar-collapse.show"
             >
-              <Link className="nav-link" exact="true" to="/">
+              <Link className="nav-link" to="/" exact="true">
                 Home
               </Link>
             </li>

@@ -61,12 +61,13 @@ class Contact extends Component {
         <h1>
           <u>Contact Us</u>{" "}
         </h1>
-        <p className="white">
+        <p style={{ color: "white" }}>
           Got a question? We'd love to hear from you. Send us a message and
           we'll respond as soon as possible.
         </p>
         <div className="container jumbotron">
           <form>
+            <hr></hr>
             <label htmlFor="name" className="contact float-left">
               Name <span className="star">*</span>
             </label>

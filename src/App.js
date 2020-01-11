@@ -38,6 +38,7 @@ function App() {
                       <Switch location={location}>
                         <Route path="/not-found" component={NotFound}></Route>
                         <Route path="/" exact component={Home}></Route>
+
                         <Route path="/about" exact component={About}></Route>
                         <Route
                           path="/contact"

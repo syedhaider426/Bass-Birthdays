@@ -74,7 +74,7 @@ class CurrentBirthdays extends Component {
     if (compareDate1 === compareDate2) date = "Today's Birthdays";
     return (
       <React.Fragment>
-        <h1 className="title">
+        <h1 className="current-birthdays-title">
           <span className="" aria-hidden="true" onClick={this.handlePrevDate}>
             <i className="fa fa-lg fa-arrow-left"></i>
           </span>
