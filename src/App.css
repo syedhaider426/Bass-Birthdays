@@ -27,7 +27,7 @@ td {
 
 th {
   font-size: larger;
-  text-align: center;
+  text-align: inherit;
 }
 
 @media only screen and (max-width: 500px) {
