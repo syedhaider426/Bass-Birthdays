@@ -122,7 +122,11 @@ class AllBirthdays extends Component {
         return false;
       });
     var sorted = {};
+
+    //sorts data based on the sort column (artist or birthday or genre)
     sorted = _.orderBy(allArtists, [sortColumn.path], [sortColumn.order]);
+
+    //paginates data into 9 pages
     var artists = paginate(sorted, currentPage, amountPerPage);
     const artistsLength = allArtists.length;
     var options = [25, 50, 75, 100];

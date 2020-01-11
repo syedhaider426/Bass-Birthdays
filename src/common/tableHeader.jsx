@@ -26,6 +26,8 @@ class TableHeader extends Component {
   render() {
     var headers = this.props.headers;
     var emptyHeader;
+
+    //used to have no header for the picture column
     if (this.props.headers[0] === "") {
       headers = this.props.headers.slice(1);
       emptyHeader = <th className="w-25"></th>;
