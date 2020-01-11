@@ -5,6 +5,8 @@ const querystring = require("querystring");
 
 const Artist = require("../database/models/artist"); //Artist model
 
+const errorLog = require("../../utils/logger").errorlog;
+const twitterLog = require("../../utils/logger").twitterLog;
 const config = require("config");
 const client_id = config.get("client_id");
 const client_secret = config.get("client_secret");
@@ -52,9 +54,16 @@ function createTweet(result) {
       tweet = tweet + "and @" + res.substring(20) + "!";
     else tweet = tweet + "@" + res.substring(20) + ",";
   }
-  if (tweet === "Happy Birthday ") tweet = "No Birthdays Today :(";
-
-  T.post("statuses/update", { status: tweet });
+  if (tweet === "Happy Birthday ") {
+    tweet = "No Birthdays Today :(";
+  }
+  T.post("statuses/update", { status: tweet }, function(err, data, response) {
+    if (err) {
+      errorLog.error(err);
+    } else {
+      twitterLog.debug("Tweet for " + new Date() + " is " + tweet);
+    }
+  });
 }
 
 var authOptions = {
@@ -117,10 +126,6 @@ router.get("/artistInfo", async (req, res) => {
     return;
   }
   var spotifyID = result[0].spotifyID;
-  // getSpotifyTopTracks(spotifyID).then(trackList => {
-  //   var finalResult = Object.assign({}, result, { topSongs: trackList });
-  //   res.status(200).send(finalResult);
-  // });
   const tracks = await getSpotifyTopTracks(spotifyID);
   const artists = await getSpotifyRelatedArtists(spotifyID);
   var finalResult = Object.assign(
@@ -214,7 +219,6 @@ router.get("/upload", async (req, res) => {
   for (var x = 0; x < result.length; x++) {
     var id = new Artist(result[x]._id);
     await artist.update({ _id: id }, { $set: { twitter: "" } }, false, true);
-    //await artist.save();
   }
 });
 
