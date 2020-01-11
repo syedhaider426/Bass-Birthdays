@@ -28,7 +28,7 @@ class TableHeader extends Component {
     var emptyHeader;
     if (this.props.headers[0] === "") {
       headers = this.props.headers.slice(1);
-      emptyHeader = <th></th>;
+      emptyHeader = <th className="w-25"></th>;
     }
     return (
       <thead>

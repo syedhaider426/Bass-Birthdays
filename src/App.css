@@ -130,10 +130,6 @@ th {
   border-bottom: unset !important;
 }
 
-.table-sm th {
-  padding: unset !important;
-}
-
 @media only screen and (max-height: 912px) and (max-width: 450px) and (orientation: portrait) {
   .pre-scrollable {
     height: initial !important;
@@ -771,4 +767,13 @@ body {
 
 .Toastify__toast-body {
   font-family: inherit;
+}
+
+@media only screen and (max-width: 350px) {
+  table th {
+    font-size: 12px;
+  }
+  table td {
+    font-size: 12px;
+  }
 }
