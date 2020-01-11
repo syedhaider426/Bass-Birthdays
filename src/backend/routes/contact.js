@@ -20,7 +20,10 @@ router.post("/contactInfo", (req, res) => {
   const name = req.query.name;
   const email = req.query.email;
   const comment = req.query.comment;
-
+  if (name === "" || email === "" || comment === "") {
+    res.status(400).send("Please enter a name, email, and comment");
+    return;
+  }
   /* Useful resource: https://medium.com/@yashoda.charith10/sending-emails-using-aws-ses-nodejs-460b8cc6d0d5*/
   const params = {
     Source: fromEmail,
@@ -48,6 +51,7 @@ router.post("/contactInfo", (req, res) => {
 
   const contact = new Contact({ name, email, comment });
   contact.save();
+  res.status(200).send("Submitted contact info");
 });
 
 module.exports = router;

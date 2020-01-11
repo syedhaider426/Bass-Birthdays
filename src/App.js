@@ -9,10 +9,13 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import NavBar from "./components/navbar";
 import About from "./components/about";
 import Contact from "./components/contact";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 /* Transition source help from
  * https://medium.com/@khwsc1/step-by-step-guide-of-simple-routing-transition-effect-for-react-with-react-router-v4-and-9152db1566a0*
  */
-
+toast.configure();
 function App() {
   return (
     <React.Fragment>

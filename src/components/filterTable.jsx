@@ -21,9 +21,6 @@ const FilteredTable = ({ value, onChange, handleBirthday, refresh }) => {
           className="text-line"
           onChange={handleBirthday}
         ></input>
-        <span className="add-on">
-          <i className="icon-th"></i>
-        </span>
       </div>
     </React.Fragment>
   );

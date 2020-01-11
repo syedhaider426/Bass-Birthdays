@@ -371,31 +371,19 @@ hr {
 }
 
 .custom-toggler .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(20,2,2, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(252, 252, 252)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 .searchbar {
   width: 60%;
 }
 
 .custom-toggler.navbar-toggler {
-  border-color: rgb(20, 2, 2);
+  border-color: rgb(252, 248, 248);
   border: none;
 }
 @media only screen and (max-width: 768px) {
   .navbar form input {
     display: none !important;
-  }
-}
-
-@media only screen and (max-width: 378px) {
-  .main-title {
-    font-size: 125% !important;
-  }
-}
-
-@media only screen and (max-width: 350px) {
-  .main-title {
-    font-size: 100% !important;
   }
 }
 
@@ -410,6 +398,12 @@ hr {
   margin-top: 5%;
 
   font-weight: 900;
+}
+
+@media only screen and (max-width: 600px) {
+  .jumbotron {
+    padding: 3rem 1rem !important;
+  }
 }
 
 .star {
@@ -773,4 +767,8 @@ body {
 
 .nav-link {
   font-size: 24px;
+}
+
+.Toastify__toast-body {
+  font-family: inherit;
 }

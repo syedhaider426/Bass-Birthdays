@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 var url;
 if (process.env.NODE_ENV === "development")
@@ -9,7 +11,8 @@ class Contact extends Component {
   state = {
     name: "",
     email: "",
-    comment: ""
+    comment: "",
+    errors: {}
   };
 
   handleName = ({ target: input }) => {
@@ -24,20 +27,35 @@ class Contact extends Component {
     this.setState({ comment: input.value });
   };
 
+  validate = () => {
+    const errors = {};
+    const { name, email, comment } = this.state;
+    if (name.trim() === "") errors.name = "Name is required";
+    if (email.trim() === "") errors.email = "Email is required";
+    if (comment.trim() === "") errors.comment = "Comment is required";
+    return Object.keys(errors).length === 0 ? null : errors;
+  };
+
   /*Make fields required*/
-  handleSubmit = () => {
+  handleSubmit = e => {
+    e.preventDefault();
+    const errors = this.validate();
+    this.setState({ errors: errors || {} });
+    if (errors) {
+      return;
+    }
     const { name, email, comment } = this.state;
     var params = { name, email, comment };
     url.search = new URLSearchParams(params).toString();
-    fetch(url, { method: "POST" })
-      .then(response => response.json())
-      .then(() => {
-        this.setState({ name: "", email: "", comment: "" });
-        this.props.history.push("/");
-      });
+    fetch(url, { method: "POST" }).then(() => {
+      this.setState({ name: "", email: "", comment: "" });
+      toast.success("🚀 Successfully submitted contact info!");
+    });
   };
 
   render() {
+    const { errors, name, email, comment } = this.state;
+
     return (
       <div className="center">
         <h1>
@@ -48,46 +66,60 @@ class Contact extends Component {
           we'll respond as soon as possible.
         </p>
         <div className="container jumbotron">
-          <label htmlFor="name" className="contact float-left">
-            Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            className="form-control"
-            placeholder="Name..."
-            onChange={this.handleName}
-          ></input>
-          <hr></hr>
-          <label htmlFor="email" className="contact float-left">
-            Email <span className="star">*</span>
-          </label>
-          <input
-            id="email"
-            type="text"
-            className="form-control"
-            placeholder="Email..."
-            onChange={this.handleEmail}
-          ></input>
-          <hr></hr>
-          <label htmlFor="comment" className="contact float-left">
-            Question/Comment <span className="star">*</span>
-          </label>
-          <textarea
-            id="comment"
-            type="textarea"
-            className="form-control"
-            placeholder="Question/Comment..."
-            onChange={this.handleComment}
-          ></textarea>
-          <hr></hr>
-          <button
-            type="button"
-            className="btn btn-primary float-left"
-            onClick={this.handleSubmit}
-          >
-            Submit
-          </button>
+          <form>
+            <label htmlFor="name" className="contact float-left">
+              Name <span className="star">*</span>
+            </label>
+            <input
+              id="name"
+              type="text"
+              className="form-control"
+              placeholder="Name..."
+              onChange={this.handleName}
+              value={name}
+            ></input>
+            {errors.name && (
+              <div className="alert alert-danger">{errors.name}</div>
+            )}
+            <hr></hr>
+            <label htmlFor="email" className="contact float-left">
+              Email <span className="star">*</span>
+            </label>
+            <input
+              id="email"
+              type="text"
+              className="form-control"
+              placeholder="Email..."
+              onChange={this.handleEmail}
+              value={email}
+            ></input>
+            {errors.email && (
+              <div className="alert alert-danger">{errors.email}</div>
+            )}
+            <hr></hr>
+            <label htmlFor="comment" className="contact float-left">
+              Question/Comment <span className="star">*</span>
+            </label>
+            <textarea
+              id="comment"
+              type="textarea"
+              className="form-control"
+              placeholder="Question/Comment..."
+              onChange={this.handleComment}
+              value={comment}
+            ></textarea>
+            {errors.comment && (
+              <div className="alert alert-danger">{errors.comment}</div>
+            )}
+            <hr></hr>
+            <button
+              type="button"
+              className="btn btn-primary float-left"
+              onClick={this.handleSubmit}
+            >
+              Submit
+            </button>
+          </form>
         </div>
       </div>
     );
