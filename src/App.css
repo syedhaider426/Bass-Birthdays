@@ -13,7 +13,6 @@ body {
   color: #444;
   background: #eee;
   background-repeat: no-repeat;
-  min-height: 100vh;
   overflow: auto;
   height: 100%;
 }
@@ -417,11 +416,6 @@ label span {
 .content {
   display: flex;
   flex-direction: column;
-}
-
-.content {
-  position: relative;
-  min-height: 100vh;
 }
 
 .footer {
