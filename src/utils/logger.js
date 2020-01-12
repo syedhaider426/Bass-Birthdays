@@ -1,10 +1,17 @@
 /**
  * Configurations of logger.
  */
+const fs = require("fs");
 const winston = require("winston");
 const env = process.env.NODE_ENV;
 
 require("winston-daily-rotate-file");
+
+//Creates the log folder if it doesn't exist
+const logDirectory = `./logs/`;
+if (!fs.existsSync(logDirectory)) {
+  fs.mkdirSync(logDirectory);
+}
 
 const loggerConfig = [
   new winston.transports.Console({
