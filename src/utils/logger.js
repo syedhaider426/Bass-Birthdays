@@ -34,7 +34,7 @@ if (env === "production") {
     new winston.transports.DailyRotateFile({
       name: "success",
       level: "info",
-      filename: "./logs/success.log",
+      filename: "../logs/success.log",
       datePattern: "YYYY-MM-DD",
       prepend: true,
       json: false
@@ -45,7 +45,7 @@ if (env === "production") {
     new winston.transports.DailyRotateFile({
       name: "error",
       level: "error",
-      filename: "./logs/error.log",
+      filename: "../logs/error.log",
       datePattern: "YYYY-MM-DD",
       prepend: true,
       json: false
@@ -56,7 +56,7 @@ if (env === "production") {
     new winston.transports.DailyRotateFile({
       name: "twitter",
       level: "debug",
-      filename: "./logs/twitter.log",
+      filename: "../logs/twitter.log",
       datePattern: "YYYY-MM-DD",
       prepend: true,
       json: false
