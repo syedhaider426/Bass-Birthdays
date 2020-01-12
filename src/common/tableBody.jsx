@@ -30,7 +30,7 @@ const TableBody = ({ data, isLoaded, handleClick }) => {
             <td>
               <img
                 src={item.profileImage}
-                className="mx-auto"
+                className="mx-auto td-image"
                 alt={item.Artist}
               />
             </td>

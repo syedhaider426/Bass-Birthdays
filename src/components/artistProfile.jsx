@@ -117,16 +117,17 @@ this mounting method to update the state*/
                   className="spotify-web-api"
                   href="https://developer.spotify.com/documentation/web-api/"
                 >
-                  Spotify
+                  Spotify Web API
                 </a>
               </i>
             </span>
             <img className="image-artist" src={image} alt={artist}></img>
-            <div className="info">{artist}</div>
-            <div className="info">{birthday}</div>
+            <div className="artist-profile">{artist}</div>
+            <div className="info ml-3">{birthday}</div>
             <div>
-              <h2 className="h2-title">Genres</h2>
-              <hr></hr>
+              <div className="info ml-3">
+                <u>Genres</u>
+              </div>
               <ul>
                 {genres.map(genre => (
                   <li key={genre} className="li-genre">

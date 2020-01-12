@@ -5,6 +5,7 @@ const secretAccessKey = config.get("awsSecretAccessKey");
 const region = config.get("region");
 const toEmail = config.get("toEmail");
 const fromEmail = config.get("fromEmail");
+const configurationSet = config.get("configurationSet");
 const express = require("express");
 const router = express.Router();
 const Contact = require("../database/models/contacts");
@@ -18,7 +19,7 @@ AWS.config.update({
   region: region
 });
 
-router.post("/contactInfo", (req, res) => {
+router.post("/contactInfo", async (req, res) => {
   const name = req.query.name;
   const email = req.query.email;
   const comment = req.query.comment;
@@ -30,7 +31,7 @@ router.post("/contactInfo", (req, res) => {
   const params = {
     Source: fromEmail,
     Template: "EmailTemplate",
-    ConfigurationSetName: "Email_Channel",
+    ConfigurationSetName: configurationSet,
     Destination: {
       ToAddresses: [toEmail]
     },
@@ -45,14 +46,16 @@ router.post("/contactInfo", (req, res) => {
   // Handle promise's fulfilled/rejected states
   sendPromise
     .then(function(data) {
-      successLog.info(data.MessageId);
+      successLog.info("Successfully sent email!");
+      successLog.info(data.MessageID);
     })
     .catch(function(err) {
+      errorLog.info("Email did not get sent!");
       errorLog.error(err, err.stack);
     });
 
   const contact = new Contact({ name, email, comment });
-  contact.save();
+  await contact.save();
   res.status(200).send("Submitted contact info");
 });
 

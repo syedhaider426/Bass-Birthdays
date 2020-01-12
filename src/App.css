@@ -49,6 +49,10 @@ h1 {
   display: flex !important;
 }
 
+#all-birthdays {
+  text-align: center;
+}
+
 th {
   top: 0;
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
@@ -100,6 +104,12 @@ td {
   color: white;
 }
 
+.td-image {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+}
+
 table tr {
   cursor: pointer;
 }
@@ -122,6 +132,7 @@ table tr:hover {
   height: 75px;
   width: 75px;
   margin-bottom: 5px;
+  object-fit: cover;
 }
 
 .center {
@@ -270,7 +281,7 @@ hr {
 /* Refers to Artist and Birthday field in the Artist Profile page*/
 .info {
   color: white !important;
-  font-size: 24px;
+  font-size: 16px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
 }
 
@@ -287,7 +298,7 @@ hr {
   width: 100%;
 } */
 
-/* .bottom-left-2 {
+.bottom-left-2 {
   color: white !important;
   font-size: 12px;
   font-weight: bold;
@@ -297,7 +308,18 @@ hr {
   margin-bottom: 5%;
   margin-top: 1%;
   bottom: 24px;
-} */
+}
+
+.artist-profile {
+  color: white !important;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+  z-index: 1;
+  position: relative;
+
+  margin-top: 1%;
+}
 
 .img-wrapper {
   text-align: center;
@@ -380,7 +402,7 @@ a:not(.spotify-web-api) {
   color: white !important;
 }
 
-.spotify-web-api:hover {
+a:hover {
   color: #7cfc00 !important;
 }
 

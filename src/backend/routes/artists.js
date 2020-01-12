@@ -23,7 +23,7 @@ var twitterConfig = {
   },
   T = new Twit(twitterConfig.twitter);
 
-cron.schedule("0 9 * * *", () => {
+cron.schedule("0 10 * * *", () => {
   getCurrentBirthdayTweet();
 });
 
