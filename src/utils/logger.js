@@ -4,6 +4,8 @@
 const fs = require("fs");
 const winston = require("winston");
 const env = process.env.NODE_ENV;
+console.log(env);
+console.log(env === "production");
 
 require("winston-daily-rotate-file");
 
@@ -27,6 +29,7 @@ const successLog = log;
 const errorlog = log;
 const twitterLog = log;
 if (env === "production") {
+  console.log("Adding rotate file transports");
   successLog.add(
     new winston.transports.DailyRotateFile({
       name: "success",
