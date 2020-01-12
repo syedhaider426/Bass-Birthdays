@@ -1,9 +1,17 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 const Footer = () => {
+  let history = useHistory();
+  var position;
+  var path = history.location.pathname;
+  if (path === "/about" || path === "/contact" || path === "/not-found")
+    position = "absolute";
+  else position = "relative";
+  var positionName = position + " footer";
   return (
     <Fragment>
-      <footer className="footer">
+      <footer id="footer" className={positionName}>
         <div className="foot">
           <p>
             <Link to="/">Home</Link>

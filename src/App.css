@@ -414,17 +414,26 @@ label span {
 /* FOOTER START*/
 
 .content {
-  display: flex;
-  flex-direction: column;
+  min-height: 100%;
+}
+
+.main-content {
+  padding-bottom: 1%;
+  overflow: auto !important;
 }
 
 .footer {
   background: #1a1a1a;
   width: 100%;
-  margin-top: auto;
-  text-align: center;
+  margin-top: 1%;
+  text-align: center !important;
+  position: relative;
+  left: 0;
+  bottom: 0;
   color: white;
+  overflow: hidden;
 }
+
 .footer p a {
   color: white;
 }
@@ -491,6 +500,14 @@ label span {
 
 .active {
   color: #0056b3 !important;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
 }
 
 .Toastify__toast-body {
