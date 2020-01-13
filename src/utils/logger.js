@@ -26,7 +26,7 @@ const log = new winston.createLogger({
 });
 
 const successLog = log;
-const errorlog = log;
+const errorLog = log;
 const twitterLog = log;
 if (env === "production") {
   console.log("Adding rotate file transports");
@@ -41,7 +41,7 @@ if (env === "production") {
     })
   );
 
-  errorlog.add(
+  errorLog.add(
     new winston.transports.DailyRotateFile({
       name: "error",
       level: "error",
@@ -70,6 +70,6 @@ if (env === "production") {
 
 module.exports = {
   successlog: successLog,
-  errorlog: errorlog,
+  errorlog: errorLog,
   twitterLog: twitterLog
 };
