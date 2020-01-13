@@ -50,7 +50,7 @@ router.post("/contactInfo", async (req, res) => {
       successLog.info(data.MessageID);
     })
     .catch(function(err) {
-      errorLog.info("Email did not get sent!");
+      errorLog.error("Email did not get sent!");
       errorLog.error(err, err.stack);
     });
 
