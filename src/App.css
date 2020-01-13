@@ -69,8 +69,11 @@ th td span {
   color: white !important;
 }
 
-.jumbotron {
+.contact-jumbotron {
   padding: 0rem 2rem 3rem 2rem !important;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
 }
 
 /*Icons*/

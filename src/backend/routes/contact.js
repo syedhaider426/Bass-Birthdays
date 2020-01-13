@@ -9,6 +9,8 @@ const configurationSet = config.get("configurationSet");
 const express = require("express");
 const router = express.Router();
 const Contact = require("../database/models/contacts");
+const errorLog = require("../../utils/logger").errorLog;
+const successLog = require("../../utils/logger").successLog;
 
 /*https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/js-sdk-dv.pdf*/
 AWS.config.update({
@@ -18,9 +20,6 @@ AWS.config.update({
 });
 
 router.post("/contactInfo", async (req, res) => {
-  const errorLog = require("../../utils/logger").errorLog;
-  const successLog = require("../../utils/logger").successLog;
-
   const name = req.query.name;
   const email = req.query.email;
   const comment = req.query.comment;

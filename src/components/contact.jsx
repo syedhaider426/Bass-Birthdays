@@ -65,7 +65,7 @@ class Contact extends Component {
           Got a question? We'd love to hear from you. Send us a message and
           we'll respond as soon as possible.
         </p>
-        <div className="container jumbotron">
+        <div className="container contact-jumbotron">
           <form>
             <hr></hr>
             <label htmlFor="name" className="contact float-left">
