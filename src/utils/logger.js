@@ -3,9 +3,7 @@
  */
 const fs = require("fs");
 const winston = require("winston");
-const env = process.env.NODE_ENV;
-console.log(env);
-console.log(env === "production");
+const env = process.env.NODE_ENV || "development";
 
 require("winston-daily-rotate-file");
 
@@ -28,48 +26,47 @@ const log = new winston.createLogger({
 const successLog = log;
 const errorLog = log;
 const twitterLog = log;
+
+successLog.add(
+  new winston.transports.DailyRotateFile({
+    name: "success",
+    level: "info",
+    filename: "./logs/success.log",
+    datePattern: "YYYY-MM-DD",
+    prepend: true,
+    json: false
+  })
+);
+
+errorLog.add(
+  new winston.transports.DailyRotateFile({
+    name: "error",
+    level: "error",
+    filename: "./logs/error.log",
+    datePattern: "YYYY-MM-DD",
+    prepend: true,
+    json: false
+  })
+);
+
+twitterLog.add(
+  new winston.transports.DailyRotateFile({
+    name: "twitter",
+    level: "debug",
+    filename: "./logs/twitter.log",
+    datePattern: "YYYY-MM-DD",
+    prepend: true,
+    json: false
+  })
+);
 if (env === "production") {
-  console.log("Adding rotate file transports");
-  successLog.add(
-    new winston.transports.DailyRotateFile({
-      name: "success",
-      level: "info",
-      filename: "./logs/success.log",
-      datePattern: "YYYY-MM-DD",
-      prepend: true,
-      json: false
-    })
-  );
-
-  errorLog.add(
-    new winston.transports.DailyRotateFile({
-      name: "error",
-      level: "error",
-      filename: "./logs/error.log",
-      datePattern: "YYYY-MM-DD",
-      prepend: true,
-      json: false
-    })
-  );
-
-  twitterLog.add(
-    new winston.transports.DailyRotateFile({
-      name: "twitter",
-      level: "debug",
-      filename: "./logs/twitter.log",
-      datePattern: "YYYY-MM-DD",
-      prepend: true,
-      json: false
-    })
-  );
-
   errorLog.remove(winston.transports.Console);
   successLog.remove(winston.transports.Console);
   twitterLog.remove(winston.transports.Console);
 }
 
 module.exports = {
-  successlog: successLog,
-  errorlog: errorLog,
+  successLog: successLog,
+  errorLog: errorLog,
   twitterLog: twitterLog
 };
