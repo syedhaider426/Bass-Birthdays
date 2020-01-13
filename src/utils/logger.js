@@ -26,40 +26,40 @@ const log = new winston.createLogger({
 const successLog = log;
 const errorLog = log;
 const twitterLog = log;
-
-successLog.add(
-  new winston.transports.DailyRotateFile({
-    name: "success",
-    level: "info",
-    filename: "./logs/success.log",
-    datePattern: "YYYY-MM-DD",
-    prepend: true,
-    json: false
-  })
-);
-
-errorLog.add(
-  new winston.transports.DailyRotateFile({
-    name: "error",
-    level: "error",
-    filename: "./logs/error.log",
-    datePattern: "YYYY-MM-DD",
-    prepend: true,
-    json: false
-  })
-);
-
-twitterLog.add(
-  new winston.transports.DailyRotateFile({
-    name: "twitter",
-    level: "debug",
-    filename: "./logs/twitter.log",
-    datePattern: "YYYY-MM-DD",
-    prepend: true,
-    json: false
-  })
-);
 if (env === "production") {
+  successLog.add(
+    new winston.transports.DailyRotateFile({
+      name: "success",
+      level: "info",
+      filename: "./logs/success.log",
+      datePattern: "YYYY-MM-DD",
+      prepend: true,
+      json: false
+    })
+  );
+
+  errorLog.add(
+    new winston.transports.DailyRotateFile({
+      name: "error",
+      level: "error",
+      filename: "./logs/error.log",
+      datePattern: "YYYY-MM-DD",
+      prepend: true,
+      json: false
+    })
+  );
+
+  twitterLog.add(
+    new winston.transports.DailyRotateFile({
+      name: "twitter",
+      level: "debug",
+      filename: "./logs/twitter.log",
+      datePattern: "YYYY-MM-DD",
+      prepend: true,
+      json: false
+    })
+  );
+
   errorLog.remove(winston.transports.Console);
   successLog.remove(winston.transports.Console);
   twitterLog.remove(winston.transports.Console);

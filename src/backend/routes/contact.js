@@ -47,13 +47,9 @@ router.post("/contactInfo", async (req, res) => {
   // Handle promise's fulfilled/rejected states
   sendPromise
     .then(function(data) {
-      var msg = data.MessageId;
-      console.log(msg);
-
-      successLog.info(msg);
+      successLog.info(data.MessageId);
     })
     .catch(function(err) {
-      console.log(err.stack);
       errorLog.error(err, err.stack);
     });
 
