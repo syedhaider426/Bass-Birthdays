@@ -56,7 +56,7 @@ if (env === "production") {
     new winston.transports.DailyRotateFile({
       name: "twitter",
       level: "debug",
-      filename: "../logs/twitter.log",
+      filename: "./logs/twitter.log",
       datePattern: "YYYY-MM-DD",
       prepend: true,
       json: false
