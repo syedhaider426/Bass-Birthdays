@@ -39,7 +39,10 @@ router.post("/contactInfo", async (req, res) => {
   };
 
   // Create the promise and SES service object
-  var sendPromise = new AWS.SES({ apiVersion: "2010-12-01" })
+  var sendPromise = new AWS.SES({
+    apiVersion: "2010-12-01",
+    region: region
+  })
     .sendTemplatedEmail(params)
     .promise();
 
