@@ -1,6 +1,7 @@
 const express = require("express");
 const artists = require("../routes/artists");
 const contact = require("../routes/contact");
+//const scripts = require("../routes/scripts");
 const cors = require("cors");
 const path = require("path");
 
@@ -11,6 +12,7 @@ module.exports = function(app) {
 
   app.use("/", artists);
   app.use("/", contact);
+  //app.use("/", scripts);
   app.get("*", function(req, res) {
     res.sendFile(path.resolve(__dirname, "../../../build", "index.html"));
   });

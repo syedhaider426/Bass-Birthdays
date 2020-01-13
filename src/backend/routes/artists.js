@@ -82,11 +82,6 @@ router.get("/artist", async (req, res) => {
   res.status(200).send(result);
 });
 
-router.get("/allArtists", async (req, res) => {
-  const result = await Artist.find().sort({ Birthday: 1 });
-  res.status(200).send(result);
-});
-
 router.get("/currentArtist", async (req, res) => {
   var date = req.query.date;
   var month = req.query.month;
@@ -212,14 +207,5 @@ async function getSpotifyRelatedArtists(spotifyID) {
     return artists;
   });
 }
-
-router.get("/upload", async (req, res) => {
-  const result = await Artist.find().sort({ Birthday: 1 });
-
-  for (var x = 0; x < result.length; x++) {
-    var id = new Artist(result[x]._id);
-    await artist.update({ _id: id }, { $set: { twitter: "" } }, false, true);
-  }
-});
 
 module.exports = router;
