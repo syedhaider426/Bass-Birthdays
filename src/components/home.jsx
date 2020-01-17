@@ -1,6 +1,6 @@
 import React from "react";
-import AllBirthdays from "./allBirthdays";
-import CurrentBirthdays from "./currentBirthdays";
+import AllBirthdays from "./AllBirthdays";
+import CurrentBirthdays from "./CurrentBirthdays";
 
 const Home = () => {
   return (

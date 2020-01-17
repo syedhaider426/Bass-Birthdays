@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import Table from "../common/table";
+import Table from "../common/Table";
 import paginate from "../utils/paginate";
 import _ from "lodash";
-import FilterTable from "./filterTable";
-import Pagination from "../common/paging";
-import Select from "../common/select";
+import FilterTable from "./FilterTable";
+import Pagination from "../common/Paging";
 import "bootstrap/dist/js/bootstrap";
 import { withRouter } from "react-router-dom";
 
@@ -132,61 +131,55 @@ class AllBirthdays extends Component {
     var options = [25, 50, 75, 100];
     var headers = ["", "Artist", "Birthday", "Genre"];
 
+    const {
+      handleSearch,
+      handleBirthdayFilter,
+      refresh,
+      handleSelect,
+      handleSort,
+      handleClick,
+      handlePageChange,
+      handlePageNext,
+      handlePagePrevious
+    } = this;
+
     return (
       <React.Fragment>
         <h1 className="title" id="all-birthdays">
           All Birthdays
         </h1>
         <hr></hr>
-        <div className="row birthday-filter">
-          <FilterTable
-            value={searchQuery}
-            onChange={this.handleSearch}
-            handleBirthday={this.handleBirthdayFilter}
-            refresh={this.refresh}
-          />
-          <div className="form-inline">
-            <Select
-              name={"Records Per Page"}
-              value={amountPerPage}
-              options={options}
-              onChange={this.handleSelect}
-            />
-            <label className="records-label">Records Per Page</label>
-          </div>
-        </div>
-        <div className="row pre-scrollable">
+        <FilterTable
+          searchQuery={searchQuery}
+          onChange={handleSearch}
+          handleBirthday={handleBirthdayFilter}
+          refresh={refresh}
+          options={options}
+          handleSelect={handleSelect}
+        />
+        <div className="pre-scrollable">
           <Table
             data={artists}
             sortColumn={sortColumn}
-            onSort={this.handleSort}
+            onSort={handleSort}
             headers={headers}
             isLoaded={isLoaded}
-            handleClick={this.handleClick}
+            handleClick={handleClick}
           />
         </div>
-        <div className="row">
-          {" "}
-          {artistsLength > 5 && (
-            <button
-              type="btn"
-              className="btn btn-primary "
-              onClick={scrollToTop}
-            >
-              Back to Top
-            </button>
-          )}
-        </div>
-        <div className="row">
-          <Pagination
-            itemsCount={artistsLength}
-            pageSize={amountPerPage}
-            onPageChange={this.handlePageChange}
-            currentPage={currentPage}
-            onPageNext={this.handlePageNext}
-            onPagePrevious={this.handlePagePrevious}
-          />
-        </div>
+        {artistsLength > 5 && (
+          <button type="btn" className="btn btn-primary " onClick={scrollToTop}>
+            Back to Top
+          </button>
+        )}
+        <Pagination
+          itemsCount={artistsLength}
+          pageSize={amountPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+          onPageNext={handlePageNext}
+          onPagePrevious={handlePagePrevious}
+        />
       </React.Fragment>
     );
   }

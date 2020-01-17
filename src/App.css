@@ -218,7 +218,7 @@ nav ul li a:hover {
 select {
   background: transparent !important;
   color: white !important;
-  width: 10rem !important;
+  width: 7rem !important;
 }
 
 select option {
@@ -335,21 +335,34 @@ hr {
   margin-top: 1%;
 }
 
-.img-wrapper {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .margin-center {
   margin-left: auto;
   margin-right: auto;
 }
+
+@media only screen and (max-width: 770px) {
+  .bass-birthdays {
+    display: none;
+  }
+  .autocomplete-form {
+    width: 35vw !important;
+  }
+  .suggestions {
+    width: 35vw !important;
+  }
+}
+
 /*height:auto, max-width:100% = equivalent to img-fluid*/
 .img-wrapper img {
   object-fit: cover;
   height: 225px;
   width: 225px;
+}
+
+.img-wrapper {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .img-fluid {
@@ -416,7 +429,7 @@ a:not(.spotify-web-api) {
   color: white !important;
 }
 
-a:hover {
+a:hover:not(.page-link) {
   color: #7cfc00 !important;
 }
 
@@ -706,4 +719,47 @@ label span {
   .title {
     font-size: 120% !important;
   }
+}
+body {
+  font-family: sans-serif;
+}
+
+.no-suggestions {
+  color: #fff;
+  padding: 0.5rem;
+}
+
+.suggestions {
+  border: 1px solid #999;
+  border-top-width: 0;
+  list-style: none;
+  margin-top: 0;
+  max-height: 143px;
+  overflow-y: auto;
+  padding-left: 0;
+  width: 293px;
+  z-index: 10000;
+  top: 38px;
+
+  position: absolute;
+  background-color: white;
+  color: black !important;
+}
+
+.suggestions li {
+  padding: 0.5rem;
+
+  color: black !important;
+}
+
+.suggestion-active,
+.suggestions li:hover {
+  background-color: #4389a2;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.suggestions li:not(:last-of-type) {
+  border-bottom: 1px solid #999;
 }

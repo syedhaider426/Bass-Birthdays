@@ -68,6 +68,7 @@ class ArtistProfile extends Component {
           topSongs: data.topSongs,
           relatedArtists: data.relatedArtists
         });
+        document.body.style.cursor = "default";
       });
   }
   /*VERY IMPORTANT*/
@@ -76,26 +77,28 @@ this mounting method to update the state*/
 
   /* important url: https://stackoverflow.com/questions/43351752/react-router-changes-url-but-not-view*/
 
-  // componentWillReceiveProps(nextProps) {
-  //   const { artist } = nextProps.match.params;
-
-  //   var params = { artist: artist };
-  //   url.search = new URLSearchParams(params).toString();
-  //   fetch(url)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       if (data.length > 0) {
-  //         this.setState({
-  //           image: data[0].profileImage,
-  //           artist: data[0].Artist,
-  //           birthday: convertISODateToString(data[0].Birthday),
-  //           genres: data[0].Genre,
-  //           topSongs: data.topSongs,
-  //           relatedArtists: data.relatedArtists
-  //         });
-  //       }
-  //     });
-  // }
+  componentWillReceiveProps(nextProps) {
+    const { artist } = nextProps.match.params;
+    console.log("Artist", artist);
+    var params = { artist: artist };
+    url.search = new URLSearchParams(params).toString();
+    console.log(url);
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        document.body.style.cursor = "default";
+        if (data[0].Artist.length > 0) {
+          this.setState({
+            image: data[0].profileImage,
+            artist: data[0].Artist,
+            birthday: convertISODateToString(data[0].Birthday),
+            genres: data[0].Genre,
+            topSongs: data.topSongs,
+            relatedArtists: data.relatedArtists
+          });
+        }
+      });
+  }
   render() {
     const {
       image,

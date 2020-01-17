@@ -1,7 +1,5 @@
 const AWS = require("aws-sdk");
 const config = require("config");
-const accessKeyId = config.get("awsAccessKeyId");
-const secretAccessKey = config.get("awsSecretAccessKey");
 const region = config.get("region");
 const toEmail = config.get("toEmail");
 const fromEmail = config.get("fromEmail");
@@ -13,11 +11,6 @@ const errorLog = require("../../utils/logger").errorLog;
 const successLog = require("../../utils/logger").successLog;
 
 /*https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/js-sdk-dv.pdf*/
-/*AWS.config.update({
-  accessKeyId: accessKeyId,
-  secretAccessKey: secretAccessKey,
-  region: region
-});*/
 
 router.post("/contactInfo", async (req, res) => {
   const name = req.query.name;

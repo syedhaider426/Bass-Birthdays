@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 var url;
 if (process.env.NODE_ENV === "development")
@@ -15,16 +14,10 @@ class Contact extends Component {
     errors: {}
   };
 
-  handleName = ({ target: input }) => {
-    this.setState({ name: input.value });
-  };
-
-  handleEmail = ({ target: input }) => {
-    this.setState({ email: input.value });
-  };
-
-  handleComment = ({ target: input }) => {
-    this.setState({ comment: input.value });
+  handleInputChange = ({ target: input }) => {
+    const value = input.value;
+    const name = input.name;
+    this.setState({ [name]: value });
   };
 
   validate = () => {
@@ -76,7 +69,7 @@ class Contact extends Component {
               type="text"
               className="form-control"
               placeholder="Name..."
-              onChange={this.handleName}
+              onChange={this.handleInputChange}
               value={name}
             ></input>
             {errors.name && (
@@ -91,7 +84,7 @@ class Contact extends Component {
               type="text"
               className="form-control"
               placeholder="Email..."
-              onChange={this.handleEmail}
+              onChange={this.handleInputChange}
               value={email}
             ></input>
             {errors.email && (
@@ -106,7 +99,7 @@ class Contact extends Component {
               type="textarea"
               className="form-control"
               placeholder="Question/Comment..."
-              onChange={this.handleComment}
+              onChange={this.handleInputChange}
               value={comment}
             ></textarea>
             {errors.comment && (

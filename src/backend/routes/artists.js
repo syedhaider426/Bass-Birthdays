@@ -82,6 +82,14 @@ router.get("/artist", async (req, res) => {
   res.status(200).send(result);
 });
 
+router.get("/artistOnly", async (req, res) => {
+  var result = await Artist.find()
+    .sort({ Artist: 1 })
+    .select({ Artist: 1, _id: 0 });
+
+  res.status(200).send(result);
+});
+
 router.get("/currentArtist", async (req, res) => {
   var date = req.query.date;
   var month = req.query.month;

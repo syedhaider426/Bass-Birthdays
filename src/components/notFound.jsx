@@ -1,5 +1,7 @@
 import React from "react";
 
+/* NotFound page is routed to when user goes to an invalid url */
+
 const NotFound = () => {
   return (
     <React.Fragment>

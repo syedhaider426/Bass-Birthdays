@@ -1,22 +1,33 @@
 import React from "react";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Home from "./components/home";
-import NotFound from "./components/notFound";
-import ArtistProfile from "./components/artistProfile";
-
-import { TransitionGroup, CSSTransition } from "react-transition-group";
-import NavBar from "./components/navbar";
-import About from "./components/about";
-import Contact from "./components/contact";
+import NavBar from "./components/Navbar";
+import Home from "./components/Home";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import ArtistProfile from "./components/ArtistProfile";
+import NotFound from "./components/NotFound";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "./components/footer";
 
-/* Transition source help from
- * https://medium.com/@khwsc1/step-by-step-guide-of-simple-routing-transition-effect-for-react-with-react-router-v4-and-9152db1566a0*
+/* Because there may be toast notifications used throughout this web application,
+ * we can simply declare it at the top level of the application
  */
 toast.configure();
+
+/*
+ * Structure
+ *
+ * NavBar at Top Level
+ * Content at Mid Level
+ *     -Consists of either Home, About, Contact, Not-Found, or "Profile Page"
+ * Footer at Bottom Level
+ *
+ * Switch is used to navigate between different url destinations/routes
+ * Routes indicate different url destinations a user can go to
+ * Redirect is used when no routes are found
+ */
 function App() {
   return (
     <React.Fragment>
@@ -25,30 +36,19 @@ function App() {
         <div className="main-content">
           <Route
             render={({ location }) => {
-              const { key, pathname } = location;
-
               return (
-                <TransitionGroup component={null}>
-                  <CSSTransition
-                    key={key}
-                    appear={true}
-                    classNames={"fade"}
-                    timeout={{ enter: 750, exit: 0 }}
-                  >
-                    <Switch location={location}>
-                      <Route path="/not-found" component={NotFound}></Route>
-                      <Route path="/" exact component={Home}></Route>
+                <Switch location={location}>
+                  <Route path="/not-found" component={NotFound}></Route>
+                  <Route path="/" exact component={Home}></Route>
 
-                      <Route path="/about" exact component={About}></Route>
-                      <Route path="/contact" exact component={Contact}></Route>
-                      <Route
-                        path="/profile/:artist"
-                        component={ArtistProfile}
-                      ></Route>
-                      <Redirect to="/not-found" />
-                    </Switch>
-                  </CSSTransition>
-                </TransitionGroup>
+                  <Route path="/about" exact component={About}></Route>
+                  <Route path="/contact" exact component={Contact}></Route>
+                  <Route
+                    path="/profile/:artist"
+                    component={ArtistProfile}
+                  ></Route>
+                  <Redirect to="/not-found" />
+                </Switch>
               );
             }}
           />
