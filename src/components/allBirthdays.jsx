@@ -124,19 +124,22 @@ class AllBirthdays extends Component {
         return m.Artist.toLowerCase().includes(searchQuery.toLowerCase());
       });
 
+    /* Filters out the artists by the date/month */
     if (bdayQuery)
-      allArtists = allArtists.filter(m => {
+      allArtists = allArtists.filter(artist => {
+        //birthdayQuery represents 2020/01/01
+        //0-4 year
+        //5-7 month
+        //8-> date
         var month = bdayQuery.substring(5, 7);
         var date = bdayQuery.substring(8);
 
-        var db = m.Birthday.substring(0, 10);
+        var db = artist.Birthday.substring(0, 10);
 
         var date2 = db.substring(8);
         var month2 = db.substring(5, 7);
 
-        if (month2 === month && date2 === date) {
-          return true;
-        }
+        if (month2 === month && date2 === date) return true;
         return false;
       });
     var sorted = {};
@@ -158,7 +161,8 @@ class AllBirthdays extends Component {
       handleSelect,
       handleSort,
       handleClick,
-      handlePageChange
+      handlePageChange,
+      handlePageButtonChange
     } = this;
 
     return (
