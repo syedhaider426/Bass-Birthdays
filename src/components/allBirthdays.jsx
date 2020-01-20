@@ -7,10 +7,18 @@ import Pagination from "../common/Paging";
 import "bootstrap/dist/js/bootstrap";
 import { withRouter } from "react-router-dom";
 
+/* Scroll to the top of the table*/
 function scrollToTop() {
   document.getElementById("table").scrollIntoView();
 }
 
+/* This component includes 3 separate components
+ * -FilteredTable
+   -Table
+   -Pagination
+
+ * This component shows all artists' birthdays in ascending order
+ */
 class AllBirthdays extends Component {
   state = {
     artists: [],
@@ -35,6 +43,10 @@ class AllBirthdays extends Component {
       });
   }
 
+  /* If a user clicks on a page link',
+   * it will jump to that page
+   * 'Page' param is the page clicked.
+   */
   handlePageChange = page => {
     const { currentPage } = this.state;
     if (currentPage === page) return;
@@ -42,24 +54,24 @@ class AllBirthdays extends Component {
     scrollToTop();
   };
 
-  handlePageNext = () => {
+  /* If a user clicks 'Next' or 'Previous',
+   * it will either increment or decrement from the current page
+   *
+   * 'Change' param can only be 1 or -1.
+   */
+  handlePageButtonChange = change => {
     let { currentPage } = this.state;
-    currentPage += 1;
+    currentPage += change;
     this.setState({ currentPage });
     scrollToTop();
   };
 
-  handlePagePrevious = () => {
-    let { currentPage } = this.state;
-    currentPage -= 1;
-    this.setState({ currentPage });
-    scrollToTop();
-  };
-
+  /* Changes the column to sort by */
   handleSort = sortColumn => {
     this.setState({ sortColumn });
   };
-  //LOOK INTO QUERY PARAMS
+
+  /* Refreshes the data on the table */
   refresh = () => {
     const searchQuery = "";
     const bdayQuery = "";
@@ -72,20 +84,25 @@ class AllBirthdays extends Component {
     });
   };
 
+  /* When a user types in any text, it will call this onChange function and filter the current results*/
   handleSearch = query => {
     //query is what is typed in
     //currentPage is set to 1 b/c if user is on page 3 when they search, they can't view page 1
     this.setState({ searchQuery: query, currentPage: 1 });
   };
 
+  /* When a user selects a birthday name, it will call this onChange function and filter the current results */
   handleBirthdayFilter = ({ target: bday }) => {
     this.setState({ bdayQuery: bday.value, currentPage: 1 });
   };
 
+  /* User can choose 'n' number of records to show on the table at a time */
   handleSelect = ({ target: selected }) => {
     //selected.value returns a string
     this.setState({ amountPerPage: parseInt(selected.value), currentPage: 1 });
   };
+
+  /* When a user clicks an artist's row, it will take the user to the artist's profile */
   handleClick = artist => {
     this.props.history.push("/profile/" + artist);
   };
@@ -101,10 +118,12 @@ class AllBirthdays extends Component {
       isLoaded
     } = this.state;
 
+    /* Filters out the artists that include the specified letters */
     if (searchQuery)
       allArtists = allArtists.filter(m => {
         return m.Artist.toLowerCase().includes(searchQuery.toLowerCase());
       });
+
     if (bdayQuery)
       allArtists = allArtists.filter(m => {
         var month = bdayQuery.substring(5, 7);
@@ -127,9 +146,10 @@ class AllBirthdays extends Component {
 
     //paginates data into 9 pages
     var artists = paginate(sorted, currentPage, amountPerPage);
+
     const artistsLength = allArtists.length;
-    var options = [25, 50, 75, 100];
-    var headers = ["", "Artist", "Birthday", "Genre"];
+    const options = [25, 50, 75, 100];
+    const headers = ["", "Artist", "Birthday", "Genre"];
 
     const {
       handleSearch,
@@ -138,9 +158,7 @@ class AllBirthdays extends Component {
       handleSelect,
       handleSort,
       handleClick,
-      handlePageChange,
-      handlePageNext,
-      handlePagePrevious
+      handlePageChange
     } = this;
 
     return (
@@ -177,8 +195,8 @@ class AllBirthdays extends Component {
           pageSize={amountPerPage}
           onPageChange={handlePageChange}
           currentPage={currentPage}
-          onPageNext={handlePageNext}
-          onPagePrevious={handlePagePrevious}
+          onPageNext={() => handlePageButtonChange(1)}
+          onPagePrevious={() => handlePageButtonChange(-1)}
         />
       </React.Fragment>
     );

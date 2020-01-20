@@ -18,8 +18,9 @@ const FilteredTable = ({
 }) => {
   return (
     <Fragment>
-      <div className="birthday-filter">
+      <div className="mb-1">
         <div className="input-group mb-2">
+          {/* Filters out the artists on the table by name*/}
           <Input
             type="text"
             name="artist"
@@ -28,6 +29,7 @@ const FilteredTable = ({
             placeholder="Enter Artist"
             onChange={e => onChange(e.target.value)}
           />
+          {/* Filters out the artists on the table by date*/}
           <Input
             type="date"
             name="birthday"
@@ -36,13 +38,14 @@ const FilteredTable = ({
           />
         </div>
         <div className="form-inline">
+          {/* Filters out the number of artists shown*/}
           <Select
             name={"Records Per Page"}
             value={amountPerPage}
             options={options}
             onChange={handleSelect}
           />
-          <label className="records-label">Records Per Page</label>
+          <label className="ml-1">Records Per Page</label>
         </div>
       </div>
     </Fragment>

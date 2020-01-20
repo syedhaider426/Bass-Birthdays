@@ -29,6 +29,11 @@ table {
   scroll-behavior: smooth;
 }
 
+.home-display {
+  flex-wrap: wrap;
+  display: flex !important;
+}
+
 /* Refers to any h1 tags*/
 h1 {
   font-size: 155% !important;
@@ -42,11 +47,6 @@ h1 {
   color: black;
   font-weight: bold;
   text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
-}
-
-.home-display {
-  flex-wrap: wrap;
-  display: flex !important;
 }
 
 #all-birthdays {
@@ -153,26 +153,6 @@ table tr:hover {
   color: white !important;
 }
 
-.page-num,
-.page-next {
-  margin-left: 1% !important;
-}
-
-/* Refers to Filter Birthday component*/
-.birthday-filter {
-  margin-bottom: 5px;
-}
-
-/* Refers to input/date filter, not the select*/
-.filter-table {
-  margin-bottom: 1%;
-}
-
-/* Refers to spacing between select and "records per page" text */
-.records-label {
-  margin: 5px !important;
-}
-
 /* NAVBAR */
 
 nav ul li a,
@@ -274,7 +254,6 @@ hr {
 
 .contact {
   color: black !important;
-  text-shadow: none;
 }
 
 .star {
@@ -313,7 +292,7 @@ hr {
   bottom: 24px;
 }
 
-.bottom-left-3 {
+.curr-artist-name {
   color: white !important;
   font-size: 12px;
   font-weight: bold;

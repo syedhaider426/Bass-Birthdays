@@ -8,21 +8,28 @@ const Input = ({
   placeholder,
   onChange,
   className,
-  onKeyDown
+  labelClassName,
+  onKeyDown,
+  autoFocus,
+  errors
 }) => {
   return (
     <Fragment>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name} className={labelClassName}>
+        {label}
+      </label>
       <input
+        autoFocus={autoFocus}
         value={value}
         onChange={onChange}
         id={name}
         name={name}
         type={type}
         placeholder={placeholder}
-        className={"form-control " + className}
+        className={className ? className + " form-control" : "form-control"}
         onKeyDown={onKeyDown}
       ></input>
+      {errors && <div className="alert alert-danger">{errors}</div>}
     </Fragment>
   );
 };

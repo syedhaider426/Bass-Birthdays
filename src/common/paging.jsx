@@ -38,9 +38,7 @@ const Pagination = ({
           <li
             key={page}
             className={
-              page === currentPage
-                ? "page-item active page-num"
-                : "page-item page-num"
+              page === currentPage ? "page-item active ml-1" : "page-item ml-1"
             }
           >
             <a
@@ -56,8 +54,8 @@ const Pagination = ({
           key={"Next"}
           className={
             lastPage === currentPage
-              ? "page-item disabled page-next"
-              : "page-item page-next"
+              ? "page-item disabled ml-1"
+              : "page-item ml-1"
           }
         >
           <a
