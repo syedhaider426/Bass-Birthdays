@@ -2,6 +2,9 @@ import React from "react";
 import TableBody from "./TableBody";
 import TableHeader from "./TableHeader";
 
+/* Reusable Table Component
+ *   -Consists of TableHeader and TableBody components
+ */
 const Table = ({
   data,
   sortColumn,
@@ -12,23 +15,17 @@ const Table = ({
   handleClick
 }) => {
   return (
-    <React.Fragment>
-      <div className="table-responsive">
-        <table className="table table-sm" id="table">
-          <TableHeader
-            sortColumn={sortColumn}
-            onSort={onSort}
-            refresh={refresh}
-            headers={headers}
-          />
-          <TableBody
-            data={data}
-            isLoaded={isLoaded}
-            handleClick={handleClick}
-          />
-        </table>
-      </div>
-    </React.Fragment>
+    <div className="table-responsive">
+      <table className="table table-sm" id="table">
+        <TableHeader
+          sortColumn={sortColumn}
+          onSort={onSort}
+          refresh={refresh}
+          headers={headers}
+        />
+        <TableBody data={data} isLoaded={isLoaded} handleClick={handleClick} />
+      </table>
+    </div>
   );
 };
 

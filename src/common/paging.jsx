@@ -1,6 +1,7 @@
 import React from "react";
 import _ from "lodash";
 
+/* Pagination component can be used to split results into pages */
 const Pagination = ({
   onPageChange,
   currentPage,
@@ -9,14 +10,18 @@ const Pagination = ({
   itemsCount,
   pageSize
 }) => {
+  //The ceiling function is used in situations where a decimal is returned by the division of itemsCount and pageSize
   const pagesCount = Math.ceil(itemsCount / pageSize);
   const pages = _.range(1, pagesCount + 1); //if pagesCount is 3, then it will be 1,2; thats why we add 1
-
-  const firstPage = pages[0];
-  const lastPage = pages[pages.length - 1];
   const length = pages.length;
-  if (pages.length < 2) return <div></div>;
+  //Used to determine when to disable the 'Next' button
+  const firstPage = pages[0];
+  //Used to determine when to disable the 'Previous' button
+  const lastPage = pages[length - 1];
 
+  if (length < 2) return <div></div>;
+
+  /* pagination count5/count4 used to determine if the paging should wrap to the next line if there is no width/space on the device's screen */
   return (
     <nav className="paging">
       <ul className={length >= 5 ? "pagination count5" : "pagination count4"}>

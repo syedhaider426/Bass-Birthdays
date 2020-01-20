@@ -1,5 +1,6 @@
 import React from "react";
 
+/* Reusable Select component */
 const Select = ({ name, options, value, onChange }) => {
   return (
     <div className="records-per-page">

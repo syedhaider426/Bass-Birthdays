@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 
+/* Reusable Input Component */
 const Input = ({
   name,
   label,
