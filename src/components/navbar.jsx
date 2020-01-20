@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 // import AutoComplete from "../common/AutoComplete";
 
-const NavBar = () => {
+/* Navbar is displayed at the top of page */
+
+const Navbar = () => {
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg" id="navbar">
@@ -55,4 +57,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;

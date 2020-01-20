@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import NavBar from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
 import Contact from "./components/Contact";
@@ -31,7 +31,7 @@ toast.configure();
 function App() {
   return (
     <React.Fragment>
-      <NavBar></NavBar>
+      <Navbar></Navbar>
       <div className="content">
         <div className="main-content">
           <Route
