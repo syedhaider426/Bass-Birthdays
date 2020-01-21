@@ -304,7 +304,9 @@ hr {
   .bass-birthdays {
     display: none;
   }
-
+  .autocomplete-form {
+    width: 50vw !important;
+  }
   .suggestions {
     width: 35vw !important;
   }
