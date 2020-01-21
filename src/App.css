@@ -176,16 +176,10 @@ select {
   width: 7rem !important;
 }
 
-input[type="date"]:after {
-  content: attr(placeholder);
-}
 input[type="date"]:before {
   color: lightgrey;
   content: attr(placeholder) !important;
   margin-right: 0.5em;
-}
-input[type="date"]:focus:before {
-  content: "" !important;
 }
 
 select option {
