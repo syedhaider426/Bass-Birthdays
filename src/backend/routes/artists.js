@@ -111,7 +111,7 @@ router.get("/artistInfo", async (req, res) => {
  * Params: SpotifyID of the artist
  */
 async function getSpotifyTopTracks(spotifyID) {
-  const token = "";
+  var token = "";
 
   /* Spotify needs a token in order to do requests to their API .
    * This post request will get a valid token
