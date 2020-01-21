@@ -160,12 +160,6 @@ select {
   width: 7rem !important;
 }
 
-/* Date placeholder on mobile */
-input[type="date"]::before {
-  color: #999;
-  content: attr(placeholder);
-}
-
 select option {
   color: black;
 }

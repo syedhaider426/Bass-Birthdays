@@ -36,7 +36,6 @@ const FilteredTable = ({
             id="birthday"
             placeholder="mm/dd/yyyy"
             onChange={handleBirthday}
-            onBlur="(this.value == '' ? this.type='text' : this.type='date')"
           />
         </div>
         <div className="form-inline">

@@ -101,7 +101,6 @@ this mounting method to update the state*/
       fetch(url)
         .then(response => response.json())
         .then(data => {
-          document.body.style.cursor = "default";
           /* If there are no artists found with the specified name,
            * go to the not-found page
            */
@@ -117,6 +116,7 @@ this mounting method to update the state*/
             topSongs: data.topSongs,
             relatedArtists: data.relatedArtists
           });
+          document.body.style.cursor = "default";
         });
     }
   }

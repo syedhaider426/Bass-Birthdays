@@ -98,6 +98,7 @@ class AutoComplete extends Component {
     fetch(url)
       .then(response => response.json())
       .then(data => {
+        document.body.style.cursor = "default";
         if (data.length === 0) {
           this.props.history.push("/not-found");
           return;
@@ -159,29 +160,27 @@ class AutoComplete extends Component {
 
     return (
       <Fragment>
-        <form className="form-inline autocomplete-form">
-          <div className="searchbox-wrapper">
-            <div className="input-group autocomplete">
-              <Input
-                autoFocus={true}
-                id="autocomplete"
-                name="autocomplete"
-                value={userInput}
-                placeholder="Search..."
-                type="search"
-                onChange={onChange}
-                onKeyDown={onKeyDown}
-              />
-              {suggestionsListComponent}
-              <div className="input-group-append">
-                <button
-                  className="btn btn-primary"
-                  type="submit"
-                  onClick={this.handleSubmit}
-                >
-                  <i className="fa fa-search"></i>
-                </button>
-              </div>
+        <form>
+          <div className="input-group autocomplete">
+            <Input
+              autoFocus={true}
+              id="autocomplete"
+              name="autocomplete"
+              value={userInput}
+              placeholder="Search..."
+              type="search"
+              onChange={onChange}
+              onKeyDown={onKeyDown}
+            />
+            {suggestionsListComponent}
+            <div className="input-group-append">
+              <button
+                className="btn btn-primary"
+                type="submit"
+                onClick={this.handleSubmit}
+              >
+                <i className="fa fa-search"></i>
+              </button>
             </div>
           </div>
         </form>
