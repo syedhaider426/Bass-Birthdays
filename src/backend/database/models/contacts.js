@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Creates the schema for contact info
 const contact = mongoose.Schema({
   name: {
     type: String,
@@ -15,6 +16,7 @@ const contact = mongoose.Schema({
   }
 });
 
+// Creates the model for contact info
 const Contact = mongoose.model("Contact", contact);
 
 module.exports = Contact;

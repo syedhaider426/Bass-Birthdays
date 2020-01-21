@@ -12,10 +12,9 @@ const successLog = require("../../utils/logger").successLog;
 
 /*https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/js-sdk-dv.pdf*/
 
+// This will send the user's contact info to the "toEmail"
 router.post("/contactInfo", async (req, res) => {
-  const name = req.query.name;
-  const email = req.query.email;
-  const comment = req.query.comment;
+  const { name, email, comment } = req.query.name;
   if (name === "" || email === "" || comment === "") {
     res.status(400).send("Please enter a name, email, and comment");
     return;
@@ -39,7 +38,7 @@ router.post("/contactInfo", async (req, res) => {
     .sendTemplatedEmail(params)
     .promise();
 
-  // Handle promise's fulfilled/rejected states
+  // Send email and handle promise's fulfilled/rejected states by logging to winston logger
   sendPromise
     .then(function(data) {
       successLog.info(data.MessageId);
@@ -48,6 +47,7 @@ router.post("/contactInfo", async (req, res) => {
       errorLog.error(err, err.stack);
     });
 
+  //Saves contact info to the database
   const contact = new Contact({ name, email, comment });
   await contact.save();
   res.status(200).send("Submitted contact info");

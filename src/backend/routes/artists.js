@@ -5,67 +5,13 @@ const querystring = require("querystring");
 
 const Artist = require("../database/models/artist"); //Artist model
 
-const errorLog = require("../../utils/logger").errorlog;
-const twitterLog = require("../../utils/logger").twitterLog;
 const config = require("config");
+
+/* Spotify credentials */
 const client_id = config.get("client_id");
 const client_secret = config.get("client_secret");
 
-const cron = require("node-cron");
-const Twit = require("twit");
-var twitterConfig = {
-    twitter: {
-      consumer_key: config.get("consumer_key"),
-      consumer_secret: config.get("consumer_secret"),
-      access_token: config.get("access_token"),
-      access_token_secret: config.get("access_token_secret")
-    }
-  },
-  T = new Twit(twitterConfig.twitter);
-
-cron.schedule("0 10 * * *", () => {
-  getCurrentBirthdayTweet();
-});
-
-async function getCurrentBirthdayTweet() {
-  var today = new Date();
-  var tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 1);
-
-  today.setHours(0, 0, 0, 0);
-  tomorrow.setHours(0, 0, 0, 0);
-  var isoToday = today.toISOString();
-  var isoTomorrow = tomorrow.toISOString();
-  var result = await Artist.find({
-    Birthday: {
-      $gte: isoToday,
-      $lt: isoTomorrow
-    }
-  }).select({ twitter: 1, _id: 0 });
-  createTweet(result);
-}
-
-function createTweet(result) {
-  var tweet = "Happy Birthday ";
-  for (var x = 0; x < result.length; x++) {
-    var res = result[x].twitter;
-    if (result.length == 1) tweet = tweet + "@" + res.substring(20) + "!";
-    else if (x == result.length - 1 && result.length > 1)
-      tweet = tweet + "and @" + res.substring(20) + "!";
-    else tweet = tweet + "@" + res.substring(20) + ",";
-  }
-  if (tweet === "Happy Birthday ") {
-    tweet = "No Birthdays Today :(";
-  }
-  T.post("statuses/update", { status: tweet }, function(err, data, response) {
-    if (err) {
-      errorLog.error(err);
-    } else {
-      twitterLog.debug("Tweet for " + new Date() + " is " + tweet);
-    }
-  });
-}
-
+/* Client talkes to Spotify and asks for OAuth token */
 var authOptions = {
   url: "https://accounts.spotify.com/api/token",
   headers: {
@@ -77,32 +23,44 @@ var authOptions = {
   },
   json: true
 };
+
+/* Gets all artists (as well as all fields) and sorts birthdays in ascending order */
 router.get("/artist", async (req, res) => {
   const result = await Artist.find().sort({ Birthday: 1 });
   res.status(200).send(result);
 });
 
+/* Gets all artists (only artist field) and sorts artists in ascending order */
 router.get("/artistOnly", async (req, res) => {
-  var result = await Artist.find()
+  const result = await Artist.find()
     .sort({ Artist: 1 })
     .select({ Artist: 1, _id: 0 });
-
   res.status(200).send(result);
 });
 
+/* Gets the artists who birthday it is */
 router.get("/currentArtist", async (req, res) => {
-  var date = req.query.date;
-  var month = req.query.month;
-  var year = new Date().getFullYear();
-  var today = new Date(year, month, date);
-  var tomorrow = new Date(year, month, date);
+  // date/month are passed in from React
+  const { date, month } = req.query;
+
+  //gets current year as dates are stored with the current year
+  const year = new Date().getFullYear();
+
+  const today = new Date(year, month, date);
+  const tomorrow = new Date(year, month, date);
+
+  //sets the next day
   tomorrow.setDate(today.getDate() + 1);
 
+  // time does not matter when comparing current date to birthday
   today.setHours(0, 0, 0, 0);
   tomorrow.setHours(0, 0, 0, 0);
-  var isoToday = today.toISOString();
-  var isoTomorrow = tomorrow.toISOString();
 
+  // mongodb stores dates in ISO-format
+  const isoToday = today.toISOString();
+  const isoTomorrow = tomorrow.toISOString();
+
+  //gets the artists for the date passed in
   const result = await Artist.find({
     Birthday: {
       $gte: isoToday,
@@ -112,6 +70,7 @@ router.get("/currentArtist", async (req, res) => {
   res.status(200).send(result);
 });
 
+/* Gets info about artist from Spotify */
 router.get("/artistInfo", async (req, res) => {
   const artist = req.query.artist;
   const result = await Artist.find({ Artist: artist })
@@ -128,10 +87,15 @@ router.get("/artistInfo", async (req, res) => {
     res.status(400).send(result);
     return;
   }
-  var spotifyID = result[0].spotifyID;
+  //result[0] because even though one element is getting returned, it's an array
+  const spotifyID = result[0].spotifyID;
+
+  //Gets the top 10 tracks produced by the artist
   const tracks = await getSpotifyTopTracks(spotifyID);
+
+  //Gets the top 20 related artists
   const artists = await getSpotifyRelatedArtists(spotifyID);
-  var finalResult = Object.assign(
+  const finalResult = Object.assign(
     {},
     result,
     { topSongs: tracks },
@@ -143,17 +107,28 @@ router.get("/artistInfo", async (req, res) => {
 
 /*https://stackoverflow.com/questions/47341603/async-await-with-request-promise-returns-undefined*/
 
+/* Gets the top 10 tracks produced by the artist
+ * Params: SpotifyID of the artist
+ */
 async function getSpotifyTopTracks(spotifyID) {
-  var token = "";
+  const token = "";
+
+  /* Spotify needs a token in order to do requests to their API .
+   * This post request will get a valid token
+   */
   await rp.post(authOptions, async function(error, response, body) {
     if (!error && response.statusCode === 200) {
       token = body.access_token; // use the access token to access the Spotify Web API
     }
   });
-  var query = querystring.stringify({
+  const query = querystring.stringify({
     country: "US"
   });
-  var options = {
+
+  /* Using this url, and the headers, get the top tracks
+   * for an artist
+   */
+  const options = {
     url:
       "https://api.spotify.com/v1/artists/" +
       spotifyID +
@@ -164,8 +139,10 @@ async function getSpotifyTopTracks(spotifyID) {
     },
     json: true
   };
+
+  // Gets the track name, album/song image, and the link to the song
   return await rp.get(options).then(function(response) {
-    var tracks = [];
+    const tracks = [];
 
     for (var x = 0; x < response.tracks.length; x++) {
       var track = response.tracks[x].name;
@@ -181,13 +158,24 @@ async function getSpotifyTopTracks(spotifyID) {
   });
 }
 
+/* Gets the top 20 related artists
+ * Params: SpotifyID of the artist
+ */
 async function getSpotifyRelatedArtists(spotifyID) {
   var token = "";
+
+  /* Spotify needs a token in order to do requests to their API .
+   * This post request will get a valid token
+   */
   await rp.post(authOptions, async function(error, response, body) {
     if (!error && response.statusCode === 200) {
       token = body.access_token; // use the access token to access the Spotify Web API
     }
   });
+
+  /* Using this url, and the headers, get the top tracks
+   * for an artist
+   */
   var options = {
     url: "https://api.spotify.com/v1/artists/" + spotifyID + "/related-artists",
     headers: {
@@ -195,6 +183,8 @@ async function getSpotifyRelatedArtists(spotifyID) {
     },
     json: true
   };
+
+  // Gets the artist name, artist profile image, and link to artist
   return await rp.get(options).then(function(response) {
     var artists = [];
 
@@ -205,7 +195,6 @@ async function getSpotifyRelatedArtists(spotifyID) {
         image = "empty-image.png";
       } else image = response.artists[x].images[0].url;
       var external_urls = response.artists[x].external_urls.spotify;
-
       artists.push({
         artist: artist,
         image: image,
