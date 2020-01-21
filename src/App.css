@@ -28,14 +28,6 @@ h1 {
   text-align: center;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="date"] {
-  height: 2.375rem !important;
-  background-color: black !important
-  ;
-}
-
 th {
   top: 0;
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
@@ -161,22 +153,6 @@ nav ul li a:hover {
 }
 
 /* NAVBAR */
-
-::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #fff;
-  opacity: 1; /* Firefox */
-}
-
-:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: #fff;
-}
-
-::-ms-input-placeholder {
-  /* Microsoft Edge */
-  color: #fff;
-}
 
 select {
   background: transparent !important;
