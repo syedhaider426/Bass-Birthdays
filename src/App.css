@@ -154,31 +154,16 @@ nav ul li a:hover {
 
 /* NAVBAR */
 
-::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: black;
-  opacity: 1; /* Firefox */
-}
-
-:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: black;
-}
-
-::-ms-input-placeholder {
-  /* Microsoft Edge */
-  color: black;
-}
-
 select {
   background: transparent !important;
   color: white !important;
   width: 7rem !important;
 }
 
+/* Date placeholder on mobile */
 input[type="date"]::before {
   color: #999;
-  content: attr(placeholder) ": ";
+  content: attr(placeholder);
 }
 input[type="date"]:focus::before {
   content: "" !important;
