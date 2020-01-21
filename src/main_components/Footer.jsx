@@ -16,7 +16,7 @@ const Footer = () => {
         <Link to="/contact">Contact</Link>
       </p>
       <p className="footer-details">
-        Powered by
+        Powered by{" "}
         <a
           className="spotify-web-api"
           href="https://developer.spotify.com/documentation/web-api/"

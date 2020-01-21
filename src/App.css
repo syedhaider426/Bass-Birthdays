@@ -32,6 +32,8 @@ input[type="text"],
 input[type="email"],
 input[type="date"] {
   height: 2.375rem !important;
+  background-color: black !important
+  ;
 }
 
 th {
