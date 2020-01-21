@@ -28,6 +28,12 @@ h1 {
   text-align: center;
 }
 
+input[type="text"],
+input[type="email"],
+input[type="date"] {
+  height: 2.375rem !important;
+}
+
 th {
   top: 0;
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
