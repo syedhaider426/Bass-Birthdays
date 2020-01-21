@@ -31,11 +31,13 @@ const FilteredTable = ({
           />
           {/* Filters out the artists on the table by date*/}
           <Input
-            type="date"
+            type="text"
             name="birthday"
             id="birthday"
             placeholder="mm/dd/yyyy"
             onChange={handleBirthday}
+            onFocus="(this.type='date')"
+            onBlur="(this.value == '' ? this.type='text' : this.type='date')"
           />
         </div>
         <div className="form-inline">
