@@ -168,6 +168,9 @@ input[type="date"]::before {
 input[type="date"]:focus::before {
   content: "" !important;
 }
+input[type="date"]:after {
+  content: attr(placeholder);
+}
 
 select option {
   color: black;

@@ -36,6 +36,7 @@ const FilteredTable = ({
             id="birthday"
             placeholder="mm/dd/yyyy"
             onChange={handleBirthday}
+            onFocus="(this.placeholder='')"
           />
         </div>
         <div className="form-inline">
