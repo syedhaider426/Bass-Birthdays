@@ -169,6 +169,9 @@ input[type="date"]:focus::before {
   content: "" !important;
 }
 
+input[type="date"]:after {
+  content: "" !important;
+}
 /* input[type="date"]:not(:valid):before {
   content: attr(placeholder);
 } */
