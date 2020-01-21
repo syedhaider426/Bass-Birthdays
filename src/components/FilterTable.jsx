@@ -34,6 +34,7 @@ const FilteredTable = ({
             type="date"
             name="birthday"
             id="birthday"
+            placeholder="mm/dd/yyyy"
             onChange={handleBirthday}
           />
         </div>

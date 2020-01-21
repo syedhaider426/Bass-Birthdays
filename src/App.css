@@ -154,10 +154,38 @@ nav ul li a:hover {
 
 /* NAVBAR */
 
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: black;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: black;
+}
+
 select {
   background: transparent !important;
-
+  color: white !important;
   width: 7rem !important;
+}
+
+input[type="date"]:after {
+  content: attr(placeholder);
+}
+input[type="date"]:before {
+  color: lightgrey;
+  content: attr(placeholder) !important;
+  margin-right: 0.5em;
+}
+input[type="date"]:focus:before {
+  content: "" !important;
 }
 
 select option {
