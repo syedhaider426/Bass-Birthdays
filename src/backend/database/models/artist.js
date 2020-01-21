@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Creates the schema for an Artist
 var artistSchema = mongoose.Schema({
   Artist: {
     type: String
@@ -21,6 +22,7 @@ var artistSchema = mongoose.Schema({
   }
 });
 
+// Creates the model for an Artist
 var Artist = mongoose.model("Artist", artistSchema);
 
 module.exports = Artist;

@@ -17,7 +17,7 @@
     "lodash": "^4.17.15",
     "mongoose": "^5.7.12",
     "node-cron": "^2.0.3",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "popper.js": "^1.16.0",
     "querystring": "^0.2.0",
     "react": "^16.12.0",

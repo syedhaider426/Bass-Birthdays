@@ -35,8 +35,10 @@ const Pagination = ({
             style={{ cursor: "pointer" }}
             className="page-previous page-link"
             onClick={() => onPagePrevious()}
+            aria-label="Previous"
           >
-            Previous
+            <span aria-hidden="true">&laquo;</span>
+            <span className="sr-only">Previous</span>
           </a>
         </li>
         {pages.map(page => (
@@ -50,6 +52,7 @@ const Pagination = ({
               style={{ cursor: "pointer" }}
               className="page-link "
               onClick={() => onPageChange(page)}
+              tabIndex="1"
             >
               {page}
             </a>
@@ -67,8 +70,10 @@ const Pagination = ({
             style={{ cursor: "pointer" }}
             className="page-link"
             onClick={() => onPageNext()}
+            aria-label="Next"
           >
-            Next
+            <span aria-hidden="true">&raquo;</span>
+            <span className="sr-only">Next</span>
           </a>
         </li>
       </ul>

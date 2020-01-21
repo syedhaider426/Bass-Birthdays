@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import AutoComplete from "../common/AutoComplete";
+import AutoComplete from "./AutoComplete";
 
 /* Navbar is displayed at the top of page */
 
@@ -12,6 +12,7 @@ const Navbar = () => {
           <span className="bass-birthdays">Bass Birthdays </span>
           <i className="fa fa-birthday-cake fa-10x"></i>
         </Link>
+        <AutoComplete />
         <button
           className="custom-toggler navbar-toggler"
           type="button"
@@ -22,7 +23,7 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarToggle">
           {/*.navbar-collapse.show closes the navbar when a navigation link has been clicked*/}
-          <ul className="navbar-nav ml-auto">
+          <ul className="navbar-nav ml-auto nav-tabs ">
             <li
               className="nav-item"
               data-toggle="collapse"

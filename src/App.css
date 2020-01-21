@@ -1,28 +1,3 @@
-/* BODY */
-
-body {
-  background-image: -webkit-linear-gradient(
-    bottom,
-    #5c258d 0%,
-    #4389a2
-  ) !important;
-
-  font-family: "Montserrat", "sans-serif" !important;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  color: #444;
-  background: #eee;
-  background-repeat: no-repeat;
-  overflow: auto;
-  height: 100%;
-}
-
-/*This fixed issue with white space on mobile*/
-html {
-  overflow: hidden;
-  height: 100%;
-}
-
 html,
 body,
 table {
@@ -733,7 +708,7 @@ body {
 
 .suggestion-active,
 .suggestions li:hover {
-  background-color: #4389a2;
+  background-color: #cbd6db;
   color: white;
   cursor: pointer;
   font-weight: 700;
