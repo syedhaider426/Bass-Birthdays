@@ -1,15 +1,7 @@
 import React from "react";
+import convertISODateToString from "../utils/convertISODateToString";
 
 const TableBody = ({ data, isLoaded, handleClick }) => {
-  /* Substrings out the ISO date into a readable string */
-  function convertISODateToString(date) {
-    var dateString = date.substring(0, 10);
-    var month = dateString.substring(5, 7);
-    date = dateString.substring(8);
-    dateString = month + "/" + date;
-    return dateString;
-  }
-
   /* When data has not been loaded, show a loading spinner */
   var loadedDiv = (
     <tbody>

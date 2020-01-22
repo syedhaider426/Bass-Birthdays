@@ -18,6 +18,8 @@ class AutoComplete extends Component {
       activeSuggestion: 0,
       // The suggestions that match the user's input
       filteredSuggestions: [],
+      // All suggestions passed in from componentDidMount
+      allSuggestions: [],
       // Whether or not the suggestion list is shown
       showSuggestions: false,
       // What the user has entered
@@ -25,23 +27,36 @@ class AutoComplete extends Component {
     };
   }
 
+  componentDidMount() {
+    //url is a global variable
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        var arr = [];
+        //Gets an array of objects and converts it into an array of strings
+        for (var x = 0; x < data.length; x++) {
+          arr.push(data[x].Artist);
+        }
+        this.setState({ allSuggestions: arr });
+      });
+  }
+
   // Event fired when the input value is changed
-  onChange = ({ target: input }) => {
-    const { filteredSuggestions: suggestions } = this.state;
-    const userInput = input.value;
+  onChange = e => {
+    const { allSuggestions: suggestions } = this.state;
+    const userInput = e.currentTarget.value;
 
     // Filter our suggestions that don't contain the user's input
-    const filteredSuggestions = suggestions.filter(suggestion =>
-      suggestion.toLowerCase().includes(userInput.toLowerCase())
+    const filteredSuggestions = suggestions.filter(
+      suggestion =>
+        suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
 
-    // Update the user input and filtered suggestions, reset the active
-    // suggestion and make sure the suggestions are shown
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions,
       showSuggestions: true,
-      userInput: input.value
+      userInput: e.currentTarget.value
     });
   };
 
@@ -68,6 +83,7 @@ class AutoComplete extends Component {
         showSuggestions: false,
         userInput: filteredSuggestions[activeSuggestion]
       });
+      this.handleSubmit(e);
     }
     // User pressed the up arrow, decrement the index
     else if (e.keyCode === 38) {
@@ -98,29 +114,19 @@ class AutoComplete extends Component {
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        document.body.style.cursor = "default";
         if (data.length === 0) {
           this.props.history.push("/not-found");
           return;
         }
-        this.setState({ userInput: "" }); //must declare {this.state.autoComplete} as value for input
+        //must declare {this.state.autoComplete} as value for input
+        this.setState({
+          activeSuggestion: 1,
+          showSuggestions: true,
+          userInput: ""
+        });
         this.props.history.push("/profile/" + artist);
       });
   };
-
-  componentDidMount() {
-    //url is a global variable
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        var arr = [];
-        //Gets an array of objects and converts it into an array of strings
-        for (var x = 0; x < data.length; x++) {
-          arr.push(data[x].Artist);
-        }
-        this.setState({ filteredSuggestions: arr });
-      });
-  }
 
   render() {
     const {
