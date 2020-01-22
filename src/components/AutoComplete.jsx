@@ -160,7 +160,7 @@ class AutoComplete extends Component {
 
     return (
       <Fragment>
-        <form>
+        <form className="autocomplete-form" onSubmit={this.handleSubmit}>
           <div className="input-group autocomplete">
             <Input
               autoFocus={true}
@@ -174,11 +174,7 @@ class AutoComplete extends Component {
             />
             {suggestionsListComponent}
             <div className="input-group-append">
-              <button
-                className="btn btn-primary"
-                type="submit"
-                onClick={this.handleSubmit}
-              >
+              <button className="btn btn-primary" type="submit">
                 <i className="fa fa-search"></i>
               </button>
             </div>

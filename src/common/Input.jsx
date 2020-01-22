@@ -27,7 +27,6 @@ const Input = ({
         name={name}
         type={type}
         placeholder={placeholder}
-        required
         className={className ? className + " form-control" : "form-control"}
         onKeyDown={onKeyDown}
       ></input>
