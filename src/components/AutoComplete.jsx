@@ -172,7 +172,7 @@ class AutoComplete extends Component {
               autoFocus={true}
               id="autocomplete"
               name="autocomplete"
-              value={userInput}
+              value={userInput || ""}
               placeholder="Search..."
               type="search"
               onChange={onChange}

@@ -82,8 +82,8 @@ class ArtistProfile extends Component {
 
   /* important url: https://stackoverflow.com/questions/43351752/react-router-changes-url-but-not-view*/
 
-  componentWillReceiveProps(prevProps, prevState) {
-    if (prevProps.match.params !== this.props.match.params) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.match.params !== prevState.artist) {
       const { artist } = prevProps.match.params;
 
       var params = { artist: artist };

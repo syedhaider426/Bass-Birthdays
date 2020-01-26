@@ -14,7 +14,8 @@ const FilteredTable = ({
   handleBirthday,
   amountPerPage,
   options,
-  handleSelect
+  handleSelect,
+  refresh
 }) => {
   return (
     <Fragment>
@@ -47,6 +48,9 @@ const FilteredTable = ({
             onChange={handleSelect}
           />
           <label className="ml-1">Records Per Page</label>
+          <button className="btn btn-primary refresh" onClick={refresh}>
+            {<i className="fa fa-lg fa-refresh"></i>}
+          </button>
         </div>
       </div>
     </Fragment>

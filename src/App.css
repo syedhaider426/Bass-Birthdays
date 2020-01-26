@@ -17,7 +17,9 @@ h1 {
   text-shadow: #222 0 2px 0;
   color: #eee;
 }
-
+.refresh {
+  margin-left: auto;
+}
 .h2-title {
   color: black;
   font-weight: bold;

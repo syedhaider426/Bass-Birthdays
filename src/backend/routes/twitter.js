@@ -18,7 +18,7 @@ var twitterConfig = {
 
 // Function is called to start the cron at 6pm UTC/10am PST
 function cronjob() {
-  cron.schedule("0 19 * * *", () => {
+  cron.schedule("0 8 * * *", () => {
     getCurrentBirthdayTweet();
   });
 }

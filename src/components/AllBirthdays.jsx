@@ -77,7 +77,7 @@ class AllBirthdays extends Component {
     const bdayQuery = "";
     const amountPerPage = 25; //look into default state values
     this.setState({
-      sortColumn: { path: "artist", order: "initial" },
+      sortColumn: { path: "birthday", order: "asc" },
       searchQuery,
       bdayQuery,
       amountPerPage
