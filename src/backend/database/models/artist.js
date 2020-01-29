@@ -8,16 +8,16 @@ var artistSchema = mongoose.Schema({
   Birthday: {
     type: Date
   },
-  spotifyID: {
+  SpotifyID: {
     type: String
   },
-  profileImage: {
+  ProfileImage: {
     type: String
   },
   Genre: {
     type: Array
   },
-  twitter: {
+  Twitter: {
     type: String
   }
 });

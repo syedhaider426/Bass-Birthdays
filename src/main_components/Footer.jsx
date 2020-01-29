@@ -21,7 +21,7 @@ const Footer = () => {
           className="spotify-web-api"
           href="https://developer.spotify.com/documentation/web-api/"
         >
-          Spotify Web Api
+          Spotify Web Api &nbsp;
         </a>
         | © BassBirthdays.com
       </p>

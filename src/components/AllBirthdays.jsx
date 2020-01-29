@@ -40,7 +40,10 @@ class AllBirthdays extends Component {
       .then(response => response.json())
       .then(data => {
         this.setState({ artists: data, isLoaded: true });
-      });
+      })
+      .catch(err =>
+        console.log("ComponentDidMount (AllBirthdays) - Error", err)
+      );
   }
 
   /* If a user clicks on a page link',

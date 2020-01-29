@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import emptyImage from "../images/empty-image.png";
 import placeholder from "../images/picture-placeholder.png";
 import convertISODateToString from "../utils/convertISODateToString";
@@ -61,20 +61,23 @@ class ArtistProfile extends Component {
           this.props.history.push("/not-found");
           return;
         }
-
         this.setState({
-          image: data[0].profileImage,
+          image: data[0].ProfileImage,
           artist: data[0].Artist,
           birthday: "Birthday: " + convertISODateToString(data[0].Birthday),
           genres: data[0].Genre,
           topSongs: data.topSongs, //topSongs is an array
           relatedArtists: data.relatedArtists //relatedArtists is an array
         });
+
         /* Cursor is set to loading before the new profile loads.
          * Once the profile loads, cursor becomes the default
          */
         document.body.style.cursor = "default";
-      });
+      })
+      .catch(err =>
+        console.log("ComponentDidMount (ArtistProfile) - Error", err)
+      );
   }
 
   /*VERY IMPORTANT*/
@@ -83,7 +86,7 @@ class ArtistProfile extends Component {
   /* important url: https://stackoverflow.com/questions/43351752/react-router-changes-url-but-not-view*/
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.match.params !== prevState.artist) {
+    if (this.props.match.params.artist !== prevState.artist) {
       const { artist } = prevProps.match.params;
 
       var params = { artist: artist };
@@ -100,7 +103,7 @@ class ArtistProfile extends Component {
             return;
           }
           this.setState({
-            image: data[0].profileImage,
+            image: data[0].ProfileImage,
             artist: data[0].Artist,
             birthday: "Birthday:" + convertISODateToString(data[0].Birthday),
             genres: data[0].Genre,
@@ -108,7 +111,10 @@ class ArtistProfile extends Component {
             relatedArtists: data.relatedArtists
           });
           document.body.style.cursor = "default";
-        });
+        })
+        .catch(err =>
+          console.log("ComponentDidUpdate (ArtistProfile) - Error", err)
+        );
     }
   }
   render() {
@@ -120,7 +126,6 @@ class ArtistProfile extends Component {
       topSongs,
       relatedArtists
     } = this.state;
-
     const spotifyNote = (
       <span>
         <i style={{ color: "black" }}>
@@ -137,11 +142,11 @@ class ArtistProfile extends Component {
 
     /* This section displays image, artist name, and birthday */
     const infoSection = (
-      <React.Fragment>
+      <Fragment>
         <img className="image-artist" src={image} alt={artist}></img>
         <div className="artist-profile">{artist}</div>
         <div className="info ml-3">{birthday}</div>
-      </React.Fragment>
+      </Fragment>
     );
 
     /* This section displays the genres of the artist */

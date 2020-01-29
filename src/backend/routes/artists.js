@@ -56,15 +56,11 @@ router.get("/currentArtist", async (req, res) => {
   today.setHours(0, 0, 0, 0);
   tomorrow.setHours(0, 0, 0, 0);
 
-  // mongodb stores dates in ISO-format
-  const isoToday = today.toISOString();
-  const isoTomorrow = tomorrow.toISOString();
-
   //gets the artists for the date passed in
   const result = await Artist.find({
     Birthday: {
-      $gte: isoToday,
-      $lt: isoTomorrow
+      $gte: today,
+      $lt: tomorrow
     }
   });
   res.status(200).send(result);
@@ -76,11 +72,11 @@ router.get("/artistInfo", async (req, res) => {
   const result = await Artist.find({ Artist: artist })
     .select({
       _id: 0,
-      profileImage: 1,
+      ProfileImage: 1,
       Artist: 1,
       Birthday: 1,
       Genre: 1,
-      spotifyID: 1
+      SpotifyID: 1
     })
     .limit(1); //returns an array
   if (result.length == 0) {
@@ -88,7 +84,7 @@ router.get("/artistInfo", async (req, res) => {
     return;
   }
   //result[0] because even though one element is getting returned, it's an array
-  const spotifyID = result[0].spotifyID;
+  const spotifyID = result[0].SpotifyID;
 
   //Gets the top 10 tracks produced by the artist
   const tracks = await getSpotifyTopTracks(spotifyID);

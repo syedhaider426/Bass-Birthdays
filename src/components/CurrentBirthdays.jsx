@@ -45,7 +45,9 @@ class CurrentBirthdays extends Component {
       .then(data => {
         this.setState({ currentArtists: data });
       })
-      .catch(err => console.log(err));
+      .catch(err =>
+        console.log("componentDidMount (CurrentBirthday) - Error", err)
+      );
   }
 
   /* When a user clicks the 'Next' or 'Previous' arrows,
@@ -123,7 +125,7 @@ class CurrentBirthdays extends Component {
                 <Link to={"/profile/" + artist.Artist}>
                   <img
                     className="img-fluid"
-                    src={artist.profileImage}
+                    src={artist.ProfileImage}
                     alt={artist.Artist}
                   />
                 </Link>

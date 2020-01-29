@@ -22,7 +22,7 @@ const TableBody = ({ data, isLoaded, handleClick }) => {
         <tr key={item._id} onClick={() => handleClick(item.Artist)}>
           <td>
             <img
-              src={item.profileImage}
+              src={item.ProfileImage}
               className="mx-auto td-image"
               alt={item.Artist}
             />

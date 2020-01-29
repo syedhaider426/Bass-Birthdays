@@ -20,6 +20,9 @@ const FilteredTable = ({
   return (
     <Fragment>
       <div className="mb-1">
+        <label>
+          <i>Filter by Artist or Date (*Year is ignored* )</i>
+        </label>
         <div className="input-group mb-2">
           {/* Filters out the artists on the table by name*/}
           <Input

@@ -43,7 +43,7 @@ async function getCurrentBirthdayTweet() {
       $gte: isoToday,
       $lt: isoTomorrow
     }
-  }).select({ twitter: 1, _id: 0 });
+  }).select({ Twitter: 1, _id: 0 });
 
   //Create tweet will combine all the artists returned from query
   createTweet(result);
@@ -57,7 +57,7 @@ function createTweet(result) {
   } else {
     //Creates the tweet
     for (var x = 0; x < result.length; x++) {
-      var res = result[x].twitter;
+      var res = result[x].Twitter;
       if (result.length == 1) tweet = tweet + "@" + res.substring(20) + "!";
       else if (x == result.length - 1 && result.length > 1)
         tweet = tweet + "and @" + res.substring(20) + "!";
