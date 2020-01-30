@@ -21,7 +21,7 @@ const FilteredTable = ({
     <Fragment>
       <div className="mb-1">
         <label>
-          <i>Filter by Artist or Date (*Year is ignored* )</i>
+          <i>Filter by Artist or Date </i>
         </label>
         <div className="input-group mb-2">
           {/* Filters out the artists on the table by name*/}
@@ -32,6 +32,7 @@ const FilteredTable = ({
             className="mr-2"
             placeholder="Enter Artist"
             onChange={e => onChange(e.target.value)}
+            ariaLabel="Artist"
           />
           {/* Filters out the artists on the table by date*/}
           <Input
@@ -40,6 +41,7 @@ const FilteredTable = ({
             id="birthday"
             placeholder="mm/dd/yyyy"
             onChange={handleBirthday}
+            ariaLabel="Date"
           />
         </div>
         <div className="form-inline">
@@ -49,9 +51,14 @@ const FilteredTable = ({
             value={amountPerPage}
             options={options}
             onChange={handleSelect}
+            ariaLabel="Records Per Page"
           />
           <label className="ml-1">Records Per Page</label>
-          <button className="btn btn-primary refresh" onClick={refresh}>
+          <button
+            className="btn btn-primary refresh"
+            onClick={refresh}
+            aria-label="Refresh"
+          >
             {<i className="fa fa-lg fa-refresh"></i>}
           </button>
         </div>

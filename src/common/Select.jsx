@@ -1,7 +1,7 @@
 import React from "react";
 
 /* Reusable Select component */
-const Select = ({ name, options, value, onChange }) => {
+const Select = ({ name, options, value, onChange, ariaLabel }) => {
   return (
     <div className="records-per-page">
       <select
@@ -10,6 +10,7 @@ const Select = ({ name, options, value, onChange }) => {
         className="form-control"
         onChange={onChange}
         value={value}
+        aria-label={ariaLabel}
       >
         {options.map(option => (
           <option key={option} value={option}>

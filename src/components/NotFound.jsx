@@ -4,6 +4,7 @@ import AutoComplete from "./AutoComplete";
 /* NotFound page is routed to when user goes to an invalid url */
 
 const NotFound = () => {
+  document.body.style.cursor = "default";
   return (
     <React.Fragment>
       <div className="container ">

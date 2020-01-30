@@ -12,7 +12,9 @@ const Input = ({
   labelClassName,
   onKeyDown,
   autoFocus,
-  errors
+  errors,
+  ariaRequired,
+  ariaLabel
 }) => {
   return (
     <Fragment>
@@ -29,6 +31,8 @@ const Input = ({
         placeholder={placeholder}
         className={className ? className + " form-control" : "form-control"}
         onKeyDown={onKeyDown}
+        aria-required={ariaRequired}
+        aria-label={ariaLabel}
       ></input>
       {errors && <div className="alert alert-danger">{errors}</div>}
     </Fragment>

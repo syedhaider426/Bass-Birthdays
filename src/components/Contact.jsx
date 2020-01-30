@@ -31,9 +31,14 @@ class Contact extends Form {
     var params = { name, email, comment };
     url.search = new URLSearchParams(params).toString();
 
-    fetch(url, { method: "POST" }).then(() => {
-      toast.success("🚀 Successfully submitted contact info!");
-    });
+    fetch(url, { method: "POST" })
+      .then(() => {
+        toast.success("🚀 Successfully submitted contact info!");
+      })
+      .catch(err => {
+        console.log("Error - Contact Info", err);
+        toast.error("🚀 Unable to submit contact info. Try again later.");
+      });
   };
 
   render() {
@@ -58,7 +63,7 @@ class Contact extends Form {
      */
 
     /* render Input/TextArea - name,autoFocus,type,placeholder,
-     * className,labelClassName,label
+     * className,labelClassName,label, ariaRequired
      */
 
     return (
@@ -79,7 +84,8 @@ class Contact extends Form {
               "Name...",
               "",
               "contact float-left mt-3",
-              nameLabel
+              nameLabel,
+              true
             )}
 
             {this.renderInput(
@@ -89,7 +95,8 @@ class Contact extends Form {
               "Email...",
               "",
               "contact float-left mt-3",
-              emailLabel
+              emailLabel,
+              true
             )}
 
             {this.renderTextArea(
@@ -98,7 +105,8 @@ class Contact extends Form {
               "Question/Comment...",
               "",
               "contact float-left mt-3",
-              commentLabel
+              commentLabel,
+              true
             )}
 
             {this.renderButton("Submit")}

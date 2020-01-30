@@ -103,13 +103,19 @@ class CurrentBirthdays extends Component {
         {/* This displays the next/prev arrows and the current date*/}
         <h1 className="current-birthdays-title">
           <span onClick={() => this.handleDateChange(-1)}>
-            <i className="fa fa-lg fa-arrow-left"></i>
+            <i
+              className="fa fa-lg fa-arrow-left"
+              title="View Previous Day's Birthday"
+            ></i>
           </span>
           <div className="divider"></div>
-          {date}
+          <span>{date}</span>
           <div className="divider"></div>
           <span onClick={() => this.handleDateChange(1)}>
-            <i className="fa fa-lg fa-arrow-right"></i>
+            <i
+              className="fa fa-lg fa-arrow-right"
+              title="View Next Day's Birthday"
+            ></i>
           </span>
         </h1>
 

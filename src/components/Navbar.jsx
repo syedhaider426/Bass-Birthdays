@@ -18,6 +18,7 @@ const Navbar = () => {
           type="button"
           data-toggle="collapse"
           data-target="#navbarToggle"
+          aria-controls="navbarToggle"
         >
           <span className="navbar-toggler-icon"></span>
         </button>

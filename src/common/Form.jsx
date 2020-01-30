@@ -60,7 +60,8 @@ class Form extends Component {
     placeholder,
     className,
     labelClassName,
-    label
+    label,
+    ariaRequired
   ) {
     const { data, errors } = this.state;
 
@@ -77,6 +78,7 @@ class Form extends Component {
         errors={errors[name]}
         labelClassName={labelClassName}
         label={label}
+        aria-required={ariaRequired}
       />
     );
   }
@@ -87,7 +89,8 @@ class Form extends Component {
     placeholder,
     className,
     labelClassName,
-    label
+    label,
+    ariaRequired
   ) {
     const { data, errors } = this.state;
 
@@ -103,6 +106,7 @@ class Form extends Component {
         errors={errors[name]}
         labelClassName={labelClassName}
         label={label}
+        aria-required={ariaRequired}
       />
     );
   }

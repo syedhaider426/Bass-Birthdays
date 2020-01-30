@@ -177,6 +177,7 @@ class AutoComplete extends Component {
               type="search"
               onChange={onChange}
               onKeyDown={onKeyDown}
+              ariaLabel="Search"
             />
             {suggestionsListComponent}
             <div className="input-group-append">
