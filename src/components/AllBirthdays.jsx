@@ -75,16 +75,18 @@ class AllBirthdays extends Component {
   };
 
   /* Refreshes the data on the table */
-  refresh = () => {
+  refresh = e => {
     const searchQuery = "";
     const bdayQuery = "";
     const amountPerPage = 25; //look into default state values
-    this.setState({
-      sortColumn: { path: "birthday", order: "asc" },
-      searchQuery,
-      bdayQuery,
-      amountPerPage
-    });
+    console.log(e.keyCode);
+    if (e.keyCode === 13 || e.keyCode === undefined)
+      this.setState({
+        sortColumn: { path: "birthday", order: "asc" },
+        searchQuery,
+        bdayQuery,
+        amountPerPage
+      });
   };
 
   /* When a user types in any text, it will call this onChange function and filter the current results*/
@@ -193,7 +195,14 @@ class AllBirthdays extends Component {
           />
         </div>
         {artistsLength > 5 && (
-          <button type="btn" className="btn btn-primary " onClick={scrollToTop}>
+          <button
+            type="btn"
+            className="btn btn-primary "
+            onKeyDown={e => {
+              if (e.keyCode === 13) scrollToTop();
+            }}
+            onClick={scrollToTop}
+          >
             Back to Top
           </button>
         )}

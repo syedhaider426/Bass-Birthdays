@@ -52,7 +52,10 @@ const Pagination = ({
               style={{ cursor: "pointer" }}
               className="page-link "
               onClick={() => onPageChange(page)}
-              tabIndex="1"
+              onKeyDown={e => {
+                if (e.keyCode === 13) onPageChange(page);
+              }}
+              tabIndex="0"
             >
               {page}
             </a>

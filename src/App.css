@@ -130,6 +130,10 @@ table tr:hover {
   color: white !important;
 }
 
+.page-link:focus {
+  opacity: 0.9;
+  background-color: gray !important;
+}
 /* NAVBAR */
 
 nav ul li a,

@@ -22,11 +22,15 @@ function makeDateFormat(day) {
 }
 
 class CurrentBirthdays extends Component {
-  state = {
-    currentArtists: [{ profileImage: placeholder }],
-    currentDate: new Date()
-  };
-
+  constructor(props) {
+    super(props);
+    this.prevArrow = React.createRef();
+    this.nextArrow = React.createRef();
+    this.state = {
+      currentArtists: [{ profileImage: placeholder }],
+      currentDate: new Date()
+    };
+  }
   componentDidMount() {
     //Gets the current date
     const { currentDate } = this.state;
@@ -75,6 +79,30 @@ class CurrentBirthdays extends Component {
       .catch(err => console.log(err));
   };
 
+  handlePrevKeyDown = e => {
+    // User pressed the enter key
+    if (e.keyCode === 13 || e.keyCode === 37) {
+      this.handleDateChange(-1);
+    }
+    // User pressed the right arrow key
+    else if (e.keyCode === 39) {
+      this.handleDateChange(1);
+      this.nextArrow.current.focus();
+    }
+  };
+
+  handleNextKeyDown = e => {
+    // User pressed the enter key
+    if (e.keyCode === 13 || e.keyCode === 39) {
+      this.handleDateChange(1);
+    }
+    // User pressed the left arrow key
+    else if (e.keyCode === 37) {
+      this.handleDateChange(-1);
+      this.prevArrow.current.focus();
+    }
+  };
+
   render() {
     const { currentArtists, currentDate } = this.state;
 
@@ -102,16 +130,26 @@ class CurrentBirthdays extends Component {
       <React.Fragment>
         {/* This displays the next/prev arrows and the current date*/}
         <h1 className="current-birthdays-title">
-          <span onClick={() => this.handleDateChange(-1)}>
+          <span
+            tabIndex="0"
+            onKeyDown={this.handlePrevKeyDown}
+            onClick={() => this.handleDateChange(-1)}
+            ref={this.prevArrow}
+          >
             <i
               className="fa fa-lg fa-arrow-left"
               title="View Previous Day's Birthday"
             ></i>
           </span>
           <div className="divider"></div>
-          <span>{date}</span>
+          {date}
           <div className="divider"></div>
-          <span onClick={() => this.handleDateChange(1)}>
+          <span
+            tabIndex="0"
+            onKeyDown={this.handleNextKeyDown}
+            onClick={() => this.handleDateChange(1)}
+            ref={this.nextArrow}
+          >
             <i
               className="fa fa-lg fa-arrow-right"
               title="View Next Day's Birthday"

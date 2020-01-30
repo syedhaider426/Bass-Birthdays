@@ -57,6 +57,7 @@ const FilteredTable = ({
           <button
             className="btn btn-primary refresh"
             onClick={refresh}
+            onKeyDown={refresh}
             aria-label="Refresh"
           >
             {<i className="fa fa-lg fa-refresh"></i>}
