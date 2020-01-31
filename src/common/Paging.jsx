@@ -36,6 +36,7 @@ const Pagination = ({
             className="page-previous page-link"
             onClick={() => onPagePrevious()}
             aria-label="Previous"
+            title="Go to the Previous Page of the Birthdays Table"
           >
             <span aria-hidden="true">&laquo;</span>
             <span className="sr-only">Previous</span>
@@ -56,6 +57,7 @@ const Pagination = ({
                 if (e.keyCode === 13) onPageChange(page);
               }}
               tabIndex="0"
+              title={"Go to the Page " + page + " of the Birthdays Table"}
             >
               {page}
             </a>
@@ -74,6 +76,7 @@ const Pagination = ({
             className="page-link"
             onClick={() => onPageNext()}
             aria-label="Next"
+            title="Go to the Next Page of the Birthdays Table"
           >
             <span aria-hidden="true">&raquo;</span>
             <span className="sr-only">Next</span>

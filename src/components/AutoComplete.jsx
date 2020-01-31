@@ -181,7 +181,12 @@ class AutoComplete extends Component {
             />
             {suggestionsListComponent}
             <div className="input-group-append">
-              <button className="btn btn-primary" type="submit">
+              <button
+                className="btn btn-primary"
+                type="submit"
+                title="Search for an artist or group"
+                aria-label="Search for Artists"
+              >
                 <i className="fa fa-search"></i>
               </button>
             </div>

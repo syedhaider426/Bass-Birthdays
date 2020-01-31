@@ -197,7 +197,9 @@ class AllBirthdays extends Component {
         {artistsLength > 5 && (
           <button
             type="btn"
-            className="btn btn-primary "
+            className="btn btn-primary"
+            aria-label="Back to the Top of Table"
+            title="Go back to the Top of the Birthdays Table"
             onKeyDown={e => {
               if (e.keyCode === 13) scrollToTop();
             }}

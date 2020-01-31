@@ -19,7 +19,11 @@ const TableBody = ({ data, isLoaded, handleClick }) => {
   ) : (
     <tbody>
       {data.map(item => (
-        <tr key={item._id} onClick={() => handleClick(item.Artist)}>
+        <tr
+          key={item._id}
+          onClick={() => handleClick(item.Artist)}
+          title={"Click to view " + item.Artist + "'s Profile."}
+        >
           <td>
             <img
               src={item.ProfileImage}

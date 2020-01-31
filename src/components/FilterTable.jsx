@@ -59,6 +59,7 @@ const FilteredTable = ({
             onClick={refresh}
             onKeyDown={refresh}
             aria-label="Refresh"
+            title="Refresh the data in the Birthdays Table"
           >
             {<i className="fa fa-lg fa-refresh"></i>}
           </button>
