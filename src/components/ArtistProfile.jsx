@@ -9,36 +9,39 @@ if (process.env.NODE_ENV === "production")
 else url = new URL("http://localhost:8080/artistInfo");
 
 class ArtistProfile extends Component {
-  state = {
-    image: placeholder,
-    artist: "",
-    birthday: "",
-    genres: [],
-    topSongs: ["", "", "", "", "", "", "", "", "", ""],
-    relatedArtists: [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    profileContent: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: placeholder,
+      artist: "",
+      birthday: "",
+      genres: [],
+      topSongs: ["", "", "", "", "", "", "", "", "", ""],
+      relatedArtists: [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      profileContent: false
+    };
+  }
 
   componentDidMount() {
     //This params value is received when a user clicks on an artist's image/table row
@@ -61,10 +64,20 @@ class ArtistProfile extends Component {
           this.props.history.push("/not-found");
           return;
         }
+        var birthday;
+        var birthdayList = data[0].BirthdayList;
+        if (birthdayList.length > 0) {
+          birthdayList.forEach((birthday, index, array) => {
+            array[index] = convertISODateToString(birthday);
+          });
+
+          birthday = "Birthdays: " + birthdayList.toString();
+        } else
+          birthday = "Birthday: " + convertISODateToString(data[0].Birthday[0]);
         this.setState({
           image: data[0].ProfileImage,
           artist: data[0].Artist,
-          birthday: "Birthday: " + convertISODateToString(data[0].Birthday),
+          birthday: birthday,
           genres: data[0].Genre,
           topSongs: data.topSongs, //topSongs is an array
           relatedArtists: data.relatedArtists //relatedArtists is an array
@@ -86,6 +99,7 @@ class ArtistProfile extends Component {
   /* important url: https://stackoverflow.com/questions/43351752/react-router-changes-url-but-not-view*/
 
   componentDidUpdate(prevProps, prevState) {
+    console.log("Did it get called again");
     if (this.props.match.params.artist !== prevState.artist) {
       const { artist } = prevProps.match.params;
 
@@ -99,17 +113,30 @@ class ArtistProfile extends Component {
            * go to the not-found page
            */
           if (data.length === 0) {
+            document.body.style.cursor = "default";
             this.props.history.push("/not-found");
             return;
           }
+          var birthday = "";
+          var birthdayList = data[0].BirthdayList;
+          if (birthdayList.length > 0) {
+            birthdayList.forEach((birthday, index, array) => {
+              array[index] = convertISODateToString(birthday);
+            });
+
+            birthday = "Birthdays: " + birthdayList.toString();
+          } else
+            birthday =
+              "Birthday: " + convertISODateToString(data[0].Birthday[0]);
           this.setState({
             image: data[0].ProfileImage,
             artist: data[0].Artist,
-            birthday: "Birthday:" + convertISODateToString(data[0].Birthday),
+            birthday: birthday,
             genres: data[0].Genre,
-            topSongs: data.topSongs,
-            relatedArtists: data.relatedArtists
+            topSongs: data.topSongs, //topSongs is an array
+            relatedArtists: data.relatedArtists //relatedArtists is an array
           });
+
           document.body.style.cursor = "default";
         })
         .catch(err =>
@@ -173,7 +200,10 @@ class ArtistProfile extends Component {
         <ol>
           {topSongs.map(song => (
             <li key={song.track} className="li-song">
-              <a href={song.url}>
+              <a
+                href={song.url}
+                title={"Click to listen to " + song.track + " on Spotify"}
+              >
                 <img
                   className="li-song img"
                   src={
@@ -197,7 +227,10 @@ class ArtistProfile extends Component {
         <ol className="related-artists-list">
           {relatedArtists.map(a => (
             <li key={a.artist} className="li-artist">
-              <a href={a.url}>
+              <a
+                href={a.url}
+                title={"Click to view " + a.artist + "'s profile on Spotify"}
+              >
                 <img
                   className="li-artist img"
                   src={a.image !== "empty-image.png" ? a.image : emptyImage}

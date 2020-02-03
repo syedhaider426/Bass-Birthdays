@@ -6,7 +6,7 @@ const fromEmail = config.get("fromEmail");
 const configurationSet = config.get("configurationSet");
 const express = require("express");
 const router = express.Router();
-const Contact = require("../database/models/contacts");
+
 const errorLog = require("../../utils/logger").errorLog;
 const successLog = require("../../utils/logger").successLog;
 
@@ -47,9 +47,6 @@ router.post("/contactInfo", async (req, res) => {
       errorLog.error(err, err.stack);
     });
 
-  //Saves contact info to the database
-  const contact = new Contact({ name, email, comment });
-  await contact.save();
   res.status(200).send("Submitted contact info");
 });
 

@@ -15,7 +15,9 @@ const FilteredTable = ({
   amountPerPage,
   options,
   handleSelect,
-  refresh
+  refresh,
+  searchQuery,
+  bdayQuery
 }) => {
   return (
     <Fragment>
@@ -30,6 +32,7 @@ const FilteredTable = ({
             name="artist"
             id="artist"
             className="mr-2"
+            value={searchQuery}
             placeholder="Enter Artist"
             onChange={e => onChange(e.target.value)}
             ariaLabel="Artist"
@@ -39,6 +42,7 @@ const FilteredTable = ({
             type="date"
             name="birthday"
             id="birthday"
+            value={bdayQuery}
             placeholder="mm/dd/yyyy"
             onChange={handleBirthday}
             ariaLabel="Date"

@@ -20,15 +20,18 @@ function scrollToTop() {
  * This component shows all artists' birthdays in ascending order
  */
 class AllBirthdays extends Component {
-  state = {
-    artists: [],
-    currentPage: 1,
-    amountPerPage: 25,
-    sortColumn: { path: "Birthday", order: "asc" },
-    searchQuery: "",
-    bdayQuery: "",
-    isLoaded: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      artists: [],
+      currentPage: 1,
+      amountPerPage: 25,
+      sortColumn: { path: "Birthday", order: "asc" },
+      searchQuery: "",
+      bdayQuery: "",
+      isLoaded: false
+    };
+  }
 
   componentDidMount() {
     document.getElementById("navbar").scrollIntoView();
@@ -79,7 +82,6 @@ class AllBirthdays extends Component {
     const searchQuery = "";
     const bdayQuery = "";
     const amountPerPage = 25; //look into default state values
-    console.log(e.keyCode);
     if (e.keyCode === 13 || e.keyCode === undefined)
       this.setState({
         sortColumn: { path: "birthday", order: "asc" },
@@ -178,6 +180,7 @@ class AllBirthdays extends Component {
         <hr></hr>
         <FilterTable
           searchQuery={searchQuery}
+          bdayQuery={bdayQuery}
           onChange={handleSearch}
           handleBirthday={handleBirthdayFilter}
           refresh={refresh}

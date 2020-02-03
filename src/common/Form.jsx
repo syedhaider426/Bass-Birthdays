@@ -3,9 +3,25 @@ import Input from "./Input";
 import TextArea from "./TextArea";
 
 class Form extends Component {
-  state = {
-    data: {},
-    errors: {}
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: {},
+      errors: {}
+    };
+  }
+
+  /* When a user tries to submit their contact info,
+   * validate that all pertinent information has been entereed
+   */
+  validate = () => {
+    //abortEarly means to pass all errors inside of just short-circuiting with the first one
+    const options = { abortEarly: false };
+    const { error } = this.schema.validate(this.state.data, options);
+    if (!error) return null;
+    const errors = {};
+    for (let item of error.details) errors[item.path[0]] = item.message;
+    return errors;
   };
 
   /*Make fields required*/

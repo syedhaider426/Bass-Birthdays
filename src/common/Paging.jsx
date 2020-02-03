@@ -31,7 +31,7 @@ const Pagination = ({
             firstPage === currentPage ? "page-item disabled" : "page-item"
           }
         >
-          <a
+          <button
             style={{ cursor: "pointer" }}
             className="page-previous page-link"
             onClick={() => onPagePrevious()}
@@ -40,7 +40,7 @@ const Pagination = ({
           >
             <span aria-hidden="true">&laquo;</span>
             <span className="sr-only">Previous</span>
-          </a>
+          </button>
         </li>
         {pages.map(page => (
           <li
@@ -49,7 +49,7 @@ const Pagination = ({
               page === currentPage ? "page-item active ml-1" : "page-item ml-1"
             }
           >
-            <a
+            <button
               style={{ cursor: "pointer" }}
               className="page-link "
               onClick={() => onPageChange(page)}
@@ -60,7 +60,7 @@ const Pagination = ({
               title={"Go to the Page " + page + " of the Birthdays Table"}
             >
               {page}
-            </a>
+            </button>
           </li>
         ))}
         <li
@@ -71,7 +71,7 @@ const Pagination = ({
               : "page-item ml-1"
           }
         >
-          <a
+          <button
             style={{ cursor: "pointer" }}
             className="page-link"
             onClick={() => onPageNext()}
@@ -80,7 +80,7 @@ const Pagination = ({
           >
             <span aria-hidden="true">&raquo;</span>
             <span className="sr-only">Next</span>
-          </a>
+          </button>
         </li>
       </ul>
     </nav>

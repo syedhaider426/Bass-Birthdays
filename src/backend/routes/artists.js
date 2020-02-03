@@ -26,7 +26,9 @@ var authOptions = {
 
 /* Gets all artists (as well as all fields) and sorts birthdays in ascending order */
 router.get("/artist", async (req, res) => {
-  const result = await Artist.find().sort({ Birthday: 1 });
+  const result = await Artist.find({ Birthday: { $exists: true } }).sort({
+    Birthday: 1
+  });
   res.status(200).send(result);
 });
 
@@ -76,11 +78,14 @@ router.get("/artistInfo", async (req, res) => {
       Artist: 1,
       Birthday: 1,
       Genre: 1,
-      SpotifyID: 1
+      SpotifyID: 1,
+      BirthdayList: 1
     })
     .limit(1); //returns an array
+  console.log(result.length);
+  // Error code is 404 because the artist was not found
   if (result.length == 0) {
-    res.status(400).send(result);
+    res.status(404).send(result);
     return;
   }
   //result[0] because even though one element is getting returned, it's an array

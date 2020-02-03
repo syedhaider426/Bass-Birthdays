@@ -1,6 +1,7 @@
 import React from "react";
 import { toast } from "react-toastify";
 import Form from "../common/Form";
+import Joi from "@hapi/joi";
 
 var url;
 if (process.env.NODE_ENV === "development")
@@ -8,29 +9,31 @@ if (process.env.NODE_ENV === "development")
 else url = new URL("https://www.dubstepdata.info/contactInfo");
 
 class Contact extends Form {
-  state = {
-    data: { name: "", email: "", comment: "" },
-    errors: {}
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: { name: "", email: "", comment: "" },
+      errors: {}
+    };
+  }
 
-  /* When a user tries to submit their contact info,
-   * validate that all pertinent information has been entereed
-   */
-  validate = () => {
-    const errors = {};
-    const { name, email, comment } = this.state.data;
-    if (name.trim() === "") errors.name = "Name is required";
-    if (email.trim() === "") errors.email = "Email is required";
-    if (comment.trim() === "") errors.comment = "Comment is required";
-
-    return Object.keys(errors).length === 0 ? null : errors;
-  };
+  schema = Joi.object().keys({
+    name: Joi.string()
+      .required()
+      .label("Name"),
+    email: Joi.string()
+      .required()
+      .label("Email"),
+    comment: Joi.string()
+      .required()
+      .label("Comment")
+  });
 
   submitValues = () => {
     const { name, email, comment } = this.state.data;
     var params = { name, email, comment };
     url.search = new URLSearchParams(params).toString();
-
+    console.log(url);
     fetch(url, { method: "POST" })
       .then(() => {
         toast.success("🚀 Successfully submitted contact info!");
