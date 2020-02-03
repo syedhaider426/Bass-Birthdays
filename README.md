@@ -23,5 +23,15 @@ The idea behind the project was developed by a curiosity for birthdays of Artist
 <li>Node - Javascript Runtime Environment</li>
 </ul>
 
+# Screenshots
+
+Home Page <br></br>
+<img src="docs/Home-Page.PNG">
+
+Profile Page <br></br>
+<img src="docs/Profile-Page.PNG">
+
+
+
 # Authors
 Syed Haider
