@@ -8,7 +8,7 @@ Each artist has their own profile. The data displayed on the website is sourced 
     <ul><li>Each song can be clicked and will take the user to Spotify's website</li></ul>
     <li>Profiles also show 20 artists that make a similar style of music.</li>
         <ul><li>Each artist can be clicked and will take the user to their Spotify page</li></ul>
-        
+</ul>
 # Motivation
 
 The project was started with the intention of gaining a grasp on React, MongoDB, and REST APIs.
