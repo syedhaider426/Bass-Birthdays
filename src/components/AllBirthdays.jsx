@@ -84,7 +84,7 @@ class AllBirthdays extends Component {
     const amountPerPage = 25; //look into default state values
     if (e.keyCode === 13 || e.keyCode === undefined)
       this.setState({
-        sortColumn: { path: "birthday", order: "asc" },
+        sortColumn: { path: "Birthday", order: "asc" },
         searchQuery,
         bdayQuery,
         amountPerPage
