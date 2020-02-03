@@ -296,6 +296,18 @@ hr {
   }
 }
 
+@media only screen and (max-width: 350px) {
+  .bass-birthdays {
+    display: none;
+  }
+  .autocomplete-form {
+    width: 43vw !important;
+  }
+  .suggestions {
+    width: 43vw !important;
+  }
+}
+
 /*height:auto, max-width:100% = equivalent to img-fluid*/
 .img-wrapper img {
   object-fit: cover;
