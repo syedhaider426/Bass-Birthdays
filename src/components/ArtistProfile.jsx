@@ -66,14 +66,15 @@ class ArtistProfile extends Component {
         }
         var birthday;
         var birthdayList = data[0].BirthdayList;
-        if (birthdayList.length > 0) {
+        if (birthdayList !== undefined) {
           birthdayList.forEach((birthday, index, array) => {
             array[index] = convertISODateToString(birthday);
           });
 
           birthday = "Birthdays: " + birthdayList.toString();
         } else
-          birthday = "Birthday: " + convertISODateToString(data[0].Birthday[0]);
+          birthday = "Birthday: " + convertISODateToString(data[0].Birthday);
+
         this.setState({
           image: data[0].ProfileImage,
           artist: data[0].Artist,
@@ -117,17 +118,17 @@ class ArtistProfile extends Component {
             this.props.history.push("/not-found");
             return;
           }
-          var birthday = "";
+          var birthday;
           var birthdayList = data[0].BirthdayList;
-          if (birthdayList.length > 0) {
+          if (birthdayList !== undefined) {
             birthdayList.forEach((birthday, index, array) => {
               array[index] = convertISODateToString(birthday);
             });
 
             birthday = "Birthdays: " + birthdayList.toString();
           } else
-            birthday =
-              "Birthday: " + convertISODateToString(data[0].Birthday[0]);
+            birthday = "Birthday: " + convertISODateToString(data[0].Birthday);
+
           this.setState({
             image: data[0].ProfileImage,
             artist: data[0].Artist,
@@ -136,7 +137,6 @@ class ArtistProfile extends Component {
             topSongs: data.topSongs, //topSongs is an array
             relatedArtists: data.relatedArtists //relatedArtists is an array
           });
-
           document.body.style.cursor = "default";
         })
         .catch(err =>
