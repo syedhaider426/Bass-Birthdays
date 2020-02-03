@@ -15,6 +15,14 @@ Each artist has their own profile. The data displayed on the website is sourced 
 The project was started with the intention of gaining a grasp on React, MongoDB, and REST APIs.
 The idea behind the project was developed by a curiosity for birthdays of Artists in the Bass Music genre. 
 
+# Built With
+<ul>
+<li>MongoDB - Database to store birthdays</li>
+<li>ExpressJS - NodeJS framework </li>
+<li>React - Javascript Library</li>
+<li>Node - Javascript Runtime Environment</li>
+</ul>
+
 # Screenshots
 
 Home Page <br></br>
@@ -23,13 +31,7 @@ Home Page <br></br>
 Profile Page <br></br>
 <img src="docs/Profile-Page.PNG">
 
-# Built With
-<ul>
-<li>MongoDB - Database to store birthdays</li>
-<li>ExpressJS - NodeJS framework </li>
-<li>React - Javascript Library</li>
-<li>Node - Javascript Runtime Environment</li>
-</ul>
+
 
 # Authors
 Syed Haider
