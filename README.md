@@ -15,10 +15,10 @@ The idea behind the project was developed by a curiosity for birthdays of Artist
 
 # Built With
 
-MongoDB - Database to store birthdays
-ExpressJS - NodeJS framework
-React - Javascript Library
-Node
+MongoDB - Database to store birthdays <br></br>
+ExpressJS - NodeJS framework <br></br>
+React - Javascript Library <br></br>
+Node - Javascript Runtime Environment <br></br>
 
 # Authors
  Syed Haider
