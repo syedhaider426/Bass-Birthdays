@@ -4,7 +4,7 @@ import placeholder from "../images/picture-placeholder.png";
 
 var url;
 if (process.env.NODE_ENV === "production")
-  url = new URL("https://dubstepdata.info/currentArtist");
+  url = new URL("https://bassbirthdays.com/currentArtist");
 else url = new URL("http://localhost:8080/currentArtist");
 
 /* If the month returned is less than 10, then place a 0

@@ -5,7 +5,7 @@ import convertISODateToString from "../utils/convertISODateToString";
 
 var url;
 if (process.env.NODE_ENV === "production")
-  url = new URL("https://dubstepdata.info/artistInfo");
+  url = new URL("https://bassbirthdays.com/artistInfo");
 else url = new URL("http://localhost:8080/artistInfo");
 
 class ArtistProfile extends Component {
@@ -100,7 +100,6 @@ class ArtistProfile extends Component {
   /* important url: https://stackoverflow.com/questions/43351752/react-router-changes-url-but-not-view*/
 
   componentDidUpdate(prevProps, prevState) {
-    console.log("Did it get called again");
     if (this.props.match.params.artist !== prevState.artist) {
       const { artist } = prevProps.match.params;
 

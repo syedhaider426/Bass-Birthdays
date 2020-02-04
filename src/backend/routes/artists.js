@@ -82,7 +82,7 @@ router.get("/artistInfo", async (req, res) => {
       BirthdayList: 1
     })
     .limit(1); //returns an array
-  console.log(result.length);
+
   // Error code is 404 because the artist was not found
   if (result.length == 0) {
     res.status(404).send(result);

@@ -4,7 +4,7 @@ import Input from "../common/Input";
 
 var url;
 if (process.env.NODE_ENV === "production")
-  url = new URL("https://dubstepdata.info/artistOnly");
+  url = new URL("https://bassbirthdays.com/artistOnly");
 else url = new URL("http://localhost:8080/artistOnly");
 
 /* Sourced from https://alligator.io/react/react-autocomplete/ */

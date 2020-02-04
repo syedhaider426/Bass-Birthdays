@@ -37,7 +37,7 @@ class AllBirthdays extends Component {
     document.getElementById("navbar").scrollIntoView();
     var url;
     if (process.env.NODE_ENV === "production")
-      url = "https://dubstepdata.info/artist";
+      url = "https://bassbirthdays.com/artist";
     else url = "http://localhost:8080/artist";
     fetch(url)
       .then(response => response.json())

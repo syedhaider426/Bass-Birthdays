@@ -6,7 +6,7 @@ import Joi from "@hapi/joi";
 var url;
 if (process.env.NODE_ENV === "development")
   url = new URL("http://localhost:8080/contactInfo");
-else url = new URL("https://www.dubstepdata.info/contactInfo");
+else url = new URL("https://bassbirthdays.com/contactInfo");
 
 class Contact extends Form {
   constructor(props) {
