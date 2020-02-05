@@ -1,16 +1,20 @@
 {
   "short_name": "Bass Birthdays",
   "name": "Bass Birthdays",
-  "icons": [
-    {
-      "src": "Bass-Birthdays-512.png",
-      "sizes": "512x512 256x256 192x192",
-      "type": "image/x-icon"
-    }
-  ],
   "start_url": "https://bassbirthdays.com",
   "display": "standalone",
-  "theme_color": "#000000",
   "background_color": "#ffffff",
-  "prefer_related_applications": true
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "Bass-Birthdays-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "Bass-Birthdays-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
 }
