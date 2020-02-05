@@ -6,11 +6,7 @@ import FilterTable from "./FilterTable";
 import Pagination from "../common/Paging";
 import "bootstrap/dist/js/bootstrap";
 import { withRouter } from "react-router-dom";
-
-/* Scroll to the top of the table*/
-function scrollToTop() {
-  document.getElementById("table").scrollIntoView();
-}
+import ScrollToTop from "../utils/scrollToTop";
 
 /* This component includes 3 separate components
  * -FilteredTable
@@ -57,7 +53,7 @@ class AllBirthdays extends Component {
     const { currentPage } = this.state;
     if (currentPage === page) return;
     this.setState({ currentPage: page });
-    scrollToTop();
+    ScrollToTop();
   };
 
   /* If a user clicks 'Next' or 'Previous',
@@ -69,7 +65,7 @@ class AllBirthdays extends Component {
     let { currentPage } = this.state;
     currentPage += change;
     this.setState({ currentPage });
-    scrollToTop();
+    ScrollToTop();
   };
 
   /* Changes the column to sort by */
@@ -204,9 +200,9 @@ class AllBirthdays extends Component {
             aria-label="Back to the Top of Table"
             title="Go back to the Top of the Birthdays Table"
             onKeyDown={e => {
-              if (e.keyCode === 13) scrollToTop();
+              if (e.keyCode === 13) ScrollToTop();
             }}
-            onClick={scrollToTop}
+            onClick={ScrollToTop}
           >
             Back to Top
           </button>
