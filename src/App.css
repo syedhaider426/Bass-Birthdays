@@ -215,6 +215,13 @@ hr {
   background-color: white;
 }
 
+@font-face {
+  font-family: "Arvo";
+  font-display: auto;
+  src: local("Arvo"),
+    url(https://fonts.gstatic.com/s/arvo/v9/rC7kKhY-eUDY-ucISTIf5PesZW2xOQ-xsNqO47m55DA.woff2)
+      format("woff2");
+}
 .contact {
   color: black !important;
 }

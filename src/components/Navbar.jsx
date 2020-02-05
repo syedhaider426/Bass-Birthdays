@@ -19,6 +19,7 @@ const Navbar = () => {
           data-toggle="collapse"
           data-target="#navbarToggle"
           aria-controls="navbarToggle"
+          aria-label="Navbar Toggler Icon"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
