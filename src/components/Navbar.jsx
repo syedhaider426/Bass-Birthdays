@@ -8,7 +8,11 @@ const Navbar = () => {
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg" id="navbar">
-        <Link className="navbar-brand main-title" to="/">
+        <Link
+          className="navbar-brand main-title"
+          to="/"
+          title="Bass Birthdays Home Button"
+        >
           <span className="bass-birthdays">Bass Birthdays </span>
           <i className="fa fa-birthday-cake fa-10x"></i>
         </Link>
