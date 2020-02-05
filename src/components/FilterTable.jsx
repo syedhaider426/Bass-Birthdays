@@ -57,7 +57,7 @@ const FilteredTable = ({
             onChange={handleSelect}
             ariaLabel="Records Per Page"
           />
-          <label className="ml-1">Records Per Page</label>
+          <label className="ml-1 records-per-page">Records Per Page</label>
           <button
             className="btn btn-primary refresh"
             onClick={refresh}

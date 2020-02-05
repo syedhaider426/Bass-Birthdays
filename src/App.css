@@ -85,8 +85,6 @@ td {
 }
 
 .td-image {
-  height: 100px;
-  width: 100px;
   object-fit: cover;
 }
 
@@ -204,9 +202,9 @@ select option {
 }
 
 table img {
-  width: 100px;
-  height: auto;
-  max-width: 100%;
+  border-radius: 100%;
+  height: 160px;
+  width: 160px;
 }
 
 span.Image {
@@ -317,6 +315,7 @@ hr {
   object-fit: cover;
   height: 225px;
   width: 225px;
+  border-radius: 100%;
 }
 
 .img-wrapper {
@@ -377,9 +376,10 @@ li.page-next {
 }
 
 .image-artist {
-  height: auto;
+  height: 225px;
   max-width: 100%;
   object-fit: cover;
+  border-radius: 100%;
 }
 a:not(.spotify-web-api) {
   color: white;
@@ -521,6 +521,20 @@ label span {
 
 .Toastify__toast-body {
   font-family: inherit;
+}
+
+@media only screen and (max-width: 365px) {
+  .records-per-page {
+    font-size: 14px;
+  }
+
+  select {
+    width: unset !important;
+  }
+
+  .current-birthdays-title {
+    font-size: 125% !important;
+  }
 }
 
 @media only screen and (max-width: 900px) {

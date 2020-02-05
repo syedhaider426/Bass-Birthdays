@@ -152,26 +152,29 @@ class ArtistProfile extends Component {
       topSongs,
       relatedArtists
     } = this.state;
-    const spotifyNote = (
-      <span>
-        <i style={{ color: "black" }}>
-          * Data sourced from{" "}
-          <a
-            className="spotify-web-api"
-            href="https://developer.spotify.com/documentation/web-api/"
-          >
-            Spotify Web API
-          </a>
-        </i>
-      </span>
-    );
+    // const spotifyNote = (
+    //   <span>
+    //     <i style={{ color: "black" }}>
+    //       * Data sourced from{" "}
+    //       <a
+    //         className="spotify-web-api"
+    //         href="https://developer.spotify.com/documentation/web-api/"
+    //       >
+    //         Spotify Web API
+    //       </a>
+    //     </i>
+    //   </span>
+    // );
 
     /* This section displays image, artist name, and birthday */
     const infoSection = (
       <Fragment>
         <img className="image-artist" src={image} alt={artist}></img>
+
         <div className="artist-profile">{artist}</div>
-        <div className="info ml-3">{birthday}</div>
+        <div>
+          <div className="info ml-3">{birthday}</div>
+        </div>
       </Fragment>
     );
 
@@ -245,13 +248,14 @@ class ArtistProfile extends Component {
 
     return (
       <div className="home-display">
-        <div className="col-sm-3">
-          {spotifyNote}
+        <div className="col-sm-12 center">
+          {/* {spotifyNote} */}
           {infoSection}
           {genresSection}
         </div>
-        <div className="col-sm-4">{tracksSection}</div>
-        <div className="col-sm-4">{artistsSection}</div>
+
+        <div className="col-sm-6">{artistsSection}</div>
+        <div className="col-sm-6">{tracksSection}</div>
       </div>
     );
   }
