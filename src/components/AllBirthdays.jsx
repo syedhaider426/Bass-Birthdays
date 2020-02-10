@@ -8,6 +8,11 @@ import "bootstrap/dist/js/bootstrap";
 import { withRouter } from "react-router-dom";
 import ScrollToTop from "../utils/scrollToTop";
 
+var url;
+if (process.env.NODE_ENV === "production")
+  url = "https://bassbirthdays.com/artist";
+else url = "http://localhost:8080/artist";
+
 /* This component includes 3 separate components
  * -FilteredTable
    -Table
@@ -15,6 +20,7 @@ import ScrollToTop from "../utils/scrollToTop";
 
  * This component shows all artists' birthdays in ascending order
  */
+
 class AllBirthdays extends Component {
   constructor(props) {
     super(props);
@@ -31,10 +37,7 @@ class AllBirthdays extends Component {
 
   componentDidMount() {
     document.getElementById("navbar").scrollIntoView();
-    var url;
-    if (process.env.NODE_ENV === "production")
-      url = "https://bassbirthdays.com/artist";
-    else url = "http://localhost:8080/artist";
+
     fetch(url)
       .then(response => response.json())
       .then(data => {
@@ -155,7 +158,7 @@ class AllBirthdays extends Component {
 
     const artistsLength = allArtists.length;
     const options = [25, 50, 75, 100];
-    const headers = ["", "Artist", "Birthday", "Genre"];
+    const headers = ["", "Artist", "Birthday", "Horoscope"];
 
     const {
       handleSearch,

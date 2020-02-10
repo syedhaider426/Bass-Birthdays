@@ -19,6 +19,9 @@ var artistSchema = mongoose.Schema({
   },
   Twitter: {
     type: String
+  },
+  Horoscope: {
+    type: String
   }
 });
 

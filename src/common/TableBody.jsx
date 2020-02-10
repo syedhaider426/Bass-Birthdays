@@ -1,6 +1,6 @@
 import React from "react";
 import convertISODateToString from "../utils/convertISODateToString";
-
+import LazyLoad from "react-lazyload";
 const TableBody = ({ data, isLoaded, handleClick }) => {
   /* When data has not been loaded, show a loading spinner */
   var loadedDiv = (
@@ -34,7 +34,7 @@ const TableBody = ({ data, isLoaded, handleClick }) => {
 
           <td>{item.Artist}</td>
           <td>{convertISODateToString(item.Birthday)}</td>
-          <td>{item.Genre[0]}</td>
+          <td>{item.Horoscope}</td>
         </tr>
       ))}
     </tbody>
