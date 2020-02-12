@@ -167,10 +167,10 @@ class ArtistProfile extends Component {
           {arrayOfSize10.map((arr, index) => (
             <div className="sweg">
               <li>
-                <RectShape
+                <img
                   color="gray"
-                  className="vertical-align"
-                  style={{ width: 75, height: 75 }}
+                  className="vertical-align rect-shape"
+                  style={{ width: 75, height: 75, backgroundColor: "gray" }}
                 />
               </li>
               <TextRow color="gray" />
@@ -188,13 +188,13 @@ class ArtistProfile extends Component {
           {arrayOfSize20.map((arr, index) => (
             <div className="sweg">
               <li>
-                <RectShape
+                <img
                   color="gray"
-                  className="vertical-align"
-                  style={{ width: 50, height: 75 }}
+                  className="vertical-align rect-shape"
+                  style={{ width: 75, height: 75, backgroundColor: "gray" }}
                 />
               </li>
-              <TextRow color="gray" />
+              <TextRow color="gray" style={{ width: 125, height: 20 }} />
             </div>
           ))}
         </ol>
