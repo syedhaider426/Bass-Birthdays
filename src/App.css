@@ -320,8 +320,8 @@ hr {
 /*height:auto, max-width:100% = equivalent to img-fluid*/
 .img-wrapper img {
   object-fit: cover;
-  height: 225px;
-  width: 225px;
+  height: 160px;
+  width: 160px;
   border-radius: 100%;
 }
 
@@ -420,6 +420,15 @@ h6 {
 
 label span {
   color: white;
+}
+
+.sweg {
+  display: flex;
+  color: white;
+}
+
+.vertical-align {
+  margin-bottom: 5%;
 }
 
 .artist-genre,
@@ -530,6 +539,71 @@ label span {
   font-family: inherit;
 }
 
+@media only screen and (max-width: 768px) {
+  .td-image {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  table td,
+  table th {
+    font-size: 0.8em;
+  }
+}
+
+@media only screen and (max-width: 485px) {
+  table td,
+  table th {
+    font-size: 0.75em;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  table td,
+  table th {
+    font-size: 0.7em;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  table td,
+  table th {
+    font-size: 0.65em;
+  }
+}
+
+@media only screen and (max-width: 330px) {
+  table th {
+    font-size: 0.5em;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  table img {
+    width: 50px !important;
+    height: 50px !important;
+    max-width: unset !important;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  table img {
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-height: 912px) and (max-width: 450px) and (orientation: portrait) {
+  .pre-scrollable {
+    height: initial !important;
+    overflow-y: hidden !important;
+  }
+  .col-md-7 {
+    height: 100% !important;
+  }
+}
+
 @media only screen and (max-width: 365px) {
   .records-per-page {
     font-size: 14px;
@@ -556,33 +630,6 @@ label span {
   }
 }
 
-@media only screen and (max-width: 520px) {
-  table img {
-    width: 50px !important;
-    height: 50px !important;
-    max-width: unset !important;
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  table img {
-    max-width: 100%;
-  }
-}
-@media only screen and (max-width: 1400px) {
-  .img-wrapper img {
-    width: 175px !important;
-    height: 175px !important;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  .img-wrapper img {
-    width: 130px !important;
-    height: 130px !important;
-  }
-}
-
 @media only screen and (max-width: 920px) and (min-width: 770px) {
   .pagination.count5 {
     flex-wrap: wrap !important;
@@ -603,31 +650,19 @@ label span {
 
 @media only screen and (max-width: 1200px) and (min-width: 732px) {
   .h2-title {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 }
 
 @media only screen and (max-width: 732px) and (min-width: 576px) {
   .h2-title {
-    font-size: 0.8rem;
+    font-size: 1.2rem;
   }
 }
 
 @media only screen and (max-width: 575px) {
   .h2-title {
-    font-size: 2rem;
-  }
-}
-
-@media only screen and (max-width: 470px) {
-  td {
-    font-size: 0.9em;
-  }
-}
-
-@media only screen and (max-width: 470px) {
-  td {
-    font-size: 0.9em;
+    font-size: 1.4rem;
   }
 }
 
@@ -668,31 +703,6 @@ label span {
 @media only screen and (max-width: 500px) {
   .link-divider {
     width: 5% !important;
-  }
-}
-
-@media only screen and (max-width: 350px) {
-  table th {
-    font-size: 12px;
-  }
-  table td {
-    font-size: 12px;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  th {
-    font-size: medium;
-  }
-}
-
-@media only screen and (max-height: 912px) and (max-width: 450px) and (orientation: portrait) {
-  .pre-scrollable {
-    height: initial !important;
-    overflow-y: hidden !important;
-  }
-  .col-md-7 {
-    height: 100% !important;
   }
 }
 

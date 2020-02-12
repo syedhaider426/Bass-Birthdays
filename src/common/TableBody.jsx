@@ -1,6 +1,6 @@
 import React from "react";
 import convertISODateToString from "../utils/convertISODateToString";
-import LazyLoad from "react-lazyload";
+
 const TableBody = ({ data, isLoaded, handleClick }) => {
   /* When data has not been loaded, show a loading spinner */
   var loadedDiv = (

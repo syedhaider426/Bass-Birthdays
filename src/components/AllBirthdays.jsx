@@ -6,7 +6,7 @@ import FilterTable from "./FilterTable";
 import Pagination from "../common/Paging";
 import "bootstrap/dist/js/bootstrap";
 import { withRouter } from "react-router-dom";
-import ScrollToTop from "../utils/scrollToTop";
+import { ScrollToTableTop } from "../utils/scrollToTop";
 
 var url;
 if (process.env.NODE_ENV === "production")
@@ -56,7 +56,7 @@ class AllBirthdays extends Component {
     const { currentPage } = this.state;
     if (currentPage === page) return;
     this.setState({ currentPage: page });
-    ScrollToTop();
+    ScrollToTableTop();
   };
 
   /* If a user clicks 'Next' or 'Previous',
@@ -68,7 +68,7 @@ class AllBirthdays extends Component {
     let { currentPage } = this.state;
     currentPage += change;
     this.setState({ currentPage });
-    ScrollToTop();
+    ScrollToTableTop();
   };
 
   /* Changes the column to sort by */
@@ -203,9 +203,9 @@ class AllBirthdays extends Component {
             aria-label="Back to the Top of Table"
             title="Go back to the Top of the Birthdays Table"
             onKeyDown={e => {
-              if (e.keyCode === 13) ScrollToTop();
+              if (e.keyCode === 13) ScrollToTableTop();
             }}
-            onClick={ScrollToTop}
+            onClick={ScrollToTableTop}
           >
             Back to Top
           </button>

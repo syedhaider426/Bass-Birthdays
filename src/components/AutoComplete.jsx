@@ -61,7 +61,7 @@ class AutoComplete extends Component {
   };
 
   // Event fired when the user clicks on a suggestion
-  onClick = ({ target: input }) => {
+  onClick = ({ target: input }, e) => {
     // Update the user input and reset the rest of the state
     this.setState({
       activeSuggestion: 0,
@@ -107,7 +107,8 @@ class AutoComplete extends Component {
   handleSubmit = e => {
     e.preventDefault();
     document.body.style.cursor = "wait"; //wait cursor until page is redirected
-    const { userInput: artist } = this.state; //gets the textbox's value
+    var { userInput: artist } = this.state; //gets the textbox's value
+    artist = artist.trim();
     var params = { artist: artist };
     url.search = new URLSearchParams(params).toString();
 
@@ -124,6 +125,18 @@ class AutoComplete extends Component {
           showSuggestions: true,
           userInput: ""
         });
+
+        /* If the user enters in an Artist whose page they already have open, then just reload the page
+         * Ex) User selected Bassnectar. They search for Bassnectar and hit enter. This will reload the page
+         */
+        var currentPath = this.props.history.location.pathname //gets the current pathname
+          .substring(9)
+          .toLowerCase();
+
+        //Compares current path with the artist selected in Autocomplete; reloads if true
+        if (currentPath === artist.toLowerCase().trim()) {
+          window.location.reload(false);
+        }
         this.props.history.push("/profile/" + artist);
       });
   };

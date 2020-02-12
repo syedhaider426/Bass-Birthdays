@@ -5,6 +5,7 @@ import AutoComplete from "./AutoComplete";
 
 const NotFound = () => {
   document.body.style.cursor = "default";
+
   return (
     <React.Fragment>
       <div className="container ">

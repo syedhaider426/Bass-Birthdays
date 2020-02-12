@@ -2,7 +2,7 @@ const express = require("express");
 const artists = require("../routes/artists");
 const contact = require("../routes/contact");
 const twitter = require("../routes/twitter");
-// const scripts = require("../routes/scripts");
+const scripts = require("../routes/scripts");
 const cors = require("cors");
 const path = require("path");
 
@@ -23,7 +23,7 @@ module.exports = function(app) {
   app.use("/", contact);
 
   // Route used to get data from the Spotify API
-  // app.use("/", scripts);
+  app.use("/", scripts);
 
   // Cron-job for twitter bot to keep running
   twitter.cronjob();

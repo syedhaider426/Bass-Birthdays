@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import placeholder from "../images/picture-placeholder.png";
-
+//import placeholder from "../images/picture-placeholder.png";
+import ReactPlaceholder from "react-placeholder";
+import "react-placeholder/lib/reactPlaceholder.css";
+import { RoundShape } from "react-placeholder/lib/placeholders";
 var url;
 if (process.env.NODE_ENV === "production")
   url = new URL("https://bassbirthdays.com/currentArtist");
@@ -27,8 +29,9 @@ class CurrentBirthdays extends Component {
     this.prevArrow = React.createRef();
     this.nextArrow = React.createRef();
     this.state = {
-      currentArtists: [{ profileImage: placeholder }],
-      currentDate: new Date()
+      currentArtists: [],
+      currentDate: new Date(),
+      ready: false
     };
   }
   componentDidMount() {
@@ -47,7 +50,7 @@ class CurrentBirthdays extends Component {
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        this.setState({ currentArtists: data });
+        this.setState({ currentArtists: data, ready: true });
       })
       .catch(err =>
         console.log("componentDidMount (CurrentBirthday) - Error", err)
@@ -104,7 +107,17 @@ class CurrentBirthdays extends Component {
   };
 
   render() {
-    const { currentArtists, currentDate } = this.state;
+    const { currentArtists, currentDate, ready } = this.state;
+
+    const imagePlaceholder = (
+      <div className="my-awesome-placeholder">
+        <RoundShape
+          color="gray"
+          className="margin-center"
+          style={{ width: 160, height: 160 }}
+        />
+      </div>
+    );
 
     /* Length is checked to see if there are any artists who have a birthday
      * on the current daye
@@ -160,24 +173,30 @@ class CurrentBirthdays extends Component {
         <hr></hr>
 
         {/*If there are no birthdays, show "None"; else, show the artists*/}
-        {length === 0 ? (
-          noBirthdays
-        ) : (
-          <div className="row">
-            {currentArtists.map(artist => (
-              <div className="img-wrapper" key={artist._id}>
-                <Link to={"/profile/" + artist.Artist}>
-                  <img
-                    className="img-fluid"
-                    src={artist.ProfileImage}
-                    alt={artist.Artist}
-                  />
-                </Link>
-                <div className="curr-artist-name">{artist.Artist}</div>
-              </div>
-            ))}
-          </div>
-        )}
+        <ReactPlaceholder
+          showLoadingAnimation
+          ready={ready}
+          customPlaceholder={imagePlaceholder}
+        >
+          {length === 0 ? (
+            noBirthdays
+          ) : (
+            <div className="row">
+              {currentArtists.map(artist => (
+                <div className="img-wrapper" key={artist._id}>
+                  <Link to={"/profile/" + artist.Artist}>
+                    <img
+                      className="img-fluid"
+                      src={artist.ProfileImage}
+                      alt={artist.Artist}
+                    />
+                  </Link>
+                  <div className="curr-artist-name">{artist.Artist}</div>
+                </div>
+              ))}
+            </div>
+          )}
+        </ReactPlaceholder>
       </React.Fragment>
     );
   }

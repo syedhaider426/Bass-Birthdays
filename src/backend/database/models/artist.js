@@ -22,6 +22,9 @@ var artistSchema = mongoose.Schema({
   },
   Horoscope: {
     type: String
+  },
+  Popularity: {
+    type: Number
   }
 });
 

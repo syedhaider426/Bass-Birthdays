@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const rp = require("request-promise"); // "Request" library, used to make post/update/delete requests
+const rp = require("request-promise"); // "Request" library, used to make post/updateOne/delete requests
 const querystring = require("querystring");
 
 const Artist = require("../database/models/artist"); //Artist model
@@ -72,6 +72,7 @@ router.get("/currentArtist", async (req, res) => {
 router.get("/artistInfo", async (req, res) => {
   const artist = req.query.artist;
   const result = await Artist.find({ Artist: artist })
+    .collation({ locale: "en", strength: 2 })
     .select({
       _id: 0,
       ProfileImage: 1,
@@ -79,7 +80,8 @@ router.get("/artistInfo", async (req, res) => {
       Birthday: 1,
       Genre: 1,
       SpotifyID: 1,
-      BirthdayList: 1
+      BirthdayList: 1,
+      Popularity: 1
     })
     .limit(1); //returns an array
 
