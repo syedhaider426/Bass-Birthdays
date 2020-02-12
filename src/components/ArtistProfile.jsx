@@ -191,7 +191,7 @@ class ArtistProfile extends Component {
                 <RectShape
                   color="gray"
                   className="vertical-align"
-                  style={{ width: 75, height: 75 }}
+                  style={{ width: 50, height: 75 }}
                 />
               </li>
               <TextRow color="gray" />
