@@ -377,7 +377,7 @@ li.page-next {
 
 .image-artist {
   height: 160px;
-  max-width: 100%;
+  max-width: 160px;
   object-fit: cover;
   border-radius: 100%;
 }

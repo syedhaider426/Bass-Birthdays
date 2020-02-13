@@ -209,15 +209,16 @@ class ArtistProfile extends Component {
           customPlaceholder={imagePlaceholder}
         >
           <img className="image-artist" src={image} alt={artist}></img>
-        </ReactPlaceholder>
-        <div
-          className="margin-center"
-          style={{ width: "240px", fontSize: "36px" }}
-        >
-          <div className="artist-profile">
-            <span>{artist}</span>
+          <div
+            className="margin-center"
+            style={{ width: "240px", fontSize: "36px" }}
+          >
+            <div className="artist-profile">
+              <span>{artist}</span>
+            </div>
           </div>
-        </div>
+        </ReactPlaceholder>
+
         <div
           className="margin-center"
           style={{ width: "200px", fontSize: "36px", maxWidth: "100%" }}
