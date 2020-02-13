@@ -5,11 +5,7 @@ import convertISODateToString from "../utils/convertISODateToString";
 import { ScrollToNavbarTop } from "../utils/scrollToTop";
 import ReactPlaceholder from "react-placeholder";
 import "react-placeholder/lib/reactPlaceholder.css";
-import {
-  TextRow,
-  RectShape,
-  RoundShape
-} from "react-placeholder/lib/placeholders";
+import { TextRow, RoundShape } from "react-placeholder/lib/placeholders";
 
 var url;
 if (process.env.NODE_ENV === "production")
@@ -171,6 +167,7 @@ class ArtistProfile extends Component {
                   color="gray"
                   className="vertical-align rect-shape"
                   style={{ width: 75, height: 75, backgroundColor: "gray" }}
+                  alt=""
                 />
               </li>
               <TextRow color="gray" />
@@ -192,6 +189,7 @@ class ArtistProfile extends Component {
                   color="gray"
                   className="vertical-align rect-shape"
                   style={{ width: 75, height: 75, backgroundColor: "gray" }}
+                  alt=""
                 />
               </li>
               <TextRow color="gray" style={{ width: 125, height: 20 }} />

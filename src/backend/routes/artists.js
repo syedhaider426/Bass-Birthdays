@@ -149,7 +149,7 @@ async function getSpotifyTopTracks(spotifyID) {
 
     for (var x = 0; x < response.tracks.length; x++) {
       var track = response.tracks[x].name;
-      var image = response.tracks[x].album.images[0].url;
+      var image = response.tracks[x].album.images[2].url;
       var trackURL = response.tracks[x].external_urls.spotify;
       tracks.push({
         track: track,
@@ -194,9 +194,9 @@ async function getSpotifyRelatedArtists(spotifyID) {
     for (var x = 0; x < response.artists.length; x++) {
       var artist = response.artists[x].name;
       var image = "";
-      if (response.artists[x].images[0] === undefined) {
+      if (response.artists[x].images[2] === undefined) {
         image = "empty-image.png";
-      } else image = response.artists[x].images[0].url;
+      } else image = response.artists[x].images[2].url;
       var external_urls = response.artists[x].external_urls.spotify;
       artists.push({
         artist: artist,

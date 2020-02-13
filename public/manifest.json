@@ -1,7 +1,7 @@
 {
   "short_name": "Bass Birthdays",
   "name": "Bass Birthdays",
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
@@ -9,11 +9,6 @@
     {
       "src": "Bass-Birthdays-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "Bass-Birthdays-192x192.png",
-      "sizes": "192x192",
       "type": "image/png"
     }
   ]
