@@ -31,7 +31,8 @@ class AllBirthdays extends Component {
       sortColumn: { path: "Birthday", order: "asc" },
       searchQuery: "",
       bdayQuery: "",
-      isLoaded: false
+      isLoaded: false,
+      totalRecords: 0
     };
   }
 
@@ -41,7 +42,11 @@ class AllBirthdays extends Component {
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        this.setState({ artists: data, isLoaded: true });
+        this.setState({
+          artists: data,
+          isLoaded: true,
+          totalRecords: data.length
+        });
       })
       .catch(err =>
         console.log("ComponentDidMount (AllBirthdays) - Error", err)
@@ -121,7 +126,8 @@ class AllBirthdays extends Component {
       sortColumn,
       searchQuery,
       bdayQuery,
-      isLoaded
+      isLoaded,
+      totalRecords
     } = this.state;
 
     /* Filters out the artists that include the specified letters */
@@ -185,6 +191,9 @@ class AllBirthdays extends Component {
           refresh={refresh}
           options={options}
           handleSelect={handleSelect}
+          currentPage={currentPage}
+          amountPerPage={amountPerPage}
+          totalRecords={totalRecords}
         />
         <div className="pre-scrollable">
           <Table

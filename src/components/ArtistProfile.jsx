@@ -243,9 +243,11 @@ class ArtistProfile extends Component {
             </div>
           </ReactPlaceholder>
         </div>
-        <div style={{ width: "480px" }} className="margin-center">
-          <ReactPlaceholder ready={ready} showLoadingAnimation>
-            <span style={{ color: "white" }}>{genres.join(", ")}</span>
+        <div style={{ width: "350px" }} className="margin-center">
+          <ReactPlaceholder ready={ready} rows={2} showLoadingAnimation>
+            <div className="info ml-3">
+              <span>{genres.join(", ")}</span>
+            </div>
           </ReactPlaceholder>
         </div>
       </Fragment>

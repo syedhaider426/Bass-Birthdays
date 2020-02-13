@@ -161,7 +161,7 @@ nav ul li a:hover {
 select {
   background: transparent !important;
   color: white !important;
-  width: 7rem !important;
+  width: 5rem !important;
 }
 
 select option {

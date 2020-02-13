@@ -17,8 +17,15 @@ const FilteredTable = ({
   handleSelect,
   refresh,
   searchQuery,
-  bdayQuery
+  bdayQuery,
+  currentPage,
+  totalRecords
 }) => {
+  //if currentpage = 1, and records total = 25, then show 1-25,1-50,1-75,1-100
+  const startRecord = (currentPage - 1) * amountPerPage;
+  var endRecord = startRecord + amountPerPage;
+  if (endRecord > totalRecords) endRecord = totalRecords;
+  const records = "Showing entries: " + (startRecord + 1) + " - " + endRecord;
   return (
     <Fragment>
       <div className="mb-1">
@@ -57,16 +64,19 @@ const FilteredTable = ({
             onChange={handleSelect}
             ariaLabel="Records Per Page"
           />
-          <label className="ml-1 records-per-page">Records Per Page</label>
-          <button
-            className="btn btn-primary refresh"
+          <label className="ml-1 records-per-page">entries</label>
+          <span className="refresh mr-2" style={{ color: "white" }}>
+            {records}{" "}
+          </span>
+          {/* <button
+            className="btn btn-primary"
             onClick={refresh}
             onKeyDown={refresh}
             aria-label="Refresh"
             title="Refresh the data in the Birthdays Table"
           >
-            {<i className="fa fa-lg fa-refresh"></i>}
-          </button>
+            {<span>Clear Filters</span>}
+          </button> */}
         </div>
       </div>
     </Fragment>
