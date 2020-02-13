@@ -25,11 +25,11 @@ const TableBody = ({ data, isLoaded, handleClick }) => {
           title={"Click to view " + item.Artist + "'s Profile."}
         >
           <td>
-            {/* <img
+            <img
               src={item.ProfileImage}
               className="mx-auto td-image"
               alt={item.Artist}
-            /> */}
+            />
           </td>
 
           <td>{item.Artist}</td>
