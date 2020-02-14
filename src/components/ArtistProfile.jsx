@@ -166,7 +166,7 @@ class ArtistProfile extends Component {
                 <img
                   color="gray"
                   className="vertical-align rect-shape"
-                  style={{ width: 75, height: 75, backgroundColor: "gray" }}
+                  style={{ width: 64, height: 64, backgroundColor: "gray" }}
                   alt=""
                 />
               </li>
@@ -188,7 +188,7 @@ class ArtistProfile extends Component {
                 <img
                   color="gray"
                   className="vertical-align rect-shape"
-                  style={{ width: 75, height: 75, backgroundColor: "gray" }}
+                  style={{ width: 64, height: 64, backgroundColor: "gray" }}
                   alt=""
                 />
               </li>
@@ -238,11 +238,11 @@ class ArtistProfile extends Component {
         <div style={{ width: "240px" }} className="margin-center">
           <ReactPlaceholder ready={ready} rows={2} showLoadingAnimation>
             <div className="info ml-3">
-              <u>Genres</u>
+              <u>{genres.length !== 0 ? "Genres" : ""}</u>
             </div>
           </ReactPlaceholder>
         </div>
-        <div style={{ width: "350px" }} className="margin-center">
+        <div style={{ width: "350px" }} className="genres-div margin-center">
           <ReactPlaceholder ready={ready} rows={2} showLoadingAnimation>
             <div className="info ml-3">
               <span>{genres.join(", ")}</span>
@@ -264,25 +264,35 @@ class ArtistProfile extends Component {
           ready={ready}
           customPlaceholder={tracksHolder}
         >
-          <ol>
-            {topSongs.map(song => (
-              <li key={song.track} className="li-song">
-                <a
-                  href={song.url}
-                  title={"Click to listen to " + song.track + " on Spotify"}
-                >
-                  <img
-                    className="li-song img"
-                    src={
-                      song.image !== "empty-image.png" ? song.image : emptyImage
-                    }
-                    alt={song.track}
-                  />
-                  <span>{song.track}</span>
-                </a>
-              </li>
-            ))}
-          </ol>
+          <table>
+            <tbody>
+              {topSongs.map(song => (
+                <div>
+                  <td key={song.track} className="li-song">
+                    <a
+                      href={song.url}
+                      title={"Click to listen to " + song.track + " on Spotify"}
+                    >
+                      <img
+                        className="li-song img"
+                        src={
+                          song.image !== "empty-image.png"
+                            ? song.image
+                            : emptyImage
+                        }
+                        alt={song.track}
+                      />
+                    </a>
+                  </td>
+                  <td>
+                    <div>
+                      <span className="span-artist-profile">{song.track}</span>
+                    </div>
+                  </td>
+                </div>
+              ))}
+            </tbody>
+          </table>
         </ReactPlaceholder>
       </div>
     );
@@ -299,23 +309,35 @@ class ArtistProfile extends Component {
           ready={ready}
           customPlaceholder={artistsHolder}
         >
-          <ol className="related-artists-list">
-            {relatedArtists.map(a => (
-              <li key={a.artist} className="li-artist">
-                <a
-                  href={a.url}
-                  title={"Click to view " + a.artist + "'s profile on Spotify"}
-                >
-                  <img
-                    className="li-artist img"
-                    src={a.image !== "empty-image.png" ? a.image : emptyImage}
-                    alt={a.artist}
-                  />
-                  <span aria-label={a.artist}>{a.artist}</span>
-                </a>
-              </li>
-            ))}
-          </ol>
+          <table className="related-artists-list">
+            <tbody>
+              {relatedArtists.map(a => (
+                <div>
+                  <td key={a.artist} className="li-artist">
+                    <a
+                      href={a.url}
+                      title={
+                        "Click to view " + a.artist + "'s profile on Spotify"
+                      }
+                    >
+                      <img
+                        className="li-artist img"
+                        src={
+                          a.image !== "empty-image.png" ? a.image : emptyImage
+                        }
+                        alt={a.artist}
+                      />{" "}
+                    </a>
+                  </td>
+                  <td>
+                    <span aria-label={a.artist} className="span-artist-profile">
+                      {a.artist}
+                    </span>
+                  </td>
+                </div>
+              ))}
+            </tbody>
+          </table>
         </ReactPlaceholder>
       </div>
     );
