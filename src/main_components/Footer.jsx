@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer id="footer" className="footer">
-      <p>
+      <p className="mt-2">
         <Link to="/">Home</Link>
         <span className="link-divider"></span>
         <Link to="/about">About</Link>
@@ -16,14 +16,16 @@ const Footer = () => {
         <Link to="/contact">Contact</Link>
       </p>
       <p className="footer-details">
-        Powered by{" "}
-        <a
-          className="spotify-web-api"
-          href="https://developer.spotify.com/documentation/web-api/"
-        >
-          Spotify Web Api &nbsp;
-        </a>
-        | © BassBirthdays.com
+        <span className="spotify-span">
+          Powered by&nbsp;
+          <a
+            className="spotify-web-api"
+            href="https://developer.spotify.com/documentation/web-api/"
+          >
+            Spotify Web Api &nbsp;|&nbsp;
+          </a>
+        </span>
+        <span>© BassBirthdays.com</span>
       </p>
     </footer>
   );

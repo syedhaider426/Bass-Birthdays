@@ -1,10 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AutoComplete from "./AutoComplete";
+import { withRouter } from "react-router-dom";
 
 /* Navbar is displayed at the top of page */
 
-const Navbar = () => {
+const Navbar = withRouter(props => {
+  function validateCurrentPage(url) {
+    if (url.location.pathname === "/") window.location.reload();
+  }
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg" id="navbar">
@@ -12,6 +16,7 @@ const Navbar = () => {
           className="navbar-brand main-title"
           to="/"
           title="Bass Birthdays Home Button"
+          onClick={() => validateCurrentPage(props)}
         >
           <span className="bass-birthdays">Bass Birthdays </span>
           <i className="fa fa-birthday-cake fa-10x"></i>
@@ -63,6 +68,6 @@ const Navbar = () => {
       </nav>
     </div>
   );
-};
+});
 
 export default Navbar;

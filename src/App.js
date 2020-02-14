@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import Header from "./main_components/Header";
 import Content from "./main_components/Content";
@@ -26,11 +26,11 @@ toast.configure();
 
 function App() {
   return (
-    <React.Fragment>
+    <Fragment>
       <Header />
       <Content />
       <Footer />
-    </React.Fragment>
+    </Fragment>
   );
 }
 

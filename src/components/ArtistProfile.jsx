@@ -159,21 +159,25 @@ class ArtistProfile extends Component {
     var arrayOfSize10 = new Array(10).fill(0);
     const tracksHolder = (
       <div>
-        <ol>
-          {arrayOfSize10.map((arr, index) => (
-            <div className="sweg">
-              <li>
-                <img
-                  color="gray"
-                  className="vertical-align rect-shape"
-                  style={{ width: 64, height: 64, backgroundColor: "gray" }}
-                  alt=""
-                />
-              </li>
-              <TextRow color="gray" />
-            </div>
-          ))}
-        </ol>
+        <table>
+          <tbody>
+            {arrayOfSize10.map((arr, index) => (
+              <tr className="sweg">
+                <td>
+                  <img
+                    color="gray"
+                    className="vertical-align rect-shape"
+                    style={{ width: 64, height: 64, backgroundColor: "gray" }}
+                    alt=""
+                  />
+                </td>
+                <td>
+                  <TextRow color="gray" style={{ width: 125, height: 20 }} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
 
@@ -181,21 +185,25 @@ class ArtistProfile extends Component {
     var arrayOfSize20 = new Array(20).fill(0);
     const artistsHolder = (
       <div>
-        <ol className="related-artists-list">
-          {arrayOfSize20.map((arr, index) => (
-            <div className="sweg">
-              <li>
-                <img
-                  color="gray"
-                  className="vertical-align rect-shape"
-                  style={{ width: 64, height: 64, backgroundColor: "gray" }}
-                  alt=""
-                />
-              </li>
-              <TextRow color="gray" style={{ width: 125, height: 20 }} />
-            </div>
-          ))}
-        </ol>
+        <table className="related-artists-list">
+          <tbody>
+            {arrayOfSize20.map((arr, index) => (
+              <tr className="sweg">
+                <td>
+                  <img
+                    color="gray"
+                    className="vertical-align rect-shape"
+                    style={{ width: 64, height: 64, backgroundColor: "gray" }}
+                    alt=""
+                  />
+                </td>
+                <td>
+                  <TextRow color="gray" style={{ width: 125, height: 20 }} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
 
@@ -267,7 +275,7 @@ class ArtistProfile extends Component {
           <table>
             <tbody>
               {topSongs.map(song => (
-                <div>
+                <tr>
                   <td key={song.track} className="li-song">
                     <a
                       href={song.url}
@@ -285,11 +293,9 @@ class ArtistProfile extends Component {
                     </a>
                   </td>
                   <td>
-                    <div>
-                      <span className="span-artist-profile">{song.track}</span>
-                    </div>
+                    <span className="span-artist-profile">{song.track}</span>
                   </td>
-                </div>
+                </tr>
               ))}
             </tbody>
           </table>
@@ -312,7 +318,7 @@ class ArtistProfile extends Component {
           <table className="related-artists-list">
             <tbody>
               {relatedArtists.map(a => (
-                <div>
+                <tr>
                   <td key={a.artist} className="li-artist">
                     <a
                       href={a.url}
@@ -334,7 +340,7 @@ class ArtistProfile extends Component {
                       {a.artist}
                     </span>
                   </td>
-                </div>
+                </tr>
               ))}
             </tbody>
           </table>
