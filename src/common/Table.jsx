@@ -16,7 +16,7 @@ const Table = ({
 }) => {
   return (
     <div className="table-responsive">
-      <table className="table table-sm" id="table">
+      <table className="table table-sm all-birthdays-table" id="table">
         <TableHeader
           sortColumn={sortColumn}
           onSort={onSort}

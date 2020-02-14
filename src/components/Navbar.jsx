@@ -24,6 +24,7 @@ const Navbar = () => {
           data-target="#navbarToggle"
           aria-controls="navbarToggle"
           aria-label="Navbar Toggler Icon"
+          aria-expanded="false"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
