@@ -2,7 +2,6 @@ import React from "react";
 import { toast } from "react-toastify";
 import Form from "../common/Form";
 import Joi from "@hapi/joi";
-import ReCAPTCHA from "react-google-recaptcha";
 
 var url;
 if (process.env.NODE_ENV === "development")

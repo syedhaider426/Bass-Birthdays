@@ -76,7 +76,7 @@ class Form extends Component {
     return (
       <ReCAPTCHA
         onChange={this.verifyCaptcha}
-        sitekey={process.env.recaptcha_site_key}
+        sitekey={"6LeSQ9kUAAAAAAbEPtNAB97hC9fyqbbYb1epP3Dn"}
         ref={refCaptcha}
       ></ReCAPTCHA>
     );
