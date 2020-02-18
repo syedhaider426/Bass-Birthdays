@@ -2,6 +2,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import Form from "../common/Form";
 import Joi from "@hapi/joi";
+import ReCAPTCHA from "react-google-recaptcha";
 
 var url;
 if (process.env.NODE_ENV === "development")
@@ -12,9 +13,10 @@ class Contact extends Form {
   constructor(props) {
     super(props);
     this.state = {
-      data: { name: "", email: "", comment: "" },
+      data: { name: "", email: "", comment: "", recaptchaVerification: false },
       errors: {}
     };
+    this.recaptchaRef = React.createRef();
   }
 
   schema = Joi.object().keys({
@@ -26,21 +28,23 @@ class Contact extends Form {
       .label("Email"),
     comment: Joi.string()
       .required()
-      .label("Comment")
+      .label("Comment"),
+    recaptchaVerification: Joi.boolean()
+      .valid(true)
+      .label("Recaptcha")
   });
 
   submitValues = () => {
     const { name, email, comment } = this.state.data;
-    var params = { name, email, comment };
+    const recaptchaValue = this.recaptchaRef.current.getValue();
+    var params = { name, email, comment, recaptchaValue };
     url.search = new URLSearchParams(params).toString();
-    console.log(url);
     fetch(url, { method: "POST" })
       .then(() => {
         toast.success("🚀 Successfully submitted contact info!");
       })
       .catch(err => {
-        console.log("Error - Contact Info", err);
-        toast.error("🚀 Unable to submit contact info. Try again later.");
+        toast.error("🚀 Unable to send email. Please try again later!");
       });
   };
 
@@ -68,7 +72,6 @@ class Contact extends Form {
     /* render Input/TextArea - name,autoFocus,type,placeholder,
      * className,labelClassName,label, ariaRequired
      */
-
     return (
       <div className="center">
         <h1>
@@ -79,7 +82,7 @@ class Contact extends Form {
           we'll respond as soon as possible.
         </p>
         <div className="container contact-jumbotron">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} method="POST">
             {this.renderInput(
               "name",
               true,
@@ -111,7 +114,8 @@ class Contact extends Form {
               commentLabel,
               true
             )}
-
+            <br></br>
+            {this.renderCaptcha(this.recaptchaRef)}
             {this.renderButton("Submit")}
           </form>
         </div>

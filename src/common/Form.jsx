@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Input from "./Input";
 import TextArea from "./TextArea";
+import ReCAPTCHA from "react-google-recaptcha";
 
 class Form extends Component {
   constructor(props) {
@@ -24,6 +25,12 @@ class Form extends Component {
     return errors;
   };
 
+  verifyCaptcha = () => {
+    const data = this.state.data;
+    data["recaptchaVerification"] = true;
+    this.setState({ data });
+  };
+
   /*Make fields required*/
   handleSubmit = e => {
     /* This prevents the default behavior of submitting form to server,
@@ -34,11 +41,15 @@ class Form extends Component {
     //Validates all info has been entered
     const errors = this.validate();
 
-    /* If errors returns null, then set errors object to be
-     * an empty object. Else, display the error
-     */
-    this.setState({ errors: errors || {} });
-
+    if (errors !== null) {
+      if (errors.recaptchaVerification.length > 0)
+        alert("Please verify that you are a human!");
+    } else {
+      /* If errors returns null, then set errors object to be
+       * an empty object. Else, display the error
+       */
+      this.setState({ errors: errors || {} });
+    }
     if (errors) {
       return;
     }
@@ -60,6 +71,16 @@ class Form extends Component {
     data[input.name] = input.value;
     this.setState({ data });
   };
+
+  renderCaptcha(refCaptcha) {
+    return (
+      <ReCAPTCHA
+        onChange={this.verifyCaptcha}
+        sitekey={process.env.recaptcha_site_key}
+        ref={refCaptcha}
+      ></ReCAPTCHA>
+    );
+  }
 
   renderButton(label) {
     return (

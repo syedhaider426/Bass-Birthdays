@@ -6,21 +6,27 @@ const fromEmail = config.get("fromEmail");
 const configurationSet = config.get("configurationSet");
 const express = require("express");
 const router = express.Router();
-
+const rp = require("request-promise");
 const errorLog = require("../../utils/logger").errorLog;
 const successLog = require("../../utils/logger").successLog;
-
+const fetch = require("node-fetch");
 /*https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/js-sdk-dv.pdf*/
 
 // This will send the user's contact info to the "toEmail"
 router.post("/contactInfo", async (req, res) => {
-  const { name, email, comment } = req.query.name;
+  var { name, email, comment, recaptchaValue: response } = req.query;
+  const url = new URL("https://www.google.com/recaptcha/api/siteverify");
+  const secret = config.get("recaptchaServer");
   if (name === "" || email === "" || comment === "") {
-    res.status(400).send("Please enter a name, email, and comment");
-    return;
+    return res.status(400).send("Please enter a name, email, and comment");
   }
+
+  const recaptchaParams = { response, secret };
+  url.search = new URLSearchParams(recaptchaParams).toString();
+  fetch(url, { method: "POST" });
+
   /* Useful resource: https://medium.com/@yashoda.charith10/sending-emails-using-aws-ses-nodejs-460b8cc6d0d5*/
-  const params = {
+  const serverParams = {
     Source: fromEmail,
     Template: "EmailTemplate",
     ConfigurationSetName: configurationSet,
@@ -35,19 +41,21 @@ router.post("/contactInfo", async (req, res) => {
     apiVersion: "2010-12-01",
     region: region
   })
-    .sendTemplatedEmail(params)
+    .sendTemplatedEmail(serverParams)
     .promise();
 
   // Send email and handle promise's fulfilled/rejected states by logging to winston logger
   sendPromise
     .then(function(data) {
       successLog.info(data.MessageId);
+      return res.status(200).send("Submitted contact info");
     })
     .catch(function(err) {
       errorLog.error(err, err.stack);
+      return res
+        .status(400)
+        .send("Unable to submit contact info. Please try again.");
     });
-
-  res.status(200).send("Submitted contact info");
 });
 
 module.exports = router;
