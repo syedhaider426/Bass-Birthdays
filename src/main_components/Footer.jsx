@@ -1,19 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
+import { Link, useHistory } from "react-router-dom";
 /* Footer contains navigation links to Home/About/Contact.
  * It also contains information about where to get more info on the Spotify
  * Web Api.
  */
-const Footer = () => {
+function Footer() {
+  let history = useHistory();
+  console.log(history.location.pathname);
   return (
     <footer id="footer" className="footer">
       <p className="mt-2">
-        <Link to="/">Home</Link>
+        {history.location.pathname !== "/" && <Link to="/">Home</Link>}
         <span className="link-divider"></span>
-        <Link to="/about">About</Link>
+        {history.location.pathname !== "/about" && (
+          <Link to="/about">About</Link>
+        )}
         <span className="link-divider"></span>
-        <Link to="/contact">Contact</Link>
+        {history.location.pathname !== "/contact" && (
+          <Link to="/contact">Contact</Link>
+        )}
       </p>
       <p className="footer-details">
         <span className="spotify-span">
@@ -29,6 +35,6 @@ const Footer = () => {
       </p>
     </footer>
   );
-};
+}
 
 export default Footer;

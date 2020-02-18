@@ -6,7 +6,7 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 import "./index.css";
-
+import { register } from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import WebFont from "webfontloader";
 
@@ -33,3 +33,4 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById("root")
 );
+register();
