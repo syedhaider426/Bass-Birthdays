@@ -7,7 +7,7 @@
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "Bass-Birthdays-512x512.png",
+      "src": "skull-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
