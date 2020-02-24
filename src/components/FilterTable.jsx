@@ -68,15 +68,6 @@ const FilteredTable = ({
           <span className="refresh mr-2" style={{ color: "white" }}>
             {records}{" "}
           </span>
-          {/* <button
-            className="btn btn-primary"
-            onClick={refresh}
-            onKeyDown={refresh}
-            aria-label="Refresh"
-            title="Refresh the data in the Birthdays Table"
-          >
-            {<span>Clear Filters</span>}
-          </button> */}
         </div>
       </div>
     </Fragment>

@@ -7,7 +7,7 @@ import { Link, useHistory } from "react-router-dom";
  */
 function Footer() {
   let history = useHistory();
-  console.log(history.location.pathname);
+
   return (
     <footer id="footer" className="footer">
       <p className="mt-2">
