@@ -25,6 +25,7 @@ class Form extends Component {
     return errors;
   };
 
+  /* If the user has passed the captacha, set the captcha in the state to true. */
   verifyCaptcha = () => {
     const data = this.state.data;
     data["recaptchaVerification"] = true;
@@ -72,6 +73,7 @@ class Form extends Component {
     this.setState({ data });
   };
 
+  /* Render captcha onto a form */
   renderCaptcha(refCaptcha) {
     return (
       <ReCAPTCHA
@@ -82,6 +84,7 @@ class Form extends Component {
     );
   }
 
+  /* Render button onto a form */
   renderButton(label) {
     return (
       <button type="submit" className="btn btn-primary float-left mt-1">
@@ -90,6 +93,7 @@ class Form extends Component {
     );
   }
 
+  /* Render input onto a form */
   renderInput(
     name,
     autoFocus,

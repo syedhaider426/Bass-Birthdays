@@ -6,6 +6,11 @@ import { Link, useHistory } from "react-router-dom";
  * Web Api.
  */
 function Footer() {
+  /* The history hook is used in order to determine whether to show certain footer
+   * links.
+   *
+   * Ex) If the user is on the home page, do not show the 'Home' page link.
+   */
   let history = useHistory();
 
   return (

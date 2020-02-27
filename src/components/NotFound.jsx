@@ -4,6 +4,11 @@ import AutoComplete from "./AutoComplete";
 /* NotFound page is routed to when user goes to an invalid url */
 
 const NotFound = () => {
+  /**
+   * When a user enters an invalid artist in the autocomplete,
+   * it will make the cursor into a 'loading' icon. Therefore,
+   * if the artist does not exist, it will go back to the default icon
+   */
   document.body.style.cursor = "default";
 
   return (

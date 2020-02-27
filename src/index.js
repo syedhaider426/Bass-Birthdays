@@ -33,4 +33,6 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById("root")
 );
+
+//Registers service worker
 register();

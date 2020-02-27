@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import AutoComplete from "./AutoComplete";
 import { withRouter } from "react-router-dom";
 
-/* Navbar is displayed at the top of page */
+/* If user is currently on the home page and clicks "Bass Birthdays",
+ * reload the page
+ */
+function validateCurrentPage(url) {
+  if (url.location.pathname === "/") window.location.reload();
+}
 
+/* Navbar is displayed at the top of page */
 const Navbar = withRouter(props => {
-  function validateCurrentPage(url) {
-    if (url.location.pathname === "/") window.location.reload();
-  }
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg" id="navbar">

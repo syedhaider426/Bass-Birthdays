@@ -18,6 +18,7 @@ class Contact extends Form {
     this.recaptchaRef = React.createRef();
   }
 
+  /* Schema to validate the inputs from the Contact Form */
   schema = Joi.object().keys({
     name: Joi.string()
       .required()
@@ -33,6 +34,7 @@ class Contact extends Form {
       .label("Recaptcha")
   });
 
+  /* When a user submits the form, run this function */
   submitValues = () => {
     const { name, email, comment } = this.state.data;
     const recaptchaValue = this.recaptchaRef.current.getValue();

@@ -15,7 +15,6 @@ const FilteredTable = ({
   amountPerPage,
   options,
   handleSelect,
-  refresh,
   searchQuery,
   bdayQuery,
   currentPage,
@@ -25,6 +24,7 @@ const FilteredTable = ({
   const startRecord = (currentPage - 1) * amountPerPage;
   var endRecord = startRecord + amountPerPage;
   if (endRecord > totalRecords) endRecord = totalRecords;
+
   const records = "Showing entries: " + (startRecord + 1) + " - " + endRecord;
   return (
     <Fragment>
@@ -66,7 +66,7 @@ const FilteredTable = ({
           />
           <label className="ml-1 records-per-page">entries</label>
           <span className="refresh mr-2" style={{ color: "white" }}>
-            {records}{" "}
+            {records}
           </span>
         </div>
       </div>
