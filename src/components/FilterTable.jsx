@@ -64,7 +64,7 @@ const FilteredTable = ({
             onChange={handleSelect}
             ariaLabel="Records Per Page"
           />
-          <label className="ml-1 records-per-page">entries</label>
+          <span className="ml-1 records-per-page">entries</span>
           <span className="refresh mr-2" style={{ color: "white" }}>
             {records}
           </span>
