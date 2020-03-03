@@ -230,19 +230,6 @@ hr {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
 }
 
-/* .bottom-left {
-  color: white !important;
-  font-size: 24px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
-  z-index: 1;
-  position: relative;
-  margin-bottom: 5%;
-  margin-top: 1%;
-  bottom: 32px;
-  background-color: black;
-  width: 100%;
-} */
-
 .bottom-left-2 {
   color: white !important;
   font-size: 12px;
@@ -529,6 +516,12 @@ label span {
 
 .Toastify__toast-body {
   font-family: inherit;
+}
+
+@media only screen and (max-width: 576px) {
+  .records-per-page {
+    display: flex !important;
+  }
 }
 
 @media only screen and (max-width: 768px) {

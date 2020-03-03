@@ -64,7 +64,7 @@ function createTweet(result) {
       else tweet = tweet + "@" + res.substring(20) + ", ";
     }
   }
-
+  tweet += "\nCheck out more birthdays at https://bassbirthdays.com!";
   //Posts the tweet to Twitter
   T.post("statuses/update", { status: tweet }, function(err, data, response) {
     if (err) {
