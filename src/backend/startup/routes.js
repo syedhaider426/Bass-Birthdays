@@ -31,13 +31,13 @@ module.exports = function(app) {
 
   //Github webhooks
   app.post("/payload", (req, res) => {
-    var sender = req.body.sender; //sender = who made the push
-    var branch = req.body.ref; //branch = what branch is being pushed to
+    const sender = req.body.sender; //sender = who made the push
+    const branch = req.body.ref; //branch = what branch is being pushed to
 
     if (branch === "master" && sender.login === "syedhaider426") {
-      childProcess.exec("./deploy.sh", (err, stdout, stderr) => {
+      childProcess.exec("cd / && ./deploy.sh", (err, stdout, stderr) => {
         if (err) return res.send(500); //if the push was not successful, send an error code
-        res.send(200); //send a success code
+        res.send(200); //send a success code for push
       });
     }
   });
