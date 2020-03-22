@@ -33,13 +33,13 @@ module.exports = function(app) {
   app.post("/payload", (req, res) => {
     const sender = req.body.sender; //sender = who made the push
     const branch = req.body.ref; //branch = what branch is being pushed to
-
-    if (branch === "master" && sender.login === "syedhaider426") {
-      childProcess.exec("cd / && ./deploy.sh", (err, stdout, stderr) => {
-        if (err) return res.send(500); //if the push was not successful, send an error code
-        res.send(200); //send a success code for push
-      });
-    }
+    childProcess.exec("cd / && ./deploy.sh");
+    // if (branch === "master" && sender.login === "syedhaider426") {
+    //   childProcess.exec("cd / && ./deploy.sh", (err, stdout, stderr) => {
+    //     if (err) return res.send(500); //if the push was not successful, send an error code
+    //     res.send(200); //send a success code for push
+    //   });
+    // }
   });
 
   // Used to display index.html on the front-end
