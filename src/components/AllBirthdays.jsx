@@ -36,6 +36,7 @@ class AllBirthdays extends Component {
     };
   }
 
+  /* This will get the artists whose birthday it is*/
   componentDidMount() {
     document.getElementById("navbar").scrollIntoView();
 
