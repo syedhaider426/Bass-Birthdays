@@ -5,7 +5,6 @@ const twitter = require("../routes/twitter");
 const payload = require("../routes/payload");
 //const scripts = require("../routes/scripts");
 const cors = require("cors");
-const childProcess = require("child_process");
 const path = require("path");
 
 // "Initializes" the routes

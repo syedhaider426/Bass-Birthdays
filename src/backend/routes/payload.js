@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
+const { exec } = require("child_process");
 
-//Github webhooks
+//Github webhooks; endpoint is responsible for pulling commits on server.
 router.post("/payload", (req, res) => {
-  const sender = req.body.sender; //sender = who made the push
-  childProcess.exec("cd / && ./deploy.sh");
-  if (sender.login === "syedhaider426") {
-    childProcess.exec("cd / && ./deploy.sh", (err, stdout, stderr) => {
-      if (err) return res.send(500); //if the push was not successful, send an error code
-      res.send(200); //send a success code for push
-    });
-  }
+  exec("sh deploy.sh", (err, stdout, stderr) => {
+    if (err) {
+      return res.status(500).send(err); //send a HTTP response of 500 if it is unsuccessful
+    }
+    res.status(200).send("Succesfully pulled commits"); //send a HTTP response of 200 if it is successful
+  });
 });
-export default router;
+
+module.exports = router;
