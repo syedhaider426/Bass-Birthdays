@@ -14,6 +14,7 @@
     "font-awesome": "^4.7.0",
     "fs": "0.0.1-security",
     "gsap": "^3.2.5",
+    "helmet": "^3.21.3",
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
     "mongoose": "^5.9.5",

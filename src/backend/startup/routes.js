@@ -6,6 +6,7 @@ const payload = require("../routes/payload");
 //const scripts = require("../routes/scripts");
 const cors = require("cors");
 const path = require("path");
+const helmet = require("helmet");
 
 // "Initializes" the routes
 module.exports = function(app) {
@@ -15,6 +16,8 @@ module.exports = function(app) {
   // Skips the same-origin policy
   // Access resources from remote hosts
   app.use(cors());
+  app.use(helmet());
+
   app.use(express.static(path.join(__dirname, "../../../build")));
 
   // Routes used to get information about artists
