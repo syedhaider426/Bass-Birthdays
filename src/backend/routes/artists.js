@@ -214,7 +214,6 @@ async function updateYear() {
   const result = await Artist.find({ Birthday: { $exists: true } }).sort({
     Birthday: 1,
   });
-  const dateDiffInMs = 1 * 24 * 60 * 60000 * 366;
   result.forEach(async (res) => {
     await Artist.updateOne(
       { _id: res._id },
