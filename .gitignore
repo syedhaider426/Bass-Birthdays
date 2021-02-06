@@ -28,3 +28,5 @@ yarn-error.log*
 default.json
 template.json
 scripts.js
+
+blog.js

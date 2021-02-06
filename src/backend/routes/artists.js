@@ -16,18 +16,19 @@ var authOptions = {
   url: "https://accounts.spotify.com/api/token",
   headers: {
     Authorization:
-      "Basic " + Buffer.from(client_id + ":" + client_secret).toString("base64")
+      "Basic " +
+      Buffer.from(client_id + ":" + client_secret).toString("base64"),
   },
   form: {
-    grant_type: "client_credentials"
+    grant_type: "client_credentials",
   },
-  json: true
+  json: true,
 };
 
 /* Gets all artists (as well as all fields) and sorts birthdays in ascending order */
 router.get("/artist", async (req, res) => {
   const result = await Artist.find({ Birthday: { $exists: true } }).sort({
-    Birthday: 1
+    Birthday: 1,
   });
   res.status(200).send(result);
 });
@@ -62,8 +63,8 @@ router.get("/currentArtist", async (req, res) => {
   const result = await Artist.find({
     Birthday: {
       $gte: today,
-      $lt: tomorrow
-    }
+      $lt: tomorrow,
+    },
   });
   res.status(200).send(result);
 });
@@ -81,7 +82,7 @@ router.get("/artistInfo", async (req, res) => {
       Genre: 1,
       SpotifyID: 1,
       BirthdayList: 1,
-      Popularity: 1
+      Popularity: 1,
     })
     .limit(1); //returns an array
 
@@ -119,13 +120,13 @@ async function getSpotifyTopTracks(spotifyID) {
   /* Spotify needs a token in order to do requests to their API .
    * This post request will get a valid token
    */
-  await rp.post(authOptions, async function(error, response, body) {
+  await rp.post(authOptions, async function (error, response, body) {
     if (!error && response.statusCode === 200) {
       token = body.access_token; // use the access token to access the Spotify Web API
     }
   });
   const query = querystring.stringify({
-    country: "US"
+    country: "US",
   });
 
   /* Using this url, and the headers, get the top tracks
@@ -138,13 +139,13 @@ async function getSpotifyTopTracks(spotifyID) {
       "/top-tracks?" +
       query,
     headers: {
-      Authorization: "Bearer " + token
+      Authorization: "Bearer " + token,
     },
-    json: true
+    json: true,
   };
 
   // Gets the track name, album/song image, and the link to the song
-  return await rp.get(options).then(function(response) {
+  return await rp.get(options).then(function (response) {
     const tracks = [];
 
     for (var x = 0; x < response.tracks.length; x++) {
@@ -154,7 +155,7 @@ async function getSpotifyTopTracks(spotifyID) {
       tracks.push({
         track: track,
         image: image,
-        url: trackURL
+        url: trackURL,
       });
     }
     return tracks;
@@ -170,7 +171,7 @@ async function getSpotifyRelatedArtists(spotifyID) {
   /* Spotify needs a token in order to do requests to their API .
    * This post request will get a valid token
    */
-  await rp.post(authOptions, async function(error, response, body) {
+  await rp.post(authOptions, async function (error, response, body) {
     if (!error && response.statusCode === 200) {
       token = body.access_token; // use the access token to access the Spotify Web API
     }
@@ -182,13 +183,13 @@ async function getSpotifyRelatedArtists(spotifyID) {
   var options = {
     url: "https://api.spotify.com/v1/artists/" + spotifyID + "/related-artists",
     headers: {
-      Authorization: "Bearer " + token
+      Authorization: "Bearer " + token,
     },
-    json: true
+    json: true,
   };
 
   // Gets the artist name, artist profile image, and link to artist
-  return await rp.get(options).then(function(response) {
+  return await rp.get(options).then(function (response) {
     var artists = [];
 
     for (var x = 0; x < response.artists.length; x++) {
@@ -201,10 +202,26 @@ async function getSpotifyRelatedArtists(spotifyID) {
       artists.push({
         artist: artist,
         image: image,
-        url: external_urls
+        url: external_urls,
       });
     }
     return artists;
+  });
+}
+
+async function updateYear() {
+  const dateDiffInMs = 1 * 24 * 60 * 60000 * 365;
+  const result = await Artist.find({ Birthday: { $exists: true } }).sort({
+    Birthday: 1,
+  });
+  const dateDiffInMs = 1 * 24 * 60 * 60000 * 366;
+  result.forEach(async (res) => {
+    await Artist.updateOne(
+      { _id: res._id },
+      {
+        $set: { Birthday: new Date(res.Birthday.getTime() + dateDiffInMs) },
+      }
+    );
   });
 }
 
