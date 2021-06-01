@@ -4,6 +4,9 @@
 
 # dependencies
 /node_modules
+src/backend/node_modules
+node_modules
+/backend/node_modules
 /.pnp
 .pnp.js
 package-lock.json
@@ -30,3 +33,4 @@ template.json
 scripts.js
 
 blog.js
+src/backend/config/dev.ts
