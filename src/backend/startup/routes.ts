@@ -1,15 +1,14 @@
-const express = require("express");
-const artists = require("../routes/artists");
-const contact = require("../routes/contact");
-const twitter = require("../routes/twitter");
-const payload = require("../routes/payload");
-//const scripts = require("../routes/scripts");
-const cors = require("cors");
-const path = require("path");
-const helmet = require("helmet");
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import path from "path";
+import { Request, Response, Application } from "express";
+import { router as artists } from "../routes/artists";
+import { router as payload } from "../routes/payload";
+import { router as contact } from "../routes/contact";
 
 // "Initializes" the routes
-module.exports = function(app) {
+module.exports = function (app: Application) {
   app.use(express.json());
 
   /* https://medium.com/@alexishevia/using-cors-in-express-cac7e29b005b */
@@ -29,14 +28,8 @@ module.exports = function(app) {
   // Route used for webhooks
   app.use("/", payload);
 
-  // Route used to get data from the Spotify API
-  //app.use("/", scripts);
-
-  // Cron-job for twitter bot to keep running
-  twitter.cronjob();
-
   // Used to display index.html on the front-end
-  app.get("*", function(req, res) {
+  app.get("*", function (req: Request, res: Response) {
     res.sendFile(path.resolve(__dirname, "../../../build", "index.html"));
   });
 };

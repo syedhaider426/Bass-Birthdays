@@ -1,18 +1,17 @@
-const express = require("express");
-const router = express.Router();
-const rp = require("request-promise"); // "Request" library, used to make post/updateOne/delete requests
-const querystring = require("querystring");
+import express, { Request, Response, Router } from "express";
+import rp from "request-promise";
+import querystring from "querystring";
+import Artist, { IArtist } from "../database/models/artist";
+import { keys } from "../config/keys";
 
-const Artist = require("../database/models/artist"); //Artist model
-
-const config = require("config");
+export const router: Router = express.Router();
 
 /* Spotify credentials */
-const client_id = config.get("client_id");
-const client_secret = config.get("client_secret");
+const client_id = keys.client_id;
+const client_secret = keys.client_secret;
 
 /* Client talkes to Spotify and asks for OAuth token */
-var authOptions = {
+const authOptions = {
   url: "https://accounts.spotify.com/api/token",
   headers: {
     Authorization:
@@ -26,31 +25,33 @@ var authOptions = {
 };
 
 /* Gets all artists (as well as all fields) and sorts birthdays in ascending order */
-router.get("/artist", async (req, res) => {
-  const result = await Artist.find({ Birthday: { $exists: true } }).sort({
+router.get("/artist", async (req: Request, res: Response) => {
+  const result: Array<IArtist> = await Artist.find({
+    Birthday: { $exists: true },
+  }).sort({
     Birthday: 1,
   });
   res.status(200).send(result);
 });
 
 /* Gets all artists (only artist field) and sorts artists in ascending order */
-router.get("/artistOnly", async (req, res) => {
-  const result = await Artist.find()
+router.get("/artistOnly", async (req: Request, res: Response) => {
+  const result: Array<IArtist> = await Artist.find()
     .sort({ Artist: 1 })
     .select({ Artist: 1, _id: 0 });
   res.status(200).send(result);
 });
 
 /* Gets the artists who birthday it is */
-router.get("/currentArtist", async (req, res) => {
+router.get("/currentArtist", async (req: Request, res: Response) => {
   // date/month are passed in from React
   const { date, month } = req.query;
 
   //gets current year as dates are stored with the current year
-  const year = new Date().getFullYear();
+  const year: number = new Date().getFullYear();
 
-  const today = new Date(year, month, date);
-  const tomorrow = new Date(year, month, date);
+  const today = new Date(year, Number(month), Number(date));
+  const tomorrow = new Date(year, Number(month), Number(date));
 
   //sets the next day
   tomorrow.setDate(today.getDate() + 1);
@@ -60,7 +61,7 @@ router.get("/currentArtist", async (req, res) => {
   tomorrow.setHours(0, 0, 0, 0);
 
   //gets the artists for the date passed in
-  const result = await Artist.find({
+  const result: Array<IArtist> = await Artist.find({
     Birthday: {
       $gte: today,
       $lt: tomorrow,
@@ -70,9 +71,10 @@ router.get("/currentArtist", async (req, res) => {
 });
 
 /* Gets info about artist from Spotify */
-router.get("/artistInfo", async (req, res) => {
-  const artist = req.query.artist;
-  const result = await Artist.find({ Artist: artist })
+router.get("/artistInfo", async (req: Request, res: Response) => {
+  //https://stackoverflow.com/questions/61305362/why-request-query-is-not-any-anymore-express-request-query-typescript-error
+  const artist: string = req.query.artist as string;
+  const result: Array<IArtist> = await Artist.find({ Artist: artist })
     .collation({ locale: "en", strength: 2 })
     .select({
       _id: 0,
@@ -92,14 +94,34 @@ router.get("/artistInfo", async (req, res) => {
     return;
   }
   //result[0] because even though one element is getting returned, it's an array
-  const spotifyID = result[0].SpotifyID;
+  const spotifyID: string = result[0].SpotifyID;
 
   //Gets the top 10 tracks produced by the artist
-  const tracks = await getSpotifyTopTracks(spotifyID);
+  const tracks: {
+    track: string;
+    image: string;
+    url: string;
+  }[] = await getSpotifyTopTracks(spotifyID);
 
   //Gets the top 20 related artists
-  const artists = await getSpotifyRelatedArtists(spotifyID);
-  const finalResult = Object.assign(
+  const artists: {
+    artist: string;
+    image: string;
+    url: string;
+  }[] = await getSpotifyRelatedArtists(spotifyID);
+  const finalResult: IArtist[] & {
+    topSongs: {
+      track: string;
+      image: string;
+      url: string;
+    }[];
+  } & {
+    relatedArtists: {
+      artist: string;
+      image: string;
+      url: string;
+    }[];
+  } = Object.assign(
     {},
     result,
     { topSongs: tracks },
@@ -114,8 +136,8 @@ router.get("/artistInfo", async (req, res) => {
 /* Gets the top 10 tracks produced by the artist
  * Params: SpotifyID of the artist
  */
-async function getSpotifyTopTracks(spotifyID) {
-  var token = "";
+async function getSpotifyTopTracks(spotifyID: string) {
+  let token: string = "";
 
   /* Spotify needs a token in order to do requests to their API .
    * This post request will get a valid token
@@ -125,14 +147,18 @@ async function getSpotifyTopTracks(spotifyID) {
       token = body.access_token; // use the access token to access the Spotify Web API
     }
   });
-  const query = querystring.stringify({
+  const query: string = querystring.stringify({
     country: "US",
   });
 
   /* Using this url, and the headers, get the top tracks
    * for an artist
    */
-  const options = {
+  const options: {
+    url: string;
+    headers: { Authorization: string };
+    json: boolean;
+  } = {
     url:
       "https://api.spotify.com/v1/artists/" +
       spotifyID +
@@ -146,18 +172,21 @@ async function getSpotifyTopTracks(spotifyID) {
 
   // Gets the track name, album/song image, and the link to the song
   return await rp.get(options).then(function (response) {
-    const tracks = [];
+    const tracks: { track: string; image: string; url: string }[] = [];
+    response.tracks.forEach(
+      (res: {
+        name: string;
+        album: { images: { url: string }[] };
+        external_urls: { spotify: string };
+      }) => {
+        tracks.push({
+          track: res.name,
+          image: res.album.images[2].url,
+          url: res.external_urls.spotify,
+        });
+      }
+    );
 
-    for (var x = 0; x < response.tracks.length; x++) {
-      var track = response.tracks[x].name;
-      var image = response.tracks[x].album.images[2].url;
-      var trackURL = response.tracks[x].external_urls.spotify;
-      tracks.push({
-        track: track,
-        image: image,
-        url: trackURL,
-      });
-    }
     return tracks;
   });
 }
@@ -165,8 +194,8 @@ async function getSpotifyTopTracks(spotifyID) {
 /* Gets the top 20 related artists
  * Params: SpotifyID of the artist
  */
-async function getSpotifyRelatedArtists(spotifyID) {
-  var token = "";
+async function getSpotifyRelatedArtists(spotifyID: string) {
+  let token: string = "";
 
   /* Spotify needs a token in order to do requests to their API .
    * This post request will get a valid token
@@ -180,48 +209,35 @@ async function getSpotifyRelatedArtists(spotifyID) {
   /* Using this url, and the headers, get the top tracks
    * for an artist
    */
-  var options = {
+  const options: {
+    url: string;
+    headers: { Authorization: string };
+    json: boolean;
+  } = {
     url: "https://api.spotify.com/v1/artists/" + spotifyID + "/related-artists",
     headers: {
       Authorization: "Bearer " + token,
     },
     json: true,
   };
-
   // Gets the artist name, artist profile image, and link to artist
   return await rp.get(options).then(function (response) {
-    var artists = [];
+    let artists: { artist: string; image: string; url: string }[] = [];
+    response.artists.forEach(
+      (art: {
+        name: string;
+        images: { url: string }[];
+        external_urls: { spotify: string };
+      }) => {
+        artists.push({
+          artist: art.name,
+          image:
+            art.images[2] === undefined ? "empty-image.png" : art.images[2].url,
+          url: art.external_urls.spotify,
+        });
+      }
+    );
 
-    for (var x = 0; x < response.artists.length; x++) {
-      var artist = response.artists[x].name;
-      var image = "";
-      if (response.artists[x].images[2] === undefined) {
-        image = "empty-image.png";
-      } else image = response.artists[x].images[2].url;
-      var external_urls = response.artists[x].external_urls.spotify;
-      artists.push({
-        artist: artist,
-        image: image,
-        url: external_urls,
-      });
-    }
     return artists;
   });
 }
-
-async function updateYear() {
-  const dateDiffInMs = 1 * 24 * 60 * 60000 * 365;
-  const result = await Artist.find({ Birthday: { $exists: true } }).sort({
-    Birthday: 1,
-  });
-  result.forEach(async (res) => {
-    await Artist.updateOne(
-      { _id: res._id },
-      {
-        $set: { Birthday: new Date(res.Birthday.getTime() + dateDiffInMs) },
-      }
-    );
-  });
-}
-
-module.exports = router;
