@@ -23,6 +23,7 @@ The idea behind the project was developed by a curiosity for birthdays of Artist
 <li>ExpressJS - NodeJS framework </li>
 <li>React - Javascript Library</li>
 <li>Node - Javascript Runtime Environment</li>
+    <li>Typescript</li>
 </ul>
 
 # Screenshots
