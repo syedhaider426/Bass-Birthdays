@@ -3,7 +3,7 @@ import AutoComplete from "./AutoComplete";
 
 /* NotFound page is routed to when user goes to an invalid url */
 
-const NotFound = () => {
+const NotFound: React.FC = (): JSX.Element => {
   /**
    * When a user enters an invalid artist in the autocomplete,
    * it will make the cursor into a 'loading' icon. Therefore,

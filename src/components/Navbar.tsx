@@ -1,17 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AutoComplete from "./AutoComplete";
-import { withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { Location } from "history";
 
 /* If user is currently on the home page and clicks "Bass Birthdays",
  * reload the page
  */
-function validateCurrentPage(url) {
-  if (url.location.pathname === "/") window.location.reload();
+function validateCurrentPage(location: Location<unknown>): void {
+  if (location.pathname === "/") window.location.reload();
 }
 
 /* Navbar is displayed at the top of page */
-const Navbar = withRouter(props => {
+const Navbar: React.FC<RouteComponentProps> = ({
+  location,
+}: RouteComponentProps) => {
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg" id="navbar">
@@ -19,7 +22,7 @@ const Navbar = withRouter(props => {
           className="navbar-brand main-title"
           to="/"
           title="Bass Birthdays Home Button"
-          onClick={() => validateCurrentPage(props)}
+          onClick={() => validateCurrentPage(location)}
         >
           <span className="bass-birthdays">Bass Birthdays </span>
           <i className="fa fa-birthday-cake fa-10x"></i>
@@ -44,7 +47,7 @@ const Navbar = withRouter(props => {
               data-toggle="collapse"
               data-target=".navbar-collapse.show"
             >
-              <Link className="nav-link" to="/" exact="true">
+              <Link className="nav-link" to="/">
                 Home
               </Link>
             </li>
@@ -71,6 +74,6 @@ const Navbar = withRouter(props => {
       </nav>
     </div>
   );
-});
+};
 
-export default Navbar;
+export default withRouter(Navbar);

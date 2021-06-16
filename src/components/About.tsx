@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 /* Informational page about Bass Birthdays */
 
-const About = () => {
+const About: React.FC = (): JSX.Element => {
   return (
     <Fragment>
       <h1 className="center">

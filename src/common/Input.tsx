@@ -1,5 +1,20 @@
 import React, { Fragment } from "react";
 
+interface iInput {
+  name: string;
+  label?: string | JSX.Element;
+  type: string;
+  value: string;
+  placeholder: string;
+  className?: string;
+  labelClassName?: string;
+  autoFocus: boolean;
+  errors?: string;
+  ariaRequired?: boolean;
+  ariaLabel?: string;
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+}
 /* Reusable Input Component */
 const Input = ({
   name,
@@ -14,8 +29,8 @@ const Input = ({
   autoFocus,
   errors,
   ariaRequired,
-  ariaLabel
-}) => {
+  ariaLabel,
+}: iInput): JSX.Element => {
   return (
     <Fragment>
       <label htmlFor={name} className={labelClassName}>

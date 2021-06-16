@@ -9,6 +9,18 @@ import Select from "../common/Select";
  * 1 dropdown (determines how many records can be shown at once)
  */
 
+interface IFilteredTable {
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  handleBirthday: (e: React.FormEvent<HTMLInputElement>) => void;
+  amountPerPage: number;
+  options: number[];
+  handleSelect: (e: React.FormEvent<HTMLSelectElement>) => void;
+  searchQuery: string;
+  bdayQuery: string;
+  currentPage: number;
+  totalRecords: number;
+}
+
 const FilteredTable = ({
   onChange,
   handleBirthday,
@@ -18,14 +30,15 @@ const FilteredTable = ({
   searchQuery,
   bdayQuery,
   currentPage,
-  totalRecords
-}) => {
+  totalRecords,
+}: IFilteredTable): JSX.Element => {
   //if currentpage = 1, and records total = 25, then show 1-25,1-50,1-75,1-100
-  const startRecord = (currentPage - 1) * amountPerPage;
-  var endRecord = startRecord + amountPerPage;
+  const startRecord: number = (currentPage - 1) * amountPerPage;
+  let endRecord: number = startRecord + amountPerPage;
   if (endRecord > totalRecords) endRecord = totalRecords;
 
-  const records = "Showing entries: " + (startRecord + 1) + " - " + endRecord;
+  const records: string =
+    "Showing entries: " + (startRecord + 1) + " - " + endRecord;
   return (
     <Fragment>
       <div className="mb-1">
@@ -37,22 +50,25 @@ const FilteredTable = ({
           <Input
             type="text"
             name="artist"
-            id="artist"
             className="mr-2"
             value={searchQuery}
             placeholder="Enter Artist"
-            onChange={e => onChange(e.target.value)}
+            onChange={onChange}
             ariaLabel="Artist"
+            autoFocus={true}
           />
           {/* Filters out the artists on the table by date*/}
           <Input
             type="date"
             name="birthday"
-            id="birthday"
             value={bdayQuery}
             placeholder="mm/dd/yyyy"
             onChange={handleBirthday}
             ariaLabel="Date"
+            ariaRequired={true}
+            className=""
+            labelClassName=""
+            autoFocus={false}
           />
         </div>
         <div className="form-inline">

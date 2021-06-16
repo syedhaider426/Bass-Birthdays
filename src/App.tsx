@@ -24,11 +24,19 @@ toast.configure();
 
  */
 
-function App() {
+// Functional component type for App
+// JSX.Element is the return type of the functional component
+function App(): JSX.Element {
   return (
     <Fragment>
       <Header />
-      <Content />
+      <Content
+        notFound="/not-found"
+        home="/"
+        about="/about"
+        contact="/contact"
+        profile="/profile/:artist"
+      />
       <Footer />
     </Fragment>
   );

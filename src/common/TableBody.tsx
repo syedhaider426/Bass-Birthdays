@@ -1,9 +1,27 @@
 import React from "react";
 import convertISODateToString from "../utils/convertISODateToString";
 
-const TableBody = ({ data, isLoaded, handleClick }) => {
+type TableBodyProps = {
+  data: ArtistType[];
+  isLoaded: boolean;
+  handleClick: (artist: string) => void;
+};
+
+type ArtistType = {
+  _id: string;
+  Artist: string;
+  Birthday: string;
+  ProfileImage: string;
+  Horoscope: string;
+};
+
+const TableBody: React.FC<TableBodyProps> = ({
+  data,
+  isLoaded,
+  handleClick,
+}: TableBodyProps): JSX.Element => {
   /* When data has not been loaded, show a loading spinner */
-  var loadedDiv = (
+  const loadedDiv = (
     <tbody>
       <tr>
         <td></td>
@@ -18,7 +36,7 @@ const TableBody = ({ data, isLoaded, handleClick }) => {
     loadedDiv
   ) : (
     <tbody>
-      {data.map(item => (
+      {data.map((item: ArtistType) => (
         <tr
           key={item._id}
           onClick={() => handleClick(item.Artist)}

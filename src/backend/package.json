@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "@types/mongoose": "^5.10.5",
     "aws-sdk": "^2.918.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -20,6 +19,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.12",
+    "@types/mongoose": "^5.11.97",
     "@types/node": "^15.6.1",
     "@types/node-fetch": "^2.5.10",
     "@types/request-promise": "^4.1.47",

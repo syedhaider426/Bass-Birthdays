@@ -1,5 +1,14 @@
 import React from "react";
 
+interface ISelect {
+  name: string;
+  options: string[] | number[];
+  value: string | number;
+  onChange: (e: React.FormEvent<HTMLSelectElement>) => void;
+  ariaLabel: string;
+  label?: string;
+  labelClassName?: string;
+}
 /* Reusable Select component */
 const Select = ({
   name,
@@ -8,8 +17,8 @@ const Select = ({
   onChange,
   ariaLabel,
   label,
-  labelClassName
-}) => {
+  labelClassName,
+}: ISelect): JSX.Element => {
   return (
     <div className="records-per-page">
       <label htmlFor={name} className={labelClassName}>
@@ -23,7 +32,7 @@ const Select = ({
         value={value}
         aria-label={ariaLabel}
       >
-        {options.map(option => (
+        {options.map((option) => (
           <option key={option} value={option}>
             {option}
           </option>

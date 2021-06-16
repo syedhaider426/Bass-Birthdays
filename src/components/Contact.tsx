@@ -1,66 +1,78 @@
-import React from "react";
+import React, { RefObject } from "react";
 import { toast } from "react-toastify";
 import Form from "../common/Form";
 import Joi from "@hapi/joi";
 
-var url;
-if (process.env.NODE_ENV === "development")
-  url = new URL("http://localhost:8080/contactInfo");
-else url = new URL("https://bassbirthdays.com/contactInfo");
+interface AppProps {
+  //code related to your props goes here
+}
 
-class Contact extends Form {
-  constructor(props) {
+class Contact extends Form<AppProps> {
+  private recaptchaRef: RefObject<HTMLInputElement>;
+  constructor(props: AppProps) {
     super(props);
     this.state = {
       data: { name: "", email: "", comment: "", recaptchaVerification: false },
-      errors: {}
+      errors: { recaptchaVerification: "" },
     };
     this.recaptchaRef = React.createRef();
+    this.setSchema(
+      Joi.object().keys({
+        name: Joi.string().required().label("Name"),
+        email: Joi.string().required().label("Email"),
+        comment: Joi.string().required().label("Comment"),
+        recaptchaVerification: Joi.boolean().valid(true).label("Recaptcha"),
+      })
+    );
   }
 
-  /* Schema to validate the inputs from the Contact Form */
-  schema = Joi.object().keys({
-    name: Joi.string()
-      .required()
-      .label("Name"),
-    email: Joi.string()
-      .required()
-      .label("Email"),
-    comment: Joi.string()
-      .required()
-      .label("Comment"),
-    recaptchaVerification: Joi.boolean()
-      .valid(true)
-      .label("Recaptcha")
-  });
-
   /* When a user submits the form, run this function */
-  submitValues = () => {
+  submitValues = (e: React.SyntheticEvent): void => {
+    e.preventDefault();
     const { name, email, comment } = this.state.data;
-    const recaptchaValue = this.recaptchaRef.current.getValue();
-    var params = { name, email, comment, recaptchaValue };
-    url.search = new URLSearchParams(params).toString();
-    fetch(url, { method: "POST" })
-      .then(() => {
-        toast.success("🚀 Successfully submitted contact info!");
-      })
-      .catch(err => {
-        toast.error("🚀 Unable to send email. Please try again later!");
-      });
+    const recaptchaValue = this.recaptchaRef.current!.value;
+    const errors = this.handleSubmit();
+    console.log("Are there errors", errors);
+    if (
+      errors.name ||
+      errors.email ||
+      errors.comment ||
+      errors.recaptchaVerification.length > 0
+    ) {
+      this.setState({ errors: errors });
+    } else {
+      fetch(
+        `/contactInfo?name=${name}&email=${email}&comment=${comment}&recaptchaValue=${recaptchaValue}`,
+        { method: "POST" }
+      )
+        .then(() => {
+          //Clearing out values in form
+          const { data } = this.state;
+
+          Object.keys(data).forEach((key) => {
+            data[key] = "";
+          });
+          this.setState({ data: data, errors: { recaptchaVerification: "" } });
+          toast.success("🚀 Successfully submitted contact info!");
+        })
+        .catch((err) => {
+          toast.error("🚀 Unable to send email. Please try again later!");
+        });
+    }
   };
 
   render() {
-    var nameLabel = (
+    var nameLabel: JSX.Element = (
       <div>
         Name <span className="star">*</span>
       </div>
     );
-    var emailLabel = (
+    var emailLabel: JSX.Element = (
       <div>
         Email <span className="star">*</span>
       </div>
     );
-    var commentLabel = (
+    var commentLabel: JSX.Element = (
       <div>
         Question/Comment <span className="star">*</span>
       </div>
@@ -83,7 +95,7 @@ class Contact extends Form {
           we'll respond as soon as possible.
         </p>
         <div className="container contact-jumbotron">
-          <form onSubmit={this.handleSubmit} method="POST">
+          <form onSubmit={this.submitValues}>
             {this.renderInput(
               "name",
               true,
@@ -113,7 +125,8 @@ class Contact extends Form {
               "",
               "contact float-left mt-3",
               commentLabel,
-              true
+              true,
+              "comment"
             )}
             <br></br>
             {this.renderCaptcha(this.recaptchaRef)}

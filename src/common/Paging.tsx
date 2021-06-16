@@ -1,6 +1,14 @@
 import React from "react";
 import _ from "lodash";
 
+interface IPagination {
+  onPageChange: (page: number) => void;
+  onPageNext: (page: number) => void;
+  onPagePrevious: (page: number) => void;
+  currentPage: number;
+  itemsCount: number;
+  pageSize: number;
+}
 /* Pagination component can be used to split results into pages */
 const Pagination = ({
   onPageChange,
@@ -8,16 +16,16 @@ const Pagination = ({
   onPageNext,
   onPagePrevious,
   itemsCount,
-  pageSize
-}) => {
+  pageSize,
+}: IPagination): JSX.Element => {
   //The ceiling function is used in situations where a decimal is returned by the division of itemsCount and pageSize
-  const pagesCount = Math.ceil(itemsCount / pageSize);
-  const pages = _.range(1, pagesCount + 1); //if pagesCount is 3, then it will be 1,2; thats why we add 1
-  const length = pages.length;
+  const pagesCount: number = Math.ceil(itemsCount / pageSize);
+  const pages: number[] = _.range(1, pagesCount + 1); //if pagesCount is 3, then it will be 1,2; thats why we add 1
+  const length: number = pages.length;
   //Used to determine when to disable the 'Next' button
-  const firstPage = pages[0];
+  const firstPage: number = pages[0];
   //Used to determine when to disable the 'Previous' button
-  const lastPage = pages[length - 1];
+  const lastPage: number = pages[length - 1];
 
   if (length < 2) return <div></div>;
 
@@ -34,7 +42,7 @@ const Pagination = ({
           <button
             style={{ cursor: "pointer" }}
             className="page-previous page-link"
-            onClick={() => onPagePrevious()}
+            onClick={() => onPagePrevious}
             aria-label="Previous"
             title="Go to the Previous Page of the Birthdays Table"
           >
@@ -42,7 +50,7 @@ const Pagination = ({
             <span className="sr-only">Previous</span>
           </button>
         </li>
-        {pages.map(page => (
+        {pages.map((page) => (
           <li
             key={page}
             className={
@@ -53,10 +61,10 @@ const Pagination = ({
               style={{ cursor: "pointer" }}
               className="page-link "
               onClick={() => onPageChange(page)}
-              onKeyDown={e => {
+              onKeyDown={(e) => {
                 if (e.keyCode === 13) onPageChange(page);
               }}
-              tabIndex="0"
+              tabIndex={0}
               title={"Go to the Page " + page + " of the Birthdays Table"}
             >
               {page}
@@ -74,7 +82,7 @@ const Pagination = ({
           <button
             style={{ cursor: "pointer" }}
             className="page-link"
-            onClick={() => onPageNext()}
+            onClick={() => onPageNext}
             aria-label="Next"
             title="Go to the Next Page of the Birthdays Table"
           >

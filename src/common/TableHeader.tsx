@@ -1,9 +1,19 @@
 import React, { Component } from "react";
 
-/* https://codewithmosh.com/ used as a reference */
-class TableHeader extends Component {
-  raiseSort = path => {
-    const sortColumn = this.props.sortColumn;
+type MyProps = {
+  // using `interface` is also ok
+  sortColumn: { path: string; order: "asc" | "desc" };
+  headers: string[];
+  onSort: (sortColumn: { path: string; order: "asc" | "desc" }) => void;
+};
+
+type MyState = {};
+
+class TableHeader extends Component<MyProps, MyState> {
+  raiseSort = (path: string) => {
+    const {
+      sortColumn,
+    }: { sortColumn: { path: string; order: "asc" | "desc" } } = this.props;
     if (sortColumn.path === path)
       sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
     else {
@@ -13,8 +23,10 @@ class TableHeader extends Component {
     this.props.onSort(sortColumn);
   };
 
-  renderSortIcon = column => {
-    const { sortColumn } = this.props;
+  renderSortIcon = (column: string) => {
+    const {
+      sortColumn,
+    }: { sortColumn: { path: string; order: "asc" | "desc" } } = this.props;
 
     if (column !== sortColumn.path) return null;
     if (sortColumn.order === "asc") return <i className="fa fa-arrow-up" />;
@@ -22,8 +34,8 @@ class TableHeader extends Component {
   };
 
   render() {
-    var headers = this.props.headers;
-    var emptyHeader;
+    let headers: string[] = this.props.headers;
+    let emptyHeader;
 
     //used to have no header for the picture column
     if (this.props.headers[0] === "") {
@@ -34,7 +46,7 @@ class TableHeader extends Component {
       <thead>
         <tr id="headers" className="headers">
           {emptyHeader}
-          {headers.map(header => (
+          {headers.map((header) => (
             <th
               onClick={() => this.raiseSort(header)}
               style={{ cursor: "pointer" }}

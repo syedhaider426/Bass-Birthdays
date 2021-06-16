@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import AllBirthdays from "./AllBirthdays";
 import CurrentBirthdays from "./CurrentBirthdays";
 
@@ -6,9 +6,9 @@ import CurrentBirthdays from "./CurrentBirthdays";
  * Each component takes the full width of the CONTAINER.
  */
 
-const Home = () => {
+const Home: React.FC = (): JSX.Element => {
   return (
-    <React.Fragment>
+    <Fragment>
       <div className="container">
         <div className="col-md-12">
           <CurrentBirthdays />
@@ -17,7 +17,7 @@ const Home = () => {
           <AllBirthdays />
         </div>
       </div>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

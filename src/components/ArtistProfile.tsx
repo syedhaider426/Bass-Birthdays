@@ -7,13 +7,38 @@ import ReactPlaceholder from "react-placeholder";
 import "react-placeholder/lib/reactPlaceholder.css";
 import { TextRow, RoundShape } from "react-placeholder/lib/placeholders";
 
-var url;
-if (process.env.NODE_ENV === "production")
-  url = new URL("https://bassbirthdays.com/artistInfo");
-else url = new URL("http://localhost:8080/artistInfo");
+type SongType = {
+  track: string;
+  image: string;
+  url: string;
+};
 
-class ArtistProfile extends Component {
-  constructor(props) {
+type ArtistType = {
+  artist: string;
+  image: string;
+  url: string;
+};
+
+interface AppProps {
+  //code related to your props goes here
+  match: any;
+  history: any;
+}
+
+interface AppState {
+  image: string;
+  artist: string;
+  birthday: string;
+  genres: string[];
+  topSongs: SongType[];
+  relatedArtists: ArtistType[];
+  profileContent: boolean;
+  popularity: string;
+  ready: boolean;
+}
+
+class ArtistProfile extends Component<AppProps, AppState> {
+  constructor(props: AppProps) {
     super(props);
     this.state = {
       image: placeholder,
@@ -24,23 +49,20 @@ class ArtistProfile extends Component {
       relatedArtists: [],
       profileContent: false,
       popularity: "",
-      ready: false //true when the component has been mounted
+      ready: false, //true when the component has been mounted
     };
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     //This params value is received when a user clicks on an artist's image/table row
-    const { artist } = this.props.match.params;
+    const { artist }: { artist: string } = this.props.match.params;
 
     //Scrolls to the top of page (which is the navbar)
     ScrollToNavbarTop();
 
-    //"Creates" the URL with the artist name as a param
-    var params = { artist: artist };
-    url.search = new URLSearchParams(params).toString();
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
+    fetch(`/artistInfo?artist=${artist}`)
+      .then((response: any) => response.json())
+      .then((data: any) => {
         /* If there are no artists found with the specified name,
          * go to the not-found page
          */
@@ -49,12 +71,14 @@ class ArtistProfile extends Component {
           this.props.history.push("/not-found");
           return;
         }
-        var birthday;
-        var birthdayList = data[0].BirthdayList;
+        let birthday: string;
+        let birthdayList: string[] = data[0].BirthdayList;
         if (birthdayList !== undefined) {
-          birthdayList.forEach((birthday, index, array) => {
-            array[index] = convertISODateToString(birthday);
-          });
+          birthdayList.forEach(
+            (birthday: string, index: number, array: string[]) => {
+              array[index] = convertISODateToString(birthday);
+            }
+          );
 
           birthday = birthdayList.toString();
         } else birthday = convertISODateToString(data[0].Birthday);
@@ -67,7 +91,7 @@ class ArtistProfile extends Component {
           topSongs: data.topSongs, //topSongs is an array
           relatedArtists: data.relatedArtists, //relatedArtists is an array
           ready: true,
-          popularity: data[0].Popularity
+          popularity: data[0].Popularity,
         });
 
         /* Cursor is set to loading before the new profile loads.
@@ -75,7 +99,7 @@ class ArtistProfile extends Component {
          */
         document.body.style.cursor = "default";
       })
-      .catch(err =>
+      .catch((err) =>
         console.log("ComponentDidMount (ArtistProfile) - Error", err)
       );
   }
@@ -85,16 +109,12 @@ class ArtistProfile extends Component {
 
   /* important url: https://stackoverflow.com/questions/43351752/react-router-changes-url-but-not-view*/
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: AppProps, prevState: AppState): void {
     if (this.props.match.params.artist !== prevState.artist) {
       const { artist } = prevProps.match.params;
-
-      var params = { artist: artist };
-      url.search = new URLSearchParams(params).toString();
-
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
+      fetch(`/artistInfo?artist=${artist}`)
+        .then((response) => response.json())
+        .then((data) => {
           /* If there are no artists found with the specified name,
            * go to the not-found page
            */
@@ -103,12 +123,14 @@ class ArtistProfile extends Component {
             this.props.history.push("/not-found");
             return;
           }
-          var birthday;
-          var birthdayList = data[0].BirthdayList;
+          let birthday: string;
+          let birthdayList: string[] = data[0].BirthdayList;
           if (birthdayList !== undefined) {
-            birthdayList.forEach((birthday, index, array) => {
-              array[index] = convertISODateToString(birthday);
-            });
+            birthdayList.forEach(
+              (birthday: string, index: number, array: string[]) => {
+                array[index] = convertISODateToString(birthday);
+              }
+            );
 
             birthday = birthdayList.toString();
           } else birthday = convertISODateToString(data[0].Birthday);
@@ -121,11 +143,11 @@ class ArtistProfile extends Component {
             topSongs: data.topSongs, //topSongs is an array
             relatedArtists: data.relatedArtists, //relatedArtists is an array
             ready: true,
-            popularity: data[0].Popularity
+            popularity: data[0].Popularity,
           });
           document.body.style.cursor = "default";
         })
-        .catch(err =>
+        .catch((err) =>
           console.log("ComponentDidUpdate (ArtistProfile) - Error", err)
         );
     }
@@ -139,13 +161,13 @@ class ArtistProfile extends Component {
       topSongs,
       relatedArtists,
       popularity,
-      ready
-    } = this.state;
+      ready,
+    }: AppState = this.state;
 
     /* Placeholders until the component is mounted */
 
     /* Image placeholder is a placeholder for the profile image of an Artist */
-    const imagePlaceholder = (
+    const imagePlaceholder: JSX.Element = (
       <div>
         <RoundShape
           color="gray"
@@ -156,8 +178,8 @@ class ArtistProfile extends Component {
     );
 
     /* Placeholder for 10 tracks that are returned from Spotify*/
-    var arrayOfSize10 = new Array(10).fill(0);
-    const tracksHolder = (
+    const arrayOfSize10: number[] = new Array(10).fill(0);
+    const tracksHolder: JSX.Element = (
       <div>
         <table>
           <tbody>
@@ -182,8 +204,8 @@ class ArtistProfile extends Component {
     );
 
     /* Placeholder for 20 tracks that are returned from Spotify*/
-    var arrayOfSize20 = new Array(20).fill(0);
-    const artistsHolder = (
+    const arrayOfSize20: number[] = new Array(20).fill(0);
+    const artistsHolder: JSX.Element = (
       <div>
         <table className="related-artists-list">
           <tbody>
@@ -209,7 +231,7 @@ class ArtistProfile extends Component {
 
     /* This section displays image, artist name, and birthday */
 
-    const infoSection = (
+    const infoSection: JSX.Element = (
       <Fragment>
         <ReactPlaceholder
           showLoadingAnimation
@@ -241,7 +263,7 @@ class ArtistProfile extends Component {
     );
 
     /* This section displays the genres of the artist */
-    const genresSection = (
+    const genresSection: JSX.Element = (
       <Fragment>
         <div style={{ width: "240px" }} className="margin-center">
           <ReactPlaceholder ready={ready} rows={2} showLoadingAnimation>
@@ -261,7 +283,7 @@ class ArtistProfile extends Component {
     );
 
     /* This div displays the top 10 songs that are being listened to for this artist */
-    const tracksSection = (
+    const tracksSection: JSX.Element = (
       <div>
         <h2 className="h2-title mt-1" style={{ textAlign: "center" }}>
           Top 10 Songs
@@ -274,7 +296,7 @@ class ArtistProfile extends Component {
         >
           <table>
             <tbody>
-              {topSongs.map(song => (
+              {topSongs.map((song: SongType) => (
                 <tr>
                   <td key={song.track} className="li-song">
                     <a
@@ -304,7 +326,7 @@ class ArtistProfile extends Component {
     );
 
     /* This div displays the top 20 related artists */
-    const artistsSection = (
+    const artistsSection: JSX.Element = (
       <div>
         <h2 className="h2-title mt-1 " style={{ textAlign: "center" }}>
           Top 20 Related Artists
@@ -317,7 +339,7 @@ class ArtistProfile extends Component {
         >
           <table className="related-artists-list">
             <tbody>
-              {relatedArtists.map(a => (
+              {relatedArtists.map((a: ArtistType) => (
                 <tr>
                   <td key={a.artist} className="li-artist">
                     <a
@@ -351,7 +373,6 @@ class ArtistProfile extends Component {
     return (
       <div className="home-display container">
         <div className="col-sm-12 center">
-          {/* {spotifyNote} */}
           {infoSection}
           {genresSection}
         </div>
@@ -361,11 +382,11 @@ class ArtistProfile extends Component {
 
         {
           <button
-            type="btn"
+            type="button"
             className="btn btn-primary margin-center"
             aria-label="Back to the Top of Table"
             title="Go back to the Top of the Birthdays Table"
-            onKeyDown={e => {
+            onKeyDown={(e) => {
               if (e.keyCode === 13) ScrollToNavbarTop();
             }}
             onClick={ScrollToNavbarTop}

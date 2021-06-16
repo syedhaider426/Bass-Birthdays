@@ -5,24 +5,42 @@ import _ from "lodash";
 import FilterTable from "./FilterTable";
 import Pagination from "../common/Paging";
 import "bootstrap/dist/js/bootstrap";
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { ScrollToTableTop } from "../utils/scrollToTop";
-
-var url;
-if (process.env.NODE_ENV === "production")
-  url = "https://bassbirthdays.com/artist";
-else url = "http://localhost:8080/artist";
 
 /* This component includes 3 separate components
  * -FilteredTable
-   -Table
-   -Pagination
+ * -Table
+ * -Pagination
 
  * This component shows all artists' birthdays in ascending order
  */
 
-class AllBirthdays extends Component {
-  constructor(props) {
+interface IProps extends RouteComponentProps {
+  //code related to your props goes here
+}
+
+interface AppState {
+  artists: ArtistType[];
+  currentPage: number;
+  amountPerPage: number;
+  sortColumn: { path: string; order: "asc" | "desc" };
+  searchQuery: string;
+  bdayQuery: string;
+  isLoaded: boolean;
+  totalRecords: number;
+}
+
+type ArtistType = {
+  _id: string;
+  Artist: string;
+  Birthday: string;
+  ProfileImage: string;
+  Horoscope: string;
+};
+
+class AllBirthdays extends Component<IProps, AppState> {
+  constructor(props: IProps) {
     super(props);
     this.state = {
       artists: [],
@@ -32,33 +50,31 @@ class AllBirthdays extends Component {
       searchQuery: "",
       bdayQuery: "",
       isLoaded: false,
-      totalRecords: 0
+      totalRecords: 0,
     };
   }
 
   /* This will get the artists whose birthday it is*/
-  componentDidMount() {
-    document.getElementById("navbar").scrollIntoView();
+  componentDidMount(): void {
+    document.getElementById("navbar")!.scrollIntoView();
 
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
+    fetch("/artist")
+      .then((response) => response.json())
+      .then((data) => {
         this.setState({
           artists: data,
           isLoaded: true,
-          totalRecords: data.length
+          totalRecords: data.length,
         });
       })
-      .catch(err =>
-        console.log("ComponentDidMount (AllBirthdays) - Error", err)
-      );
+      .catch((err) => console.error("AllBirthdays - Error", err));
   }
 
   /* If a user clicks on a page link',
    * it will jump to that page
    * 'Page' param is the page clicked.
    */
-  handlePageChange = page => {
+  handlePageChange = (page: number): void => {
     const { currentPage } = this.state;
     if (currentPage === page) return;
     this.setState({ currentPage: page });
@@ -70,7 +86,7 @@ class AllBirthdays extends Component {
    *
    * 'Change' param can only be 1 or -1.
    */
-  handlePageButtonChange = change => {
+  handlePageButtonChange = (change: number): void => {
     let { currentPage } = this.state;
     currentPage += change;
     this.setState({ currentPage });
@@ -78,44 +94,33 @@ class AllBirthdays extends Component {
   };
 
   /* Changes the column to sort by */
-  handleSort = sortColumn => {
+  handleSort = (sortColumn: { path: string; order: "asc" | "desc" }) => {
     this.setState({ sortColumn });
   };
 
-  /* Refreshes the data on the table */
-  refresh = e => {
-    const searchQuery = "";
-    const bdayQuery = "";
-    const amountPerPage = 25; //look into default state values
-    if (e.keyCode === 13 || e.keyCode === undefined)
-      this.setState({
-        sortColumn: { path: "Birthday", order: "asc" },
-        searchQuery,
-        bdayQuery,
-        amountPerPage
-      });
-  };
-
   /* When a user types in any text, it will call this onChange function and filter the current results*/
-  handleSearch = query => {
+  handleSearch = (e: React.FormEvent<HTMLInputElement>): void => {
     //query is what is typed in
     //currentPage is set to 1 b/c if user is on page 3 when they search, they can't view page 1
-    this.setState({ searchQuery: query, currentPage: 1 });
+    this.setState({ searchQuery: e.currentTarget.value, currentPage: 1 });
   };
 
   /* When a user selects a birthday name, it will call this onChange function and filter the current results */
-  handleBirthdayFilter = ({ target: bday }) => {
-    this.setState({ bdayQuery: bday.value, currentPage: 1 });
+  handleBirthdayFilter = (e: React.FormEvent<HTMLInputElement>): void => {
+    this.setState({ bdayQuery: e.currentTarget.value, currentPage: 1 });
   };
 
   /* User can choose 'n' number of records to show on the table at a time */
-  handleSelect = ({ target: selected }) => {
+  handleSelect = (e: React.FormEvent<HTMLSelectElement>): void => {
     //selected.value returns a string
-    this.setState({ amountPerPage: parseInt(selected.value), currentPage: 1 });
+    this.setState({
+      amountPerPage: parseInt(e.currentTarget.value),
+      currentPage: 1,
+    });
   };
 
   /* When a user clicks an artist's row, it will take the user to the artist's profile */
-  handleClick = artist => {
+  handleClick = (artist: string): void => {
     this.props.history.push("/profile/" + artist);
   };
 
@@ -128,18 +133,18 @@ class AllBirthdays extends Component {
       searchQuery,
       bdayQuery,
       isLoaded,
-      totalRecords
+      totalRecords,
     } = this.state;
 
     /* Filters out the artists that include the specified letters */
     if (searchQuery)
-      allArtists = allArtists.filter(m => {
+      allArtists = allArtists.filter((m: ArtistType) => {
         return m.Artist.toLowerCase().includes(searchQuery.toLowerCase());
       });
 
     /* Filters out the artists by the date/month */
     if (bdayQuery)
-      allArtists = allArtists.filter(artist => {
+      allArtists = allArtists.filter((artist: ArtistType) => {
         //birthdayQuery represents 2020/01/01
         //0-4 year
         //5-7 month
@@ -163,19 +168,18 @@ class AllBirthdays extends Component {
     //paginates data into 9 pages
     var artists = paginate(sorted, currentPage, amountPerPage);
 
-    const artistsLength = allArtists.length;
-    const options = [25, 50, 75, 100];
-    const headers = ["", "Artist", "Birthday", "Horoscope"];
+    const artistsLength: number = allArtists.length;
+    const options: number[] = [25, 50, 75, 100];
+    const headers: string[] = ["", "Artist", "Birthday", "Horoscope"];
 
     const {
       handleSearch,
       handleBirthdayFilter,
-      refresh,
       handleSelect,
       handleSort,
       handleClick,
       handlePageChange,
-      handlePageButtonChange
+      handlePageButtonChange,
     } = this;
 
     return (
@@ -189,7 +193,6 @@ class AllBirthdays extends Component {
           bdayQuery={bdayQuery}
           onChange={handleSearch}
           handleBirthday={handleBirthdayFilter}
-          refresh={refresh}
           options={options}
           handleSelect={handleSelect}
           currentPage={currentPage}
@@ -208,12 +211,12 @@ class AllBirthdays extends Component {
         </div>
         {artistsLength > 5 && (
           <button
-            type="btn"
+            type="button"
             className="btn btn-primary"
             aria-label="Back to the Top of Table"
             title="Go back to the Top of the Birthdays Table"
-            onKeyDown={e => {
-              if (e.keyCode === 13) ScrollToTableTop();
+            onKeyDown={(e) => {
+              if (e.key === "13") ScrollToTableTop();
             }}
             onClick={ScrollToTableTop}
           >

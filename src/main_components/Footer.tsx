@@ -5,26 +5,23 @@ import { Link, useHistory } from "react-router-dom";
  * It also contains information about where to get more info on the Spotify
  * Web Api.
  */
-function Footer() {
+const Footer: React.FC = (): JSX.Element => {
   /* The history hook is used in order to determine whether to show certain footer
    * links.
    *
    * Ex) If the user is on the home page, do not show the 'Home' page link.
    */
-  let history = useHistory();
+  const history = useHistory();
+  const { pathname } = history.location;
 
   return (
     <footer id="footer" className="footer">
       <p className="mt-2">
-        {history.location.pathname !== "/" && <Link to="/">Home</Link>}
+        {pathname !== "/" && <Link to="/">Home</Link>}
         <span className="link-divider"></span>
-        {history.location.pathname !== "/about" && (
-          <Link to="/about">About</Link>
-        )}
+        {pathname !== "/about" && <Link to="/about">About</Link>}
         <span className="link-divider"></span>
-        {history.location.pathname !== "/contact" && (
-          <Link to="/contact">Contact</Link>
-        )}
+        {pathname !== "/contact" && <Link to="/contact">Contact</Link>}
       </p>
       <p className="footer-details">
         <span className="spotify-span">
@@ -40,6 +37,6 @@ function Footer() {
       </p>
     </footer>
   );
-}
+};
 
 export default Footer;

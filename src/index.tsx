@@ -16,8 +16,8 @@ import WebFont from "webfontloader";
 //Loads the Monserrat font and sans-serif font
 WebFont.load({
   google: {
-    families: ["Montserrat", "sans-serif"]
-  }
+    families: ["Montserrat", "sans-serif"],
+  },
 });
 
 /* App component is rendered in the BrowserRouter in order to pass down the history object

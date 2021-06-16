@@ -6,10 +6,24 @@ import Contact from "../components/Contact";
 import ArtistProfile from "../components/ArtistProfile";
 import NotFound from "../components/NotFound";
 
+interface IURLs {
+  notFound: string;
+  home: string;
+  about: string;
+  contact: string;
+  profile: "/profile/:artist";
+}
+
 /* Content at Mid Level
  *  -Consists of either Home, About, Contact, Not-Found, or "Profile Page"
  */
-const Content = () => {
+const Content: React.FC<IURLs> = ({
+  notFound,
+  home,
+  about,
+  contact,
+  profile,
+}): JSX.Element => {
   return (
     <main>
       <div className="content">
@@ -18,16 +32,13 @@ const Content = () => {
             render={({ location }) => {
               return (
                 <Switch location={location}>
-                  <Route path="/not-found" component={NotFound}></Route>
-                  <Route path="/" exact component={Home}></Route>
+                  <Route path={notFound} component={NotFound}></Route>
+                  <Route path={home} exact component={Home}></Route>
 
-                  <Route path="/about" exact component={About}></Route>
-                  <Route path="/contact" exact component={Contact}></Route>
-                  <Route
-                    path="/profile/:artist"
-                    component={ArtistProfile}
-                  ></Route>
-                  <Redirect to="/not-found" />
+                  <Route path={about} exact component={About}></Route>
+                  <Route path={contact} exact component={Contact}></Route>
+                  <Route path={profile} component={ArtistProfile}></Route>
+                  <Redirect to={notFound} />
                 </Switch>
               );
             }}
