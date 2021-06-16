@@ -1,5 +1,3 @@
-[![Coverage Status](https://coveralls.io/repos/github/syedhaider426/Bass-Birthdays/badge.svg?branch=master)](https://coveralls.io/github/syedhaider426/Bass-Birthdays?branch=master)
-
 # Bass Birthdays
 Bass Birthdays is a website dedicated to displaying the birthdays of artists involved in the bass music scene, whether that be a dubstep artist or future bass artist.
 
